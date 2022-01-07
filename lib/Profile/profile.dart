@@ -136,6 +136,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                   _buildDivider(),
+                  const SizedBox(height: 10.0),
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -154,6 +155,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                   _buildDivider(),
+                  const SizedBox(height: 10.0),
                   GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -168,8 +170,10 @@ class ProfileScreen extends StatelessWidget {
                       },
                       child: _buildRow(Icons.settings, "Settings")),
                   _buildDivider(),
+                  const SizedBox(height: 10.0),
                   _buildRow(Icons.email, "Contact us"),
                   _buildDivider(),
+                  const SizedBox(height: 10.0),
                   GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -184,8 +188,10 @@ class ProfileScreen extends StatelessWidget {
                       },
                       child: _buildRow(Icons.info_outline, "Help")),
                   _buildDivider(),
+                  const SizedBox(height: 10.0),
                   _buildRow(Icons.logout, "Logout"),
                   _buildDivider(),
+                  const SizedBox(height: 10.0),
                 ],
               ),
             ),

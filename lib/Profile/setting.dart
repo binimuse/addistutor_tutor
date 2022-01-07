@@ -15,6 +15,8 @@ class SettingsFourPage extends StatefulWidget {
   _SettingsFourPageState createState() => _SettingsFourPageState();
 }
 
+bool isActive = true;
+
 class _SettingsFourPageState extends State<SettingsFourPage> {
   @override
   Widget build(BuildContext context) {
@@ -71,8 +73,6 @@ class _SettingsFourPageState extends State<SettingsFourPage> {
               height: 10,
             ),
             buildAccountOptionRow(context, "Change password"),
-            buildAccountOptionRow(context, "Content settings"),
-            buildAccountOptionRow(context, "Social Media"),
             buildAccountOptionRow(context, "Language"),
             buildAccountOptionRow(context, "Privacy and Policy"),
             SizedBox(
@@ -98,7 +98,7 @@ class _SettingsFourPageState extends State<SettingsFourPage> {
               height: 10,
             ),
             buildNotificationOptionRow("New update", true),
-            buildNotificationOptionRow("Account Status", false),
+            buildNotificationOptionRow("Account Status", isActive),
             SizedBox(
               height: 50,
             ),
@@ -108,7 +108,7 @@ class _SettingsFourPageState extends State<SettingsFourPage> {
     );
   }
 
-  Row buildNotificationOptionRow(String title, bool isActive) {
+  Row buildNotificationOptionRow(String title, isActive) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -119,12 +119,18 @@ class _SettingsFourPageState extends State<SettingsFourPage> {
               fontWeight: FontWeight.w500,
               color: Colors.grey[600]),
         ),
-        Transform.scale(
-            scale: 0.7,
-            child: CupertinoSwitch(
-              value: isActive,
-              onChanged: (bool val) {},
-            ))
+        GestureDetector(
+          child: Transform.scale(
+              scale: 0.7,
+              child: CupertinoSwitch(
+                value: isActive,
+                onChanged: (bool val) {
+                  setState(() {
+                    isActive == false;
+                  });
+                },
+              )),
+        )
       ],
     );
   }
