@@ -57,7 +57,7 @@ class _SettingsFourPageState extends State<SettingsFourPage> {
                   color: kPrimaryColor,
                 ),
                 SizedBox(
-                  width: 8,
+                  width: 10,
                 ),
                 Text(
                   "Account",

@@ -1,6 +1,15 @@
+import 'dart:convert';
+
+import 'package:addistutor_tutor/Login/login_screen.dart';
 import 'package:addistutor_tutor/Notification/notification.dart';
 import 'package:addistutor_tutor/Profile/setting.dart';
+import 'package:addistutor_tutor/controller/editprofilecontroller.dart';
+import 'package:addistutor_tutor/controller/signupcontroller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants.dart';
 import 'editprofile.dart';
@@ -8,73 +17,193 @@ import 'feedback_screen.dart';
 import 'help_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
-  static const String path = "lib/src/pages/profile/profile8.dart";
+  const ProfileScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: ProfileS(),
+    );
+  }
+}
+
+class ProfileS extends StatefulWidget {
+  const ProfileS({Key? key}) : super(key: key);
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfileS> {
+  @override
+  void deactivate() {
+    EasyLoading.dismiss();
+    super.deactivate();
+  }
+
+  final EditprofileController editprofileController =
+      Get.put(EditprofileController());
+  @override
+  void initState() {
+    super.initState();
+
+    _fetchUser();
+  }
+
+  final RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
+
+  void _onRefresh() async {
+    // monitor network fetch
+    await Future.delayed(const Duration(milliseconds: 1000));
+    // if failed,use refreshFailed()
+
+    setState(() {
+      _fetchUser();
+    });
+    _refreshController.refreshCompleted();
+  }
+
+  void _onLoading() async {
+    // monitor network fetch
+    await Future.delayed(const Duration(milliseconds: 1000));
+    // if failed,use loadFailed(),if no data return,use LoadNodata()
+    //items.add((items.length+1).toString());
+    //if(mounted)
+    // setState(() {
+
+    // });
+    _refreshController.loadComplete();
+  }
+
+  var ids;
+
+  void _fetchUser() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var token = localStorage.getString('user');
+
+    if (token != null) {
+      var body = json.decode(token);
+
+      if (body["student_id"] != null) {
+        ids = int.parse(body["student_id"]);
+        editprofileController.fetchPf(int.parse(body["student_id"]));
+      } else {
+        var noid = "noid";
+        print("no Id");
+        editprofileController.fetchPf(noid);
+      }
+    } else {
+      print("no Token");
+    }
+  }
+
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: _key,
-        backgroundColor: Colors.grey.shade100,
-        extendBodyBehindAppBar: true,
-        extendBody: true,
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          leading: IconButton(
-            onPressed: () {
-              _key.currentState!.openDrawer();
-            },
-            icon: const Icon(Icons.menu),
-          ),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
+      key: _key,
+      backgroundColor: Colors.grey.shade100,
+      extendBodyBehindAppBar: true,
+      extendBody: true,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          onPressed: () {
+            _key.currentState!.openDrawer();
+          },
+          icon: const Icon(Icons.menu),
         ),
-        drawer: _buildDrawer(context),
-        body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              ProfileHeader(
-                avatar: const NetworkImage(
-                    "https://firebasestorage.googleapis.com/v0/b/dl-flutter-ui-challenges.appspot.com/o/img%2F1.jpg?alt=media"),
-                coverImage: NetworkImage(
-                    "https://firebasestorage.googleapis.com/v0/b/dl-flutter-ui-challenges.appspot.com/o/img%2F1.jpg?alt=media"),
-                title: "Ramesh Mana",
-                subtitle: "Secondary student",
-                actions: <Widget>[
-                  MaterialButton(
-                    color: Colors.white,
-                    shape: CircleBorder(),
-                    elevation: 0,
-                    child: const Icon(
-                      Icons.edit,
-                      color: kPrimaryColor,
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        // ignore: prefer_const_constructors
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder: (context, animation1, animation2) =>
-                              EditPage(),
-                          transitionDuration: Duration.zero,
-                        ),
-                      );
-                    },
-                  )
-                ],
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      drawer: _buildDrawer(
+        context,
+        editprofileController.firstname.text.toString(),
+        editprofileController.lastname.text.toString(),
+        ids,
+      ),
+      body: editprofileController.obx(
+          (editForm) => SmartRefresher(
+                enablePullDown: true,
+                enablePullUp: true,
+
+                //cheak pull_to_refresh
+                controller: _refreshController,
+                onRefresh: _onRefresh,
+                onLoading: _onLoading,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      ProfileHeader(
+                        avatar: NetworkImage(
+                            "https://tutor.oddatech.com/api/teacher-profile-picture/${ids}"),
+                        coverImage: NetworkImage(
+                            "https://tutor.oddatech.com/api/teacher-profile-picture/${ids}"),
+                        title: editprofileController.firstname.text.toString() +
+                            " " +
+                            editprofileController.lastname.text.toString(),
+                        subtitle: "Tutor",
+                        actions: <Widget>[
+                          MaterialButton(
+                            color: Colors.white,
+                            shape: CircleBorder(),
+                            elevation: 0,
+                            child: const Icon(
+                              Icons.edit,
+                              color: kPrimaryColor,
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                // ignore: prefer_const_constructors
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder:
+                                      (context, animation1, animation2) =>
+                                          EditPage(),
+                                  transitionDuration: Duration.zero,
+                                ),
+                              );
+                            },
+                          )
+                        ],
+                      ),
+                      const SizedBox(height: 10.0),
+                      UserInfo(
+                        phone: editprofileController.phone.text.toString(),
+                        email: editprofileController.email.text.toString(),
+                        about: editprofileController.About.text.toString(),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              const SizedBox(height: 10.0),
-              UserInfo(),
-            ],
-          ),
-        ));
+          onLoading: Center(child: loadData()),
+          onEmpty: const Text("Can't fetch data"),
+          onError: (error) => Center(child: Text(error.toString()))),
+    );
+  }
+
+  loadData() {
+    // Here you can write your code for open new view
+    EasyLoading.show();
+    Future.delayed(const Duration(milliseconds: 500), () {
+// Here you can write your code
+
+      EasyLoading.dismiss();
+    });
   }
 
   final Color primary = Colors.white;
   final Color active = Colors.grey.shade800;
   final Color divider = Colors.grey.shade600;
-  _buildDrawer(BuildContext context) {
+  _buildDrawer(BuildContext context, String fname, String lastname, ids) {
     final String image =
-        "https://firebasestorage.googleapis.com/v0/b/dl-flutter-ui-challenges.appspot.com/o/img%2F1.jpg?alt=media";
+        "https://tutor.oddatech.com/api/teacher-profile-picture/${ids}";
     return ClipPath(
       clipper: OvalRightBorderClipper(),
       child: Drawer(
@@ -110,8 +239,8 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 5.0),
-                  const Text(
-                    "erika costell",
+                  Text(
+                    fname.toString() + " " + lastname.toString(),
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 18.0,
@@ -189,7 +318,101 @@ class ProfileScreen extends StatelessWidget {
                       child: _buildRow(Icons.info_outline, "Help")),
                   _buildDivider(),
                   const SizedBox(height: 10.0),
-                  _buildRow(Icons.logout, "Logout"),
+                  GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            elevation: 0,
+                            backgroundColor: Color(0xffffffff),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                            title: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  SizedBox(height: 15),
+                                  const Text(
+                                    'Message',
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(height: 15),
+                                  Divider(
+                                    height: 1,
+                                    color: kPrimaryColor,
+                                  ),
+                                ]),
+                            content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  SizedBox(height: 15),
+                                  const Text(
+                                    'Are You Sure you want to Log Out',
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(height: 15),
+                                ]),
+                            actions: <Widget>[
+                              // ignore: deprecated_member_use
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                height: 50,
+                                child: InkWell(
+                                  highlightColor: Colors.grey[200],
+                                  onTap: () {
+                                    Navigator.of(context).pop(true);
+                                    _logout(context);
+                                  },
+                                  child: Center(
+                                    child: Text(
+                                      "Ok",
+                                      style: TextStyle(
+                                        fontSize: 18.0,
+                                        color: Theme.of(context).primaryColor,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+
+                              Divider(
+                                height: 1,
+                              ),
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: 50,
+                                child: InkWell(
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(15.0),
+                                    bottomRight: Radius.circular(15.0),
+                                  ),
+                                  highlightColor: Colors.grey[200],
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Center(
+                                    child: Text(
+                                      "Cancel",
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                      child: _buildRow(Icons.logout, "Logout")),
                   _buildDivider(),
                   const SizedBox(height: 10.0),
                 ],
@@ -197,6 +420,22 @@ class ProfileScreen extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  void _logout(BuildContext context) async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    localStorage.remove('token');
+    Get.delete<SignupController>();
+    // Get.delete<EditprofileController>();
+    // Get.delete<GetLocationController>();
+
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation1, animation2) => LoginScreen(),
+        transitionDuration: Duration.zero,
       ),
     );
   }
@@ -252,6 +491,17 @@ class ProfileScreen extends StatelessWidget {
 }
 
 class UserInfo extends StatelessWidget {
+  final String? phone;
+  final String? email;
+
+  final String? about;
+  const UserInfo({
+    Key? key,
+    required this.phone,
+    required this.email,
+    required this.about,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -282,42 +532,31 @@ class UserInfo extends StatelessWidget {
                       ...ListTile.divideTiles(
                         color: Colors.grey,
                         tiles: [
-                          const ListTile(
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 4),
-                            leading: Icon(
-                              Icons.my_location,
-                              color: kPrimaryColor,
-                            ),
-                            title: Text("Location"),
-                            subtitle: Text("Bole"),
-                          ),
-                          const ListTile(
-                            leading: Icon(Icons.grade, color: kPrimaryColor),
-                            title: Text("Grade"),
-                            subtitle: Text("8"),
-                          ),
-                          const ListTile(
-                            leading: Icon(Icons.email, color: kPrimaryColor),
-                            title: Text("Email"),
-                            subtitle: Text("sudeptech@gmail.com"),
-                          ),
-                          const ListTile(
+                          ListTile(
                             leading: Icon(
                               Icons.phone,
                               color: kPrimaryColor,
                             ),
                             title: Text("Phone"),
-                            subtitle: Text("99--99876-56"),
+                            subtitle: Text(phone.toString()),
                           ),
-                          const ListTile(
+                          ListTile(
+                            leading: Icon(Icons.email, color: kPrimaryColor),
+                            title: Text("Email"),
+                            subtitle: Text(email.toString()),
+                          ),
+                          // ListTile(
+                          //   leading: Icon(Icons.grade, color: kPrimaryColor),
+                          //   title: Text("Birth Day"),
+                          //   subtitle: Text(birthday.toString()),
+                          // ),
+                          ListTile(
                             leading: Icon(
                               Icons.person,
                               color: kPrimaryColor,
                             ),
                             title: Text("About Me"),
-                            subtitle: Text(
-                                "This is a about me link and you can khow about me in this section."),
+                            subtitle: Text(about.toString()),
                           ),
                         ],
                       ),

@@ -1,3 +1,4 @@
+import 'package:addistutor_tutor/constants.dart';
 import 'package:flutter/material.dart';
 
 class ConnectionFaildScreen extends StatefulWidget {
@@ -10,8 +11,6 @@ class ConnectionFaildScreen extends StatefulWidget {
 class _MyHomePageState extends State<ConnectionFaildScreen> {
   bool load = false;
 
-  get kPrimaryColor => null;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +18,7 @@ class _MyHomePageState extends State<ConnectionFaildScreen> {
         fit: StackFit.expand,
         children: [
           Image.asset(
-            "assets/images/err.png",
+            "assets/images/no.png",
             fit: BoxFit.cover,
           ),
           Positioned(
