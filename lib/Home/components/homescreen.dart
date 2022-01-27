@@ -347,7 +347,7 @@ class _HomePageState extends State<Home> with SingleTickerProviderStateMixin {
             width: 60,
             height: 60,
             child: Image.asset(
-              'assets/images/logo2.png',
+              'assets/images/lg3.png',
             ),
           )
         ],

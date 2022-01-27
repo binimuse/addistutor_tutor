@@ -37,6 +37,55 @@ class RemoteServices {
     }
   }
 
+  static Future<String> editAvalablitydate(var data) async {
+    List<String> errors = [];
+    // create multipart request
+    res = await Network().getpassedData(data, "teacher-availability");
+
+    body = json.decode(res.body);
+    print("body");
+    print(body);
+    if (res.statusCode == 200) {
+      return res.statusCode.toString();
+    } else {
+      if (body["message"] != null) {
+        return body["message"].toString();
+      } else {
+        Map<String, dynamic> map = body["errors"];
+        map.forEach((key, value) {
+          errors.add(value[0].toString());
+        });
+
+        return errors.join("\n").toString();
+      }
+    }
+  }
+
+  static Future<String> editAvalablity(var data, id) async {
+    List<String> errors = [];
+    // create multipart request
+    res = await Network()
+        .getpassedData(data, "teacher/${id.toString()}/update-status");
+
+    body = json.decode(res.body);
+    print("body");
+    print(body);
+    if (res.statusCode == 200) {
+      return res.statusCode.toString();
+    } else {
+      if (body["message"] != null) {
+        return body["message"].toString();
+      } else {
+        Map<String, dynamic> map = body["errors"];
+        map.forEach((key, value) {
+          errors.add(value[0].toString());
+        });
+
+        return errors.join("\n").toString();
+      }
+    }
+  }
+
   static Future<Teacher> fetchpf(var id) async {
     // print("id.toString()");
     //print(id.toString());
@@ -73,6 +122,18 @@ class RemoteServices {
       }
     } else {
       return false;
+    }
+  }
+
+  static Future<List<Activedays>> fetchdaya() async {
+    res = await Network().getData("teacher-availability");
+
+    var body = json.decode(res.body);
+
+    if (res.statusCode == 200) {
+      return body;
+    } else {
+      throw Exception('Failed to load Comment');
     }
   }
 }

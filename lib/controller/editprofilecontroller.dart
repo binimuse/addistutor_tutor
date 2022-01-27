@@ -22,6 +22,7 @@ class EditprofileController extends GetxController with StateMixin {
 
   late TextEditingController firstname;
   late TextEditingController lastname;
+  late TextEditingController middlename;
 
   late TextEditingController phone;
   late TextEditingController email;
@@ -34,11 +35,14 @@ class EditprofileController extends GetxController with StateMixin {
   // ignore: non_constant_identifier_names
 
   var isFetched = false.obs;
+  var isActive;
   var ifupdatd = false.obs;
+
   @override
   void onInit() {
     firstname = TextEditingController();
     lastname = TextEditingController();
+    middlename = TextEditingController();
     email = TextEditingController();
     phone = TextEditingController();
     About = TextEditingController();
@@ -63,10 +67,12 @@ class EditprofileController extends GetxController with StateMixin {
 
           firstname.text = fetched.first_name;
           lastname.text = fetched.last_name;
+          middlename.text = fetched.middle_name;
           phone.text = fetched.phone_no;
           email.text = fetched.email;
           date = fetched.birth_date;
           About.text = fetched.about;
+          isActive = fetched.is_active;
 
           await Future.delayed(const Duration(seconds: 1));
           // Dismiss CircularProgressIndicator
@@ -106,10 +112,7 @@ class EditprofileController extends GetxController with StateMixin {
 
     if (uploaded) {
       var data = {
-        "first_name": firstname.text,
-        "last_name": lastname.text,
         "phone_no": phone.text,
-        "birth_date": date,
         "email": email.text,
         "about": About.text,
       };
@@ -127,23 +130,11 @@ class EditprofileController extends GetxController with StateMixin {
     } else {
       print("yes am here");
       var data = {
-        "first_name": firstname.text,
-        "last_name": lastname.text,
         "phone_no": phone.text,
-        "birth_date": date,
         "email": email.text,
         "about": About.text,
 
 //delete
-        "middle_name": "test",
-        "gender": "male",
-        "grade": "5",
-        "study_purpose": "Regular support",
-        "experience": 21,
-        "teaching_since": 2021,
-        "location_id": 1,
-        "subject_id": 1,
-        "qualification_id": 1,
       };
       inforesponse = await RemoteServices.editPersonalInfo(data);
       if (inforesponse.toString() == "200") {
@@ -154,10 +145,6 @@ class EditprofileController extends GetxController with StateMixin {
       }
     }
   }
-
-  // openAndCloseLoadingDialog() {
-
-  // }
 
   closeDialog(bool stat, String data, BuildContext context) {
     Future.delayed(const Duration(seconds: 1));
@@ -227,7 +214,7 @@ class EditprofileController extends GetxController with StateMixin {
                 if (token != null) {
                   body = json.decode(token);
 
-                  if (body["student_id"] != null) {
+                  if (body["teacher_id"] != null) {
                     Navigator.pop(context);
                     isLoading(false);
                     //    openAndCloseLoadingDialog(context);

@@ -67,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen> {
               decoration: const BoxDecoration(),
               child: Center(
                 child: Image.asset(
-                  'assets/images/logo2.png',
+                  'assets/images/lg3.png',
                   height: 160,
                   width: 160,
                 ),
@@ -88,7 +88,7 @@ class _SplashScreenState extends State<SplashScreen> {
               height: 10,
             ),
             const Text(
-              "Connecting you with the Best Tutors in Town, Conveniently. ",
+              "Increase your income by working flexibly! ",
               style: TextStyle(
                 fontSize: 12.0,
                 fontFamily: 'Roboto',

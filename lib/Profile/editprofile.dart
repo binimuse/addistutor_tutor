@@ -47,9 +47,9 @@ class _EditPageState extends State<EditPage> {
     if (token != null) {
       body = json.decode(token);
 
-      if (body["student_id"] != null) {
-        editprofileController.fetchPf(int.parse(body["student_id"]));
-        id = int.parse(body["student_id"]);
+      if (body["teacher_id"] != null) {
+        editprofileController.fetchPf(int.parse(body["teacher_id"]));
+        id = int.parse(body["teacher_id"]);
 
         print("yes");
       } else {
@@ -83,6 +83,7 @@ class _EditPageState extends State<EditPage> {
   Widget build(BuildContext context) {
     return Obx(() => editprofileController.isFetched.value
         ? Scaffold(
+            resizeToAvoidBottomInset: false,
             key: editprofileController.scaffoldKey,
             appBar: AppBar(
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -185,48 +186,65 @@ class _EditPageState extends State<EditPage> {
                           ],
                         ),
                       ),
-                      SizedBox(
+
+                      // TextFormField(
+                      //   controller: editprofileController.firstname,
+                      //   decoration: const InputDecoration(
+                      //       contentPadding: EdgeInsets.only(bottom: 3),
+                      //       labelText: "First Name",
+                      //       focusColor: kPrimaryColor,
+                      //       fillColor: kPrimaryColor,
+                      //       floatingLabelBehavior: FloatingLabelBehavior.always,
+                      //       hintText: "your First  Name",
+                      //       hintStyle: TextStyle(
+                      //         fontSize: 16,
+                      //         fontWeight: FontWeight.bold,
+                      //         color: Colors.black,
+                      //       )),
+                      //   validator: (value) {
+                      //     return editprofileController.validateName(value!);
+                      //   },
+                      // ),
+
+                      // TextFormField(
+                      //   controller: editprofileController.middlename,
+                      //   decoration: const InputDecoration(
+                      //       contentPadding: EdgeInsets.only(bottom: 3),
+                      //       labelText: "Middle Name",
+                      //       focusColor: kPrimaryColor,
+                      //       fillColor: kPrimaryColor,
+                      //       floatingLabelBehavior: FloatingLabelBehavior.always,
+                      //       hintText: "your Middle Name",
+                      //       hintStyle: TextStyle(
+                      //         fontSize: 16,
+                      //         fontWeight: FontWeight.bold,
+                      //         color: Colors.black,
+                      //       )),
+                      //   validator: (value) {
+                      //     return editprofileController.validateName(value!);
+                      //   },
+                      // ),
+                      const SizedBox(
                         height: 35,
                       ),
-                      TextFormField(
-                        controller: editprofileController.firstname,
-                        decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.only(bottom: 3),
-                            labelText: "First Name",
-                            focusColor: kPrimaryColor,
-                            fillColor: kPrimaryColor,
-                            floatingLabelBehavior: FloatingLabelBehavior.always,
-                            hintText: "your First  Name",
-                            hintStyle: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            )),
-                        validator: (value) {
-                          return editprofileController.validateName(value!);
-                        },
-                      ),
-                      SizedBox(
-                        height: 35,
-                      ),
-                      TextFormField(
-                        controller: editprofileController.lastname,
-                        decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.only(bottom: 3),
-                            labelText: "Last Name",
-                            focusColor: kPrimaryColor,
-                            fillColor: kPrimaryColor,
-                            floatingLabelBehavior: FloatingLabelBehavior.always,
-                            hintText: "your Last Name",
-                            hintStyle: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            )),
-                        validator: (value) {
-                          return editprofileController.validateName(value!);
-                        },
-                      ),
+                      // TextFormField(
+                      //   controller: editprofileController.lastname,
+                      //   decoration: const InputDecoration(
+                      //       contentPadding: EdgeInsets.only(bottom: 3),
+                      //       labelText: "Last Name",
+                      //       focusColor: kPrimaryColor,
+                      //       fillColor: kPrimaryColor,
+                      //       floatingLabelBehavior: FloatingLabelBehavior.always,
+                      //       hintText: "your Last Name",
+                      //       hintStyle: TextStyle(
+                      //         fontSize: 16,
+                      //         fontWeight: FontWeight.bold,
+                      //         color: Colors.black,
+                      //       )),
+                      //   validator: (value) {
+                      //     return editprofileController.validateName(value!);
+                      //   },
+                      // ),
                       SizedBox(
                         height: 35,
                       ),
@@ -272,23 +290,23 @@ class _EditPageState extends State<EditPage> {
                       SizedBox(
                         height: 35,
                       ),
-                      const Text(
-                        'Select BirthDate',
-                        style: TextStyle(color: Colors.black38),
-                      ),
-                      OutlineButton(
-                        padding: EdgeInsets.symmetric(horizontal: 50),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                        onPressed: () {
-                          _selectDate(context);
-                        },
-                        child: Text(editprofileController.date.toString(),
-                            style: TextStyle(
-                                fontSize: 14,
-                                letterSpacing: 2.2,
-                                color: Colors.black)),
-                      ),
+                      // const Text(
+                      //   'Select BirthDate',
+                      //   style: TextStyle(color: Colors.black38),
+                      // ),
+                      // OutlineButton(
+                      //   padding: EdgeInsets.symmetric(horizontal: 50),
+                      //   shape: RoundedRectangleBorder(
+                      //       borderRadius: BorderRadius.circular(20)),
+                      //   onPressed: () {
+                      //     _selectDate(context);
+                      //   },
+                      //   child: Text(editprofileController.date.toString(),
+                      //       style: TextStyle(
+                      //           fontSize: 14,
+                      //           letterSpacing: 2.2,
+                      //           color: Colors.black)),
+                      // ),
                       const SizedBox(
                         height: 35,
                       ),

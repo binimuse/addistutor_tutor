@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:addistutor_tutor/Avalablity/avalabilty.dart';
 import 'package:addistutor_tutor/Login/login_screen.dart';
 import 'package:addistutor_tutor/Notification/notification.dart';
 import 'package:addistutor_tutor/Profile/setting.dart';
@@ -88,9 +89,9 @@ class _ProfilePageState extends State<ProfileS> {
     if (token != null) {
       var body = json.decode(token);
 
-      if (body["student_id"] != null) {
-        ids = int.parse(body["student_id"]);
-        editprofileController.fetchPf(int.parse(body["student_id"]));
+      if (body["teacher_id"] != null) {
+        ids = int.parse(body["teacher_id"]);
+        editprofileController.fetchPf(int.parse(body["teacher_id"]));
       } else {
         var noid = "noid";
         print("no Id");
@@ -286,6 +287,25 @@ class _ProfilePageState extends State<ProfileS> {
                   _buildDivider(),
                   const SizedBox(height: 10.0),
                   GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        // ignore: prefer_const_constructors
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (context, animation1, animation2) =>
+                              const AvalablityScreen(),
+                          transitionDuration: Duration.zero,
+                        ),
+                      );
+                    },
+                    child: _buildRow(
+                      Icons.event_available,
+                      "Avalablity",
+                    ),
+                  ),
+                  _buildDivider(),
+                  const SizedBox(height: 10.0),
+                  GestureDetector(
                       onTap: () {
                         Navigator.push(
                           // ignore: prefer_const_constructors
@@ -428,8 +448,7 @@ class _ProfilePageState extends State<ProfileS> {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     localStorage.remove('token');
     Get.delete<SignupController>();
-    // Get.delete<EditprofileController>();
-    // Get.delete<GetLocationController>();
+    Get.delete<EditprofileController>();
 
     Navigator.push(
       context,
