@@ -12,7 +12,7 @@
     <uses-permission android:name="android.permission.CAMERA" /> 
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>  
    <application
-        android:label="addistutor_tutor"
+        android:label="NextGen tutor"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

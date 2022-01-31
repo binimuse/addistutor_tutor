@@ -88,7 +88,7 @@ class _SplashScreenState extends State<SplashScreen> {
               height: 10,
             ),
             const Text(
-              "Increase your income by working flexibly! ",
+              "Increase your income by working flexibly!",
               style: TextStyle(
                 fontSize: 12.0,
                 fontFamily: 'Roboto',
