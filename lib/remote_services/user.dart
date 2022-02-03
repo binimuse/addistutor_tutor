@@ -46,15 +46,20 @@ class Teacher {
 
 class Activedays {
   String day;
+  String is_active;
+  String teacher_id;
 
   Activedays({
     required this.day,
+    required this.is_active,
+    required this.teacher_id,
   });
 
   factory Activedays.fromJson(Map<String, dynamic> json) {
-    Map<String, dynamic> jsons = json["data"];
     return Activedays(
-      day: jsons["day"],
+      day: json["day"],
+      is_active: json["is_active"],
+      teacher_id: json["teacher_id"],
     );
   }
 }

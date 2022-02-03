@@ -4,11 +4,13 @@ import 'package:addistutor_tutor/Avalablity/avalabilty.dart';
 import 'package:addistutor_tutor/Login/login_screen.dart';
 import 'package:addistutor_tutor/Notification/notification.dart';
 import 'package:addistutor_tutor/Profile/setting.dart';
+import 'package:addistutor_tutor/controller/avlablityconroller.dart';
 import 'package:addistutor_tutor/controller/editprofilecontroller.dart';
 import 'package:addistutor_tutor/controller/signupcontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -31,6 +33,11 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
+
+bool _isLoggedIn = false;
+GoogleSignIn _googleSignIn = GoogleSignIn();
+final Avalablitycontrollerclass avalablitycontrollerclass =
+    Get.put(Avalablitycontrollerclass());
 
 class ProfileS extends StatefulWidget {
   const ProfileS({Key? key}) : super(key: key);
@@ -83,6 +90,13 @@ class _ProfilePageState extends State<ProfileS> {
   var ids;
 
   void _fetchUser() async {
+    if (editprofileController.isActive.toString() == "1") {
+      avalablitycontrollerclass.isSelected = [true, false];
+      print("avalble");
+    } else {
+      print("Not avalble");
+      avalablitycontrollerclass.isSelected = [false, true];
+    }
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     var token = localStorage.getString('user');
 
@@ -117,7 +131,10 @@ class _ProfilePageState extends State<ProfileS> {
           onPressed: () {
             _key.currentState!.openDrawer();
           },
-          icon: const Icon(Icons.menu),
+          icon: const Icon(
+            Icons.menu,
+            color: kPrimaryColor,
+          ),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -457,6 +474,12 @@ class _ProfilePageState extends State<ProfileS> {
         transitionDuration: Duration.zero,
       ),
     );
+
+    _googleSignIn.signOut().then((value) {
+      setState(() {
+        _isLoggedIn = false;
+      });
+    }).catchError((e) {});
   }
 
   Divider _buildDivider() {

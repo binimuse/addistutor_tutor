@@ -53,6 +53,7 @@ dependencies:
   image: ^3.1.0
   qr_code_scanner: ^0.6.1
   weekday_selector: ^1.0.0
+  google_sign_in: ^5.0.1
 
   
   

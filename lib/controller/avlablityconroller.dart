@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:addistutor_tutor/Login/login_screen.dart';
+import 'package:addistutor_tutor/Profile/profile.dart';
 
 import 'package:addistutor_tutor/constants.dart';
 import 'package:addistutor_tutor/remote_services/service.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/state_manager.dart';
+import 'package:image/image.dart';
 
 class Avalablitycontrollerclass extends GetxController with StateMixin {
   // ignore: non_constant_identifier_names
@@ -17,7 +19,7 @@ class Avalablitycontrollerclass extends GetxController with StateMixin {
   var isLoading = false.obs;
 
   late String days;
-
+  late List<bool> isSelected;
   late TextEditingController Mon;
   late TextEditingController Tue;
   late TextEditingController Wed;
@@ -26,7 +28,9 @@ class Avalablitycontrollerclass extends GetxController with StateMixin {
   late TextEditingController Sat;
   late TextEditingController Sun;
 
-  late bool isa = true;
+  late bool isa = false;
+  var onchange = false.obs;
+  var onchangedate = false.obs;
 
   @override
   void onInit() {
@@ -57,7 +61,6 @@ class Avalablitycontrollerclass extends GetxController with StateMixin {
       //   print(fetched);
       if (fetched != "") {
         isFetched.value = true;
-        activedays = fetched.day;
 
         await Future.delayed(const Duration(seconds: 1));
         // Dismiss CircularProgressIndicator
@@ -77,11 +80,15 @@ class Avalablitycontrollerclass extends GetxController with StateMixin {
     try {
       final isValid = Avalablity.currentState!.validate();
 
-      if (isValid == true) {
+      if (onchange(true)) {
+        isLoading(true);
+        Avalablity.currentState!.save();
+        await seteditInfo2(context, id);
+      }
+      if (onchangedate(true)) {
         isLoading(true);
         Avalablity.currentState!.save();
         await seteditInfo(context);
-        await seteditInfo2(context, id);
       }
     } finally {
       // ignore: todo
@@ -120,9 +127,10 @@ class Avalablitycontrollerclass extends GetxController with StateMixin {
     }
   }
 
-  closeDialog(bool stat, String data, BuildContext context) {
-    Future.delayed(const Duration(seconds: 1));
+  closeDialog(bool stat, String data, BuildContext context) async {
+    await Future.delayed(const Duration(seconds: 1));
     // Dismiss CircularProgressIndicator
+    //
     Navigator.of(context).pop();
     if (stat == false) {
       showDialog(
@@ -141,7 +149,7 @@ class Avalablitycontrollerclass extends GetxController with StateMixin {
             FlatButton(
               onPressed: () async {
                 isLoading(false);
-                // Navigator.of(context).pop(true);
+                Navigator.of(context).pop(true);
               },
               child: new Text('ok'),
             ),
@@ -169,6 +177,11 @@ class Avalablitycontrollerclass extends GetxController with StateMixin {
                 isLoading(false);
                 Navigator.of(context).pop(true);
                 Navigator.pop(context);
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //       builder: (context) => const ProfileScreen()),
+                // );
               },
               child: new Text('ok'),
             ),
@@ -206,9 +219,10 @@ class Avalablitycontrollerclass extends GetxController with StateMixin {
     );
   }
 
+// ignore: prefer_typing_uninitialized_variables
+  var datas;
   seteditInfo2(BuildContext context, id) async {
-    //  openAndCloseLoadingDialog(context);
-    var datas;
+    // openAndCloseLoadingDialog(context);
 
     if (isa == true) {
       datas = {
@@ -222,12 +236,11 @@ class Avalablitycontrollerclass extends GetxController with StateMixin {
 
     inforesponse = await RemoteServices.editAvalablity(datas, id);
     if (inforesponse.toString() == "200") {
-      // closeDialog(true, '', context);
+      closeDialog(true, '', context);
 
       isLoading(false);
     } else {
-      // closeDialog(false, inforesponse, context);
-
+      closeDialog(false, inforesponse, context);
     }
   }
 }

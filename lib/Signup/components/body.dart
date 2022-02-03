@@ -14,6 +14,7 @@ import 'package:flutter/services.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../constants.dart';
@@ -33,6 +34,10 @@ class _SplashScreenState extends State<Body> {
 
   bool isLoading = false;
   var inforesponse;
+
+  bool _isLoggedIn = false;
+  late GoogleSignInAccount _userObj;
+  GoogleSignIn _googleSignIn = GoogleSignIn();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -206,16 +211,60 @@ class _SplashScreenState extends State<Body> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   SocalIcon(
-                    iconSrc: "assets/icons/facebook.svg",
-                    press: () {},
-                  ),
-                  SocalIcon(
-                    iconSrc: "assets/icons/twitter.svg",
-                    press: () {},
-                  ),
-                  SocalIcon(
                     iconSrc: "assets/icons/google-plus.svg",
-                    press: () {},
+                    press: () {
+                      _googleSignIn.signIn().then((userData) {
+                        setState(() {
+                          _isLoggedIn = true;
+                          _userObj = userData!;
+                        });
+
+                        print(_userObj.displayName);
+                        print(_userObj.email);
+
+                        signupController.email.text = _userObj.email;
+                        signupController.fullname.text = _userObj.displayName!;
+
+                        print("after");
+
+                        print(signupController.email.text);
+                        print(signupController.fullname.text);
+                        if (_isLoggedIn) {
+                          registerbygoogle();
+                        }
+
+                        // register();
+                      }).catchError((e) {
+                        setState(() {
+                          _googleSignIn.signOut().then((value) {
+                            setState(() {
+                              _isLoggedIn = false;
+                            });
+                          }).catchError((e) {});
+                        });
+
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: const Text('Error'),
+                            content: Text(e.toString()),
+                            actions: <Widget>[
+                              // ignore: deprecated_member_use
+                              FlatButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop(true);
+                                  setState(() {
+                                    isLoading = false;
+                                  });
+                                },
+                                child: const Text('ok'),
+                              ),
+                            ],
+                          ),
+                        );
+                        print(e);
+                      });
+                    },
                   ),
                 ],
               )
@@ -224,6 +273,66 @@ class _SplashScreenState extends State<Body> {
         ),
       ),
     );
+  }
+
+  registerbygoogle() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    var data = {
+      "email": signupController.email.text,
+      "full_name": signupController.fullname.text,
+    };
+
+    var res = await Network().authData(data, 'register-teacher');
+    var body = json.decode(res.body);
+
+    print(res.statusCode);
+    print(body);
+    //print(body.toString());
+    if (res.statusCode == 200) {
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
+      localStorage.setString("token", body["token"]);
+
+      localStorage.setString('user', json.encode(body['user']));
+
+      closeDialog(true, '');
+      isLoading = false;
+    } else if (res.statusCode == 422) {
+      setState(() {
+        _googleSignIn.signOut().then((value) {
+          setState(() {
+            _isLoggedIn = false;
+          });
+        }).catchError((e) {});
+      });
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Error'),
+          content: Text(body["errors"].toString()),
+          actions: <Widget>[
+            // ignore: deprecated_member_use
+            FlatButton(
+              onPressed: () {
+                Navigator.of(context).pop(true);
+                setState(() {
+                  isLoading = false;
+                });
+              },
+              child: const Text('ok'),
+            ),
+          ],
+        ),
+      );
+    } else {
+      closeDialog(false, res);
+    }
+
+    setState(() {
+      isLoading = false;
+    });
   }
 
   register() async {

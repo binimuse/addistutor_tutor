@@ -4,6 +4,8 @@ import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
 import 'package:addistutor_tutor/Profile/app_theme.dart';
 import 'package:addistutor_tutor/controller/avlablityconroller.dart';
 import 'package:addistutor_tutor/controller/editprofilecontroller.dart';
+import 'package:addistutor_tutor/remote_services/service.dart';
+import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -29,16 +31,16 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
 
   final EditprofileController editprofileController =
       Get.put(EditprofileController());
-  late List<bool> isSelected;
 
   @override
   void initState() {
     super.initState();
-    isSelected = [true, false];
+
     _fetchUser();
     _fetchdays();
   }
 
+  Activedays? day;
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 
@@ -65,7 +67,16 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
     _refreshController.loadComplete();
   }
 
+  bool change = false;
+
   void _fetchUser() async {
+    if (editprofileController.isActive.toString() == "1") {
+      avalablitycontrollerclass.isSelected = [true, false];
+      print("avalble");
+    } else {
+      print("Not avalble");
+      avalablitycontrollerclass.isSelected = [false, true];
+    }
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     var token = localStorage.getString('user');
 
@@ -83,19 +94,25 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
     } else {
       print("no Token");
     }
-
-    if (editprofileController.isActive == "1") {
-      isSelected = [true, false];
-    } else {
-      isSelected = [false, true];
-    }
   }
+
+  late List<bool?> values = <bool?>[
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ];
+  List<String> daylist = [
+    "Monday",
+  ];
 
   void _fetchdays() async {
     avalablitycontrollerclass.fetchPf();
   }
 
-  final values = <bool?>[false, false, false, false, false, false, false];
   bool ismonday = false;
   bool istue = false;
   bool iswen = false;
@@ -103,364 +120,179 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
   bool isfri = false;
   bool issat = false;
   bool issun = false;
+  final selectedIndexes = [];
 
   @override
   Widget build(BuildContext context) {
-    return SmartRefresher(
-      enablePullDown: true,
-      enablePullUp: true,
+    return Obx(() => avalablitycontrollerclass.isFetched.value
+        ? SmartRefresher(
+            enablePullDown: true,
+            enablePullUp: true,
 
-      //cheak pull_to_refresh
-      controller: _refreshController,
-      onRefresh: _onRefresh,
-      onLoading: _onLoading,
-      child: Container(
-          color: AppTheme.nearlyWhite,
-          child: SafeArea(
-              top: false,
-              child: Scaffold(
-                resizeToAvoidBottomInset: false,
-                key: avalablitycontrollerclass.scaffoldKey,
-                appBar: AppBar(
-                  backgroundColor: Colors.white,
-                  leading: Material(
-                    color: Colors.white,
-                    child: InkWell(
-                      borderRadius:
-                          BorderRadius.circular(AppBar().preferredSize.height),
-                      child: Icon(
-                        Icons.arrow_back_ios,
-                        color: DesignCourseAppTheme.nearlyBlack,
-                      ),
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ),
-                  title: Text(
-                    "Tutor Availability",
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black,
-                      fontFamily: 'WorkSans',
-                    ),
-                  ),
-                ),
-                backgroundColor: AppTheme.nearlyWhite,
-                body: Form(
-                  key: avalablitycontrollerclass.Avalablity,
-                  child: SafeArea(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        const Padding(
-                          padding: EdgeInsets.all(16),
-                          child: Text(
-                            'select your available date to give a tutor',
-                            style: TextStyle(color: Colors.black45),
-                          ),
-                        ),
-                        WeekdaySelector(
-                            selectedFillColor: kPrimaryColor,
-                            onChanged: (v) {
-                              printIntAsDay(v);
-
-                              setState(() {
-                                values[v % 7] = !values[v % 7]!;
-                                //    mon;
-                              });
-
-                              print(values);
-
-                              if (values[1] == true) {
-                                ismonday = true;
-
-                                avalablitycontrollerclass.Mon.text = "Monday";
-                              } else if (values[1] == false) {
-                                ismonday = false;
-                                avalablitycontrollerclass.Mon.text = "";
-                              }
-
-                              //    thu;
-                              if (values[2] == true) {
-                                istue = true;
-
-                                avalablitycontrollerclass.Tue.text = "Tuesday";
-                              } else if (values[2] == false) {
-                                istue = false;
-                                avalablitycontrollerclass.Tue.text = "";
-                              }
-
-                              //    Wen;
-                              if (values[3] == true) {
-                                iswen = true;
-
-                                avalablitycontrollerclass.Wed.text =
-                                    "Wednesday";
-                              } else if (values[3] == false) {
-                                iswen = false;
-                                avalablitycontrollerclass.Wed.text = "";
-                              }
-
-                              //    The;
-                              if (values[4] == true) {
-                                isthe = true;
-
-                                avalablitycontrollerclass.Thu.text = "Thursday";
-                              } else if (values[4] == false) {
-                                isthe = false;
-                                avalablitycontrollerclass.Thu.text = "";
-                              }
-                              //    fri;
-                              if (values[5] == true) {
-                                isfri = true;
-
-                                avalablitycontrollerclass.Fri.text = "Friday";
-                              } else if (values[5] == false) {
-                                isfri = false;
-                                avalablitycontrollerclass.Fri.text = "";
-                              }
-
-                              //    sat;
-                              if (values[6] == true) {
-                                issat = true;
-
-                                avalablitycontrollerclass.Sat.text = "Saturday";
-                              } else if (values[6] == false) {
-                                issat = false;
-                                avalablitycontrollerclass.Sat.text = "";
-                              }
-
-                              if (values[0] == true) {
-                                issun = true;
-
-                                avalablitycontrollerclass.Sun.text = "Sunday";
-                              } else if (values[0] == false) {
-                                issun = false;
-                                avalablitycontrollerclass.Sun.text = "";
-                              }
+            //cheak pull_to_refresh
+            controller: _refreshController,
+            onRefresh: _onRefresh,
+            onLoading: _onLoading,
+            child: Container(
+                color: AppTheme.nearlyWhite,
+                child: SafeArea(
+                    top: false,
+                    child: Scaffold(
+                      resizeToAvoidBottomInset: false,
+                      key: avalablitycontrollerclass.scaffoldKey,
+                      appBar: AppBar(
+                        backgroundColor: Colors.white,
+                        leading: Material(
+                          color: Colors.white,
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(
+                                AppBar().preferredSize.height),
+                            child: Icon(
+                              Icons.arrow_back_ios,
+                              color: DesignCourseAppTheme.nearlyBlack,
+                            ),
+                            onTap: () {
+                              Navigator.pop(context);
                             },
-                            values: values,
-                            selectedElevation: 15,
-                            elevation: 5,
-                            disabledElevation: 0,
-                            shortWeekdays: const [
-                              'Sun', // Sunday
-                              'Mon', // MOONday
-                              'Tue', // https://en.wikipedia.org/wiki/Names_of_the_days_of_the_week
-                              'Wed', // I ran out of ideas...
-                              'Thur', // Thirst-day
-                              'Fri', // It's Friday, Friday, Gotta get down on Friday!
-                              'Sat', // Everybody's lookin' forward to the weekend, weekend
-                            ]),
-                        const SizedBox(height: 20),
-                        ismonday
-                            ? TextFormField(
-                                controller: avalablitycontrollerclass.Mon,
-                                decoration: const InputDecoration(
-                                  contentPadding: EdgeInsets.only(bottom: 3),
-                                  enabled: false,
-                                  focusColor: kPrimaryColor,
-                                  fillColor: kPrimaryColor,
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.always,
-                                ),
-                                validator: (value) {
-                                  return avalablitycontrollerclass
-                                      .validateName(value!);
-                                },
-                              )
-                            : Container(),
-                        istue
-                            ? TextFormField(
-                                controller: avalablitycontrollerclass.Tue,
-                                decoration: const InputDecoration(
-                                  contentPadding: EdgeInsets.only(bottom: 3),
-                                  enabled: false,
-                                  focusColor: kPrimaryColor,
-                                  fillColor: kPrimaryColor,
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.always,
-                                ),
-                                validator: (value) {
-                                  return avalablitycontrollerclass
-                                      .validateName(value!);
-                                },
-                              )
-                            : Container(),
-                        iswen
-                            ? TextFormField(
-                                controller: avalablitycontrollerclass.Wed,
-                                decoration: const InputDecoration(
-                                  contentPadding: EdgeInsets.only(bottom: 3),
-                                  enabled: false,
-                                  focusColor: kPrimaryColor,
-                                  fillColor: kPrimaryColor,
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.always,
-                                ),
-                                validator: (value) {
-                                  return avalablitycontrollerclass
-                                      .validateName(value!);
-                                },
-                              )
-                            : Container(),
-                        isthe
-                            ? TextFormField(
-                                controller: avalablitycontrollerclass.Thu,
-                                decoration: const InputDecoration(
-                                  contentPadding: EdgeInsets.only(bottom: 3),
-                                  enabled: false,
-                                  focusColor: kPrimaryColor,
-                                  fillColor: kPrimaryColor,
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.always,
-                                ),
-                                validator: (value) {
-                                  return avalablitycontrollerclass
-                                      .validateName(value!);
-                                },
-                              )
-                            : Container(),
-                        isfri
-                            ? TextFormField(
-                                controller: avalablitycontrollerclass.Fri,
-                                decoration: const InputDecoration(
-                                  contentPadding: EdgeInsets.only(bottom: 3),
-                                  enabled: false,
-                                  focusColor: kPrimaryColor,
-                                  fillColor: kPrimaryColor,
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.always,
-                                ),
-                                validator: (value) {
-                                  return avalablitycontrollerclass
-                                      .validateName(value!);
-                                },
-                              )
-                            : Container(),
-                        issat
-                            ? TextFormField(
-                                controller: avalablitycontrollerclass.Sat,
-                                decoration: const InputDecoration(
-                                  contentPadding: EdgeInsets.only(bottom: 3),
-                                  enabled: false,
-                                  focusColor: kPrimaryColor,
-                                  fillColor: kPrimaryColor,
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.always,
-                                ),
-                                validator: (value) {
-                                  return avalablitycontrollerclass
-                                      .validateName(value!);
-                                },
-                              )
-                            : Container(),
-                        issun
-                            ? TextFormField(
-                                controller: avalablitycontrollerclass.Sun,
-                                decoration: const InputDecoration(
-                                  contentPadding: EdgeInsets.only(bottom: 3),
-                                  enabled: false,
-                                  focusColor: kPrimaryColor,
-                                  fillColor: kPrimaryColor,
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.always,
-                                ),
-                                validator: (value) {
-                                  return avalablitycontrollerclass
-                                      .validateName(value!);
-                                },
-                              )
-                            : Container(),
-                        const Padding(
-                          padding: EdgeInsets.all(16),
-                          child: Text(
-                            'select your availability ',
-                            style: TextStyle(color: Colors.black45),
                           ),
                         ),
-                        Center(
+                        title: Text(
+                          "Tutor Availability",
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black,
+                            fontFamily: 'WorkSans',
+                          ),
+                        ),
+                      ),
+                      backgroundColor: AppTheme.nearlyWhite,
+                      body: Form(
+                        key: avalablitycontrollerclass.Avalablity,
+                        child: SafeArea(
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              ToggleButtons(
-                                borderColor: Colors.black,
-                                fillColor: kPrimaryColor,
-                                borderWidth: 2,
-                                selectedBorderColor: Colors.black,
-                                selectedColor: Colors.white,
-                                borderRadius: BorderRadius.circular(0),
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      'Available',
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      'Temporarily unavailable',
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                  ),
-                                ],
-                                onPressed: (int index) {
-                                  setState(() {
-                                    for (int i = 0;
-                                        i < isSelected.length;
-                                        i++) {
-                                      isSelected[i] = i == index;
-                                    }
-
-                                    avalablitycontrollerclass.isa =
-                                        isSelected[0];
-
-                                    print(avalablitycontrollerclass.isa);
-                                  });
-                                },
-                                isSelected: isSelected,
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              RaisedButton(
-                                onPressed: () {
-                                  // print("bin");
-                                  // print(id);
-                                  avalablitycontrollerclass.editProf(
-                                      context, ids.toString());
-                                },
-                                color: kPrimaryColor,
-                                padding: EdgeInsets.symmetric(horizontal: 50),
-                                elevation: 2,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20)),
+                              const Padding(
+                                padding: EdgeInsets.all(16),
                                 child: Text(
-                                  "SAVE",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      letterSpacing: 2.2,
-                                      color: Colors.white),
+                                  'selected Dates',
+                                  style: TextStyle(color: Colors.black45),
                                 ),
-                              )
+                              ),
+                              FutureBuilder(
+                                  future: RemoteServices.fetchdaya(),
+                                  builder: (BuildContext context,
+                                      AsyncSnapshot snapshot) {
+                                    if (snapshot.hasError) {
+                                      return Center(
+                                        child: Text(snapshot.error.toString()),
+                                      );
+                                    }
+                                    if (snapshot.hasData) {
+                                      return SizedBox(
+                                          height: 100,
+                                          child: ListView.builder(
+                                              scrollDirection: Axis.horizontal,
+                                              itemBuilder: (_, index) {
+                                                return SizedBox.fromSize(
+                                                  size: const Size(76,
+                                                      76), // button width and height
+                                                  child: ClipOval(
+                                                    child: Material(
+                                                      color: Colors
+                                                          .transparent, // button color
+                                                      child: InkWell(
+                                                        splashColor:
+                                                            kPrimaryColor, // splash color
+                                                        onTap:
+                                                            () {}, // button pressed
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
+                                                          children: <Widget>[
+                                                            Icon(
+                                                              Icons
+                                                                  .date_range_outlined,
+                                                              color:
+                                                                  kPrimaryColor,
+                                                            ), // icon
+                                                            Text(
+                                                              snapshot
+                                                                  .data[index]!
+                                                                  .day,
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      12.0),
+                                                            ), // text
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                              itemCount: snapshot.data.length));
+                                    } else {
+                                      return const Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    }
+                                  }),
+                              change ? selectdate() : Container(),
+                              const SizedBox(height: 20),
+                              selectavalbily(),
+                              const SizedBox(height: 20),
+                              change
+                                  ? Center(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          RaisedButton(
+                                            onPressed: () {
+                                              // print("bin");
+                                              // print(id);
+                                              avalablitycontrollerclass
+                                                  .editProf(
+                                                      context, ids.toString());
+                                            },
+                                            color: kPrimaryColor,
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 50),
+                                            elevation: 2,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(20)),
+                                            child: Text(
+                                              "SAVE",
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  letterSpacing: 2.2,
+                                                  color: Colors.white),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  : Container(),
                             ],
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                ),
-              ))),
-    );
+                      ),
+                      floatingActionButton: FloatingActionButton(
+                        onPressed: () {
+                          setState(() {
+                            change = true;
+                          });
+                          // change = false;
+                        },
+                        backgroundColor: kPrimaryColor,
+                        child: const Icon(Icons.edit),
+                      ),
+                    ))))
+        : const Center(child: CircularProgressIndicator()));
   }
 
   printIntAsDay(int day) {
@@ -486,4 +318,210 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
     if (day % 7 == DateTime.sunday % 7) return 'Sunday';
     throw '🐞 This should never have happened: $day';
   }
+
+  Widget selectdate() {
+    return Column(children: [
+      const Padding(
+        padding: EdgeInsets.all(16),
+        child: Text(
+          'select your available date to give a tutor',
+          style: TextStyle(color: Colors.black45),
+        ),
+      ),
+      WeekdaySelector(
+          selectedFillColor: kPrimaryColor,
+          onChanged: (v) {
+            avalablitycontrollerclass.onchangedate(true);
+            printIntAsDay(v);
+
+            setState(() {
+              values[v % 7] = !values[v % 7]!;
+              //    mon;
+            });
+
+            print(values);
+
+            if (values[1] == true) {
+              ismonday = true;
+
+              avalablitycontrollerclass.Mon.text = "Monday";
+            } else if (values[1] == false) {
+              ismonday = false;
+              avalablitycontrollerclass.Mon.text = "";
+            }
+
+            //    thu;
+            if (values[2] == true) {
+              istue = true;
+
+              avalablitycontrollerclass.Tue.text = "Tuesday";
+            } else if (values[2] == false) {
+              istue = false;
+              avalablitycontrollerclass.Tue.text = "";
+            }
+
+            //    Wen;
+            if (values[3] == true) {
+              iswen = true;
+
+              avalablitycontrollerclass.Wed.text = "Wednesday";
+            } else if (values[3] == false) {
+              iswen = false;
+              avalablitycontrollerclass.Wed.text = "";
+            }
+
+            //    The;
+            if (values[4] == true) {
+              isthe = true;
+
+              avalablitycontrollerclass.Thu.text = "Thursday";
+            } else if (values[4] == false) {
+              isthe = false;
+              avalablitycontrollerclass.Thu.text = "";
+            }
+            //    fri;
+            if (values[5] == true) {
+              isfri = true;
+
+              avalablitycontrollerclass.Fri.text = "Friday";
+            } else if (values[5] == false) {
+              isfri = false;
+              avalablitycontrollerclass.Fri.text = "";
+            }
+
+            //    sat;
+            if (values[6] == true) {
+              issat = true;
+
+              avalablitycontrollerclass.Sat.text = "Saturday";
+            } else if (values[6] == false) {
+              issat = false;
+              avalablitycontrollerclass.Sat.text = "";
+            }
+
+            if (values[0] == true) {
+              issun = true;
+
+              avalablitycontrollerclass.Sun.text = "Sunday";
+            } else if (values[0] == false) {
+              issun = false;
+              avalablitycontrollerclass.Sun.text = "";
+            }
+          },
+          values: values,
+          selectedElevation: 15,
+          elevation: 5,
+          disabledElevation: 0,
+          shortWeekdays: const [
+            'Sun', // Sunday
+            'Mon', // MOONday
+            'Tue', // https://en.wikipedia.org/wiki/Names_of_the_days_of_the_week
+            'Wed', // I ran out of ideas...
+            'Thur', // Thirst-day
+            'Fri', // It's Friday, Friday, Gotta get down on Friday!
+            'Sat', // Everybody's lookin' forward to the weekend, weekend
+          ]),
+    ]);
+  }
+
+  Widget selectavalbily() {
+    return Column(children: [
+      const Padding(
+        padding: EdgeInsets.all(16),
+        child: Text(
+          'select your availability ',
+          style: TextStyle(color: Colors.black45),
+        ),
+      ),
+      Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            ToggleButtons(
+              borderColor: Colors.black,
+              fillColor: kPrimaryColor,
+              borderWidth: 2,
+              selectedBorderColor: Colors.black,
+              selectedColor: Colors.white,
+              borderRadius: BorderRadius.circular(0),
+              children: <Widget>[
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'Available',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Temporarily unavailable',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+              ],
+              onPressed: (int index) {
+                setState(() {
+                  change = true;
+
+                  for (int i = 0;
+                      i < avalablitycontrollerclass.isSelected.length;
+                      i++) {
+                    avalablitycontrollerclass.isSelected[i] = i == index;
+                  }
+                });
+
+                setState(() {
+                  avalablitycontrollerclass.onchange(true);
+                  avalablitycontrollerclass.isa =
+                      avalablitycontrollerclass.isSelected[0];
+                  print(avalablitycontrollerclass.isa);
+                  print("on" + avalablitycontrollerclass.onchange.toString());
+                });
+              },
+              isSelected: avalablitycontrollerclass.isSelected,
+            ),
+          ],
+        ),
+      ),
+    ]);
+  }
 }
+
+// class FollowedList extends StatefulWidget {
+//   final Activedays? day;
+
+//   const FollowedList({
+//     Key? key,
+//     required this.day,
+//   }) : super(key: key);
+
+//   @override
+//   _SettingsScreenState2 createState() => _SettingsScreenState2();
+// }
+
+// final Avalablitycontrollerclass avalablitycontrollerclass =
+//     Get.put(Avalablitycontrollerclass());
+
+// class _SettingsScreenState2 extends State<FollowedList> {
+//   @override
+//   void initState() {
+//     // TODO: implement initState
+
+//     if (widget.day!.day != null) {
+//       avalablitycontrollerclass.selecteddate.add(widget.day!.day);
+//       print(avalablitycontrollerclass.selecteddate);
+
+//       // values.clear();
+//     } else {
+//       avalablitycontrollerclass.selecteddate.clear();
+//     }
+
+//     super.initState();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Material(child: Container());
+//   }
+// }

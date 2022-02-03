@@ -63,6 +63,8 @@ class RemoteServices {
 
   static Future<String> editAvalablity(var data, id) async {
     List<String> errors = [];
+    print("id");
+    print(id);
     // create multipart request
     res = await Network()
         .getpassedData(data, "teacher/${id.toString()}/update-status");
@@ -131,9 +133,35 @@ class RemoteServices {
     var body = json.decode(res.body);
 
     if (res.statusCode == 200) {
-      return body;
+      return body["data"]
+          .map((e) => Activedays.fromJson(e))
+          .toList()
+          .cast<Activedays>();
     } else {
-      throw Exception('Failed to load Comment');
+      throw Exception('Failed to load days' + res.statusCode.toString());
+    }
+  }
+
+  static Future<String> feedback(var data) async {
+    List<String> errors = [];
+    // create multipart request
+    res = await Network().getpassedData(data, "feedback");
+
+    body = json.decode(res.body);
+
+    if (res.statusCode == 200) {
+      return res.statusCode.toString();
+    } else {
+      if (body["message"] != null) {
+        return body["message"].toString();
+      } else {
+        Map<String, dynamic> map = body["errors"];
+        map.forEach((key, value) {
+          errors.add(value[0].toString());
+        });
+
+        return errors.join("\n").toString();
+      }
     }
   }
 }

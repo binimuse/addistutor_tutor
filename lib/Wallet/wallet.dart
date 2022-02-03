@@ -1,8 +1,46 @@
+import 'dart:convert';
+
 import 'package:addistutor_tutor/Wallet/topuppage.dart';
 import 'package:addistutor_tutor/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class WalletPage extends StatelessWidget {
+class WalletPage extends StatefulWidget {
+  const WalletPage({Key? key}) : super(key: key);
+  @override
+  _EditProfilePageState createState() => _EditProfilePageState();
+}
+
+class _EditProfilePageState extends State<WalletPage> {
+  var ids;
+  @override
+  void initState() {
+    _fetchUser();
+    super.initState();
+  }
+
+  void _fetchUser() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var token = localStorage.getString('user');
+
+    if (token != null) {
+      var body = json.decode(token);
+
+      if (body["teacher_id"] != null) {
+        setState(() {
+          ids = int.parse(body["teacher_id"]);
+        });
+
+        print("yes Id");
+      } else {
+        var noid = "noid";
+        print("no Id");
+      }
+    } else {
+      print("no Token");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -39,7 +77,7 @@ class WalletPage extends StatelessWidget {
                               backgroundColor: Colors.white,
                               child: ClipOval(
                                 child: Image.network(
-                                  'https://firebasestorage.googleapis.com/v0/b/dl-flutter-ui-challenges.appspot.com/o/img%2F6.jpg?alt=media',
+                                  'https://tutor.oddatech.com/api/teacher-profile-picture/${ids}',
                                   fit: BoxFit.contain,
                                 ),
                               ),
