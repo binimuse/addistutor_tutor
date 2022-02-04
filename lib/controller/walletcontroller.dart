@@ -1,5 +1,6 @@
 import 'package:addistutor_tutor/constants.dart';
 import 'package:addistutor_tutor/remote_services/service.dart';
+import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
@@ -20,6 +21,22 @@ class WalletContoller extends GetxController with StateMixin {
     slipid = TextEditingController();
 
     super.onInit();
+  }
+
+  var balnce;
+  Balance? balance;
+  var wallet;
+
+  void getbalance(var id) async {
+    balnce = await RemoteServices.balance(id);
+
+    if (balnce != null) {
+      // balnce = balance;
+      // ignore: unnecessary_null_comparison
+      wallet = balnce!.wallet_amount.toString();
+      print(wallet);
+      isFetched(true);
+    }
   }
 
   var image;

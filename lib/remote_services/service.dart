@@ -183,6 +183,7 @@ class RemoteServices {
 
   static Future<Balance> balance(var id) async {
     res = await Network().getData("wallet/${id}/balance");
+    print("wallet/${id}/balance");
 
     var body = json.decode(res.body);
     if (res.statusCode == 200) {

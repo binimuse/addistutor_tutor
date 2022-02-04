@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, duplicate_ignore, prefer_const_literals_to_create_immutables
 
+import 'dart:convert';
+
 import 'package:addistutor_tutor/Home/components/category_list_view.dart';
 import 'package:addistutor_tutor/Home/components/course_info_screen.dart';
 import 'package:addistutor_tutor/Home/components/course_info_screen_rating.dart';
@@ -7,6 +9,8 @@ import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
 import 'package:addistutor_tutor/Wallet/wallet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constants.dart';
 import '../message_model.dart';
@@ -32,40 +36,74 @@ class Appointment extends StatefulWidget {
 
 class _HomePageState extends State<Appointment>
     with SingleTickerProviderStateMixin {
+  @override
+  void initState() {
+    _fetchUser();
+
+    super.initState();
+  }
+
+  var ids;
+  void _fetchUser() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var token = localStorage.getString('user');
+
+    if (token != null) {
+      var body = json.decode(token);
+
+      if (body["teacher_id"] != null) {
+        setState(() {
+          ids = int.parse(body["teacher_id"]);
+          walletContoller.getbalance(ids);
+        });
+
+        print("yes Id");
+      } else {
+        var noid = "noid";
+        print("no Id");
+      }
+    } else {
+      print("no Token");
+    }
+  }
+
+  var balancewallet = 10;
+
   CategoryType categoryType = CategoryType.ui;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: DesignCourseAppTheme.nearlyWhite,
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Column(
-          children: <Widget>[
-            SizedBox(
-              height: MediaQuery.of(context).padding.top,
-            ),
-            getAppBarUI(),
-            _buildDivider(),
-            Expanded(
-              child: SingleChildScrollView(
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height,
-                  child: Column(
-                    children: <Widget>[
-                      getCategoryUI(),
-                      Flexible(
-                        child: getPopularCourseUI(),
-                      ),
-                    ],
+    return Obx(() => walletContoller.isFetched.value
+        ? Container(
+            color: DesignCourseAppTheme.nearlyWhite,
+            child: Scaffold(
+              backgroundColor: Colors.transparent,
+              body: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: MediaQuery.of(context).padding.top,
                   ),
-                ),
+                  getAppBarUI(),
+                  _buildDivider(),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.height,
+                        child: Column(
+                          children: <Widget>[
+                            getCategoryUI(),
+                            Flexible(
+                              child: getPopularCourseUI(),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
-      ),
-    );
+            ))
+        : const Center(child: CircularProgressIndicator()));
   }
 
   final Color divider = Colors.grey.shade600;
@@ -402,7 +440,7 @@ class _HomePageState extends State<Appointment>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '1000 birr',
+                    walletContoller.wallet.toString() + ' birr',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontWeight: FontWeight.w700,

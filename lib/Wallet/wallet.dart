@@ -2,7 +2,11 @@ import 'dart:convert';
 
 import 'package:addistutor_tutor/Wallet/topuppage.dart';
 import 'package:addistutor_tutor/constants.dart';
+import 'package:addistutor_tutor/controller/walletcontroller.dart';
+import 'package:addistutor_tutor/remote_services/service.dart';
+import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class WalletPage extends StatefulWidget {
@@ -11,11 +15,15 @@ class WalletPage extends StatefulWidget {
   _EditProfilePageState createState() => _EditProfilePageState();
 }
 
+final WalletContoller walletContoller = Get.put(WalletContoller());
+
 class _EditProfilePageState extends State<WalletPage> {
+  late Balance? balance;
   var ids;
   @override
   void initState() {
     _fetchUser();
+    _balance();
     super.initState();
   }
 
@@ -29,6 +37,7 @@ class _EditProfilePageState extends State<WalletPage> {
       if (body["teacher_id"] != null) {
         setState(() {
           ids = int.parse(body["teacher_id"]);
+          walletContoller.getbalance(ids);
         });
 
         print("yes Id");
@@ -39,6 +48,13 @@ class _EditProfilePageState extends State<WalletPage> {
     } else {
       print("no Token");
     }
+  }
+
+  var balancewallet = 10;
+
+  void _balance() async {
+    print(walletContoller.wallet.toString());
+    print(ids.toString());
   }
 
   @override
@@ -60,7 +76,7 @@ class _EditProfilePageState extends State<WalletPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        "1000.00 birr",
+                        walletContoller.wallet.toString() + ' birr',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 29,
