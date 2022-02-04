@@ -39,7 +39,7 @@ class FeedBackScreencontroller extends GetxController with StateMixin {
     openAndCloseLoadingDialog(context);
     print(feedback.value);
     var data = {
-      "message": feedback.toString(),
+      "message": feedback.text,
     };
     inforesponse = await RemoteServices.feedback(data);
     if (inforesponse.toString() == "200") {

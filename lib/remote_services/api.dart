@@ -66,7 +66,7 @@ class Network {
     return await request.send();
   }
 
-  uploadFilewallet(apiUrl, file, data stream, length) async {
+  uploadFilewallet(apiUrl, file, data, stream, length) async {
     var fullUrl = _url + apiUrl;
     var uri = Uri.parse(fullUrl);
     await _getToken();
@@ -79,29 +79,16 @@ class Network {
     return await request.send();
   }
 
-  postFile(apiUrl, files, data, stream, length) async {
+  postFile2(apiUrl, file, data, stream, length) async {
     var fullUrl = _url + apiUrl;
-    // ignore: prefer_typing_uninitialized_variables
     var uri = Uri.parse(fullUrl);
-
     await _getToken();
     var request = http.MultipartRequest("POST", uri);
-    // request.headers.addAll(_setFileHeaders());
-    // request.fields["location"] = data["location"].toString();
-    // request.fields["caption"] = data["caption"].toString();
-    // request.fields["post_type"] = data["post_type"].toString();
-
     request.fields["amount"] = data["amount"].toString();
-
-    for (var file in files) {
-      // ignore: deprecated_member_use
-      var stream = http.ByteStream(DelegatingStream.typed(file.openRead()));
-      var length = await file.length();
-      var multipartFile = http.MultipartFile('file', stream, length,
-          filename: basename(file.path));
-      request.files.add(multipartFile);
-    }
-
+    request.headers.addAll(_setFileHeaders());
+    var multipartFile = http.MultipartFile('file', stream, length,
+        filename: basename(file.path));
+    request.files.add(multipartFile);
     return await request.send();
   }
 }

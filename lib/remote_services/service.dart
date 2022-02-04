@@ -164,4 +164,20 @@ class RemoteServices {
       }
     }
   }
+
+  static Future<String> wallet(File image, var data, var id) async {
+    // create multipart request
+    var stream = http.ByteStream(DelegatingStream.typed(image.openRead()));
+    var length = await image.length();
+    res = await Network()
+        .postFile2("wallet/${id}/deposit", image, data, stream, length);
+    print(res.statusCode.toString());
+    if (res.statusCode == 200) {
+      res.stream.transform(utf8.decoder).listen((value) {});
+
+      return res.statusCode.toString();
+    } else {
+      throw Exception((res.statusCode.toString()));
+    }
+  }
 }

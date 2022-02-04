@@ -8,25 +8,29 @@ import 'package:flutter/material.dart';
 class WalletContoller extends GetxController with StateMixin {
   GlobalKey<FormState> Formkey = GlobalKey<FormState>();
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  late TextEditingController feedback;
+  late TextEditingController ammount;
+  late TextEditingController slipid;
+
   var inforesponse;
   var isLoading = false.obs;
   var isFetched = false.obs;
   @override
   void onInit() {
-    feedback = TextEditingController();
+    ammount = TextEditingController();
+    slipid = TextEditingController();
 
     super.onInit();
   }
 
-  void editProf(BuildContext context) async {
+  var image;
+  void editProf(BuildContext context, id) async {
     try {
       final isValid = Formkey.currentState!.validate();
 
-      if (isValid == true) {
+      if (isValid == true && image != null) {
         isLoading(true);
         Formkey.currentState!.save();
-        await seteditInfo(context);
+        await seteditInfo(context, image, id);
       }
     } finally {
       // ignore: todo
@@ -35,13 +39,19 @@ class WalletContoller extends GetxController with StateMixin {
     }
   }
 
-  Future<void> seteditInfo(BuildContext context) async {
+  Future<void> seteditInfo(BuildContext context, image, id) async {
     openAndCloseLoadingDialog(context);
-    print(feedback.value);
+
     var data = {
-      "message": feedback.toString(),
+      "teacher_id": slipid.text,
+      "amount": ammount.text,
     };
-    inforesponse = await RemoteServices.feedback(data);
+
+    print("image");
+    print(id);
+    print(image);
+    print(data);
+    inforesponse = await RemoteServices.wallet(image, data, id);
     if (inforesponse.toString() == "200") {
       closeDialog(true, '', context);
       isLoading(false);
