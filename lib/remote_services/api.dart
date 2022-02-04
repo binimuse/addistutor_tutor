@@ -66,26 +66,28 @@ class Network {
     return await request.send();
   }
 
-  uploadFilewallet(apiUrl, file, data, stream, length) async {
-    var fullUrl = _url + apiUrl;
-    var uri = Uri.parse(fullUrl);
-    await _getToken();
-    var request = http.MultipartRequest("POST", uri);
-    request.headers.addAll(_setFileHeaders());
-    request.fields["amount"] = data["amount"].toString();
-    var multipartFile = http.MultipartFile('image', stream, length,
-        filename: basename(file.path));
-    request.files.add(multipartFile);
-    return await request.send();
-  }
+  // uploadFilewallet(apiUrl, file, data, stream, length) async {
+  //   var fullUrl = _url + apiUrl;
+  //   var uri = Uri.parse(fullUrl);
+  //   await _getToken();
+  //   var request = http.MultipartRequest("POST", uri);
+  //   request.headers.addAll(_setFileHeaders());
+
+  //   var multipartFile = http.MultipartFile('image', stream, length,
+  //       filename: basename(file.path));
+  //   request.files.add(multipartFile);
+  //   return await request.send();
+  // }
 
   postFile2(apiUrl, file, data, stream, length) async {
     var fullUrl = _url + apiUrl;
     var uri = Uri.parse(fullUrl);
     await _getToken();
     var request = http.MultipartRequest("POST", uri);
-    request.fields["amount"] = data["amount"].toString();
     request.headers.addAll(_setFileHeaders());
+    request.fields["amount"] = data["amount"].toString();
+    request.fields["slip_id"] = data["slip_id"].toString();
+
     var multipartFile = http.MultipartFile('file', stream, length,
         filename: basename(file.path));
     request.files.add(multipartFile);

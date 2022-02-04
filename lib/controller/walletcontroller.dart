@@ -43,7 +43,7 @@ class WalletContoller extends GetxController with StateMixin {
     openAndCloseLoadingDialog(context);
 
     var data = {
-      "teacher_id": slipid.text,
+      "slip_id": slipid.text,
       "amount": ammount.text,
     };
 
@@ -57,6 +57,8 @@ class WalletContoller extends GetxController with StateMixin {
       isLoading(false);
     } else {
       closeDialog(false, inforesponse, context);
+      print(inforesponse);
+      isLoading(false);
     }
   }
 
@@ -69,8 +71,8 @@ class WalletContoller extends GetxController with StateMixin {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text(
-            'FeedBack Error',
+          title: Text(
+            data.toString(),
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w500,
@@ -83,6 +85,7 @@ class WalletContoller extends GetxController with StateMixin {
               onPressed: () async {
                 isLoading(false);
                 Navigator.of(context).pop(true);
+                Navigator.pop(context);
               },
               child: new Text('ok'),
             ),

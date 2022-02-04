@@ -63,3 +63,17 @@ class Activedays {
     );
   }
 }
+
+class Balance {
+  String wallet_amount;
+
+  Balance({
+    required this.wallet_amount,
+  });
+
+  factory Balance.fromJson(Map<String, dynamic> json) {
+    return Balance(
+      wallet_amount: json["wallet_amount"],
+    );
+  }
+}

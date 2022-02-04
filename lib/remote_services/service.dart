@@ -177,7 +177,18 @@ class RemoteServices {
 
       return res.statusCode.toString();
     } else {
-      throw Exception((res.statusCode.toString()));
+      throw Exception("can't");
+    }
+  }
+
+  static Future<Balance> balance(var id) async {
+    res = await Network().getData("wallet/${id}/balance");
+
+    var body = json.decode(res.body);
+    if (res.statusCode == 200) {
+      return Balance.fromJson(body["data"]);
+    } else {
+      throw Exception('Failed to load User' + res.statusCode.toString());
     }
   }
 }
