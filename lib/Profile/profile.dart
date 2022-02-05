@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:addistutor_tutor/Avalablity/avalabilty.dart';
 import 'package:addistutor_tutor/Login/login_screen.dart';
 import 'package:addistutor_tutor/Notification/notification.dart';
+import 'package:addistutor_tutor/Profile/contactus.dart';
 import 'package:addistutor_tutor/Profile/setting.dart';
 import 'package:addistutor_tutor/controller/avlablityconroller.dart';
 import 'package:addistutor_tutor/controller/editprofilecontroller.dart';
@@ -337,7 +338,19 @@ class _ProfilePageState extends State<ProfileS> {
                       child: _buildRow(Icons.settings, "Settings")),
                   _buildDivider(),
                   const SizedBox(height: 10.0),
-                  _buildRow(Icons.email, "Contact us"),
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          // ignore: prefer_const_constructors
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder: (context, animation1, animation2) =>
+                                ContactDetailsView(),
+                            transitionDuration: Duration.zero,
+                          ),
+                        );
+                      },
+                      child: _buildRow(Icons.email, "Contact us")),
                   _buildDivider(),
                   const SizedBox(height: 10.0),
                   GestureDetector(

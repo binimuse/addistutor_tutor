@@ -77,3 +77,43 @@ class Balance {
     );
   }
 }
+
+class Transaction {
+  String slip_id;
+  String amount;
+  String status;
+
+  Transaction({
+    required this.slip_id,
+    required this.amount,
+    required this.status,
+  });
+
+  factory Transaction.fromJson(Map<String, dynamic> json) {
+    return Transaction(
+      slip_id: json["slip_id"],
+      amount: json["amount"],
+      status: json["status"],
+    );
+  }
+}
+
+class ContactUS {
+  String name;
+  String email;
+  String phone;
+
+  ContactUS({
+    required this.name,
+    required this.email,
+    required this.phone,
+  });
+
+  factory ContactUS.fromJson(Map<String, dynamic> json) {
+    return ContactUS(
+      name: json["name"],
+      email: json["email"],
+      phone: json["phone"],
+    );
+  }
+}

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, duplicate_ignore, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, duplicate_ignore, prefer_const_literals_to_create_immutables, avoid_print
 
 import 'dart:convert';
 
@@ -43,6 +43,7 @@ class _HomePageState extends State<Appointment>
     super.initState();
   }
 
+  // ignore: prefer_typing_uninitialized_variables
   var ids;
   void _fetchUser() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
@@ -59,7 +60,6 @@ class _HomePageState extends State<Appointment>
 
         print("yes Id");
       } else {
-        var noid = "noid";
         print("no Id");
       }
     } else {
@@ -152,7 +152,7 @@ class _HomePageState extends State<Appointment>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const Text(
-              'Recent Tutors',
+              'My Recent Tutors',
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontWeight: FontWeight.w600,

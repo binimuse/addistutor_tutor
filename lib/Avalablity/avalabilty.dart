@@ -8,8 +8,6 @@ import 'package:addistutor_tutor/remote_services/service.dart';
 import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/date_symbols.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,6 +21,7 @@ class AvalablityScreen extends StatefulWidget {
   _FeedbackScreenState createState() => _FeedbackScreenState();
 }
 
+// ignore: prefer_typing_uninitialized_variables
 var ids;
 
 class _FeedbackScreenState extends State<AvalablityScreen> {
@@ -49,9 +48,8 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
     await Future.delayed(const Duration(milliseconds: 1000));
     // if failed,use refreshFailed()
 
-    setState(() {
-      _fetchUser();
-    });
+    _fetchUser();
+
     _refreshController.refreshCompleted();
   }
 
@@ -124,6 +122,7 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // _onRefresh();
     return Obx(() => avalablitycontrollerclass.isFetched.value
         ? SmartRefresher(
             enablePullDown: true,
@@ -250,6 +249,7 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
+                                          // ignore: deprecated_member_use
                                           RaisedButton(
                                             onPressed: () {
                                               // print("bin");
@@ -425,6 +425,7 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
   }
 
   Widget selectavalbily() {
+    _onRefresh();
     return Column(children: [
       const Padding(
         padding: EdgeInsets.all(16),

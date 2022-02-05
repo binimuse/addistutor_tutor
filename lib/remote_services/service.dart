@@ -192,4 +192,30 @@ class RemoteServices {
       throw Exception('Failed to load User' + res.statusCode.toString());
     }
   }
+
+  static Future<List<Transaction>> transaction(var id) async {
+    res = await Network().getData("wallet/${id}/transaction");
+    print("transaction");
+
+    var body = json.decode(res.body);
+    if (res.statusCode == 200) {
+      return body["data"]
+          .map((e) => Transaction.fromJson(e))
+          .toList()
+          .cast<Transaction>();
+    } else {
+      throw Exception('Failed to load transaction');
+    }
+  }
+
+  static Future<ContactUS> contactus() async {
+    res = await Network().getData("contact-us");
+
+    var body = json.decode(res.body);
+    if (res.statusCode == 200) {
+      return ContactUS.fromJson(body["data"]);
+    } else {
+      throw Exception('Failed to load User' + res.statusCode.toString());
+    }
+  }
 }
