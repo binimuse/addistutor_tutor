@@ -1,3 +1,4 @@
+import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
 import 'package:addistutor_tutor/constants.dart';
 import 'package:addistutor_tutor/controller/editprofilecontroller.dart';
 import 'package:flutter/cupertino.dart';
@@ -69,22 +70,28 @@ class _EditProfilePageState extends State<ChangePassword> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          leadingWidth: 40,
           backgroundColor: Colors.white,
-          leading: IconButton(
-              onPressed: () {
-                Navigator.of(context).pop(true);
-              },
-              icon: const Icon(Icons.arrow_back),
-              color: kPrimaryColor),
-          title: const SizedBox(
-            child: Text(
-              "Edit Password",
-              style: TextStyle(
-                color: kPrimaryColor,
-                fontSize: 23,
-                fontFamily: 'font1',
+          leading: Material(
+            color: Colors.white,
+            child: InkWell(
+              borderRadius:
+                  BorderRadius.circular(AppBar().preferredSize.height),
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: DesignCourseAppTheme.nearlyBlack,
               ),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
+          title: Text(
+            "Change Password",
+            style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.w500,
+              color: Colors.black,
+              fontFamily: 'WorkSans',
             ),
           ),
         ),

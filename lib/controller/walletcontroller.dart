@@ -85,7 +85,7 @@ class WalletContoller extends GetxController with StateMixin {
     } else {
       closeDialog(false, inforesponse, context);
       print(inforesponse);
-      isLoading(false);
+      //  isLoading(false);
     }
   }
 
