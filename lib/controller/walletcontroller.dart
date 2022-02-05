@@ -34,7 +34,7 @@ class WalletContoller extends GetxController with StateMixin {
   }
 
   var balnce;
-  Balance? balance;
+
   var wallet;
 
   void getbalance(var id) async {

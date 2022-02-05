@@ -1,3 +1,4 @@
+import 'package:addistutor_tutor/Profile/localstring.dart';
 import 'package:addistutor_tutor/connectvity.dart';
 import 'package:addistutor_tutor/constants.dart';
 import 'package:addistutor_tutor/splash/error.dart';
@@ -58,8 +59,10 @@ class _MyHomePageState extends State<MyApp> {
 
     }
     return isconected
-        ? MaterialApp(
+        ? GetMaterialApp(
             debugShowCheckedModeBanner: false,
+            translations: LocaleString(),
+            locale: const Locale('en', 'US'),
             title: 'Flutter Auth',
             theme: ThemeData(
               primaryColor: kPrimaryColor,
@@ -73,6 +76,8 @@ class _MyHomePageState extends State<MyApp> {
 
   buildUnAuthScreen() {
     return GetMaterialApp(
+      translations: LocaleString(),
+      locale: const Locale('en', 'US'),
       title: 'Flutter Auth',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
