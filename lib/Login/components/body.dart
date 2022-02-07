@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:addistutor_tutor/Profile/profile.dart';
 import 'package:addistutor_tutor/Signup/components/or_divider.dart';
 import 'package:addistutor_tutor/Signup/components/social_icon.dart';
 import 'package:addistutor_tutor/Signup/signup_screen.dart';
@@ -388,28 +389,21 @@ class _LoginScreenState extends State<Body> {
       var token = localStorage.getString('user');
       var bodys = json.decode(token!);
 
-      // if (bodys["student_id"] == null) {
-      //   Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //       builder: (context) => ProfileScreen(),
-      //     ),
-      //   );
-      // } else {
-      //   Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //       builder: (context) => Main(),
-      //     ),
-      //   );
-      // }
-
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => Main(),
-        ),
-      );
+      if (bodys["teacher_id"] == null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProfileScreen(),
+          ),
+        );
+      } else {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Main(),
+          ),
+        );
+      }
 
       isLoading = false;
     } else if (res.statusCode == 401) {

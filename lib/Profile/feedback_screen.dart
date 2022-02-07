@@ -30,6 +30,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             child: SafeArea(
                 top: false,
                 child: Scaffold(
+                  resizeToAvoidBottomInset: false,
                   appBar: AppBar(
                     backgroundColor: Colors.white,
                     leading: Material(
@@ -37,7 +38,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                       child: InkWell(
                         borderRadius: BorderRadius.circular(
                             AppBar().preferredSize.height),
-                        child: Icon(
+                        child: const Icon(
                           Icons.arrow_back_ios,
                           color: DesignCourseAppTheme.nearlyBlack,
                         ),
@@ -46,7 +47,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                         },
                       ),
                     ),
-                    title: Text(
+                    title: const Text(
                       "FeedBack",
                       style: TextStyle(
                         fontSize: 25,
@@ -56,7 +57,6 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                       ),
                     ),
                   ),
-                  resizeToAvoidBottomInset: true,
                   backgroundColor: AppTheme.nearlyWhite,
                   body: Form(
                     key: feedBackScreencontroller.Formkey,
@@ -75,21 +75,11 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                             ),
                             Container(
                               padding: const EdgeInsets.only(top: 8),
-                              child: Text(
+                              child: const Text(
                                 'Your FeedBack',
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.only(top: 16),
-                              child: const Text(
-                                'Give your best time for this moment.',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 16,
                                 ),
                               ),
                             ),
@@ -123,11 +113,11 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                                       child: TextFormField(
                                         controller:
                                             feedBackScreencontroller.feedback,
-                                        decoration: InputDecoration(
+                                        decoration: const InputDecoration(
                                             fillColor: kPrimaryColor,
                                             border: InputBorder.none,
                                             hintText: 'Enter your feedback...'),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontFamily: AppTheme.fontName,
                                           fontSize: 16,
                                           color: AppTheme.dark_grey,
@@ -151,6 +141,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                               children: [
                                 // ignore: deprecated_member_use
 
+                                // ignore: deprecated_member_use
                                 RaisedButton(
                                   onPressed: () {
                                     feedBackScreencontroller.editProf(context);

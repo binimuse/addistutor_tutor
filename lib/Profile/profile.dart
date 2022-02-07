@@ -6,8 +6,11 @@ import 'package:addistutor_tutor/Notification/notification.dart';
 import 'package:addistutor_tutor/Profile/contactus.dart';
 import 'package:addistutor_tutor/Profile/setting.dart';
 import 'package:addistutor_tutor/controller/avlablityconroller.dart';
+import 'package:addistutor_tutor/controller/contactuscontroller.dart';
 import 'package:addistutor_tutor/controller/editprofilecontroller.dart';
+import 'package:addistutor_tutor/controller/feedbackcontroller.dart';
 import 'package:addistutor_tutor/controller/signupcontroller.dart';
+import 'package:addistutor_tutor/controller/walletcontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -105,7 +108,9 @@ class _ProfilePageState extends State<ProfileS> {
       var body = json.decode(token);
 
       if (body["teacher_id"] != null) {
-        ids = int.parse(body["teacher_id"]);
+        setState(() {
+          ids = int.parse(body["teacher_id"]);
+        });
         editprofileController.fetchPf(int.parse(body["teacher_id"]));
       } else {
         var noid = "noid";
@@ -479,6 +484,10 @@ class _ProfilePageState extends State<ProfileS> {
     localStorage.remove('token');
     Get.delete<SignupController>();
     Get.delete<EditprofileController>();
+    Get.delete<Avalablitycontrollerclass>();
+    Get.delete<ContactUSContolller>();
+    Get.delete<FeedBackScreencontroller>();
+    Get.delete<WalletContoller>();
 
     Navigator.push(
       context,

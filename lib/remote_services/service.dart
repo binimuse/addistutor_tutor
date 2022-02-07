@@ -242,4 +242,56 @@ class RemoteServices {
       }
     }
   }
+
+  static Future<List<Notifications>> getActivity() async {
+    res = await Network().getData("teacher-notification");
+    var body = json.decode(res.body);
+
+    if (res.statusCode == 200) {
+      return body["data"]
+          .map((e) => Notifications.fromJson(e))
+          .toList()
+          .cast<Notifications>();
+    } else {
+      throw Exception('Failed to load Comment');
+    }
+  }
+
+  static Future<List<RequestedBooking>> getrequestedbooking(
+      var id, var status) async {
+    res = await Network().getData("teacher/${id}/bookings?status=${status}");
+    var body = json.decode(res.body);
+
+    if (res.statusCode == 200) {
+      return body["data"]
+          .map((e) => RequestedBooking.fromJson(e))
+          .toList()
+          .cast<RequestedBooking>();
+    } else {
+      throw Exception('Failed to load Comment');
+    }
+  }
+
+  static Future<String> updatestatus(var data, var b_id) async {
+    List<String> errors = [];
+    // create multipart request
+    res = await Network().getpassedData(data, "booking/${b_id}/update-status");
+
+    body = json.decode(res.body);
+
+    if (res.statusCode == 200) {
+      return res.statusCode.toString();
+    } else {
+      if (body["message"] != null) {
+        return body["message"].toString();
+      } else {
+        Map<String, dynamic> map = body["errors"];
+        map.forEach((key, value) {
+          errors.add(value[0].toString());
+        });
+
+        return errors.join("\n").toString();
+      }
+    }
+  }
 }

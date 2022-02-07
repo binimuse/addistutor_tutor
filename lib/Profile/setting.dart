@@ -44,6 +44,7 @@ class _SettingsFourPageState extends State<SettingsFourPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: Material(

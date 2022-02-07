@@ -77,24 +77,17 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
       pages: [
         PageViewModel(
-          title: "Our tutors",
+          title: "Choice",
           body:
-              "Our tutors are carefully screened for their competence and character.",
+              "You Can Pick tutorials that work best for you based on time,level and location",
           image: _buildImage('login.svg'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Platform",
+          title: "Standardization",
           body:
-              "A convenient and efficient tutor booking system with a rich choice of tutors to book for a time and date that suits you best.",
+              "We will help standardize such as thing as time keeping,payments and professional ethics.",
           image: _buildImage('chat.svg'),
-          decoration: pageDecoration,
-        ),
-        PageViewModel(
-          title: "Community",
-          body:
-              "By using our services, you get access to a growing community of learners.",
-          image: _buildImage('signup.svg'),
           decoration: pageDecoration,
         ),
       ],

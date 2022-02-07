@@ -105,7 +105,7 @@ class _HomePageState extends State<Home> with SingleTickerProviderStateMixin {
         ),
         CategoryListView(
           callBack: () {
-            moveTo();
+            //    moveTo();
           },
         ),
       ],
@@ -132,7 +132,7 @@ class _HomePageState extends State<Home> with SingleTickerProviderStateMixin {
           Flexible(
             child: PopularCourseListView(
               callBack: () {
-                moveTo();
+                //  moveTo();
               },
             ),
           )
@@ -141,14 +141,14 @@ class _HomePageState extends State<Home> with SingleTickerProviderStateMixin {
     );
   }
 
-  void moveTo() {
-    Navigator.push<dynamic>(
-      context,
-      MaterialPageRoute<dynamic>(
-        builder: (BuildContext context) => CourseInfoScreen(),
-      ),
-    );
-  }
+  // void moveTo() {
+  //   Navigator.push<dynamic>(
+  //     context,
+  //     MaterialPageRoute<dynamic>(
+  //       builder: (BuildContext context) => CourseInfoScreen(),
+  //     ),
+  //   );
+  // }
 
   Widget getButtonUI(CategoryType categoryTypeData, bool isSelected) {
     String txt = '';

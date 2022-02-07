@@ -49,7 +49,9 @@ class _EditPageState extends State<EditPage> {
 
       if (body["teacher_id"] != null) {
         editprofileController.fetchPf(int.parse(body["teacher_id"]));
-        id = int.parse(body["teacher_id"]);
+        setState(() {
+          id = int.parse(body["teacher_id"]);
+        });
 
         print("yes");
       } else {
@@ -125,67 +127,71 @@ class _EditPageState extends State<EditPage> {
                       SizedBox(
                         height: 15,
                       ),
-                      Center(
-                        child: Stack(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                _showPicker(context);
-                              },
-                              child: CircleAvatar(
-                                radius: 40,
-                                backgroundColor: kPrimaryColor,
-                                child: _imageFileList != null
-                                    ? ClipRRect(
-                                        borderRadius: BorderRadius.circular(40),
-                                        child: Image.file(
-                                            File(_imageFileList![0].path),
-                                            width: 95,
-                                            height: 95,
-                                            fit: BoxFit.cover),
-                                      )
-                                    : Container(
-                                        decoration: BoxDecoration(
-                                            color: Colors.grey[200],
-                                            borderRadius:
-                                                BorderRadius.circular(50)),
-                                        width: 100,
-                                        height: 100,
-                                        child: Icon(
-                                          Icons.camera_alt,
-                                          color: Colors.grey[800],
-                                        ),
-                                      ),
-                              ),
-                            ),
-                            Positioned(
-                                bottom: 0,
-                                right: 0,
-                                child: Container(
-                                  height: 30,
-                                  width: 30,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      width: 2,
-                                      color: Theme.of(context)
-                                          .scaffoldBackgroundColor,
-                                    ),
-                                    color: kPrimaryColor,
-                                  ),
-                                  child: GestureDetector(
+                      id != null
+                          ? Center(
+                              child: Stack(
+                                children: [
+                                  GestureDetector(
                                     onTap: () {
                                       _showPicker(context);
                                     },
-                                    child: const Icon(
-                                      Icons.edit,
-                                      color: Colors.white,
+                                    child: CircleAvatar(
+                                      radius: 40,
+                                      backgroundColor: kPrimaryColor,
+                                      child: _imageFileList != null
+                                          ? ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(40),
+                                              child: Image.file(
+                                                  File(_imageFileList![0].path),
+                                                  width: 95,
+                                                  height: 95,
+                                                  fit: BoxFit.cover),
+                                            )
+                                          : Container(
+                                              decoration: BoxDecoration(
+                                                  color: Colors.grey[200],
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          50)),
+                                              width: 100,
+                                              height: 100,
+                                              child: Icon(
+                                                Icons.camera_alt,
+                                                color: Colors.grey[800],
+                                              ),
+                                            ),
                                     ),
                                   ),
-                                )),
-                          ],
-                        ),
-                      ),
+                                  Positioned(
+                                      bottom: 0,
+                                      right: 0,
+                                      child: Container(
+                                        height: 30,
+                                        width: 30,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            width: 2,
+                                            color: Theme.of(context)
+                                                .scaffoldBackgroundColor,
+                                          ),
+                                          color: kPrimaryColor,
+                                        ),
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            _showPicker(context);
+                                          },
+                                          child: const Icon(
+                                            Icons.edit,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      )),
+                                ],
+                              ),
+                            )
+                          : Container(),
 
                       // TextFormField(
                       //   controller: editprofileController.firstname,
