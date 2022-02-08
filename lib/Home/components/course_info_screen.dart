@@ -182,6 +182,17 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                     color: DesignCourseAppTheme.nearlyBlue,
                                   ),
                                 ),
+                                Text(
+                                  "Grade " +
+                                      getNotigicationController
+                                          .chat!.student.grade,
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w200,
+                                    fontSize: 22,
+                                    letterSpacing: 0.27,
+                                  ),
+                                ),
                                 Row(
                                   children: <Widget>[
                                     Text(
@@ -196,13 +207,28 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                       ),
                                     ),
                                     Icon(
-                                      Icons.star,
+                                      Icons.date_range,
                                       color: DesignCourseAppTheme.nearlyBlue,
                                       size: 24,
                                     ),
                                   ],
                                 )
                               ],
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsets.only(top: 10.0, left: 18, right: 16),
+                            child: Text(
+                              getNotigicationController
+                                  .chat!.student.study_purpose,
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w200,
+                                fontSize: 22,
+                                letterSpacing: 0.27,
+                                color: DesignCourseAppTheme.grey,
+                              ),
                             ),
                           ),
                           AnimatedOpacity(

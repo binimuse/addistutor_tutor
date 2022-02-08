@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:addistutor_tutor/Progress/progress.dart';
 import 'package:addistutor_tutor/main/main.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +51,10 @@ class _SplashScreenState extends State<SplashScreen> {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     var token = localStorage.getString('token');
 
-    if (token != null) {
+    var user = localStorage.getString('user');
+    var bodys = json.decode(user!);
+
+    if (token != null && bodys["email_verified_at"] != null) {
       setState(() {
         isAuth = true;
       });

@@ -34,31 +34,53 @@ class _HomePageState extends State<Home> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Container(
       color: DesignCourseAppTheme.nearlyWhite,
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Column(
-          children: <Widget>[
-            SizedBox(
-              height: MediaQuery.of(context).padding.top,
+      child: WillPopScope(
+        onWillPop: () async {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text('Are you sure?'),
+              content: const Text('Do you want to exit an App'),
+              actions: <Widget>[
+                FlatButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: new Text('No'),
+                ),
+                FlatButton(
+                  onPressed: () => Navigator.of(context).pop(true),
+                  child: const Text('Yes'),
+                ),
+              ],
             ),
-            getAppBarUI(),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Container(
-                  height: MediaQuery.of(context).size.height,
-                  child: Column(
-                    children: <Widget>[
-                      getSearchBarUI(),
-                      getCategoryUI(),
-                      Flexible(
-                        child: getPopularCourseUI(),
-                      ),
-                    ],
+          );
+          return true;
+        },
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Column(
+            children: <Widget>[
+              SizedBox(
+                height: MediaQuery.of(context).padding.top,
+              ),
+              getAppBarUI(),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    child: Column(
+                      children: <Widget>[
+                        getSearchBarUI(),
+                        getCategoryUI(),
+                        Flexible(
+                          child: getPopularCourseUI(),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -353,6 +375,29 @@ class _HomePageState extends State<Home> with SingleTickerProviderStateMixin {
         ],
       ),
     );
+  }
+
+  Future<bool> _onBackPressed() async {
+    // This dialog will exit your app on saying yes
+    print("object");
+    return (await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('Are you sure?'),
+            content: const Text('Do you want to exit an App'),
+            actions: <Widget>[
+              FlatButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: new Text('No'),
+              ),
+              FlatButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: const Text('Yes'),
+              ),
+            ],
+          ),
+        )) ??
+        false;
   }
 }
 

@@ -179,7 +179,7 @@ class CategoryView extends StatelessWidget {
                               children: [
                                 Container(
                                   width: 40,
-                                  height: 80,
+                                  height: 50,
                                   decoration: BoxDecoration(
                                       border: Border.all(
                                           width: 4,
@@ -201,7 +201,7 @@ class CategoryView extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            const SizedBox(width: 10.0),
+                            const SizedBox(width: 5.0),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[

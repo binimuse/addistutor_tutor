@@ -486,9 +486,9 @@ class _SplashScreenState extends State<Body> {
             borderRadius: BorderRadius.circular(15.0),
           ),
           title: Column(mainAxisSize: MainAxisSize.min, children: [
-            SizedBox(height: 15),
-            const Text(
-              'Success',
+            const SizedBox(height: 15),
+            Text(
+              'Successfully registerd',
               style: TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
@@ -503,7 +503,7 @@ class _SplashScreenState extends State<Body> {
           content: Column(mainAxisSize: MainAxisSize.min, children: [
             SizedBox(height: 15),
             const Text(
-              'Successfully registerd',
+              'please verify your email address to login',
               style: TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,

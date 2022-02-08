@@ -19,6 +19,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../constants.dart';
 import 'background.dart';
+import 'forgotpassword.dart';
 
 class Body extends StatefulWidget {
   Body({
@@ -205,6 +206,30 @@ class _LoginScreenState extends State<Body> {
                 ),
               ),
               SizedBox(height: size.height * 0.03),
+
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation1, animation2) {
+                        return ForgotPassword();
+                      },
+                    ),
+                  );
+                },
+                child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    alignment: Alignment.center,
+                    child: const Text(
+                      'Forgot Password?',
+                      style: TextStyle(
+                        color: kPrimaryColor,
+                      ),
+                    )),
+              ),
+              SizedBox(height: size.height * 0.03),
               AlreadyHaveAnAccountCheck(
                 press: () {
                   Navigator.push(
@@ -389,23 +414,44 @@ class _LoginScreenState extends State<Body> {
       var token = localStorage.getString('user');
       var bodys = json.decode(token!);
 
-      if (bodys["teacher_id"] == null) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ProfileScreen(),
+      if (bodys["email_verified_at"] == null) {
+        showDialog(
+          context: context,
+          builder: (context) => new AlertDialog(
+            title: const Text('info'),
+            content: Text("Please Varify Your email"),
+            actions: <Widget>[
+              new FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pop(true);
+                  setState(() {
+                    isLoading = false;
+                  });
+                },
+                child: new Text('ok'),
+              ),
+            ],
           ),
         );
       } else {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Main(),
-          ),
-        );
-      }
+        if (bodys["teacher_id"] == null) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ProfileScreen(),
+            ),
+          );
+        } else {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Main(),
+            ),
+          );
+        }
 
-      isLoading = false;
+        isLoading = false;
+      }
     } else if (res.statusCode == 401) {
       showDialog(
         context: context,

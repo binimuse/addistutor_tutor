@@ -275,6 +275,8 @@ class ReqStu {
   String parent_last_name;
   String first_name;
   String last_name;
+  String grade;
+  String study_purpose;
 
   String phone_no;
   String gender;
@@ -292,6 +294,8 @@ class ReqStu {
     required this.parent_last_name,
     required this.first_name,
     required this.last_name,
+    required this.grade,
+    required this.study_purpose,
     required this.phone_no,
     required this.gender,
     required this.birth_date,
@@ -311,6 +315,8 @@ class ReqStu {
       first_name: json["first_name"],
       last_name: json["last_name"],
       phone_no: json["phone_no"],
+      grade: json["grade"],
+      study_purpose: json["study_purpose"],
       gender: json["gender"],
       birth_date: json["birth_date"],
       about: json["about"],

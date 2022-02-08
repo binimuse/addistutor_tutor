@@ -18,14 +18,14 @@ class Body extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              "Welcome to AddisTutor ",
+            const Text(
+              "Welcome to NextGen ",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: kPrimaryColor,
                   fontSize: 23),
             ),
-            Text(
+            const Text(
               "Tutor Applicaion",
               style: TextStyle(
                   fontWeight: FontWeight.normal,

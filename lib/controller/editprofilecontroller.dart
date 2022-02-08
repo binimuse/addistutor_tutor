@@ -16,7 +16,7 @@ class EditprofileController extends GetxController with StateMixin {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   final GlobalKey<FormState> changePass = GlobalKey<FormState>();
-
+  final GlobalKey<FormState> forgot = GlobalKey<FormState>();
   // ignore: prefer_typing_uninitialized_variables
   var inforesponse;
   var isLoading = false.obs;
@@ -33,7 +33,9 @@ class EditprofileController extends GetxController with StateMixin {
   late TextEditingController passControl;
   late TextEditingController newpassControl;
   late TextEditingController confirmpassControl;
+  late TextEditingController forgotpass;
   var pass = '';
+  var forgo = '';
   var date;
   var id;
   //GetLocation? selectedModel;
@@ -58,12 +60,113 @@ class EditprofileController extends GetxController with StateMixin {
     passControl = TextEditingController();
     newpassControl = TextEditingController();
     confirmpassControl = TextEditingController();
-
+    //forgot
+    forgotpass = TextEditingController();
     super.onInit();
   }
 
   var fetched;
   var edited = "";
+
+  void forgotpassword(BuildContext context) async {
+    try {
+      final isValid = forgot.currentState!.validate();
+
+      if (isValid == true) {
+        isLoading(true);
+        forgot.currentState!.save();
+        await forgott(context);
+      }
+    } finally {
+      // TODO
+    }
+  }
+
+  var emailadd = "";
+  Future<void> forgott(context) async {
+    openAndCloseLoadingDialog(context);
+
+    var data = {
+      "email": forgotpass.text,
+    };
+    print(data);
+    emailadd = await RemoteServices.forgott(data);
+    print(emailadd.toString());
+    if (emailadd.toString() == "200") {
+      closeDialogforgot(true, emailadd, context);
+      isLoading(false);
+      print("yess");
+    } else {
+      //inforesponse = edited;
+      closeDialogforgot(false, emailadd, context);
+      print("noo");
+      //  print(edited.toString());
+    }
+  }
+
+  closeDialogforgot(bool stat, String data, BuildContext context) {
+    Future.delayed(const Duration(seconds: 1));
+    // Dismiss CircularProgressIndicator
+    Navigator.of(context).pop();
+    if (stat == false) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(
+            data.toString(),
+            style: TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w500,
+              color: Colors.black,
+              fontFamily: 'WorkSans',
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              onPressed: () async {
+                Navigator.of(context).pop(true);
+                Navigator.pop(context);
+                isLoading(false);
+              },
+              child: new Text('ok'),
+            ),
+          ],
+        ),
+      );
+    } else {
+      // ignore: deprecated_member_use
+
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text(
+            'cheak your email aadress ',
+            style: TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w500,
+              color: Colors.black,
+              fontFamily: 'WorkSans',
+            ),
+          ),
+          actions: <Widget>[
+            // ignore: deprecated_member_use
+            FlatButton(
+              onPressed: () async {
+                isLoading(false);
+                Navigator.of(context).pop(true);
+
+                Navigator.pop(context);
+                isLoading(false);
+                //    openAndCloseLoadingDialog(context);
+                print("yess");
+              },
+              child: new Text('ok'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
 
   void changepass(BuildContext context) async {
     try {
