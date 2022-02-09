@@ -4,8 +4,6 @@ import 'dart:convert';
 
 import 'package:addistutor_tutor/Appointment/components/ongoingtutors.dart';
 import 'package:addistutor_tutor/Home/components/category_list_view.dart';
-import 'package:addistutor_tutor/Home/components/course_info_screen.dart';
-import 'package:addistutor_tutor/Home/components/course_info_screen_rating.dart';
 import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
 import 'package:addistutor_tutor/Wallet/wallet.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,7 +12,6 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constants.dart';
-import '../message_model.dart';
 
 class AppointmentScreen extends StatelessWidget {
   const AppointmentScreen({Key? key}) : super(key: key);

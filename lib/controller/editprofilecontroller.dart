@@ -370,7 +370,7 @@ class EditprofileController extends GetxController with StateMixin {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text(
+          title: const Text(
             'profile Not Edited',
             style: TextStyle(
               fontSize: 13,
@@ -385,7 +385,7 @@ class EditprofileController extends GetxController with StateMixin {
                 isLoading(false);
                 Navigator.of(context).pop(true);
               },
-              child: new Text('ok'),
+              child: const Text('ok'),
             ),
           ],
         ),
@@ -442,14 +442,14 @@ class EditprofileController extends GetxController with StateMixin {
                       context,
                       PageRouteBuilder(
                         pageBuilder: (context, animation1, animation2) {
-                          return LoginScreen();
+                          return const LoginScreen();
                         },
                       ),
                     );
                   }
                 }
               },
-              child: new Text('ok'),
+              child: const Text('ok'),
             ),
           ],
         ),
@@ -460,14 +460,14 @@ class EditprofileController extends GetxController with StateMixin {
 
   openSnackBaredit(BuildContext context) async {
     scaffoldKey.currentState!.showSnackBar(SnackBar(
-      content: Text("profile Edited"),
+      content: const Text("profile Edited"),
       action: SnackBarAction(
         label: 'OK',
         onPressed: () {},
       ),
       backgroundColor: kPrimaryColor,
       behavior: SnackBarBehavior.floating,
-      margin: EdgeInsets.all(50),
+      margin: const EdgeInsets.all(50),
       elevation: 30,
     ));
   }

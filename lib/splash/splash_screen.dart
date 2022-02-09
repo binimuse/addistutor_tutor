@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
         context,
         MaterialPageRoute(
           builder: (context) => Scaffold(
-            body: isAuth ? Main() : const MyPages(),
+            body: isAuth ? const Main() : const MyPages(),
           ),
         ),
         (route) => false,
@@ -89,7 +89,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 color: Color(0xFF4A6572),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             const Text(

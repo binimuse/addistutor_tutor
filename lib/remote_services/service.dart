@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison, duplicate_ignore, unnecessary_brace_in_string_interps, deprecated_member_use
+
 import 'dart:convert';
 
 import 'dart:io';
@@ -19,8 +21,7 @@ class RemoteServices {
     res = await Network().getpassedData(data, "update-profile-teacher");
 
     body = json.decode(res.body);
-    print("body");
-    print(body);
+
     if (res.statusCode == 200) {
       return res.statusCode.toString();
     } else {
@@ -43,8 +44,7 @@ class RemoteServices {
     res = await Network().getpassedData(data, "teacher-availability");
 
     body = json.decode(res.body);
-    print("body");
-    print(body);
+
     if (res.statusCode == 200) {
       return res.statusCode.toString();
     } else {
@@ -63,15 +63,13 @@ class RemoteServices {
 
   static Future<String> editAvalablity(var data, id) async {
     List<String> errors = [];
-    print("id");
-    print(id);
+
     // create multipart request
     res = await Network()
         .getpassedData(data, "teacher/${id.toString()}/update-status");
 
     body = json.decode(res.body);
-    print("body");
-    print(body);
+
     if (res.statusCode == 200) {
       return res.statusCode.toString();
     } else {
@@ -105,9 +103,6 @@ class RemoteServices {
   static Future<bool> uploadImage(File image, String id) async {
     // ignore: unnecessary_null_comparison
 
-    print("object");
-    print(image.toString());
-    print(id);
     if (image != null) {
       // ignore: deprecated_member_use
       var stream = http.ByteStream(DelegatingStream.typed(image.openRead()));
@@ -171,7 +166,7 @@ class RemoteServices {
     var length = await image.length();
     res = await Network()
         .postFile2("wallet/${id}/deposit", image, data, stream, length);
-    print(res.statusCode.toString());
+
     if (res.statusCode == 200) {
       res.stream.transform(utf8.decoder).listen((value) {});
 
@@ -183,7 +178,6 @@ class RemoteServices {
 
   static Future<Balance> balance(var id) async {
     res = await Network().getData("wallet/${id}/balance");
-    print("wallet/${id}/balance");
 
     var body = json.decode(res.body);
     if (res.statusCode == 200) {
@@ -195,7 +189,6 @@ class RemoteServices {
 
   static Future<List<Transaction>> transaction(var id) async {
     res = await Network().getData("wallet/${id}/transaction");
-    print("transaction");
 
     var body = json.decode(res.body);
     if (res.statusCode == 200) {
@@ -226,7 +219,7 @@ class RemoteServices {
     // ignore: unnecessary_brace_in_string_interps
     res = await Network().getpassedData(data, "change-password");
     body = json.decode(res.body);
-    print(body);
+
     if (res.statusCode == 200) {
       return res.statusCode.toString();
     } else {
@@ -272,10 +265,10 @@ class RemoteServices {
     }
   }
 
-  static Future<String> updatestatus(var data, var b_id) async {
+  static Future<String> updatestatus(var data, var bId) async {
     List<String> errors = [];
     // create multipart request
-    res = await Network().getpassedData(data, "booking/${b_id}/update-status");
+    res = await Network().getpassedData(data, "booking/${bId}/update-status");
 
     body = json.decode(res.body);
 

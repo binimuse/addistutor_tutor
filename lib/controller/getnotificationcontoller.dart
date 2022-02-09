@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:addistutor_tutor/remote_services/service.dart';
 import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,8 +17,6 @@ class GetNotigicationController extends GetxController with StateMixin {
     listdate.value = await RemoteServices.getActivity();
 
     if (listdate.isNotEmpty) {
-      print(listdate.length.toString());
-
       //  isfetchedlocation(true);
 
       isfetchedlocation(true);
@@ -31,14 +31,13 @@ class GetNotigicationController extends GetxController with StateMixin {
   var statuss;
 
   var isLoading = false.obs;
-  void fetchReqBooking(var b_id) async {
-    listreq.value = await RemoteServices.getrequestedbooking(b_id, "");
+  void fetchReqBooking(var bId) async {
+    listreq.value = await RemoteServices.getrequestedbooking(bId, "");
 
     if (listreq.isNotEmpty) {
       subject = listreq;
       //print(list.length.toString());
       isfetchedsreq(true);
-      print("am here");
     }
   }
 

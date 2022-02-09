@@ -1,6 +1,4 @@
-import 'dart:convert';
-import 'package:addistutor_tutor/Login/login_screen.dart';
-import 'package:addistutor_tutor/Profile/profile.dart';
+// ignore_for_file: non_constant_identifier_names, duplicate_ignore, deprecated_member_use
 
 import 'package:addistutor_tutor/constants.dart';
 import 'package:addistutor_tutor/remote_services/service.dart';
@@ -8,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/state_manager.dart';
-import 'package:image/image.dart';
 
 class Avalablitycontrollerclass extends GetxController with StateMixin {
   // ignore: non_constant_identifier_names
@@ -56,8 +53,7 @@ class Avalablitycontrollerclass extends GetxController with StateMixin {
     try {
       //  openAndCloseLoadingDialog();
       fetched = await RemoteServices.fetchdaya();
-      print("days");
-      print(fetched);
+
       //   print(fetched);
       if (fetched != "") {
         isFetched.value = true;
@@ -78,8 +74,6 @@ class Avalablitycontrollerclass extends GetxController with StateMixin {
 
   void editProf(BuildContext context, id) async {
     try {
-      final isValid = Avalablity.currentState!.validate();
-
       if (onchange(true)) {
         isLoading(true);
         Avalablity.currentState!.save();
@@ -151,7 +145,7 @@ class Avalablitycontrollerclass extends GetxController with StateMixin {
                 isLoading(false);
                 Navigator.of(context).pop(true);
               },
-              child: new Text('ok'),
+              child: const Text('ok'),
             ),
           ],
         ),
@@ -183,7 +177,7 @@ class Avalablitycontrollerclass extends GetxController with StateMixin {
                 //       builder: (context) => const ProfileScreen()),
                 // );
               },
-              child: new Text('ok'),
+              child: const Text('ok'),
             ),
           ],
         ),

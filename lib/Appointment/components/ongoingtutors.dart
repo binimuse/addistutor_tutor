@@ -1,9 +1,7 @@
-// ignore_for_file: prefer_typing_uninitialized_variables, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_typing_uninitialized_variables, prefer_const_literals_to_create_immutables, must_be_immutable, unnecessary_null_comparison
 
 import 'dart:convert';
 
-import 'package:addistutor_tutor/Appointment/components/appointmentscreen.dart';
-import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
 import 'package:addistutor_tutor/controller/getnotificationcontoller.dart';
 import 'package:addistutor_tutor/remote_services/service.dart';
 import 'package:addistutor_tutor/remote_services/user.dart';

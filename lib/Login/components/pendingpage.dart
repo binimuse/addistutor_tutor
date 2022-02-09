@@ -1,10 +1,6 @@
-import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
 import 'package:addistutor_tutor/Profile/app_theme.dart';
-import 'package:addistutor_tutor/controller/feedbackcontroller.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../../constants.dart';
+import 'package:flutter/material.dart';
 
 class PendingScreen extends StatelessWidget {
   const PendingScreen({Key? key}) : super(key: key);
@@ -19,7 +15,7 @@ class PendingScreen extends StatelessWidget {
               resizeToAvoidBottomInset: false,
               appBar: AppBar(
                 backgroundColor: Colors.white,
-                leading: Material(
+                leading: const Material(
                   color: Colors.white,
                 ),
                 title: const Text(
@@ -67,10 +63,10 @@ class PendingScreen extends StatelessWidget {
                                 constraints: const BoxConstraints(
                                     minHeight: 80, maxHeight: 160),
                                 color: AppTheme.white,
-                                child: SingleChildScrollView(
-                                  padding: const EdgeInsets.only(
+                                child: const SingleChildScrollView(
+                                  padding: EdgeInsets.only(
                                       left: 10, right: 10, top: 0, bottom: 0),
-                                  child: const Text(
+                                  child: Text(
                                     'To Complete Your profile \nPlease go to NextGen Office ',
                                     style: TextStyle(
                                       fontSize: 16.0,

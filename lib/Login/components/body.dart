@@ -1,14 +1,13 @@
+// ignore_for_file: prefer_typing_uninitialized_variables, duplicate_ignore, avoid_print, deprecated_member_use
+
 import 'dart:convert';
 
 import 'package:addistutor_tutor/Login/components/pendingpage.dart';
-import 'package:addistutor_tutor/Profile/profile.dart';
 import 'package:addistutor_tutor/Signup/components/or_divider.dart';
 import 'package:addistutor_tutor/Signup/components/social_icon.dart';
 import 'package:addistutor_tutor/Signup/signup_screen.dart';
 import 'package:addistutor_tutor/components/already_have_an_account_acheck.dart';
-import 'package:addistutor_tutor/components/rounded_button.dart';
-import 'package:addistutor_tutor/components/rounded_input_field.dart';
-import 'package:addistutor_tutor/components/rounded_password_field.dart';
+
 import 'package:addistutor_tutor/components/text_field_container.dart';
 import 'package:addistutor_tutor/main/main.dart';
 import 'package:addistutor_tutor/remote_services/api.dart';
@@ -23,7 +22,7 @@ import 'background.dart';
 import 'forgotpassword.dart';
 
 class Body extends StatefulWidget {
-  Body({
+  const Body({
     Key? key,
   }) : super(key: key);
 
@@ -44,11 +43,10 @@ class _LoginScreenState extends State<Body> {
   bool isPasswordTextField1 = true;
   SharedPreferences? localStorage;
   final _formKey = GlobalKey<FormState>();
-  GlobalKey<_LoginScreenState> _myKey = GlobalKey();
 
   bool _isLoggedIn = false;
   late GoogleSignInAccount _userObj;
-  GoogleSignIn _googleSignIn = GoogleSignIn();
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
   late TextEditingController emailcon;
 
   var body;
@@ -66,7 +64,7 @@ class _LoginScreenState extends State<Body> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
+              const Text(
                 "LOGIN",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -83,7 +81,7 @@ class _LoginScreenState extends State<Body> {
                 child: TextFormField(
                   controller: emailcon,
                   cursorColor: kPrimaryColor,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: "Email",
                     icon: Icon(
                       Icons.email,
@@ -110,7 +108,7 @@ class _LoginScreenState extends State<Body> {
                   cursorColor: kPrimaryColor,
                   decoration: InputDecoration(
                     hintText: "Password",
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.lock,
                       color: kPrimaryColor,
                     ),
@@ -121,13 +119,13 @@ class _LoginScreenState extends State<Body> {
                                 showPassword1 = !showPassword1;
                               });
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.remove_red_eye,
                               color: kPrimaryColor,
                             ),
                           )
                         : null,
-                    contentPadding: EdgeInsets.all(10),
+                    contentPadding: const EdgeInsets.all(10),
                     focusedBorder: OutlineInputBorder(
                       borderSide:
                           const BorderSide(color: kPrimaryColor, width: 2.0),
@@ -214,7 +212,7 @@ class _LoginScreenState extends State<Body> {
                     context,
                     PageRouteBuilder(
                       pageBuilder: (context, animation1, animation2) {
-                        return ForgotPassword();
+                        return const ForgotPassword();
                       },
                     ),
                   );
@@ -237,13 +235,13 @@ class _LoginScreenState extends State<Body> {
                     context,
                     PageRouteBuilder(
                       pageBuilder: (context, animation1, animation2) {
-                        return SignUpScreen();
+                        return const SignUpScreen();
                       },
                     ),
                   );
                 },
               ),
-              OrDivider(),
+              const OrDivider(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -310,7 +308,6 @@ class _LoginScreenState extends State<Body> {
     var data = {'email': email, 'password': password};
     var res = await Network().authData(data, "login-teacher");
     body = json.decode(res.body);
-    bool isupdated;
     // ignore: avoid_print
 
     //  print(body.toString());
@@ -320,9 +317,6 @@ class _LoginScreenState extends State<Body> {
       localStorage.setString("token", body["token"]);
 
       localStorage.setString('user', json.encode(body['user']));
-
-      var token = localStorage.getString('user');
-      var bodys = json.decode(token!);
 
       // if (bodys["student_id"] == null) {
       //   Navigator.push(
@@ -343,7 +337,7 @@ class _LoginScreenState extends State<Body> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => Main(),
+          builder: (context) => const Main(),
         ),
       );
 
@@ -356,18 +350,18 @@ class _LoginScreenState extends State<Body> {
       }).catchError((e) {});
       showDialog(
         context: context,
-        builder: (context) => new AlertDialog(
+        builder: (context) => AlertDialog(
           title: const Text('info'),
-          content: new Text(body["message"]),
+          content: Text(body["message"]),
           actions: <Widget>[
-            new FlatButton(
+            FlatButton(
               onPressed: () {
                 Navigator.of(context).pop(true);
                 setState(() {
                   isLoading = false;
                 });
               },
-              child: new Text('ok'),
+              child: const Text('ok'),
             ),
           ],
         ),
@@ -375,18 +369,18 @@ class _LoginScreenState extends State<Body> {
     } else {
       showDialog(
         context: context,
-        builder: (context) => new AlertDialog(
+        builder: (context) => AlertDialog(
           title: const Text('info'),
-          content: new Text(body["message"]),
+          content: Text(body["message"]),
           actions: <Widget>[
-            new FlatButton(
+            FlatButton(
               onPressed: () {
                 Navigator.of(context).pop(true);
                 setState(() {
                   isLoading = false;
                 });
               },
-              child: new Text('ok'),
+              child: const Text('ok'),
             ),
           ],
         ),
@@ -401,7 +395,6 @@ class _LoginScreenState extends State<Body> {
     var data = {'email': email, 'password': password};
     var res = await Network().authData(data, "login-teacher");
     body = json.decode(res.body);
-    bool isupdated;
     // ignore: avoid_print
 
     //  print(body.toString());
@@ -418,18 +411,18 @@ class _LoginScreenState extends State<Body> {
       if (bodys["email_verified_at"] == null) {
         showDialog(
           context: context,
-          builder: (context) => new AlertDialog(
+          builder: (context) => AlertDialog(
             title: const Text('info'),
-            content: Text("Please Varify Your email"),
+            content: const Text("Please Varify Your email"),
             actions: <Widget>[
-              new FlatButton(
+              FlatButton(
                 onPressed: () {
                   Navigator.of(context).pop(true);
                   setState(() {
                     isLoading = false;
                   });
                 },
-                child: new Text('ok'),
+                child: const Text('ok'),
               ),
             ],
           ),
@@ -439,14 +432,14 @@ class _LoginScreenState extends State<Body> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => PendingScreen(),
+              builder: (context) => const PendingScreen(),
             ),
           );
         } else {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => Main(),
+              builder: (context) => const Main(),
             ),
           );
         }
@@ -456,18 +449,18 @@ class _LoginScreenState extends State<Body> {
     } else if (res.statusCode == 401) {
       showDialog(
         context: context,
-        builder: (context) => new AlertDialog(
+        builder: (context) => AlertDialog(
           title: const Text('info'),
-          content: new Text(body["message"]),
+          content: Text(body["message"]),
           actions: <Widget>[
-            new FlatButton(
+            FlatButton(
               onPressed: () {
                 Navigator.of(context).pop(true);
                 setState(() {
                   isLoading = false;
                 });
               },
-              child: new Text('ok'),
+              child: const Text('ok'),
             ),
           ],
         ),
@@ -475,18 +468,18 @@ class _LoginScreenState extends State<Body> {
     } else {
       showDialog(
         context: context,
-        builder: (context) => new AlertDialog(
+        builder: (context) => AlertDialog(
           title: const Text('info'),
-          content: new Text(body["message"]),
+          content: Text(body["message"]),
           actions: <Widget>[
-            new FlatButton(
+            FlatButton(
               onPressed: () {
                 Navigator.of(context).pop(true);
                 setState(() {
                   isLoading = false;
                 });
               },
-              child: new Text('ok'),
+              child: const Text('ok'),
             ),
           ],
         ),
@@ -503,13 +496,13 @@ class _LoginScreenState extends State<Body> {
         context: context,
         builder: (context) => AlertDialog(
           elevation: 0,
-          backgroundColor: Color(0xffffffff),
+          backgroundColor: const Color(0xffffffff),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
           ),
-          title: Column(mainAxisSize: MainAxisSize.min, children: [
+          title: Column(mainAxisSize: MainAxisSize.min, children: const [
             SizedBox(height: 15),
-            const Text(
+            Text(
               'Error',
               style: TextStyle(
                 fontSize: 18.0,
@@ -522,9 +515,9 @@ class _LoginScreenState extends State<Body> {
               color: kPrimaryColor,
             ),
           ]),
-          content: Column(mainAxisSize: MainAxisSize.min, children: [
+          content: Column(mainAxisSize: MainAxisSize.min, children: const [
             SizedBox(height: 15),
-            const Text(
+            Text(
               'incorrect Email or Password',
               style: TextStyle(
                 fontSize: 18.0,

@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, prefer_typing_uninitialized_variables, unnecessary_null_comparison, duplicate_ignore, deprecated_member_use
+
 import 'package:addistutor_tutor/constants.dart';
 import 'package:addistutor_tutor/remote_services/service.dart';
 import 'package:addistutor_tutor/remote_services/user.dart';
@@ -44,7 +46,7 @@ class WalletContoller extends GetxController with StateMixin {
       // balnce = balance;
       // ignore: unnecessary_null_comparison
       wallet = balnce!.wallet_amount.toString();
-      print(wallet);
+
       isFetched(true);
     }
   }
@@ -74,17 +76,13 @@ class WalletContoller extends GetxController with StateMixin {
       "amount": ammount.text,
     };
 
-    print("image");
-    print(id);
-    print(image);
-    print(data);
     inforesponse = await RemoteServices.wallet(image, data, id);
     if (inforesponse.toString() == "200") {
       closeDialog(true, '', context);
       isLoading(false);
     } else {
       closeDialog(false, inforesponse, context);
-      print(inforesponse);
+
       //  isLoading(false);
     }
   }
@@ -100,7 +98,7 @@ class WalletContoller extends GetxController with StateMixin {
         builder: (context) => AlertDialog(
           title: Text(
             data.toString(),
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w500,
               color: Colors.black,
@@ -114,7 +112,7 @@ class WalletContoller extends GetxController with StateMixin {
                 Navigator.of(context).pop(true);
                 Navigator.pop(context);
               },
-              child: new Text('ok'),
+              child: const Text('ok'),
             ),
           ],
         ),
@@ -146,7 +144,7 @@ class WalletContoller extends GetxController with StateMixin {
                 //       builder: (context) => const ProfileScreen()),
                 // );
               },
-              child: new Text('ok'),
+              child: const Text('ok'),
             ),
           ],
         ),

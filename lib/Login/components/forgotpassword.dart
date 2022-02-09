@@ -76,7 +76,7 @@ class _EditProfilePageState extends State<ForgotPassword> {
           color: Colors.white,
           child: InkWell(
             borderRadius: BorderRadius.circular(AppBar().preferredSize.height),
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back_ios,
               color: DesignCourseAppTheme.nearlyBlack,
             ),
@@ -85,7 +85,7 @@ class _EditProfilePageState extends State<ForgotPassword> {
             },
           ),
         ),
-        title: Text(
+        title: const Text(
           "Forgot Password",
           style: TextStyle(
             fontSize: 25,
@@ -119,10 +119,10 @@ class _EditProfilePageState extends State<ForgotPassword> {
                       TextFormField(
                         controller: editprofileController.forgotpass,
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(10),
+                          contentPadding: const EdgeInsets.all(10),
                           focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: kPrimaryColor, width: 2.0),
+                            borderSide: const BorderSide(
+                                color: kPrimaryColor, width: 2.0),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           border: OutlineInputBorder(
@@ -182,25 +182,6 @@ class _EditProfilePageState extends State<ForgotPassword> {
   }
 
   ImagePicker picker = ImagePicker();
-
-  void _showMessage() {
-    showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              title: const Text('info'),
-              content:
-                  Text(json.decode(editprofileController.edited)["message"]),
-              actions: <Widget>[
-                // ignore: deprecated_member_use
-                FlatButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(true);
-                  },
-                  child: const Text('ok'),
-                ),
-              ],
-            ));
-  }
 
   loadData() {
     // Here you can write your code for open new view

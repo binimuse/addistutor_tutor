@@ -19,8 +19,8 @@ class MyPages extends StatelessWidget {
       SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent),
     );
 
-    return Scaffold(
-      body: const OnBoardingPage(),
+    return const Scaffold(
+      body: OnBoardingPage(),
     );
   }
 }
@@ -38,7 +38,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       // ignore: prefer_const_constructors
       context,
       PageRouteBuilder(
-        pageBuilder: (context, animation1, animation2) => WelcomeScreen(),
+        pageBuilder: (context, animation1, animation2) => const WelcomeScreen(),
         transitionDuration: Duration.zero,
       ),
     );

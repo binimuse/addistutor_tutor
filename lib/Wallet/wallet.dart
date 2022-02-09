@@ -1,9 +1,11 @@
+// ignore_for_file: prefer_typing_uninitialized_variables, unused_local_variable, unnecessary_brace_in_string_interps
+
 import 'dart:convert';
 
 import 'package:addistutor_tutor/Wallet/topuppage.dart';
 import 'package:addistutor_tutor/constants.dart';
 import 'package:addistutor_tutor/controller/walletcontroller.dart';
-import 'package:addistutor_tutor/remote_services/service.dart';
+
 import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -41,15 +43,10 @@ class _EditProfilePageState extends State<WalletPage> {
           walletContoller.getbalance(ids);
           walletContoller.gettransaction(ids);
         });
-
-        print("yes Id");
       } else {
         var noid = "noid";
-        print("no Id");
       }
-    } else {
-      print("no Token");
-    }
+    } else {}
   }
 
   var balancewallet = 10;
@@ -96,8 +93,8 @@ class _EditProfilePageState extends State<WalletPage> {
                 child: Stack(
                   children: <Widget>[
                     Container(
-                      margin:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 50),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -106,29 +103,27 @@ class _EditProfilePageState extends State<WalletPage> {
                             children: <Widget>[
                               Text(
                                 walletContoller.wallet.toString() + ' birr',
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 29,
                                     fontWeight: FontWeight.w700),
                               ),
-                              Container(
-                                child: Row(
-                                  children: <Widget>[
-                                    SizedBox(
-                                      width: 16,
-                                    ),
-                                    CircleAvatar(
-                                      radius: 25,
-                                      backgroundColor: Colors.white,
-                                      child: ClipOval(
-                                        child: Image.network(
-                                          'https://tutor.oddatech.com/api/teacher-profile-picture/${ids}',
-                                          fit: BoxFit.contain,
-                                        ),
+                              Row(
+                                children: <Widget>[
+                                  const SizedBox(
+                                    width: 16,
+                                  ),
+                                  CircleAvatar(
+                                    radius: 25,
+                                    backgroundColor: Colors.white,
+                                    child: ClipOval(
+                                      child: Image.network(
+                                        'https://tutor.oddatech.com/api/teacher-profile-picture/${ids}',
+                                        fit: BoxFit.contain,
                                       ),
-                                    )
-                                  ],
-                                ),
+                                    ),
+                                  )
+                                ],
                               )
                             ],
                           ),
@@ -139,7 +134,7 @@ class _EditProfilePageState extends State<WalletPage> {
                                 fontSize: 16,
                                 color: Colors.blue[100]),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 24,
                           ),
                           Row(
@@ -151,38 +146,36 @@ class _EditProfilePageState extends State<WalletPage> {
                                     context,
                                     MaterialPageRoute<dynamic>(
                                       builder: (BuildContext context) =>
-                                          TopUpPage(),
+                                          const TopUpPage(),
                                     ),
                                   );
                                 },
-                                child: Container(
-                                  child: Column(
-                                    children: <Widget>[
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            color: Color.fromRGBO(
-                                                243, 245, 248, 1),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(18))),
-                                        child: Icon(
-                                          Icons.trending_down,
-                                          color: Colors.blue[900],
-                                          size: 30,
-                                        ),
-                                        padding: EdgeInsets.all(12),
+                                child: Column(
+                                  children: <Widget>[
+                                    Container(
+                                      decoration: const BoxDecoration(
+                                          color:
+                                              Color.fromRGBO(243, 245, 248, 1),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(18))),
+                                      child: Icon(
+                                        Icons.trending_down,
+                                        color: Colors.blue[900],
+                                        size: 30,
                                       ),
-                                      SizedBox(
-                                        height: 4,
-                                      ),
-                                      Text(
-                                        "Topup",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 14,
-                                            color: Colors.blue[100]),
-                                      ),
-                                    ],
-                                  ),
+                                      padding: const EdgeInsets.all(12),
+                                    ),
+                                    const SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text(
+                                      "Topup",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 14,
+                                          color: Colors.blue[100]),
+                                    ),
+                                  ],
                                 ),
                               )
                             ],
@@ -193,7 +186,7 @@ class _EditProfilePageState extends State<WalletPage> {
                     DraggableScrollableSheet(
                       builder: (context, scrollController) {
                         return Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               color: Color.fromRGBO(243, 245, 248, 1),
                               borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(40),
@@ -202,15 +195,16 @@ class _EditProfilePageState extends State<WalletPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                SizedBox(
+                                const SizedBox(
                                   height: 24,
                                 ),
                                 Container(
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
+                                    // ignore: prefer_const_literals_to_create_immutables
                                     children: <Widget>[
-                                      Text(
+                                      const Text(
                                         "Recent Transactions",
                                         style: TextStyle(
                                             fontWeight: FontWeight.w900,
@@ -219,12 +213,13 @@ class _EditProfilePageState extends State<WalletPage> {
                                       ),
                                     ],
                                   ),
-                                  padding: EdgeInsets.symmetric(horizontal: 32),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 32),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 24,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 16,
                                 ),
                                 Container(
@@ -235,9 +230,10 @@ class _EditProfilePageState extends State<WalletPage> {
                                         fontWeight: FontWeight.w700,
                                         color: Colors.grey[500]),
                                   ),
-                                  padding: EdgeInsets.symmetric(horizontal: 32),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 32),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 16,
                                 ),
                                 ListView.builder(
@@ -249,10 +245,10 @@ class _EditProfilePageState extends State<WalletPage> {
                                     final Transaction transaction =
                                         walletContoller.listtransaction[index];
                                     return Container(
-                                      margin:
-                                          EdgeInsets.symmetric(horizontal: 32),
-                                      padding: EdgeInsets.all(16),
-                                      decoration: BoxDecoration(
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 32),
+                                      padding: const EdgeInsets.all(16),
+                                      decoration: const BoxDecoration(
                                           color: Colors.white,
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(20))),
@@ -276,16 +272,16 @@ class _EditProfilePageState extends State<WalletPage> {
                                                   ],
                                                   color: Colors.grey[100],
                                                   borderRadius:
-                                                      BorderRadius.all(
+                                                      const BorderRadius.all(
                                                           Radius.circular(18))),
                                               child: Icon(
                                                 Icons.account_balance_wallet,
                                                 color: Colors.lightBlue[900],
                                               ),
-                                              padding: EdgeInsets.all(12),
+                                              padding: const EdgeInsets.all(12),
                                             ),
                                           ]),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 16,
                                           ),
                                           Expanded(
@@ -310,7 +306,7 @@ class _EditProfilePageState extends State<WalletPage> {
                                             children: <Widget>[
                                               Text(
                                                 transaction.amount + " Birr",
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     fontSize: 18,
                                                     fontWeight: FontWeight.w700,
                                                     color: Colors.lightGreen),
@@ -330,7 +326,7 @@ class _EditProfilePageState extends State<WalletPage> {
                                   },
                                   itemCount:
                                       walletContoller.listtransaction.length,
-                                  padding: EdgeInsets.all(0),
+                                  padding: const EdgeInsets.all(0),
                                 ),
                               ],
                             ),

@@ -1,10 +1,11 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'dart:convert';
 
 import 'package:addistutor_tutor/Login/login_screen.dart';
 import 'package:addistutor_tutor/Signup/components/social_icon.dart';
 import 'package:addistutor_tutor/components/already_have_an_account_acheck.dart';
-import 'package:addistutor_tutor/components/rounded_button.dart';
-import 'package:addistutor_tutor/components/rounded_password_field.dart';
+
 import 'package:addistutor_tutor/components/text_field_container.dart';
 import 'package:addistutor_tutor/controller/signupcontroller.dart';
 import 'package:addistutor_tutor/remote_services/api.dart';
@@ -39,7 +40,7 @@ class _SplashScreenState extends State<Body> {
 
   bool _isLoggedIn = false;
   late GoogleSignInAccount _userObj;
-  GoogleSignIn _googleSignIn = GoogleSignIn();
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -71,7 +72,7 @@ class _SplashScreenState extends State<Body> {
                         cursorColor: kPrimaryColor,
                         autofocus: false,
                         controller: signupController.fullname,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           icon: Icon(
                             Icons.person_add,
                             color: kPrimaryColor,
@@ -89,7 +90,7 @@ class _SplashScreenState extends State<Body> {
                         cursorColor: kPrimaryColor,
                         autofocus: false,
                         controller: signupController.email,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           icon: Icon(
                             Icons.email,
                             color: kPrimaryColor,
@@ -107,7 +108,7 @@ class _SplashScreenState extends State<Body> {
                         cursorColor: kPrimaryColor,
                         autofocus: false,
                         controller: signupController.phone,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           icon: Icon(
                             Icons.phone,
                             color: kPrimaryColor,
@@ -132,7 +133,7 @@ class _SplashScreenState extends State<Body> {
                         controller: signupController.password,
                         decoration: InputDecoration(
                           hintText: "Password",
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.lock,
                             color: kPrimaryColor,
                           ),
@@ -143,13 +144,13 @@ class _SplashScreenState extends State<Body> {
                                       showPassword1 = !showPassword1;
                                     });
                                   },
-                                  icon: Icon(
+                                  icon: const Icon(
                                     Icons.remove_red_eye,
                                     color: kPrimaryColor,
                                   ),
                                 )
                               : null,
-                          contentPadding: EdgeInsets.all(10),
+                          contentPadding: const EdgeInsets.all(10),
                           focusedBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
                                 color: kPrimaryColor, width: 2.0),
@@ -219,13 +220,13 @@ class _SplashScreenState extends State<Body> {
                     context,
                     PageRouteBuilder(
                       pageBuilder: (context, animation1, animation2) {
-                        return LoginScreen();
+                        return const LoginScreen();
                       },
                     ),
                   );
                 },
               ),
-              OrDivider(),
+              const OrDivider(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -238,16 +239,9 @@ class _SplashScreenState extends State<Body> {
                           _userObj = userData!;
                         });
 
-                        print(_userObj.displayName);
-                        print(_userObj.email);
-
                         signupController.email.text = _userObj.email;
                         signupController.fullname.text = _userObj.displayName!;
 
-                        print("after");
-
-                        print(signupController.email.text);
-                        print(signupController.fullname.text);
                         if (_isLoggedIn) {
                           registerbygoogle();
                         }
@@ -281,7 +275,6 @@ class _SplashScreenState extends State<Body> {
                             ],
                           ),
                         );
-                        print(e);
                       });
                     },
                   ),
@@ -307,8 +300,6 @@ class _SplashScreenState extends State<Body> {
     var res = await Network().authData(data, 'register-teacher');
     var body = json.decode(res.body);
 
-    print(res.statusCode);
-    print(body);
     //print(body.toString());
     if (res.statusCode == 200) {
       SharedPreferences localStorage = await SharedPreferences.getInstance();
@@ -369,8 +360,6 @@ class _SplashScreenState extends State<Body> {
     var res = await Network().authData(data, 'register-teacher');
     var body = json.decode(res.body);
 
-    print(res.statusCode);
-    print(body);
     //print(body.toString());
     if (res.statusCode == 200) {
       SharedPreferences localStorage = await SharedPreferences.getInstance();
@@ -418,13 +407,13 @@ class _SplashScreenState extends State<Body> {
         context: context,
         builder: (context) => AlertDialog(
           elevation: 0,
-          backgroundColor: Color(0xffffffff),
+          backgroundColor: const Color(0xffffffff),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
           ),
-          title: Column(mainAxisSize: MainAxisSize.min, children: [
+          title: Column(mainAxisSize: MainAxisSize.min, children: const [
             SizedBox(height: 15),
-            const Text(
+            Text(
               'Error',
               style: TextStyle(
                 fontSize: 18.0,
@@ -437,7 +426,7 @@ class _SplashScreenState extends State<Body> {
               color: kPrimaryColor,
             ),
           ]),
-          content: Column(mainAxisSize: MainAxisSize.min, children: [
+          content: Column(mainAxisSize: MainAxisSize.min, children: const [
             SizedBox(height: 15),
             Text(
               "Running TO a probelm please try again",
@@ -481,12 +470,12 @@ class _SplashScreenState extends State<Body> {
         context: context,
         builder: (context) => AlertDialog(
           elevation: 0,
-          backgroundColor: Color(0xffffffff),
+          backgroundColor: const Color(0xffffffff),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
           ),
-          title: Column(mainAxisSize: MainAxisSize.min, children: [
-            const SizedBox(height: 15),
+          title: Column(mainAxisSize: MainAxisSize.min, children: const [
+            SizedBox(height: 15),
             Text(
               'Successfully registerd',
               style: TextStyle(
@@ -500,9 +489,9 @@ class _SplashScreenState extends State<Body> {
               color: kPrimaryColor,
             ),
           ]),
-          content: Column(mainAxisSize: MainAxisSize.min, children: [
+          content: Column(mainAxisSize: MainAxisSize.min, children: const [
             SizedBox(height: 15),
-            const Text(
+            Text(
               'please verify your email address to login',
               style: TextStyle(
                 fontSize: 18.0,
@@ -526,7 +515,7 @@ class _SplashScreenState extends State<Body> {
                   Navigator.push<dynamic>(
                     context,
                     MaterialPageRoute<dynamic>(
-                      builder: (BuildContext context) => LoginScreen(),
+                      builder: (BuildContext context) => const LoginScreen(),
                     ),
                   );
                 },

@@ -9,6 +9,8 @@ import '../../constants.dart';
 import 'background.dart';
 
 class Body extends StatelessWidget {
+  const Body({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -45,7 +47,7 @@ class Body extends StatelessWidget {
                   context,
                   PageRouteBuilder(
                     pageBuilder: (context, animation1, animation2) {
-                      return LoginScreen();
+                      return const LoginScreen();
                     },
                   ),
                 );
@@ -60,7 +62,7 @@ class Body extends StatelessWidget {
                   context,
                   PageRouteBuilder(
                     pageBuilder: (context, animation1, animation2) {
-                      return SignUpScreen();
+                      return const SignUpScreen();
                     },
                   ),
                 );

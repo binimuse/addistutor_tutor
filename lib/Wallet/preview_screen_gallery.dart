@@ -5,10 +5,8 @@ import 'dart:io';
 import 'package:addistutor_tutor/Wallet/topuppage.dart';
 import 'package:addistutor_tutor/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 
 // ignore: library_prefixes
-import 'package:image/image.dart' as imageLib;
 
 // ignore: library_prefixes
 
@@ -91,13 +89,13 @@ class _PreviewImageScreenState extends State<PreviewImageScreengallery> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => TopUpPage(),
+                              builder: (context) => const TopUpPage(),
                             ),
                           );
                         },
-                        child: Center(
+                        child: const Center(
                           child: Padding(
-                            padding: const EdgeInsets.all(4.0),
+                            padding: EdgeInsets.all(4.0),
                             child: Text(
                               'Confirm',
                               style: TextStyle(

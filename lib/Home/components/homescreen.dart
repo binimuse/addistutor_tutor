@@ -1,8 +1,9 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'category_list_view.dart';
-import 'course_info_screen.dart';
 import 'design_course_app_theme.dart';
 import 'popular_course_list_view.dart';
 
@@ -26,8 +27,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomePageState extends State<Home> with SingleTickerProviderStateMixin {
-  int _tabIndex = 0;
-
   CategoryType categoryType = CategoryType.ui;
 
   @override
@@ -39,12 +38,12 @@ class _HomePageState extends State<Home> with SingleTickerProviderStateMixin {
           showDialog(
             context: context,
             builder: (context) => AlertDialog(
-              title: Text('Are you sure?'),
+              title: const Text('Are you sure?'),
               content: const Text('Do you want to exit an App'),
               actions: <Widget>[
                 FlatButton(
                   onPressed: () => Navigator.of(context).pop(false),
-                  child: new Text('No'),
+                  child: const Text('No'),
                 ),
                 FlatButton(
                   onPressed: () => Navigator.of(context).pop(true),
@@ -65,7 +64,7 @@ class _HomePageState extends State<Home> with SingleTickerProviderStateMixin {
               getAppBarUI(),
               Expanded(
                 child: SingleChildScrollView(
-                  child: Container(
+                  child: SizedBox(
                     height: MediaQuery.of(context).size.height,
                     child: Column(
                       children: <Widget>[
@@ -238,7 +237,7 @@ class _HomePageState extends State<Home> with SingleTickerProviderStateMixin {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Container(
+          SizedBox(
             width: MediaQuery.of(context).size.width * 0.75,
             height: 64,
             child: Padding(
@@ -261,7 +260,7 @@ class _HomePageState extends State<Home> with SingleTickerProviderStateMixin {
                         child: GestureDetector(
                           onTap: () {},
                           child: TextFormField(
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontFamily: 'WorkSans',
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
@@ -340,7 +339,7 @@ class _HomePageState extends State<Home> with SingleTickerProviderStateMixin {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
+              children: const <Widget>[
                 Text(
                   'Welcome to',
                   textAlign: TextAlign.left,
@@ -365,7 +364,7 @@ class _HomePageState extends State<Home> with SingleTickerProviderStateMixin {
               ],
             ),
           ),
-          Container(
+          SizedBox(
             width: 60,
             height: 60,
             child: Image.asset(
@@ -375,29 +374,6 @@ class _HomePageState extends State<Home> with SingleTickerProviderStateMixin {
         ],
       ),
     );
-  }
-
-  Future<bool> _onBackPressed() async {
-    // This dialog will exit your app on saying yes
-    print("object");
-    return (await showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text('Are you sure?'),
-            content: const Text('Do you want to exit an App'),
-            actions: <Widget>[
-              FlatButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                child: new Text('No'),
-              ),
-              FlatButton(
-                onPressed: () => Navigator.of(context).pop(true),
-                child: const Text('Yes'),
-              ),
-            ],
-          ),
-        )) ??
-        false;
   }
 }
 

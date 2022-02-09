@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables, deprecated_member_use, duplicate_ignore
+
 import 'package:addistutor_tutor/remote_services/service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,17 +20,16 @@ class SendQrcode extends GetxController with StateMixin {
     var data = {
       "data": qrcode,
     };
-    print(data);
+
     qrcode = await RemoteServices.qrcode(data);
     //print(edited.toString());
     if (qrcode.toString() == "200") {
       closeDialogpassword(true, qrcode, context);
       isLoading(false);
-      print("yess");
     } else {
       //inforesponse = edited;
       closeDialogpassword(false, qrcode, context);
-      print("noo");
+
       //  print(edited.toString());
     }
   }
@@ -41,7 +42,7 @@ class SendQrcode extends GetxController with StateMixin {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text(
+          title: const Text(
             'Attendance Already created',
             style: TextStyle(
               fontSize: 13,
@@ -57,7 +58,7 @@ class SendQrcode extends GetxController with StateMixin {
                 //  Navigator.pop(context);
                 isLoading(false);
               },
-              child: new Text('ok'),
+              child: const Text('ok'),
             ),
           ],
         ),
@@ -86,9 +87,8 @@ class SendQrcode extends GetxController with StateMixin {
 
                 isLoading(false);
                 //    openAndCloseLoadingDialog(context);
-                print("yess");
               },
-              child: new Text('ok'),
+              child: const Text('ok'),
             ),
           ],
         ),

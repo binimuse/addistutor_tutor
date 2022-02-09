@@ -1,9 +1,4 @@
-// ignore_for_file: constant_identifier_names
-
-import 'dart:convert';
-
-import 'package:addistutor_tutor/Home/components/course_info_screen.dart';
-import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
+// ignore_for_file: constant_identifier_names, import_of_legacy_library_into_null_safe, prefer_typing_uninitialized_variables
 
 import 'package:addistutor_tutor/controller/getnotificationcontoller.dart';
 import 'package:addistutor_tutor/controller/getreqestedbookingcpntroller.dart';
@@ -12,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'activity_item_widget.dart';
 
@@ -101,8 +95,6 @@ class _ActivityPageState extends State<Notificationclass>
                 child: ListView.builder(
                   scrollDirection: Axis.vertical,
                   itemBuilder: (context, index) {
-                    final Notifications notifications =
-                        getNotigicationController.listdate[index];
                     return GestureDetector(
                       onTap: () {},
                       child: ActivityItemWidget(

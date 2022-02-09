@@ -1,7 +1,8 @@
+// ignore_for_file: avoid_print
+
 import 'dart:io';
 
 import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
-import 'package:addistutor_tutor/Home/components/homescreen.dart';
 import 'package:addistutor_tutor/Profile/app_theme.dart';
 import 'package:addistutor_tutor/controller/sendqrcodecontroller.dart';
 import 'package:flutter/foundation.dart';
@@ -102,8 +103,7 @@ class _FeedbackScreenState extends State<CodeScreen> {
                           child: Center(
                             child: (result != null)
                                 ? Column(children: [
-                                    Text(
-                                        'Sucessfully Scaned Qr code: ${result!.code}'),
+                                    const Text('Sucessfully Scaned Qr code'),
                                     Material(
                                       color: kPrimaryColor,
                                       child: InkWell(
@@ -115,9 +115,9 @@ class _FeedbackScreenState extends State<CodeScreen> {
                                             sendQrcode.qr(context);
                                           });
                                         },
-                                        child: Center(
+                                        child: const Center(
                                           child: Padding(
-                                            padding: const EdgeInsets.all(24.0),
+                                            padding: EdgeInsets.all(24.0),
                                             child: Text(
                                               'Confirm',
                                               style: TextStyle(
@@ -130,7 +130,7 @@ class _FeedbackScreenState extends State<CodeScreen> {
                                       ),
                                     ),
                                   ])
-                                : Text('Canot find Qr Code'),
+                                : const Text('Canot find Qr Code'),
                           ))
                       : Container(),
                   Row(
@@ -142,6 +142,7 @@ class _FeedbackScreenState extends State<CodeScreen> {
                       ),
                       // ignore: deprecated_member_use
 
+                      // ignore: deprecated_member_use
                       RaisedButton.icon(
                         onPressed: () {
                           setState(() {
@@ -182,9 +183,9 @@ class _FeedbackScreenState extends State<CodeScreen> {
 
   snackBar() {
     return ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
+      const SnackBar(
         content: Text("Sucessfully  Scaned Qr code"),
-        duration: const Duration(seconds: 1),
+        duration: Duration(seconds: 1),
       ),
     );
   }

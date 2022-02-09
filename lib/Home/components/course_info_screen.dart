@@ -1,13 +1,11 @@
-import 'dart:convert';
+// ignore_for_file: prefer_typing_uninitialized_variables, unnecessary_null_comparison, prefer_const_constructors, deprecated_member_use, duplicate_ignore
 
 import 'package:addistutor_tutor/constants.dart';
-import 'package:addistutor_tutor/controller/getnotificationcontoller.dart';
 import 'package:addistutor_tutor/controller/getreqestedbookingcpntroller.dart';
 import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'design_course_app_theme.dart';
 
 class CourseInfoScreen extends StatefulWidget {
@@ -126,14 +124,14 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Padding(
-                            padding:
-                                EdgeInsets.only(top: 32.0, left: 18, right: 16),
+                            padding: const EdgeInsets.only(
+                                top: 32.0, left: 18, right: 16),
                             child: Text(
                               widget.requestedBooking!.student.first_name +
                                   " " +
                                   widget.requestedBooking!.student.last_name,
                               textAlign: TextAlign.left,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 22,
                                 letterSpacing: 0.27,
@@ -151,7 +149,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                 Text(
                                   widget.requestedBooking!.student.gender,
                                   textAlign: TextAlign.left,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontWeight: FontWeight.w200,
                                     fontSize: 22,
                                     letterSpacing: 0.27,
@@ -162,7 +160,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                   "Grade " +
                                       widget.requestedBooking!.student.grade,
                                   textAlign: TextAlign.left,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontWeight: FontWeight.w200,
                                     fontSize: 22,
                                     letterSpacing: 0.27,
@@ -173,14 +171,14 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                     Text(
                                       widget.requestedBooking!.created_at,
                                       textAlign: TextAlign.left,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontWeight: FontWeight.w200,
                                         fontSize: 22,
                                         letterSpacing: 0.27,
                                         color: DesignCourseAppTheme.grey,
                                       ),
                                     ),
-                                    Icon(
+                                    const Icon(
                                       Icons.date_range,
                                       color: DesignCourseAppTheme.nearlyBlue,
                                       size: 24,
@@ -191,12 +189,12 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                             ),
                           ),
                           Padding(
-                            padding:
-                                EdgeInsets.only(top: 10.0, left: 18, right: 16),
+                            padding: const EdgeInsets.only(
+                                top: 10.0, left: 18, right: 16),
                             child: Text(
                               widget.requestedBooking!.student.study_purpose,
                               textAlign: TextAlign.left,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.w200,
                                 fontSize: 22,
                                 letterSpacing: 0.27,
@@ -223,7 +221,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                   widget.requestedBooking!.subject.title +
                                       "subject ")
                               : getTimeBoxUIday("subject not defind" " "),
-                          Center(
+                          const Center(
                             child: Text(
                               "Days Booked",
                               style: TextStyle(color: Colors.black38),
@@ -236,16 +234,14 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                             child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemBuilder: (_, index) {
-                                  return Container(
-                                    child: Column(
-                                      children: [
-                                        getTimeBoxUIday(widget.requestedBooking!
-                                                .booking_schedule[index].day +
-                                            " " +
-                                            widget.requestedBooking!
-                                                .booking_schedule[index].time),
-                                      ],
-                                    ),
+                                  return Column(
+                                    children: [
+                                      getTimeBoxUIday(widget.requestedBooking!
+                                              .booking_schedule[index].day +
+                                          " " +
+                                          widget.requestedBooking!
+                                              .booking_schedule[index].time),
+                                    ],
                                   );
                                 },
                                 itemCount: widget
@@ -259,6 +255,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                               ),
                               // ignore: deprecated_member_use
 
+                              // ignore: deprecated_member_use
                               RaisedButton.icon(
                                 onPressed: () {
                                   setState(() {
@@ -282,6 +279,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                 splashColor: Colors.white,
                                 color: Colors.green,
                               ),
+                              // ignore: deprecated_member_use
                               RaisedButton.icon(
                                 onPressed: () {
                                   setState(() {
@@ -511,7 +509,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
               Navigator.of(context).pop(true);
               // Navigator.pop(context);
             },
-            child: Center(child: new Text('ok')),
+            child: Center(child: Text('ok')),
           ),
         ],
       ),

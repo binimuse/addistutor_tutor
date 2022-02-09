@@ -1,6 +1,7 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'dart:convert';
 
-import 'package:addistutor_tutor/Avalablity/avalabilty.dart';
 import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
 import 'package:addistutor_tutor/Profile/app_theme.dart';
 import 'package:addistutor_tutor/controller/walletcontroller.dart';
@@ -11,7 +12,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
 import '../constants.dart';
-import 'preview_screen_gallery.dart';
 
 class TopUpPage extends StatefulWidget {
   const TopUpPage({Key? key}) : super(key: key);
@@ -29,7 +29,6 @@ class _FeedbackScreenState extends State<TopUpPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     _fetchUser();
     super.initState();
   }
@@ -43,17 +42,11 @@ class _FeedbackScreenState extends State<TopUpPage> {
 
       if (body["teacher_id"] != null) {
         ids = int.parse(body["teacher_id"]);
-
-        print("yes");
       } else {
-        var noid = "noid";
         //  editprofileController.fetchPf(noid);
 
-        print("Nooo");
       }
-    } else {
-      print("cant");
-    }
+    } else {}
   }
 
   ImagePicker picker = ImagePicker();
@@ -81,7 +74,7 @@ class _FeedbackScreenState extends State<TopUpPage> {
               child: InkWell(
                 borderRadius:
                     BorderRadius.circular(AppBar().preferredSize.height),
-                child: Icon(
+                child: const Icon(
                   Icons.arrow_back_ios,
                   color: DesignCourseAppTheme.nearlyBlack,
                 ),
@@ -90,7 +83,7 @@ class _FeedbackScreenState extends State<TopUpPage> {
                 },
               ),
             ),
-            title: Text(
+            title: const Text(
               "Top Up",
               style: TextStyle(
                 fontSize: 25,
@@ -143,13 +136,13 @@ class _FeedbackScreenState extends State<TopUpPage> {
                                 controller: walletContoller.slipid,
                                 maxLines: null,
                                 onChanged: (String txt) {},
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontFamily: AppTheme.fontName,
                                   fontSize: 16,
                                   color: AppTheme.dark_grey,
                                 ),
                                 cursorColor: Colors.blue,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     border: InputBorder.none,
                                     hintText: 'Enter your Slip Id...'),
                                 validator: (value) {
@@ -189,13 +182,13 @@ class _FeedbackScreenState extends State<TopUpPage> {
                                 controller: walletContoller.ammount,
                                 maxLines: null,
                                 onChanged: (String txt) {},
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontFamily: AppTheme.fontName,
                                   fontSize: 16,
                                   color: AppTheme.dark_grey,
                                 ),
                                 cursorColor: Colors.blue,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     border: InputBorder.none,
                                     hintText: 'Enter your Ammount...'),
                                 validator: (value) {
@@ -207,7 +200,7 @@ class _FeedbackScreenState extends State<TopUpPage> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     _buildComposer(),
@@ -234,9 +227,9 @@ class _FeedbackScreenState extends State<TopUpPage> {
                               onTap: () {
                                 walletContoller.editProf(context, ids);
                               },
-                              child: Center(
+                              child: const Center(
                                 child: Padding(
-                                  padding: const EdgeInsets.all(4.0),
+                                  padding: EdgeInsets.all(4.0),
                                   child: Text(
                                     'Send',
                                     style: TextStyle(
@@ -311,8 +304,8 @@ class _FeedbackScreenState extends State<TopUpPage> {
                     onTap: () {
                       _showPicker(context);
                     },
-                    child:
-                        Text("Upload", style: TextStyle(color: kPrimaryColor)),
+                    child: const Text("Upload",
+                        style: TextStyle(color: kPrimaryColor)),
                   ),
                 )),
           ],
@@ -326,32 +319,30 @@ class _FeedbackScreenState extends State<TopUpPage> {
         context: context,
         builder: (BuildContext bc) {
           return SafeArea(
-            child: Container(
-              child: Wrap(
-                children: <Widget>[
-                  ListTile(
-                      leading: const Icon(
-                        Icons.photo_library,
-                        color: kPrimaryColor,
-                      ),
-                      title: const Text('Photo Library'),
-                      onTap: () {
-                        _imgFromGallery();
-                        Navigator.of(context).pop();
-                      }),
-                  ListTile(
+            child: Wrap(
+              children: <Widget>[
+                ListTile(
                     leading: const Icon(
-                      Icons.photo_camera,
+                      Icons.photo_library,
                       color: kPrimaryColor,
                     ),
-                    title: const Text('Camera'),
+                    title: const Text('Photo Library'),
                     onTap: () {
-                      _imgFromCamera();
+                      _imgFromGallery();
                       Navigator.of(context).pop();
-                    },
+                    }),
+                ListTile(
+                  leading: const Icon(
+                    Icons.photo_camera,
+                    color: kPrimaryColor,
                   ),
-                ],
-              ),
+                  title: const Text('Camera'),
+                  onTap: () {
+                    _imgFromCamera();
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
             ),
           );
         });

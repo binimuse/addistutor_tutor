@@ -11,7 +11,9 @@ import 'package:get/get.dart';
 import '../constants.dart';
 
 class SettingsFourPage extends StatefulWidget {
-  static final String path = "lib/src/pages/settings/settings4.dart";
+  static const String path = "lib/src/pages/settings/settings4.dart";
+
+  const SettingsFourPage({Key? key}) : super(key: key);
 
   @override
   _SettingsFourPageState createState() => _SettingsFourPageState();
@@ -51,7 +53,7 @@ class _SettingsFourPageState extends State<SettingsFourPage> {
           color: Colors.white,
           child: InkWell(
             borderRadius: BorderRadius.circular(AppBar().preferredSize.height),
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back_ios,
               color: DesignCourseAppTheme.nearlyBlack,
             ),
@@ -60,7 +62,7 @@ class _SettingsFourPageState extends State<SettingsFourPage> {
             },
           ),
         ),
-        title: Text(
+        title: const Text(
           "Settings",
           style: TextStyle(
             fontSize: 25,
@@ -71,11 +73,11 @@ class _SettingsFourPageState extends State<SettingsFourPage> {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.only(left: 16, top: 25, right: 16),
+        padding: const EdgeInsets.only(left: 16, top: 25, right: 16),
         child: ListView(
           children: [
             Row(
-              children: [
+              children: const [
                 Icon(
                   Icons.person,
                   color: kPrimaryColor,
@@ -89,11 +91,11 @@ class _SettingsFourPageState extends State<SettingsFourPage> {
                 ),
               ],
             ),
-            Divider(
+            const Divider(
               height: 15,
               thickness: 2,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             GestureDetector(
@@ -103,7 +105,7 @@ class _SettingsFourPageState extends State<SettingsFourPage> {
                   context,
                   PageRouteBuilder(
                     pageBuilder: (context, animation1, animation2) =>
-                        ChangePassword(),
+                        const ChangePassword(),
                     transitionDuration: Duration.zero,
                   ),
                 );
@@ -121,7 +123,7 @@ class _SettingsFourPageState extends State<SettingsFourPage> {
                         color: Colors.grey[600],
                       ),
                     ),
-                    Icon(
+                    const Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.grey,
                     ),
@@ -129,7 +131,7 @@ class _SettingsFourPageState extends State<SettingsFourPage> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             GestureDetector(
@@ -149,7 +151,7 @@ class _SettingsFourPageState extends State<SettingsFourPage> {
                         color: Colors.grey[600],
                       ),
                     ),
-                    Icon(
+                    const Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.grey,
                     ),
@@ -157,15 +159,15 @@ class _SettingsFourPageState extends State<SettingsFourPage> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             buildAccountOptionRow(context, "Privacy and Policy"),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             Row(
-              children: [
+              children: const [
                 Icon(Icons.volume_up_outlined, color: kPrimaryColor),
                 SizedBox(
                   width: 8,
@@ -176,16 +178,16 @@ class _SettingsFourPageState extends State<SettingsFourPage> {
                 ),
               ],
             ),
-            Divider(
+            const Divider(
               height: 15,
               thickness: 2,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             buildNotificationOptionRow("New update", true),
             buildNotificationOptionRow("Account Status", isActive),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
           ],
@@ -246,7 +248,7 @@ class _SettingsFourPageState extends State<SettingsFourPage> {
                 color: Colors.grey[600],
               ),
             ),
-            Icon(
+            const Icon(
               Icons.arrow_forward_ios,
               color: Colors.grey,
             ),

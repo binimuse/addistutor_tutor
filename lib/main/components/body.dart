@@ -1,6 +1,5 @@
 import 'package:addistutor_tutor/Appointment/components/appointmentscreen.dart';
-import 'package:addistutor_tutor/Confirmationcode/confirmationcode.dart';
-import 'package:addistutor_tutor/Home/components/homescreen.dart';
+
 import 'package:addistutor_tutor/Notification/notification.dart';
 import 'package:addistutor_tutor/Profile/profile.dart';
 import 'package:addistutor_tutor/Tutordashbord/tutordashbord.dart';
@@ -45,7 +44,7 @@ class _BottomNavPageState extends State<Home> {
             });
           }
         },
-        children: <Widget>[
+        children: const <Widget>[
           // HomeScreen(),
           // SearchScreen(),
           AppointmentScreen(),

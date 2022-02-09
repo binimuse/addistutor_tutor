@@ -1,24 +1,26 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'design_course_app_theme.dart';
 
 class CourseInfoScreenRating extends StatefulWidget {
+  const CourseInfoScreenRating({Key? key}) : super(key: key);
+
   @override
   _CourseInfoScreenState createState() => _CourseInfoScreenState();
 }
 
 class _CourseInfoScreenState extends State<CourseInfoScreenRating>
     with TickerProviderStateMixin {
-  late final _ratingController;
-  double _initialRating = 2.0;
-  late double _rating;
+  final double _initialRating = 2.0;
   final double infoHeight = 364.0;
   AnimationController? animationController;
   Animation<double>? animation;
   double opacity1 = 0.0;
   double opacity2 = 0.0;
   double opacity3 = 0.0;
-  bool _isVertical = false;
+  final bool _isVertical = false;
   IconData? _selectedIcon;
   @override
   void initState() {
@@ -26,11 +28,9 @@ class _CourseInfoScreenState extends State<CourseInfoScreenRating>
         duration: const Duration(milliseconds: 1000), vsync: this);
     animation = Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
         parent: animationController!,
-        curve: Interval(0, 1.0, curve: Curves.fastOutSlowIn)));
+        curve: const Interval(0, 1.0, curve: Curves.fastOutSlowIn)));
     setData();
     super.initState();
-    _ratingController = TextEditingController(text: '3.0');
-    _rating = _initialRating;
   }
 
   Future<void> setData() async {
@@ -99,9 +99,9 @@ class _CourseInfoScreenState extends State<CourseInfoScreenRating>
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 32.0, left: 18, right: 16),
+                          const Padding(
+                            padding:
+                                EdgeInsets.only(top: 32.0, left: 18, right: 16),
                             child: Text(
                               'Robel Musema\n',
                               textAlign: TextAlign.left,
@@ -130,8 +130,8 @@ class _CourseInfoScreenState extends State<CourseInfoScreenRating>
                             child: AnimatedOpacity(
                               duration: const Duration(milliseconds: 500),
                               opacity: opacity2,
-                              child: Padding(
-                                padding: const EdgeInsets.only(
+                              child: const Padding(
+                                padding: EdgeInsets.only(
                                     left: 16, right: 16, bottom: 18),
                                 child: Center(
                                   child: Text(
@@ -174,16 +174,14 @@ class _CourseInfoScreenState extends State<CourseInfoScreenRating>
                                       unratedColor: Colors.amber.withAlpha(50),
                                       itemCount: 5,
                                       itemSize: 20.0,
-                                      itemPadding:
-                                          EdgeInsets.symmetric(horizontal: 4.0),
+                                      itemPadding: const EdgeInsets.symmetric(
+                                          horizontal: 4.0),
                                       itemBuilder: (context, _) => Icon(
                                         _selectedIcon ?? Icons.star,
                                         color: Colors.amber,
                                       ),
                                       onRatingUpdate: (rating) {
-                                        setState(() {
-                                          _rating = rating;
-                                        });
+                                        setState(() {});
                                       },
                                       updateOnDrag: true,
                                     ),
@@ -215,7 +213,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreenRating>
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(80.0)),
                     elevation: 10.0,
-                    child: Container(
+                    child: SizedBox(
                       width: 120,
                       height: 120,
                       //   child: Center(
@@ -241,7 +239,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreenRating>
                   child: InkWell(
                     borderRadius:
                         BorderRadius.circular(AppBar().preferredSize.height),
-                    child: Icon(
+                    child: const Icon(
                       Icons.arrow_back_ios,
                       color: DesignCourseAppTheme.nearlyBlack,
                     ),
@@ -282,7 +280,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreenRating>
               Text(
                 text1,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 14,
                   letterSpacing: 0.27,
@@ -292,7 +290,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreenRating>
               Text(
                 txt2,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.w200,
                   fontSize: 14,
                   letterSpacing: 0.27,

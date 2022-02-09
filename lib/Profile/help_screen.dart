@@ -19,8 +19,8 @@ class HelpScreen extends StatelessWidget {
       SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent),
     );
 
-    return Scaffold(
-      body: const OnBoardingPage(),
+    return const Scaffold(
+      body: OnBoardingPage(),
     );
   }
 }

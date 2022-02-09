@@ -1,7 +1,4 @@
-/**
- * Author: Aparna Dulal
- * profile: https://github.com/ambikadulal
-  */
+// ignore_for_file: import_of_legacy_library_into_null_safe, prefer_typing_uninitialized_variables, deprecated_member_use
 
 import 'dart:convert';
 import 'dart:io';
@@ -19,6 +16,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../constants.dart';
 
 class EditPage extends StatefulWidget {
+  const EditPage({Key? key}) : super(key: key);
+
   @override
   _EditPageState createState() => _EditPageState();
 }
@@ -52,17 +51,11 @@ class _EditPageState extends State<EditPage> {
         setState(() {
           id = int.parse(body["teacher_id"]);
         });
-
-        print("yes");
       } else {
         var noid = "noid";
         editprofileController.fetchPf(noid);
-
-        print("Nooo");
       }
-    } else {
-      print("cant");
-    }
+    } else {}
   }
 
   @override
@@ -95,7 +88,7 @@ class _EditPageState extends State<EditPage> {
                 child: InkWell(
                   borderRadius:
                       BorderRadius.circular(AppBar().preferredSize.height),
-                  child: Icon(
+                  child: const Icon(
                     Icons.arrow_back_ios,
                     color: DesignCourseAppTheme.nearlyBlack,
                   ),
@@ -104,7 +97,7 @@ class _EditPageState extends State<EditPage> {
                   },
                 ),
               ),
-              title: Text(
+              title: const Text(
                 "Edit Profile",
                 style: TextStyle(
                   fontSize: 25,
@@ -117,14 +110,14 @@ class _EditPageState extends State<EditPage> {
             body: Form(
               key: editprofileController.EditProf,
               child: Container(
-                padding: EdgeInsets.only(left: 16, top: 25, right: 16),
+                padding: const EdgeInsets.only(left: 16, top: 25, right: 16),
                 child: GestureDetector(
                   onTap: () {
                     FocusScope.of(context).unfocus();
                   },
                   child: ListView(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       id != null
@@ -251,7 +244,7 @@ class _EditPageState extends State<EditPage> {
                       //     return editprofileController.validateName(value!);
                       //   },
                       // ),
-                      SizedBox(
+                      const SizedBox(
                         height: 35,
                       ),
                       TextFormField(
@@ -272,7 +265,7 @@ class _EditPageState extends State<EditPage> {
                           return editprofileController.validateEmail(value!);
                         },
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 35,
                       ),
                       TextFormField(
@@ -293,7 +286,7 @@ class _EditPageState extends State<EditPage> {
                           return editprofileController.validateName(value!);
                         },
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 35,
                       ),
                       // const Text(
@@ -342,13 +335,13 @@ class _EditPageState extends State<EditPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           OutlineButton(
-                            padding: EdgeInsets.symmetric(horizontal: 50),
+                            padding: const EdgeInsets.symmetric(horizontal: 50),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20)),
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            child: Text("CANCEL",
+                            child: const Text("CANCEL",
                                 style: TextStyle(
                                     fontSize: 14,
                                     letterSpacing: 2.2,
@@ -356,16 +349,14 @@ class _EditPageState extends State<EditPage> {
                           ),
                           RaisedButton(
                             onPressed: () {
-                              print("bin");
-                              print(id);
                               editprofileController.editProf(id, context);
                             },
                             color: kPrimaryColor,
-                            padding: EdgeInsets.symmetric(horizontal: 50),
+                            padding: const EdgeInsets.symmetric(horizontal: 50),
                             elevation: 2,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20)),
-                            child: Text(
+                            child: const Text(
                               "SAVE",
                               style: TextStyle(
                                   fontSize: 14,
@@ -408,19 +399,19 @@ class _EditPageState extends State<EditPage> {
                         showPassword = !showPassword;
                       });
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.remove_red_eye,
                       color: kPrimaryColor,
                     ),
                   )
                 : null,
-            contentPadding: EdgeInsets.only(bottom: 3),
+            contentPadding: const EdgeInsets.only(bottom: 3),
             labelText: labelText,
             focusColor: kPrimaryColor,
             fillColor: kPrimaryColor,
             floatingLabelBehavior: FloatingLabelBehavior.always,
             hintText: placeholder,
-            hintStyle: TextStyle(
+            hintStyle: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
               color: Colors.black,
@@ -486,20 +477,6 @@ class _EditPageState extends State<EditPage> {
       });
     } catch (e) {
       setState(() {});
-    }
-  }
-
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? pickedDate = await showDatePicker(
-        context: context,
-        initialDate: currentDate,
-        firstDate: DateTime(2015),
-        lastDate: DateTime(2050));
-    if (pickedDate != null && pickedDate != currentDate) {
-      setState(() {
-        currentDate = pickedDate;
-        editprofileController.date = DateFormat.yMd().format(currentDate);
-      });
     }
   }
 }

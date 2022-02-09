@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables, deprecated_member_use, avoid_print, duplicate_ignore
+
 import 'package:addistutor_tutor/remote_services/service.dart';
 import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:flutter/material.dart';
@@ -14,36 +16,34 @@ class GetReqBooking extends GetxController with StateMixin {
   RequestedBooking? chat;
 
   var isLoading = false.obs;
-  void fetchReqBooking(var b_id) async {
-    listsubject.value = await RemoteServices.getrequestedbooking(b_id, "");
+  void fetchReqBooking(var bId) async {
+    listsubject.value = await RemoteServices.getrequestedbooking(bId, "");
 
     if (listsubject.isNotEmpty) {
       //print(list.length.toString());
       isfetchedsubject(true);
-      print("am here");
     }
   }
 
   var statuss;
 
   var edited = "";
-  Future<void> updateStatus(context, b_id) async {
+  Future<void> updateStatus(context, bId) async {
     openAndCloseLoadingDialog(context);
 
     var data = {
       "status": statuss,
     };
-    print(data);
-    edited = await RemoteServices.updatestatus(data, b_id);
+
+    edited = await RemoteServices.updatestatus(data, bId);
     //print(edited.toString());
     if (edited.toString() == "200") {
       closeDialogpassword(true, edited, context);
       isLoading(false);
-      print("yess");
     } else {
       //inforesponse = edited;
       closeDialogpassword(false, edited, context);
-      print("noo");
+
       //  print(edited.toString());
     }
   }
@@ -58,7 +58,7 @@ class GetReqBooking extends GetxController with StateMixin {
         builder: (context) => AlertDialog(
           title: Text(
             'Status  Not Updated \n ' + data.toString(),
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w500,
               color: Colors.black,
@@ -72,7 +72,7 @@ class GetReqBooking extends GetxController with StateMixin {
                 Navigator.pop(context);
                 isLoading(false);
               },
-              child: new Text('ok'),
+              child: const Text('ok'),
             ),
           ],
         ),
@@ -104,7 +104,7 @@ class GetReqBooking extends GetxController with StateMixin {
                 //    openAndCloseLoadingDialog(context);
                 print("yess");
               },
-              child: new Text('ok'),
+              child: const Text('ok'),
             ),
           ],
         ),

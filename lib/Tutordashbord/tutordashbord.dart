@@ -1,12 +1,9 @@
-// ignore_for_file: prefer_const_constructors, duplicate_ignore, prefer_const_literals_to_create_immutables, avoid_print
+// ignore_for_file: prefer_const_constructors, duplicate_ignore, prefer_const_literals_to_create_immutables, avoid_print, unnecessary_null_comparison
 
 import 'dart:convert';
 
-import 'package:addistutor_tutor/Appointment/components/ongoingtutors.dart';
 import 'package:addistutor_tutor/Confirmationcode/confirmationcode.dart';
-import 'package:addistutor_tutor/Home/components/category_list_view.dart';
 import 'package:addistutor_tutor/Home/components/course_info_screen.dart';
-import 'package:addistutor_tutor/Home/components/course_info_screen_rating.dart';
 import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
 
 import 'package:addistutor_tutor/controller/editprofilecontroller.dart';
@@ -256,7 +253,7 @@ class _HomePageState extends State<TutorDahsbord>
                                     width: MediaQuery.of(context).size.width *
                                         0.45,
                                     child: Text(
-                                      "Grade" + " " + chat.student.grade,
+                                      "Grade" " " + chat.student.grade,
                                       // ignore: prefer_const_constructors
                                       style: TextStyle(
                                         color: Colors.blueGrey,

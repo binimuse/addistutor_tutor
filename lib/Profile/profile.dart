@@ -1,8 +1,9 @@
+// ignore_for_file: import_of_legacy_library_into_null_safe, unused_element, prefer_typing_uninitialized_variables, unnecessary_brace_in_string_interps
+
 import 'dart:convert';
 
 import 'package:addistutor_tutor/Avalablity/avalabilty.dart';
 import 'package:addistutor_tutor/Login/login_screen.dart';
-import 'package:addistutor_tutor/Notification/notification.dart';
 import 'package:addistutor_tutor/Profile/contactus.dart';
 import 'package:addistutor_tutor/Profile/setting.dart';
 import 'package:addistutor_tutor/controller/avlablityconroller.dart';
@@ -33,7 +34,7 @@ class ProfileScreen extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ProfileS(),
+      home: const ProfileS(),
     );
   }
 }
@@ -96,9 +97,7 @@ class _ProfilePageState extends State<ProfileS> {
   void _fetchUser() async {
     if (editprofileController.isActive.toString() == "1") {
       avalablitycontrollerclass.isSelected = [true, false];
-      print("avalble");
     } else {
-      print("Not avalble");
       avalablitycontrollerclass.isSelected = [false, true];
     }
     SharedPreferences localStorage = await SharedPreferences.getInstance();
@@ -114,12 +113,10 @@ class _ProfilePageState extends State<ProfileS> {
         editprofileController.fetchPf(int.parse(body["teacher_id"]));
       } else {
         var noid = "noid";
-        print("no Id");
+
         editprofileController.fetchPf(noid);
       }
-    } else {
-      print("no Token");
-    }
+    } else {}
   }
 
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
@@ -175,7 +172,7 @@ class _ProfilePageState extends State<ProfileS> {
                         actions: <Widget>[
                           MaterialButton(
                             color: Colors.white,
-                            shape: CircleBorder(),
+                            shape: const CircleBorder(),
                             elevation: 0,
                             child: const Icon(
                               Icons.edit,
@@ -188,7 +185,7 @@ class _ProfilePageState extends State<ProfileS> {
                                 PageRouteBuilder(
                                   pageBuilder:
                                       (context, animation1, animation2) =>
-                                          EditPage(),
+                                          const EditPage(),
                                   transitionDuration: Duration.zero,
                                 ),
                               );
@@ -234,7 +231,8 @@ class _ProfilePageState extends State<ProfileS> {
         child: Container(
           padding: const EdgeInsets.only(left: 16.0, right: 40),
           decoration: BoxDecoration(
-              color: primary, boxShadow: [BoxShadow(color: Colors.black45)]),
+              color: primary,
+              boxShadow: const [BoxShadow(color: Colors.black45)]),
           width: 300,
           child: SafeArea(
             child: SingleChildScrollView(
@@ -253,7 +251,7 @@ class _ProfilePageState extends State<ProfileS> {
                   Container(
                     height: 90,
                     alignment: Alignment.center,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         gradient: LinearGradient(
                             colors: [kPrimaryColor, kPrimaryColor])),
@@ -265,7 +263,7 @@ class _ProfilePageState extends State<ProfileS> {
                   const SizedBox(height: 5.0),
                   Text(
                     fname.toString() + " " + lastname.toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.black,
                         fontSize: 18.0,
                         fontWeight: FontWeight.w600),
@@ -278,7 +276,7 @@ class _ProfilePageState extends State<ProfileS> {
                         context,
                         PageRouteBuilder(
                           pageBuilder: (context, animation1, animation2) =>
-                              EditPage(),
+                              const EditPage(),
                           transitionDuration: Duration.zero,
                         ),
                       );
@@ -335,7 +333,7 @@ class _ProfilePageState extends State<ProfileS> {
                           context,
                           PageRouteBuilder(
                             pageBuilder: (context, animation1, animation2) =>
-                                SettingsFourPage(),
+                                const SettingsFourPage(),
                             transitionDuration: Duration.zero,
                           ),
                         );
@@ -350,7 +348,7 @@ class _ProfilePageState extends State<ProfileS> {
                           context,
                           PageRouteBuilder(
                             pageBuilder: (context, animation1, animation2) =>
-                                ContactDetailsView(),
+                                const ContactDetailsView(),
                             transitionDuration: Duration.zero,
                           ),
                         );
@@ -365,7 +363,7 @@ class _ProfilePageState extends State<ProfileS> {
                           context,
                           PageRouteBuilder(
                             pageBuilder: (context, animation1, animation2) =>
-                                HelpScreen(),
+                                const HelpScreen(),
                             transitionDuration: Duration.zero,
                           ),
                         );
@@ -379,15 +377,15 @@ class _ProfilePageState extends State<ProfileS> {
                           context: context,
                           builder: (context) => AlertDialog(
                             elevation: 0,
-                            backgroundColor: Color(0xffffffff),
+                            backgroundColor: const Color(0xffffffff),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0),
                             ),
                             title: Column(
                                 mainAxisSize: MainAxisSize.min,
-                                children: [
+                                children: const [
                                   SizedBox(height: 15),
-                                  const Text(
+                                  Text(
                                     'Message',
                                     style: TextStyle(
                                       fontSize: 18.0,
@@ -402,9 +400,9 @@ class _ProfilePageState extends State<ProfileS> {
                                 ]),
                             content: Column(
                                 mainAxisSize: MainAxisSize.min,
-                                children: [
+                                children: const [
                                   SizedBox(height: 15),
-                                  const Text(
+                                  Text(
                                     'Are You Sure you want to Log Out',
                                     style: TextStyle(
                                       fontSize: 18.0,
@@ -437,14 +435,14 @@ class _ProfilePageState extends State<ProfileS> {
                                 ),
                               ),
 
-                              Divider(
+                              const Divider(
                                 height: 1,
                               ),
-                              Container(
+                              SizedBox(
                                 width: MediaQuery.of(context).size.width,
                                 height: 50,
                                 child: InkWell(
-                                  borderRadius: BorderRadius.only(
+                                  borderRadius: const BorderRadius.only(
                                     bottomLeft: Radius.circular(15.0),
                                     bottomRight: Radius.circular(15.0),
                                   ),
@@ -452,7 +450,7 @@ class _ProfilePageState extends State<ProfileS> {
                                   onTap: () {
                                     Navigator.of(context).pop();
                                   },
-                                  child: Center(
+                                  child: const Center(
                                     child: Text(
                                       "Cancel",
                                       style: TextStyle(
@@ -492,7 +490,7 @@ class _ProfilePageState extends State<ProfileS> {
     Navigator.push(
       context,
       PageRouteBuilder(
-        pageBuilder: (context, animation1, animation2) => LoginScreen(),
+        pageBuilder: (context, animation1, animation2) => const LoginScreen(),
         transitionDuration: Duration.zero,
       ),
     );
@@ -520,12 +518,12 @@ class _ProfilePageState extends State<ProfileS> {
           icon,
           color: kPrimaryColor,
         ),
-        SizedBox(width: 10.0),
+        const SizedBox(width: 10.0),
         Text(
           title,
           style: tStyle,
         ),
-        Spacer(),
+        const Spacer(),
         if (showBadge)
           Material(
             color: kPrimaryColor,
@@ -540,7 +538,7 @@ class _ProfilePageState extends State<ProfileS> {
                 color: kPrimaryColor,
                 borderRadius: BorderRadius.circular(5.0),
               ),
-              child: Text(
+              child: const Text(
                 "10+",
                 style: TextStyle(
                     color: Colors.white,
@@ -569,13 +567,13 @@ class UserInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child: Column(
         children: <Widget>[
           Container(
             padding: const EdgeInsets.only(left: 8.0, bottom: 4.0),
             alignment: Alignment.topLeft,
-            child: Text(
+            child: const Text(
               "User Information",
               style: TextStyle(
                 color: Colors.black87,
@@ -588,7 +586,7 @@ class UserInfo extends StatelessWidget {
           Card(
             child: Container(
               alignment: Alignment.topLeft,
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               child: Column(
                 children: <Widget>[
                   Column(
@@ -597,16 +595,17 @@ class UserInfo extends StatelessWidget {
                         color: Colors.grey,
                         tiles: [
                           ListTile(
-                            leading: Icon(
+                            leading: const Icon(
                               Icons.phone,
                               color: kPrimaryColor,
                             ),
-                            title: Text("Phone"),
+                            title: const Text("Phone"),
                             subtitle: Text(phone.toString()),
                           ),
                           ListTile(
-                            leading: Icon(Icons.email, color: kPrimaryColor),
-                            title: Text("Email"),
+                            leading:
+                                const Icon(Icons.email, color: kPrimaryColor),
+                            title: const Text("Email"),
                             subtitle: Text(email.toString()),
                           ),
                           // ListTile(
@@ -615,11 +614,11 @@ class UserInfo extends StatelessWidget {
                           //   subtitle: Text(birthday.toString()),
                           // ),
                           ListTile(
-                            leading: Icon(
+                            leading: const Icon(
                               Icons.person,
                               color: kPrimaryColor,
                             ),
-                            title: Text("About Me"),
+                            title: const Text("About Me"),
                             subtitle: Text(about.toString()),
                           ),
                         ],
@@ -664,7 +663,7 @@ class ProfileHeader extends StatelessWidget {
         ),
         Ink(
           height: 200,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.black38,
           ),
         ),
@@ -731,9 +730,7 @@ class Avatar extends StatelessWidget {
       backgroundColor: borderColor,
       child: CircleAvatar(
         radius: radius,
-        backgroundColor: backgroundColor != null
-            ? backgroundColor
-            : Theme.of(context).primaryColor,
+        backgroundColor: backgroundColor ?? Theme.of(context).primaryColor,
         child: CircleAvatar(
           radius: radius - borderWidth,
           backgroundImage: image as ImageProvider<Object>?,

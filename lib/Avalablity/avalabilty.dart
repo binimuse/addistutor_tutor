@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 
 import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
@@ -70,9 +72,7 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
   void _fetchUser() async {
     if (editprofileController.isActive.toString() == "1") {
       avalablitycontrollerclass.isSelected = [true, false];
-      print("avalble");
     } else {
-      print("Not avalble");
       avalablitycontrollerclass.isSelected = [false, true];
     }
     SharedPreferences localStorage = await SharedPreferences.getInstance();
@@ -86,12 +86,10 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
         editprofileController.fetchPf(int.parse(body["teacher_id"]));
       } else {
         var noid = "noid";
-        print("no Id");
+
         editprofileController.fetchPf(noid);
       }
-    } else {
-      print("no Token");
-    }
+    } else {}
   }
 
   late List<bool?> values = <bool?>[
@@ -146,7 +144,7 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
                           child: InkWell(
                             borderRadius: BorderRadius.circular(
                                 AppBar().preferredSize.height),
-                            child: Icon(
+                            child: const Icon(
                               Icons.arrow_back_ios,
                               color: DesignCourseAppTheme.nearlyBlack,
                             ),
@@ -155,7 +153,7 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
                             },
                           ),
                         ),
-                        title: Text(
+                        title: const Text(
                           "Tutor Availability",
                           style: TextStyle(
                             fontSize: 25,
@@ -211,7 +209,7 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
                                                               MainAxisAlignment
                                                                   .spaceEvenly,
                                                           children: <Widget>[
-                                                            Icon(
+                                                            const Icon(
                                                               Icons
                                                                   .date_range_outlined,
                                                               color:
@@ -221,9 +219,10 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
                                                               snapshot
                                                                   .data[index]!
                                                                   .day,
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      12.0),
+                                                              style:
+                                                                  const TextStyle(
+                                                                      fontSize:
+                                                                          12.0),
                                                             ), // text
                                                           ],
                                                         ),
@@ -259,13 +258,13 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
                                                       context, ids.toString());
                                             },
                                             color: kPrimaryColor,
-                                            padding: EdgeInsets.symmetric(
+                                            padding: const EdgeInsets.symmetric(
                                                 horizontal: 50),
                                             elevation: 2,
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(20)),
-                                            child: Text(
+                                            child: const Text(
                                               "SAVE",
                                               style: TextStyle(
                                                   fontSize: 14,
@@ -445,8 +444,8 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
               selectedBorderColor: Colors.black,
               selectedColor: Colors.white,
               borderRadius: BorderRadius.circular(0),
-              children: <Widget>[
-                const Padding(
+              children: const <Widget>[
+                Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
                     'Available',
@@ -454,7 +453,7 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0),
                   child: Text(
                     'Temporarily unavailable',
                     style: TextStyle(fontSize: 16),

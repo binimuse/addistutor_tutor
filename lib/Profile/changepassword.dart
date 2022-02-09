@@ -76,7 +76,7 @@ class _EditProfilePageState extends State<ChangePassword> {
             child: InkWell(
               borderRadius:
                   BorderRadius.circular(AppBar().preferredSize.height),
-              child: Icon(
+              child: const Icon(
                 Icons.arrow_back_ios,
                 color: DesignCourseAppTheme.nearlyBlack,
               ),
@@ -85,7 +85,7 @@ class _EditProfilePageState extends State<ChangePassword> {
               },
             ),
           ),
-          title: Text(
+          title: const Text(
             "Change Password",
             style: TextStyle(
               fontSize: 25,
@@ -132,13 +132,13 @@ class _EditProfilePageState extends State<ChangePassword> {
                                                 showPassword = !showPassword;
                                               });
                                             },
-                                            icon: Icon(
+                                            icon: const Icon(
                                               Icons.remove_red_eye,
                                               color: kPrimaryColor,
                                             ),
                                           )
                                         : null,
-                                    contentPadding: EdgeInsets.all(10),
+                                    contentPadding: const EdgeInsets.all(10),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(
                                           color: kPrimaryColor, width: 2.0),
@@ -185,13 +185,13 @@ class _EditProfilePageState extends State<ChangePassword> {
                                                 showPassword1 = !showPassword1;
                                               });
                                             },
-                                            icon: Icon(
+                                            icon: const Icon(
                                               Icons.remove_red_eye,
                                               color: kPrimaryColor,
                                             ),
                                           )
                                         : null,
-                                    contentPadding: EdgeInsets.all(10),
+                                    contentPadding: const EdgeInsets.all(10),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(
                                           color: kPrimaryColor, width: 2.0),
@@ -238,13 +238,13 @@ class _EditProfilePageState extends State<ChangePassword> {
                                                 showPassword2 = !showPassword2;
                                               });
                                             },
-                                            icon: Icon(
+                                            icon: const Icon(
                                               Icons.remove_red_eye,
                                               color: kPrimaryColor,
                                             ),
                                           )
                                         : null,
-                                    contentPadding: EdgeInsets.all(10),
+                                    contentPadding: const EdgeInsets.all(10),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(
                                           color: kPrimaryColor, width: 2.0),
@@ -322,25 +322,6 @@ class _EditProfilePageState extends State<ChangePassword> {
   }
 
   ImagePicker picker = ImagePicker();
-
-  void _showMessage() {
-    showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              title: const Text('info'),
-              content:
-                  Text(json.decode(editprofileController.edited)["message"]),
-              actions: <Widget>[
-                // ignore: deprecated_member_use
-                FlatButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(true);
-                  },
-                  child: const Text('ok'),
-                ),
-              ],
-            ));
-  }
 
   loadData() {
     // Here you can write your code for open new view

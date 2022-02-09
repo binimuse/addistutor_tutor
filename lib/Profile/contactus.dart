@@ -32,7 +32,7 @@ class _HomePageState extends State<ContactDetailsView>
             child: InkWell(
               borderRadius:
                   BorderRadius.circular(AppBar().preferredSize.height),
-              child: Icon(
+              child: const Icon(
                 Icons.arrow_back_ios,
                 color: DesignCourseAppTheme.nearlyBlack,
               ),
@@ -41,7 +41,7 @@ class _HomePageState extends State<ContactDetailsView>
               },
             ),
           ),
-          title: Text(
+          title: const Text(
             "Contact US",
             style: TextStyle(
               fontSize: 25,
@@ -68,9 +68,9 @@ class _HomePageState extends State<ContactDetailsView>
                       child: Text(contactUSContolller.name,
                           style: const TextStyle(
                               fontSize: 22, fontWeight: FontWeight.w600))),
-                  Center(
+                  const Center(
                       child: Text('${"Addis Ababa"}, ${"Ethiopia"}',
-                          style: const TextStyle(
+                          style: TextStyle(
                               fontSize: 22, fontWeight: FontWeight.normal))),
                   const SizedBox(
                     height: 30,
@@ -141,9 +141,9 @@ class _HomePageState extends State<ContactDetailsView>
                               style: TextStyle(
                                   fontWeight: FontWeight.w600, fontSize: 18),
                             ),
-                            subtitle: Text(
+                            subtitle: const Text(
                               "https://nextgeneducation.et/",
-                              style: const TextStyle(
+                              style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 16,
                                   color: Color(0xf3333333)),
