@@ -3,6 +3,7 @@ import 'package:addistutor_tutor/Confirmationcode/confirmationcode.dart';
 import 'package:addistutor_tutor/Home/components/homescreen.dart';
 import 'package:addistutor_tutor/Notification/notification.dart';
 import 'package:addistutor_tutor/Profile/profile.dart';
+import 'package:addistutor_tutor/Tutordashbord/tutordashbord.dart';
 import 'package:addistutor_tutor/main/components/bottom_navigation_item.dart';
 import 'package:addistutor_tutor/main/components/icons_app.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,7 @@ class _BottomNavPageState extends State<Home> {
           // SearchScreen(),
           AppointmentScreen(),
 
-          CodeScreen(),
+          TutorDahsbord(),
           Notificationclass(),
           ProfileScreen(),
         ],

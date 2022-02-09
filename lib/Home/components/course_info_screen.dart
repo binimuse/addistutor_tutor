@@ -13,8 +13,9 @@ import 'design_course_app_theme.dart';
 class CourseInfoScreen extends StatefulWidget {
   const CourseInfoScreen({
     Key? key,
+    this.requestedBooking,
   }) : super(key: key);
-
+  final RequestedBooking? requestedBooking;
   @override
   _CourseInfoScreenState createState() => _CourseInfoScreenState();
 }
@@ -32,7 +33,8 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
   bool rating = false;
   IconData? _selectedIcon;
 
-  GetNotigicationController getNotigicationController = Get.find();
+  final GetReqBooking getReqBooking = Get.put(GetReqBooking());
+
   @override
   void initState() {
     animationController = AnimationController(
@@ -47,33 +49,10 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
     super.initState();
   }
 
-  List<RequestedBooking> subject = [];
   var ids;
   void _fetchUser() async {
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
-    var token = localStorage.getString('user');
-
-    if (token != null) {
-      var body = json.decode(token);
-
-      if (body["teacher_id"] != null) {
-        setState(() {
-          ids = int.parse(body["teacher_id"]);
-          subject = getNotigicationController.listreq.value;
-          getNotigicationController.fetchReqBooking(ids);
-          try {
-            getNotigicationController.chat = subject[0];
-          } catch (e) {}
-        });
-
-        print("yes Id");
-        print(ids);
-      } else {
-        print("no Id");
-      }
-    } else {
-      print("no Token");
-    }
+    await Future.delayed(const Duration(milliseconds: 1000));
+    setState(() {});
   }
 
   Future<void> setData() async {
@@ -150,11 +129,9 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                             padding:
                                 EdgeInsets.only(top: 32.0, left: 18, right: 16),
                             child: Text(
-                              getNotigicationController
-                                      .chat!.student.first_name +
+                              widget.requestedBooking!.student.first_name +
                                   " " +
-                                  getNotigicationController
-                                      .chat!.student.last_name,
+                                  widget.requestedBooking!.student.last_name,
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
@@ -172,8 +149,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Text(
-                                  getNotigicationController
-                                      .chat!.student.gender,
+                                  widget.requestedBooking!.student.gender,
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w200,
@@ -184,8 +160,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                 ),
                                 Text(
                                   "Grade " +
-                                      getNotigicationController
-                                          .chat!.student.grade,
+                                      widget.requestedBooking!.student.grade,
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w200,
@@ -196,8 +171,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                 Row(
                                   children: <Widget>[
                                     Text(
-                                      getNotigicationController
-                                          .chat!.created_at,
+                                      widget.requestedBooking!.created_at,
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
                                         fontWeight: FontWeight.w200,
@@ -220,8 +194,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                             padding:
                                 EdgeInsets.only(top: 10.0, left: 18, right: 16),
                             child: Text(
-                              getNotigicationController
-                                  .chat!.student.study_purpose,
+                              widget.requestedBooking!.student.study_purpose,
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontWeight: FontWeight.w200,
@@ -239,17 +212,16 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                               child: Row(
                                 children: <Widget>[
                                   getTimeBoxUI(1.toString(), 'Subject'),
-                                  getTimeBoxUI(
-                                      getNotigicationController.chat!.session,
+                                  getTimeBoxUI(widget.requestedBooking!.session,
                                       'session'),
                                 ],
                               ),
                             ),
                           ),
-                          getNotigicationController.chat!.subject.title != null
-                              ? getTimeBoxUIday(getNotigicationController
-                                      .chat!.subject.title +
-                                  "subject ")
+                          widget.requestedBooking!.subject.title != null
+                              ? getTimeBoxUIday(
+                                  widget.requestedBooking!.subject.title +
+                                      "subject ")
                               : getTimeBoxUIday("subject not defind" " "),
                           Center(
                             child: Text(
@@ -267,22 +239,17 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                   return Container(
                                     child: Column(
                                       children: [
-                                        getTimeBoxUIday(
-                                            getNotigicationController
-                                                    .chat!
-                                                    .booking_schedule[index]
-                                                    .day +
-                                                " " +
-                                                getNotigicationController
-                                                    .chat!
-                                                    .booking_schedule[index]
-                                                    .time),
+                                        getTimeBoxUIday(widget.requestedBooking!
+                                                .booking_schedule[index].day +
+                                            " " +
+                                            widget.requestedBooking!
+                                                .booking_schedule[index].time),
                                       ],
                                     ),
                                   );
                                 },
-                                itemCount: getNotigicationController
-                                    .chat!.booking_schedule.length),
+                                itemCount: widget
+                                    .requestedBooking!.booking_schedule.length),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -295,10 +262,9 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                               RaisedButton.icon(
                                 onPressed: () {
                                   setState(() {
-                                    getNotigicationController.statuss = "1";
-                                    getNotigicationController.updateStatus(
-                                        context,
-                                        getNotigicationController.chat!.id);
+                                    getReqBooking.statuss = "1";
+                                    getReqBooking.updateStatus(
+                                        context, widget.requestedBooking!.id);
                                   });
                                 },
                                 shape: const RoundedRectangleBorder(
@@ -319,10 +285,9 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                               RaisedButton.icon(
                                 onPressed: () {
                                   setState(() {
-                                    getNotigicationController.statuss = "0";
-                                    getNotigicationController.updateStatus(
-                                        context,
-                                        getNotigicationController.chat!.id);
+                                    getReqBooking.statuss = "0";
+                                    getReqBooking.updateStatus(
+                                        context, widget.requestedBooking!.id);
                                   });
                                 },
                                 shape: const RoundedRectangleBorder(
@@ -371,7 +336,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(18.0),
                           child: Image.network(
-                            "https://tutor.oddatech.com/api/student-profile-picture/${getNotigicationController.chat!.student.id}",
+                            "https://tutor.oddatech.com/api/student-profile-picture/${widget.requestedBooking!.student.id}",
                           )),
                     ))),
             Padding(

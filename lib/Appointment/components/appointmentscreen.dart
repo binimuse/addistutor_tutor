@@ -174,12 +174,12 @@ class _HomePageState extends State<Appointment>
   }
 
   void moveTo() {
-    Navigator.push<dynamic>(
-      context,
-      MaterialPageRoute<dynamic>(
-        builder: (BuildContext context) => CourseInfoScreen(),
-      ),
-    );
+    // Navigator.push<dynamic>(
+    //   context,
+    //   MaterialPageRoute<dynamic>(
+    //     builder: (BuildContext context) => CourseInfoScreen(),
+    //   ),
+    // );
   }
 
   Widget getButtonUI(CategoryType categoryTypeData, bool isSelected) {
@@ -244,7 +244,7 @@ class _HomePageState extends State<Appointment>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const <Widget>[
                 Text(
-                  'Tutor',
+                  'Welcome to',
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontWeight: FontWeight.w400,
@@ -254,7 +254,7 @@ class _HomePageState extends State<Appointment>
                   ),
                 ),
                 Text(
-                  'Dashbord',
+                  'NextGen',
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,

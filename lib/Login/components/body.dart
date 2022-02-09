@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:addistutor_tutor/Login/components/pendingpage.dart';
 import 'package:addistutor_tutor/Profile/profile.dart';
 import 'package:addistutor_tutor/Signup/components/or_divider.dart';
 import 'package:addistutor_tutor/Signup/components/social_icon.dart';
@@ -438,7 +439,7 @@ class _LoginScreenState extends State<Body> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ProfileScreen(),
+              builder: (context) => PendingScreen(),
             ),
           );
         } else {

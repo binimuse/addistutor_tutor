@@ -327,6 +327,7 @@ class RemoteServices {
     // ignore: unnecessary_brace_in_string_interps
     res = await Network().getpassedData(data, "password/email");
     body = json.decode(res.body);
+    // ignore: avoid_print
     print(body);
     if (res.statusCode == 200) {
       return res.statusCode.toString();

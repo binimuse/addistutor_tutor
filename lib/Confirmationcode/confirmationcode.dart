@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
 import 'package:addistutor_tutor/Home/components/homescreen.dart';
 import 'package:addistutor_tutor/Profile/app_theme.dart';
 import 'package:addistutor_tutor/controller/sendqrcodecontroller.dart';
@@ -53,9 +54,24 @@ class _FeedbackScreenState extends State<CodeScreen> {
         top: false,
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.white,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            elevation: 1,
+            leading: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius:
+                    BorderRadius.circular(AppBar().preferredSize.height),
+                child: const Icon(
+                  Icons.arrow_back_ios,
+                  color: DesignCourseAppTheme.nearlyBlack,
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
             title: const Text(
-              "Confirmation code",
+              "Qr Code",
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.w500,
