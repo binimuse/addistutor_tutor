@@ -1,6 +1,7 @@
-// ignore_for_file: import_of_legacy_library_into_null_safe, unused_element, prefer_typing_uninitialized_variables, unnecessary_brace_in_string_interps
+// ignore_for_file: import_of_legacy_library_into_null_safe, unused_element, prefer_typing_uninitialized_variables, unnecessary_brace_in_string_interps, deprecated_member_use, duplicate_ignore
 
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:addistutor_tutor/Avalablity/avalabilty.dart';
 import 'package:addistutor_tutor/Login/login_screen.dart';
@@ -123,89 +124,148 @@ class _ProfilePageState extends State<ProfileS> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _key,
-      backgroundColor: Colors.grey.shade100,
-      extendBodyBehindAppBar: true,
-      extendBody: true,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          onPressed: () {
-            _key.currentState!.openDrawer();
-          },
-          icon: const Icon(
-            Icons.menu,
-            color: kPrimaryColor,
+    return WillPopScope(
+      onWillPop: _onBackPressed,
+      child: Scaffold(
+        key: _key,
+        backgroundColor: Colors.grey.shade100,
+        extendBodyBehindAppBar: true,
+        extendBody: true,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          leading: IconButton(
+            onPressed: () {
+              _key.currentState!.openDrawer();
+            },
+            icon: const Icon(
+              Icons.menu,
+              color: kPrimaryColor,
+            ),
           ),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
         ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      drawer: _buildDrawer(
-        context,
-        editprofileController.firstname.text.toString(),
-        editprofileController.lastname.text.toString(),
-        ids,
-      ),
-      body: editprofileController.obx(
-          (editForm) => SmartRefresher(
-                enablePullDown: true,
-                enablePullUp: true,
+        drawer: _buildDrawer(
+          context,
+          editprofileController.firstname.text.toString(),
+          editprofileController.lastname.text.toString(),
+          ids,
+        ),
+        body: editprofileController.obx(
+            (editForm) => SmartRefresher(
+                  enablePullDown: true,
+                  enablePullUp: true,
 
-                //cheak pull_to_refresh
-                controller: _refreshController,
-                onRefresh: _onRefresh,
-                onLoading: _onLoading,
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                      ProfileHeader(
-                        avatar: NetworkImage(
-                            "https://tutor.oddatech.com/api/teacher-profile-picture/${ids}"),
-                        coverImage: NetworkImage(
-                            "https://tutor.oddatech.com/api/teacher-profile-picture/${ids}"),
-                        title: editprofileController.firstname.text.toString() +
-                            " " +
-                            editprofileController.lastname.text.toString(),
-                        subtitle: "Tutor",
-                        actions: <Widget>[
-                          MaterialButton(
-                            color: Colors.white,
-                            shape: const CircleBorder(),
-                            elevation: 0,
-                            child: const Icon(
-                              Icons.edit,
-                              color: kPrimaryColor,
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                // ignore: prefer_const_constructors
-                                context,
-                                PageRouteBuilder(
-                                  pageBuilder:
-                                      (context, animation1, animation2) =>
-                                          const EditPage(),
-                                  transitionDuration: Duration.zero,
-                                ),
-                              );
-                            },
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: 10.0),
-                      UserInfo(
-                        phone: editprofileController.phone.text.toString(),
-                        email: editprofileController.email.text.toString(),
-                        about: editprofileController.About.text.toString(),
-                      ),
-                    ],
+                  //cheak pull_to_refresh
+                  controller: _refreshController,
+                  onRefresh: _onRefresh,
+                  onLoading: _onLoading,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        ProfileHeader(
+                          avatar: NetworkImage(
+                              "https://tutor.oddatech.com/api/teacher-profile-picture/${ids}"),
+                          coverImage: NetworkImage(
+                              "https://tutor.oddatech.com/api/teacher-profile-picture/${ids}"),
+                          title: editprofileController.firstname.text
+                                  .toString() +
+                              " " +
+                              editprofileController.lastname.text.toString(),
+                          subtitle: "Tutor",
+                          actions: <Widget>[
+                            MaterialButton(
+                              color: Colors.white,
+                              shape: const CircleBorder(),
+                              elevation: 0,
+                              child: const Icon(
+                                Icons.edit,
+                                color: kPrimaryColor,
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  // ignore: prefer_const_constructors
+                                  context,
+                                  PageRouteBuilder(
+                                    pageBuilder:
+                                        (context, animation1, animation2) =>
+                                            const EditPage(),
+                                    transitionDuration: Duration.zero,
+                                  ),
+                                );
+                              },
+                            )
+                          ],
+                        ),
+                        const SizedBox(height: 10.0),
+                        UserInfo(
+                          phone: editprofileController.phone.text.toString(),
+                          email: editprofileController.email.text.toString(),
+                          about: editprofileController.About.text.toString(),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
+            onLoading: Center(child: loadData()),
+            onEmpty: const Text("Can't fetch data"),
+            onError: (error) => Center(child: Text(error.toString()))),
+      ),
+    );
+  }
+
+  Future<bool> _onBackPressed() async {
+    return await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return WillPopScope(
+          onWillPop: () async => false,
+          child: AlertDialog(
+            title: const Text(
+              'Exit',
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+                color: Colors.green,
+                fontFamily: 'WorkSans',
               ),
-          onLoading: Center(child: loadData()),
-          onEmpty: const Text("Can't fetch data"),
-          onError: (error) => Center(child: Text(error.toString()))),
+            ),
+            content: const Text(
+              'Are You Sure you want to Exit This App',
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+                fontFamily: 'WorkSans',
+              ),
+            ),
+            actions: <Widget>[
+              Center(
+                child:
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  FlatButton(
+                    onPressed: () {
+                      //Navigator.of(context).pop(true);
+                      Navigator.pop(context);
+                    },
+                    child: const Center(child: Text('No')),
+                  ),
+                  FlatButton(
+                    onPressed: () async {
+                      //
+
+                      exit(0);
+                      //  Navigator.of(context).pop(true);
+                    },
+                    child: const Center(child: Text('Yes')),
+                  ),
+                ]),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 

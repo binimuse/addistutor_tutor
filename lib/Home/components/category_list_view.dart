@@ -1,8 +1,13 @@
-import 'package:addistutor_tutor/Home/models/category.dart';
+// ignore_for_file: unnecessary_string_interpolations
+
+import 'package:addistutor_tutor/Appointment/components/appointmentscreen.dart';
+
+import 'package:addistutor_tutor/controller/getpopulartutor.dart';
+import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'design_course_app_theme.dart';
-import 'homescreen.dart';
 
 class CategoryListView extends StatefulWidget {
   const CategoryListView({Key? key, this.callBack}) : super(key: key);
@@ -16,10 +21,14 @@ class _CategoryListViewState extends State<CategoryListView>
     with TickerProviderStateMixin {
   AnimationController? animationController;
 
+  final GetPopularTutorController getPopularTutorController =
+      Get.put(GetPopularTutorController());
+
   @override
   void initState() {
     animationController = AnimationController(
         duration: const Duration(milliseconds: 2000), vsync: this);
+    getPopularTutorController.fetchqr();
     super.initState();
   }
 
@@ -36,47 +45,50 @@ class _CategoryListViewState extends State<CategoryListView>
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 16, bottom: 16),
-      child: SizedBox(
-        height: 134,
-        width: double.infinity,
-        child: FutureBuilder<bool>(
-          future: getData(),
-          builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-            if (!snapshot.hasData) {
-              return const SizedBox();
-            } else {
-              return ListView.builder(
-                padding: const EdgeInsets.only(
-                    top: 0, bottom: 0, right: 16, left: 16),
-                itemCount: Category.categoryList.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (BuildContext context, int index) {
-                  final int count = Category.categoryList.length > 10
-                      ? 10
-                      : Category.categoryList.length;
-                  final Animation<double> animation =
-                      Tween<double>(begin: 0.0, end: 1.0).animate(
-                          CurvedAnimation(
-                              parent: animationController!,
-                              curve: Interval((1 / count) * index, 1.0,
-                                  curve: Curves.fastOutSlowIn)));
-                  animationController?.forward();
+    return Obx(() => getPopularTutorController.isfetchedsubject.value
+        ? Padding(
+            padding: const EdgeInsets.only(top: 16, bottom: 16),
+            child: SizedBox(
+              height: 134,
+              width: double.infinity,
+              child: FutureBuilder<bool>(
+                future: getData(),
+                builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                  if (!snapshot.hasData) {
+                    return const SizedBox();
+                  } else {
+                    return ListView.builder(
+                      padding: const EdgeInsets.only(
+                          top: 0, bottom: 0, right: 16, left: 16),
+                      itemCount: getPopularTutorController.popular.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (BuildContext context, int index) {
+                        final int count =
+                            getPopularTutorController.popular.length > 10
+                                ? 10
+                                : getPopularTutorController.popular.length;
+                        final Animation<double> animation =
+                            Tween<double>(begin: 0.0, end: 1.0).animate(
+                                CurvedAnimation(
+                                    parent: animationController!,
+                                    curve: Interval((1 / count) * index, 1.0,
+                                        curve: Curves.fastOutSlowIn)));
+                        animationController?.forward();
 
-                  return CategoryView(
-                    category: Category.categoryList[index],
-                    animation: animation,
-                    animationController: animationController,
-                    callback: widget.callBack,
-                  );
+                        return CategoryView(
+                          category: getPopularTutorController.popular[index],
+                          animation: animation,
+                          animationController: animationController,
+                          callback: widget.callBack,
+                        );
+                      },
+                    );
+                  }
                 },
-              );
-            }
-          },
-        ),
-      ),
-    );
+              ),
+            ),
+          )
+        : const Center(child: CircularProgressIndicator()));
   }
 }
 
@@ -90,7 +102,7 @@ class CategoryView extends StatelessWidget {
       : super(key: key);
 
   final VoidCallback? callback;
-  final Category? category;
+  final Teacher? category;
   final AnimationController? animationController;
   final Animation<double>? animation;
 
@@ -134,7 +146,7 @@ class CategoryView extends StatelessWidget {
                                       Padding(
                                         padding: const EdgeInsets.only(top: 16),
                                         child: Text(
-                                          category!.title,
+                                          category!.first_name,
                                           textAlign: TextAlign.left,
                                           style: const TextStyle(
                                             fontWeight: FontWeight.w600,
@@ -158,11 +170,12 @@ class CategoryView extends StatelessWidget {
                                               CrossAxisAlignment.center,
                                           children: <Widget>[
                                             Text(
-                                              '${category!.lessonCount} lesson',
+                                              '${category!.gender}',
                                               textAlign: TextAlign.left,
                                               style: const TextStyle(
                                                 fontWeight: FontWeight.w200,
                                                 fontSize: 12,
+                                                fontFamily: 'WorkSans',
                                                 letterSpacing: 0.27,
                                                 color:
                                                     DesignCourseAppTheme.grey,
@@ -192,34 +205,6 @@ class CategoryView extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            bottom: 16, right: 16),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Container(
-                                              decoration: const BoxDecoration(
-                                                color: DesignCourseAppTheme
-                                                    .nearlyBlue,
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(8.0)),
-                                              ),
-                                              child: const Padding(
-                                                padding: EdgeInsets.all(4.0),
-                                                child: Icon(
-                                                  Icons.add,
-                                                  color: DesignCourseAppTheme
-                                                      .nearlyWhite,
-                                                ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
                                     ],
                                   ),
                                 ),
@@ -230,23 +215,24 @@ class CategoryView extends StatelessWidget {
                       ],
                     ),
                     Container(
-                      width: 70,
-                      height: 70,
+                      width: 100,
+                      height: 90,
                       decoration: BoxDecoration(
                           border: Border.all(
-                              width: 4,
+                              width: 3,
                               color: Theme.of(context).scaffoldBackgroundColor),
                           boxShadow: [
                             BoxShadow(
-                                spreadRadius: 2,
+                                spreadRadius: 3,
                                 blurRadius: 10,
                                 color: Colors.black.withOpacity(0.1),
-                                offset: const Offset(0, 10))
+                                offset: const Offset(0, 20))
                           ],
                           shape: BoxShape.circle,
                           image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: AssetImage(category!.imagePath))),
+                              image: NetworkImage(
+                                  "https://tutor.oddatech.com/api/teacher-profile-picture/${category!.id}"))),
                     ),
                   ],
                 ),

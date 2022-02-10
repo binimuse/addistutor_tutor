@@ -1,6 +1,7 @@
-// ignore_for_file: prefer_const_constructors, duplicate_ignore, prefer_const_literals_to_create_immutables, avoid_print
+// ignore_for_file: prefer_const_constructors, duplicate_ignore, prefer_const_literals_to_create_immutables, avoid_print, deprecated_member_use
 
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:addistutor_tutor/Appointment/components/ongoingtutors.dart';
 import 'package:addistutor_tutor/Home/components/category_list_view.dart';
@@ -74,34 +75,92 @@ class _HomePageState extends State<Appointment>
     return Obx(() => walletContoller.isFetched.value
         ? Container(
             color: DesignCourseAppTheme.nearlyWhite,
-            child: Scaffold(
-              backgroundColor: Colors.transparent,
-              body: Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: MediaQuery.of(context).padding.top,
-                  ),
-                  getAppBarUI(),
-                  _buildDivider(),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: SizedBox(
-                        height: MediaQuery.of(context).size.height,
-                        child: Column(
-                          children: <Widget>[
-                            getCategoryUI(),
-                            Flexible(
-                              child: getPopularCourseUI(),
-                            ),
-                          ],
+            child: WillPopScope(
+              onWillPop: _onBackPressed,
+              child: Scaffold(
+                backgroundColor: Colors.transparent,
+                body: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: MediaQuery.of(context).padding.top,
+                    ),
+                    getAppBarUI(),
+                    _buildDivider(),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: SizedBox(
+                          height: MediaQuery.of(context).size.height,
+                          child: Column(
+                            children: <Widget>[
+                              getCategoryUI(),
+                              Flexible(
+                                child: getPopularCourseUI(),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ))
         : const Center(child: CircularProgressIndicator()));
+  }
+
+  Future<bool> _onBackPressed() async {
+    return await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return WillPopScope(
+          onWillPop: () async => false,
+          child: AlertDialog(
+            title: const Text(
+              'Exit',
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+                color: Colors.green,
+                fontFamily: 'WorkSans',
+              ),
+            ),
+            content: const Text(
+              'Are You Sure you want to Exit This App',
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+                fontFamily: 'WorkSans',
+              ),
+            ),
+            actions: <Widget>[
+              Center(
+                child:
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  FlatButton(
+                    onPressed: () {
+                      //Navigator.of(context).pop(true);
+                      Navigator.pop(context);
+                    },
+                    child: const Center(child: Text('No')),
+                  ),
+                  FlatButton(
+                    onPressed: () async {
+                      //
+
+                      exit(0);
+                      //  Navigator.of(context).pop(true);
+                    },
+                    child: const Center(child: Text('Yes')),
+                  ),
+                ]),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   final Color divider = Colors.grey.shade600;
@@ -119,7 +178,7 @@ class _HomePageState extends State<Appointment>
         const Padding(
           padding: EdgeInsets.only(top: 20.0, left: 18, right: 16),
           child: Text(
-            'This Month Top Tutors ',
+            'Top Rated Tutors ',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontWeight: FontWeight.w600,
@@ -266,10 +325,12 @@ class _HomePageState extends State<Appointment>
           ),
           GestureDetector(
             onTap: () {
-              Navigator.push<dynamic>(
+              Navigator.push(
                 context,
-                MaterialPageRoute<dynamic>(
-                  builder: (BuildContext context) => WalletPage(),
+                PageRouteBuilder(
+                  pageBuilder: (context, animation1, animation2) {
+                    return const WalletPage();
+                  },
                 ),
               );
             },

@@ -18,6 +18,8 @@ class CourseInfoScreen extends StatefulWidget {
   _CourseInfoScreenState createState() => _CourseInfoScreenState();
 }
 
+final Color divider = Colors.grey.shade600;
+
 class _CourseInfoScreenState extends State<CourseInfoScreen>
     with TickerProviderStateMixin {
   final double _initialRating = 2.0;
@@ -113,6 +115,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8, right: 8),
                   child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
                     child: Container(
                       constraints: BoxConstraints(
                           minHeight: infoHeight,
@@ -127,13 +130,12 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                             padding: const EdgeInsets.only(
                                 top: 32.0, left: 18, right: 16),
                             child: Text(
-                              widget.requestedBooking!.student.first_name +
-                                  " " +
-                                  widget.requestedBooking!.student.last_name,
+                              "Student info",
                               textAlign: TextAlign.left,
                               style: const TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 22,
+                                fontFamily: 'WorkSans',
                                 letterSpacing: 0.27,
                                 color: DesignCourseAppTheme.darkerText,
                               ),
@@ -147,13 +149,28 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Text(
+                                  widget.requestedBooking!.student.first_name +
+                                      " " +
+                                      widget
+                                          .requestedBooking!.student.last_name,
+                                  textAlign: TextAlign.left,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w200,
+                                    fontSize: 15,
+                                    fontFamily: 'WorkSans',
+                                    letterSpacing: 0.27,
+                                    color: DesignCourseAppTheme.grey,
+                                  ),
+                                ),
+                                Text(
                                   widget.requestedBooking!.student.gender,
                                   textAlign: TextAlign.left,
                                   style: const TextStyle(
                                     fontWeight: FontWeight.w200,
-                                    fontSize: 22,
+                                    fontSize: 15,
+                                    fontFamily: 'WorkSans',
                                     letterSpacing: 0.27,
-                                    color: DesignCourseAppTheme.nearlyBlue,
+                                    color: DesignCourseAppTheme.grey,
                                   ),
                                 ),
                                 Text(
@@ -162,30 +179,60 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                   textAlign: TextAlign.left,
                                   style: const TextStyle(
                                     fontWeight: FontWeight.w200,
-                                    fontSize: 22,
+                                    fontSize: 15,
+                                    fontFamily: 'WorkSans',
                                     letterSpacing: 0.27,
                                   ),
                                 ),
                                 Row(
                                   children: <Widget>[
                                     Text(
-                                      widget.requestedBooking!.created_at,
+                                      "Age: " +
+                                          widget.requestedBooking!.student
+                                              .birth_date,
                                       textAlign: TextAlign.left,
                                       style: const TextStyle(
                                         fontWeight: FontWeight.w200,
-                                        fontSize: 22,
+                                        fontSize: 15,
+                                        fontFamily: 'WorkSans',
                                         letterSpacing: 0.27,
                                         color: DesignCourseAppTheme.grey,
                                       ),
                                     ),
-                                    const Icon(
-                                      Icons.date_range,
-                                      color: DesignCourseAppTheme.nearlyBlue,
-                                      size: 24,
-                                    ),
                                   ],
-                                )
+                                ),
                               ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 10.0, left: 18, right: 16),
+                            child: Text(
+                              widget.requestedBooking!.student.about,
+                              textAlign: TextAlign.left,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w200,
+                                fontSize: 15,
+                                fontFamily: 'WorkSans',
+                                letterSpacing: 0.27,
+                                color: DesignCourseAppTheme.grey,
+                              ),
+                            ),
+                          ),
+                          _buildDivider(),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 10.0, left: 18, right: 16),
+                            child: Text(
+                              "Booking info",
+                              textAlign: TextAlign.left,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 22,
+                                fontFamily: 'WorkSans',
+                                letterSpacing: 0.27,
+                                color: DesignCourseAppTheme.darkerText,
+                              ),
                             ),
                           ),
                           Padding(
@@ -196,7 +243,8 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                               textAlign: TextAlign.left,
                               style: const TextStyle(
                                 fontWeight: FontWeight.w200,
-                                fontSize: 22,
+                                fontSize: 15,
+                                fontFamily: 'WorkSans',
                                 letterSpacing: 0.27,
                                 color: DesignCourseAppTheme.grey,
                               ),
@@ -212,15 +260,16 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                   getTimeBoxUI(1.toString(), 'Subject'),
                                   getTimeBoxUI(widget.requestedBooking!.session,
                                       'session'),
+                                  widget.requestedBooking!.subject.title != null
+                                      ? getTimeBoxUIday(widget
+                                              .requestedBooking!.subject.title +
+                                          "subject ")
+                                      : getTimeBoxUIday(
+                                          "subject not defind" " "),
                                 ],
                               ),
                             ),
                           ),
-                          widget.requestedBooking!.subject.title != null
-                              ? getTimeBoxUIday(
-                                  widget.requestedBooking!.subject.title +
-                                      "subject ")
-                              : getTimeBoxUIday("subject not defind" " "),
                           const Center(
                             child: Text(
                               "Days Booked",
@@ -239,8 +288,10 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                       getTimeBoxUIday(widget.requestedBooking!
                                               .booking_schedule[index].day +
                                           " " +
-                                          widget.requestedBooking!
-                                              .booking_schedule[index].time),
+                                          widget
+                                              .requestedBooking!
+                                              .booking_schedule[index]
+                                              .readable_time),
                                     ],
                                   );
                                 },
@@ -329,8 +380,8 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                         parent: animationController!,
                         curve: Curves.fastOutSlowIn),
                     child: SizedBox(
-                      width: 100,
-                      height: 70,
+                      width: 120,
+                      height: 78,
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(18.0),
                           child: Image.network(
@@ -360,6 +411,12 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
             )
           ],
         ));
+  }
+
+  Divider _buildDivider() {
+    return Divider(
+      color: divider,
+    );
   }
 
   Widget getTimeBoxUIday(String txt2) {

@@ -9,6 +9,8 @@ class Teacher {
   String middle_name;
   String phone_no;
   String email;
+  String gender;
+  String rating;
 
   String birth_date;
 
@@ -24,6 +26,8 @@ class Teacher {
     required this.email,
     required this.birth_date,
     required this.about,
+    required this.rating,
+    required this.gender,
     required this.is_active,
   });
 
@@ -37,6 +41,8 @@ class Teacher {
       email: json["email"],
       birth_date: json["birth_date"],
       about: json["about"],
+      rating: json["rating"],
+      gender: json["gender"],
       is_active: json["is_active"],
     );
   }
@@ -245,13 +251,13 @@ class Bookingschedule {
   int id;
 
   String day;
-  String time;
+  String readable_time;
   String booking_id;
 
   Bookingschedule({
     required this.id,
     required this.day,
-    required this.time,
+    required this.readable_time,
     required this.booking_id,
   });
 
@@ -259,7 +265,7 @@ class Bookingschedule {
     return Bookingschedule(
       id: json["id"] as int,
       day: json["day"],
-      time: json["time"],
+      readable_time: json["readable_time"],
       booking_id: json["booking_id"],
     );
   }
