@@ -124,7 +124,7 @@ class WalletContoller extends GetxController with StateMixin {
         context: context,
         builder: (context) => AlertDialog(
           title: const Text(
-            'FeedBack Sucess',
+            'Wallet Sucess',
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w500,

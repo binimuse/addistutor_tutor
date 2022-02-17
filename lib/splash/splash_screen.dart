@@ -20,18 +20,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     var d = const Duration(seconds: 3);
+
     // delayed 3 seconds to next page
     Future.delayed(d, () {
-      // to next page and close this page
-      // Navigator.pushAndRemoveUntil(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => Scaffold(
-      //       body: isAuth ? const MyHomePage() : const HomeScreen(),
-      //     ),
-      //   ),
-      //   (route) => false,
-      // );
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
@@ -54,7 +45,9 @@ class _SplashScreenState extends State<SplashScreen> {
     var user = localStorage.getString('user');
     var bodys = json.decode(user!);
 
-    if (token != null && bodys["email_verified_at"] != null) {
+    if (token != null &&
+        bodys["email_verified_at"] != null &&
+        bodys["teacher_id"] != null) {
       setState(() {
         isAuth = true;
       });

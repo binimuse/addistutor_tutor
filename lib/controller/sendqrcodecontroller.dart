@@ -43,7 +43,7 @@ class SendQrcode extends GetxController with StateMixin {
         context: context,
         builder: (context) => AlertDialog(
           title: const Text(
-            'Attendance Already created',
+            'unauthorized or Attendance Already created',
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w500,

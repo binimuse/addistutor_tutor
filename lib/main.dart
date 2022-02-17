@@ -1,5 +1,7 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe
 
+import 'dart:io';
+
 import 'package:addistutor_tutor/Profile/localstring.dart';
 import 'package:addistutor_tutor/connectvity.dart';
 import 'package:addistutor_tutor/constants.dart';
@@ -10,7 +12,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  HttpOverrides.global = MyHttpOverrides();
+  runApp(const MyApp());
+}
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -88,5 +93,14 @@ class _MyHomePageState extends State<MyApp> {
       ),
       home: const ConnectionFaildScreen(),
     );
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

@@ -11,6 +11,10 @@ class ContactUSContolller extends GetxController with StateMixin {
   var name;
   var phone;
   var email;
+  var facebook;
+  var twitter;
+  var instagram;
+  var linkedin;
 
   void getcontact() async {
     contact = await RemoteServices.contactus();
@@ -19,6 +23,10 @@ class ContactUSContolller extends GetxController with StateMixin {
       name = contact!.name.toString();
       phone = contact!.phone.toString();
       email = contact!.email.toString();
+      facebook = contact!.facebook.toString();
+      twitter = contact!.twitter.toString();
+      instagram = contact!.instagram.toString();
+      linkedin = contact!.linkedin.toString();
 
       isfetchedsubject(true);
     }

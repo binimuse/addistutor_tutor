@@ -229,14 +229,7 @@ class _HomePageState extends State<Appointment>
     );
   }
 
-  void moveTo() {
-    // Navigator.push<dynamic>(
-    //   context,
-    //   MaterialPageRoute<dynamic>(
-    //     builder: (BuildContext context) => CourseInfoScreen(),
-    //   ),
-    // );
-  }
+  void moveTo() {}
 
   Widget getButtonUI(CategoryType categoryTypeData, bool isSelected) {
     String txt = '';
@@ -326,11 +319,12 @@ class _HomePageState extends State<Appointment>
           GestureDetector(
             onTap: () {
               Navigator.push(
+                // ignore: prefer_const_constructors
                 context,
                 PageRouteBuilder(
-                  pageBuilder: (context, animation1, animation2) {
-                    return const WalletPage();
-                  },
+                  pageBuilder: (context, animation1, animation2) =>
+                      const WalletPage(),
+                  transitionDuration: Duration.zero,
                 ),
               );
             },

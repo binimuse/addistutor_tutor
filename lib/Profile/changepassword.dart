@@ -113,7 +113,7 @@ class _EditProfilePageState extends State<ChangePassword> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const Text(
-                                  "Password",
+                                  "old Password",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16),

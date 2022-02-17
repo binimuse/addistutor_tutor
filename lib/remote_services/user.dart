@@ -86,11 +86,13 @@ class Transaction {
   String slip_id;
   String amount;
   String status;
+  String date;
 
   Transaction({
     required this.slip_id,
     required this.amount,
     required this.status,
+    required this.date,
   });
 
   factory Transaction.fromJson(Map<String, dynamic> json) {
@@ -98,6 +100,7 @@ class Transaction {
       slip_id: json["slip_id"],
       amount: json["amount"],
       status: json["status"],
+      date: json["date"],
     );
   }
 }
@@ -106,11 +109,19 @@ class ContactUS {
   String name;
   String email;
   String phone;
+  String facebook;
+  String twitter;
+  String instagram;
+  String linkedin;
 
   ContactUS({
     required this.name,
     required this.email,
     required this.phone,
+    required this.facebook,
+    required this.twitter,
+    required this.instagram,
+    required this.linkedin,
   });
 
   factory ContactUS.fromJson(Map<String, dynamic> json) {
@@ -118,6 +129,10 @@ class ContactUS {
       name: json["name"],
       email: json["email"],
       phone: json["phone"],
+      facebook: json["facebook"],
+      twitter: json["twitter"],
+      instagram: json["instagram"],
+      linkedin: json["linkedin"],
     );
   }
 }
@@ -183,6 +198,27 @@ class Notifications {
   }
 }
 
+class Locations {
+  int id;
+
+  String name;
+  String description;
+
+  Locations({
+    required this.id,
+    required this.name,
+    required this.description,
+  });
+
+  factory Locations.fromJson(Map<String, dynamic> json) {
+    return Locations(
+      id: json["id"],
+      name: json["name"],
+      description: json["description"],
+    );
+  }
+}
+
 class RequestedBooking {
   int id;
 
@@ -194,6 +230,7 @@ class RequestedBooking {
   ReqTech teacher;
   ReqStu student;
   Subjects subject;
+
   String created_at;
 
   RequestedBooking({
@@ -290,6 +327,7 @@ class ReqStu {
   String location_id;
   String profile_img;
   String teaching_since;
+  Locations location;
 
   ReqStu({
     required this.id,
@@ -306,6 +344,7 @@ class ReqStu {
     required this.about,
     required this.rating,
     required this.location_id,
+    required this.location,
     required this.profile_img,
     required this.teaching_since,
   });
@@ -328,6 +367,7 @@ class ReqStu {
       profile_img: json["profile_img"],
       teaching_since: json["teaching_since"],
       location_id: json["location_id"],
+      location: Locations.fromJson(json["location"]),
     );
   }
 }

@@ -160,7 +160,7 @@ class _SplashScreenState extends State<Body> {
                         ),
                         onSaved: (value) {},
                         validator: (value) {
-                          return signupController.validatephone(value!);
+                          return signupController.validateNamep(value!);
                         },
                       ),
                     ),

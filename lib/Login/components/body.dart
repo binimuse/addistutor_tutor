@@ -412,8 +412,9 @@ class _LoginScreenState extends State<Body> {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text('info'),
-            content: const Text("Please Varify Your email"),
+            title: const Text('Please Varify Your email'),
+            content:
+                const Text("go to your email address to confirm your email"),
             actions: <Widget>[
               FlatButton(
                 onPressed: () {
@@ -436,11 +437,14 @@ class _LoginScreenState extends State<Body> {
             ),
           );
         } else {
-          Navigator.push(
+          Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-              builder: (context) => const Main(),
+              builder: (context) => const Scaffold(
+                body: Main(),
+              ),
             ),
+            (route) => false,
           );
         }
 

@@ -18,13 +18,15 @@ class PendingScreen extends StatelessWidget {
                 leading: const Material(
                   color: Colors.white,
                 ),
-                title: const Text(
-                  "Pending page",
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black,
-                    fontFamily: 'WorkSans',
+                title: const Center(
+                  child: Text(
+                    "Pending page",
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                      fontFamily: 'WorkSans',
+                    ),
                   ),
                 ),
               ),

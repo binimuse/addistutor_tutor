@@ -205,7 +205,7 @@ class _EditProfilePageState extends State<WalletPage> {
                                     // ignore: prefer_const_literals_to_create_immutables
                                     children: <Widget>[
                                       const Text(
-                                        "Recent Transactions",
+                                        "Recent approved Transactions",
                                         style: TextStyle(
                                             fontWeight: FontWeight.w900,
                                             fontSize: 18,
@@ -218,23 +218,6 @@ class _EditProfilePageState extends State<WalletPage> {
                                 ),
                                 const SizedBox(
                                   height: 24,
-                                ),
-                                const SizedBox(
-                                  height: 16,
-                                ),
-                                Container(
-                                  child: Text(
-                                    "Recent",
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w700,
-                                        color: Colors.grey[500]),
-                                  ),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 32),
-                                ),
-                                const SizedBox(
-                                  height: 16,
                                 ),
                                 ListView.builder(
                                   physics: const ScrollPhysics(),
@@ -290,7 +273,7 @@ class _EditProfilePageState extends State<WalletPage> {
                                                   CrossAxisAlignment.start,
                                               children: <Widget>[
                                                 Text(
-                                                  "Payment Success",
+                                                  "payment submitted",
                                                   style: TextStyle(
                                                       fontSize: 18,
                                                       fontWeight:
@@ -312,7 +295,7 @@ class _EditProfilePageState extends State<WalletPage> {
                                                     color: Colors.lightGreen),
                                               ),
                                               Text(
-                                                "26 Jan",
+                                                transaction.date,
                                                 style: TextStyle(
                                                     fontSize: 15,
                                                     fontWeight: FontWeight.w700,

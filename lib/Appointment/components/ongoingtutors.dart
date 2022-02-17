@@ -33,8 +33,11 @@ class _CategoryListViewState extends State<OnGoingTutors>
   void initState() {
     animationController = AnimationController(
         duration: const Duration(milliseconds: 2000), vsync: this);
-    getNotigicationController.isfetchedlocation(true);
-    _fetchUser();
+    setState(() {
+      getNotigicationController.isfetchedlocation(true);
+      _fetchUser();
+    });
+
     super.initState();
   }
 
@@ -70,7 +73,7 @@ class _CategoryListViewState extends State<OnGoingTutors>
         ? Padding(
             padding: const EdgeInsets.only(top: 16, bottom: 16),
             child: SizedBox(
-                height: 134,
+                height: 400,
                 width: double.infinity,
                 child: FutureBuilder(
                     future: RemoteServices.getrequestedbooking(ids, "1"),
@@ -99,19 +102,7 @@ class _CategoryListViewState extends State<OnGoingTutors>
                               category: snapshot.data[index],
                               animation: animation,
                               animationController: animationController,
-                              callback: () {
-                                // Navigator.push(
-                                //   context,
-                                //   PageRouteBuilder(
-                                //     pageBuilder:
-                                //         (context, animation1, animation2) {
-                                //       return CourseInfoQr(
-                                //         hotelData: snapshot.data[index],
-                                //       );
-                                //     },
-                                //   ),
-                                // );
-                              },
+                              callback: () {},
                             );
                           },
                         );
@@ -126,7 +117,8 @@ class _CategoryListViewState extends State<OnGoingTutors>
   }
 }
 
-GetNotigicationController getNotigicationController2 = Get.find();
+GetNotigicationController getNotigicationController2 =
+    Get.put(GetNotigicationController());
 
 class CategoryView extends StatelessWidget {
   var kPrimaryColor;
@@ -226,19 +218,57 @@ class CategoryView extends StatelessWidget {
                                 SizedBox(
                                   width:
                                       MediaQuery.of(context).size.width * 0.45,
-                                  // child: Text(
-                                  //   "teaching since" +
-                                  //       " " +
-                                  //       chat.teacher.teaching_since,
-                                  //   // ignore: prefer_const_constructors
-                                  //   style: TextStyle(
-                                  //     color: Colors.blueGrey,
-                                  //     fontSize: 14.0,
-                                  //     fontWeight: FontWeight.w400,
-                                  //   ),
-                                  //   overflow: TextOverflow.ellipsis,
-                                  // ),
+                                  child: Row(children: [
+                                    Row(children: [
+                                      Icon(
+                                        Icons.timer,
+                                        color: kPrimaryColor,
+                                        size: 10,
+                                      ),
+                                      Text(
+                                        category!.session + " session",
+                                        // ignore: prefer_const_constructors
+                                        style: TextStyle(
+                                          color: kPrimaryColor,
+                                          fontSize: 14.0,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ]),
+                                  ]),
                                 ),
+                                Row(children: [
+                                  Icon(
+                                    Icons.subject,
+                                    color: kPrimaryColor,
+                                    size: 10,
+                                  ),
+                                  Text(
+                                    category!.subject.title,
+                                    // ignore: prefer_const_constructors
+                                    style: TextStyle(
+                                      color: kPrimaryColor,
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ]),
+                                Row(children: [
+                                  Icon(
+                                    Icons.location_pin,
+                                    color: kPrimaryColor,
+                                    size: 10,
+                                  ),
+                                  Text(
+                                    category!.student.location.name,
+                                    // ignore: prefer_const_constructors
+                                    style: TextStyle(
+                                      color: kPrimaryColor,
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ]),
                               ],
                             ),
                           ],

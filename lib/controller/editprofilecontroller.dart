@@ -263,6 +263,7 @@ class EditprofileController extends GetxController with StateMixin {
     var uploaded = await RemoteServices.uploadImage(image, ids.toString());
 
     if (uploaded) {
+      print("uploaded");
       var data = {
         "phone_no": phone.text,
         "email": email.text,
@@ -362,8 +363,10 @@ class EditprofileController extends GetxController with StateMixin {
     }
   }
 
-  closeDialog(bool stat, String data, BuildContext context) {
+  closeDialog(bool stat, String data, BuildContext context) async {
     Future.delayed(const Duration(seconds: 1));
+    var body;
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
     // Dismiss CircularProgressIndicator
     Navigator.of(context).pop();
     if (stat == false) {
@@ -393,49 +396,79 @@ class EditprofileController extends GetxController with StateMixin {
     } else {
       // ignore: deprecated_member_use
 
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text(
-            'profile Edited',
-            style: TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w500,
-              color: Colors.black,
-              fontFamily: 'WorkSans',
-            ),
-          ),
-          content: const Text(
-            'if its your first time updating your profile you will me redirected to login',
-            style: TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w500,
-              color: Colors.black,
-              fontFamily: 'WorkSans',
-            ),
-          ),
-          actions: <Widget>[
-            // ignore: deprecated_member_use
-            FlatButton(
-              onPressed: () async {
-                isLoading(false);
-                Navigator.of(context).pop(true);
+      localStorage.setBool('isupdated', true);
 
-                SharedPreferences localStorage =
-                    await SharedPreferences.getInstance();
-                localStorage.setBool('isupdated', true);
+      var token = localStorage.getString('user');
 
-                var token = localStorage.getString('user');
+      if (token != null) {
+        body = json.decode(token);
 
-                if (token != null) {
-                  body = json.decode(token);
+        if (body["teacher_id"] != null) {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Text(
+                'profile Edited',
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black,
+                  fontFamily: 'WorkSans',
+                ),
+              ),
+              content: const Text(
+                '',
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black,
+                  fontFamily: 'WorkSans',
+                ),
+              ),
+              actions: <Widget>[
+                // ignore: deprecated_member_use
+                FlatButton(
+                  onPressed: () async {
+                    isLoading(false);
+                    Navigator.of(context).pop(true);
 
-                  if (body["teacher_id"] != null) {
                     Navigator.pop(context);
                     isLoading(false);
-                    //    openAndCloseLoadingDialog(context);
-                    print("yess");
-                  } else {
+                  },
+                  child: const Text('ok'),
+                ),
+              ],
+            ),
+          );
+
+          //    openAndCloseLoadingDialog(context);
+          print("yess");
+        } else {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Text(
+                'profile Edited',
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black,
+                  fontFamily: 'WorkSans',
+                ),
+              ),
+              content: const Text(
+                'if its your first time updating your profile you will be redirected to login',
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black,
+                  fontFamily: 'WorkSans',
+                ),
+              ),
+              actions: <Widget>[
+                // ignore: deprecated_member_use
+                FlatButton(
+                  onPressed: () async {
                     isLoading(false);
 
                     Navigator.push(
@@ -446,14 +479,15 @@ class EditprofileController extends GetxController with StateMixin {
                         },
                       ),
                     );
-                  }
-                }
-              },
-              child: const Text('ok'),
+                  },
+                  child: const Text('ok'),
+                ),
+              ],
             ),
-          ],
-        ),
-      );
+          );
+        }
+      }
+
       editstudentid(context);
     }
   }
@@ -472,7 +506,6 @@ class EditprofileController extends GetxController with StateMixin {
     ));
   }
 
-  var body;
   Future<void> editstudentid(BuildContext context) async {}
 
   String? validateEmail(String value) {

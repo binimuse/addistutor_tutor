@@ -7,10 +7,14 @@ import 'package:addistutor_tutor/Avalablity/avalabilty.dart';
 import 'package:addistutor_tutor/Login/login_screen.dart';
 import 'package:addistutor_tutor/Profile/contactus.dart';
 import 'package:addistutor_tutor/Profile/setting.dart';
+import 'package:addistutor_tutor/Profile/termsodservice.dart';
 import 'package:addistutor_tutor/controller/avlablityconroller.dart';
 import 'package:addistutor_tutor/controller/contactuscontroller.dart';
 import 'package:addistutor_tutor/controller/editprofilecontroller.dart';
 import 'package:addistutor_tutor/controller/feedbackcontroller.dart';
+import 'package:addistutor_tutor/controller/getnotificationcontoller.dart';
+import 'package:addistutor_tutor/controller/getreqestedbookingcpntroller.dart';
+import 'package:addistutor_tutor/controller/sendqrcodecontroller.dart';
 import 'package:addistutor_tutor/controller/signupcontroller.dart';
 import 'package:addistutor_tutor/controller/walletcontroller.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +27,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../constants.dart';
 import 'editprofile.dart';
 import 'feedback_screen.dart';
-import 'help_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -83,7 +86,7 @@ class _ProfilePageState extends State<ProfileS> {
 
   void _onLoading() async {
     // monitor network fetch
-    await Future.delayed(const Duration(milliseconds: 1000));
+    await Future.delayed(const Duration(milliseconds: 500));
     // if failed,use loadFailed(),if no data return,use LoadNodata()
     //items.add((items.length+1).toString());
     //if(mounted)
@@ -148,7 +151,7 @@ class _ProfilePageState extends State<ProfileS> {
         drawer: _buildDrawer(
           context,
           editprofileController.firstname.text.toString(),
-          editprofileController.lastname.text.toString(),
+          editprofileController.middlename.text.toString(),
           ids,
         ),
         body: editprofileController.obx(
@@ -171,7 +174,7 @@ class _ProfilePageState extends State<ProfileS> {
                           title: editprofileController.firstname.text
                                   .toString() +
                               " " +
-                              editprofileController.lastname.text.toString(),
+                              editprofileController.middlename.text.toString(),
                           subtitle: "Tutor",
                           actions: <Widget>[
                             MaterialButton(
@@ -298,15 +301,8 @@ class _ProfilePageState extends State<ProfileS> {
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  Container(
-                    alignment: Alignment.centerRight,
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.power_settings_new,
-                        color: active,
-                      ),
-                      onPressed: () {},
-                    ),
+                  const SizedBox(
+                    height: 20,
                   ),
                   Container(
                     height: 90,
@@ -415,7 +411,6 @@ class _ProfilePageState extends State<ProfileS> {
                       },
                       child: _buildRow(Icons.email, "Contact us")),
                   _buildDivider(),
-                  const SizedBox(height: 10.0),
                   GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -423,12 +418,12 @@ class _ProfilePageState extends State<ProfileS> {
                           context,
                           PageRouteBuilder(
                             pageBuilder: (context, animation1, animation2) =>
-                                const HelpScreen(),
+                                const ProductDescriptionPage(),
                             transitionDuration: Duration.zero,
                           ),
                         );
                       },
-                      child: _buildRow(Icons.info_outline, "Help")),
+                      child: _buildRow(Icons.rule, "Terms of Service")),
                   _buildDivider(),
                   const SizedBox(height: 10.0),
                   GestureDetector(
@@ -546,6 +541,9 @@ class _ProfilePageState extends State<ProfileS> {
     Get.delete<ContactUSContolller>();
     Get.delete<FeedBackScreencontroller>();
     Get.delete<WalletContoller>();
+    Get.delete<SendQrcode>();
+    Get.delete<GetReqBooking>();
+    Get.delete<GetNotigicationController>();
 
     Navigator.push(
       context,

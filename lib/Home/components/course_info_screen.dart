@@ -80,7 +80,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
   @override
   Widget build(BuildContext context) {
     final double tempHeight = MediaQuery.of(context).size.height -
-        (MediaQuery.of(context).size.width / 1.2) +
+        (MediaQuery.of(context).size.width / 1.3) +
         24.0;
     return Scaffold(
         backgroundColor: Colors.transparent,
@@ -145,7 +145,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                             padding: const EdgeInsets.only(
                                 left: 16, right: 16, bottom: 8, top: 16),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Text(
@@ -173,37 +173,76 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                     color: DesignCourseAppTheme.grey,
                                   ),
                                 ),
-                                Text(
-                                  "Grade " +
-                                      widget.requestedBooking!.student.grade,
-                                  textAlign: TextAlign.left,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w200,
-                                    fontSize: 15,
-                                    fontFamily: 'WorkSans',
-                                    letterSpacing: 0.27,
-                                  ),
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    Text(
-                                      "Age: " +
-                                          widget.requestedBooking!.student
-                                              .birth_date,
-                                      textAlign: TextAlign.left,
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.w200,
-                                        fontSize: 15,
-                                        fontFamily: 'WorkSans',
-                                        letterSpacing: 0.27,
-                                        color: DesignCourseAppTheme.grey,
-                                      ),
+                                Row(children: [
+                                  Text(
+                                    "Grade:- ",
+                                    textAlign: TextAlign.left,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w200,
+                                      fontSize: 15,
+                                      color: kPrimaryColor,
+                                      fontFamily: 'WorkSans',
+                                      letterSpacing: 0.27,
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                  Text(
+                                    widget.requestedBooking!.student.grade,
+                                    textAlign: TextAlign.left,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w200,
+                                      fontSize: 15,
+                                      fontFamily: 'WorkSans',
+                                      letterSpacing: 0.27,
+                                    ),
+                                  ),
+                                ]),
+                                Row(children: [
+                                  const Icon(
+                                    Icons.location_pin,
+                                    color: kPrimaryColor,
+                                    size: 10,
+                                  ),
+                                  Text(
+                                    widget.requestedBooking!.student.location
+                                        .name,
+                                    textAlign: TextAlign.left,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w200,
+                                      fontSize: 15,
+                                      fontFamily: 'WorkSans',
+                                      letterSpacing: 0.27,
+                                    ),
+                                  ),
+                                ]),
                               ],
                             ),
                           ),
+                          widget.requestedBooking!.is_active == "1"
+                              ? Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                      const Icon(
+                                        Icons.phone,
+                                        color: kPrimaryColor,
+                                        size: 10,
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        widget
+                                            .requestedBooking!.student.phone_no,
+                                        textAlign: TextAlign.left,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w200,
+                                          fontSize: 15,
+                                          fontFamily: 'WorkSans',
+                                          letterSpacing: 0.27,
+                                        ),
+                                      ),
+                                    ])
+                              : Container(),
                           Padding(
                             padding: const EdgeInsets.only(
                                 top: 10.0, left: 18, right: 16),
@@ -235,21 +274,6 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 10.0, left: 18, right: 16),
-                            child: Text(
-                              widget.requestedBooking!.student.study_purpose,
-                              textAlign: TextAlign.left,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w200,
-                                fontSize: 15,
-                                fontFamily: 'WorkSans',
-                                letterSpacing: 0.27,
-                                color: DesignCourseAppTheme.grey,
-                              ),
-                            ),
-                          ),
                           AnimatedOpacity(
                             duration: const Duration(milliseconds: 500),
                             opacity: opacity1,
@@ -260,24 +284,17 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                   getTimeBoxUI(1.toString(), 'Subject'),
                                   getTimeBoxUI(widget.requestedBooking!.session,
                                       'session'),
-                                  widget.requestedBooking!.subject.title != null
-                                      ? getTimeBoxUIday(widget
-                                              .requestedBooking!.subject.title +
-                                          "subject ")
-                                      : getTimeBoxUIday(
-                                          "subject not defind" " "),
                                 ],
                               ),
                             ),
                           ),
+                          getTimeBoxUIday(
+                              widget.requestedBooking!.subject.title),
                           const Center(
                             child: Text(
                               "Days Booked",
                               style: TextStyle(color: Colors.black38),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 18,
                           ),
                           Expanded(
                             child: ListView.builder(
@@ -298,72 +315,73 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                 itemCount: widget
                                     .requestedBooking!.booking_schedule.length),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const SizedBox(
-                                height: 35,
-                              ),
-                              // ignore: deprecated_member_use
+                          widget.requestedBooking!.is_active != "1" &&
+                                  widget.requestedBooking!.is_active != "0"
+                              ? Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const SizedBox(
+                                      height: 35,
+                                    ),
+                                    // ignore: deprecated_member_use
 
-                              // ignore: deprecated_member_use
-                              RaisedButton.icon(
-                                onPressed: () {
-                                  setState(() {
-                                    getReqBooking.statuss = "1";
-                                    getReqBooking.updateStatus(
-                                        context, widget.requestedBooking!.id);
-                                  });
-                                },
-                                shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(10.0))),
-                                label: const Text(
-                                  'Accept',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                icon: const Icon(
-                                  Icons.check,
-                                  color: Colors.white,
-                                ),
-                                textColor: kPrimaryColor,
-                                splashColor: Colors.white,
-                                color: Colors.green,
-                              ),
-                              // ignore: deprecated_member_use
-                              RaisedButton.icon(
-                                onPressed: () {
-                                  setState(() {
-                                    getReqBooking.statuss = "0";
-                                    getReqBooking.updateStatus(
-                                        context, widget.requestedBooking!.id);
-                                  });
-                                },
-                                shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(10.0))),
-                                label: const Text(
-                                  'Reject',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                icon: const Icon(
-                                  Icons.cancel,
-                                  color: Colors.white,
-                                ),
-                                textColor: kPrimaryColor,
-                                splashColor: Colors.white,
-                                color: Colors.red,
-                              ),
-                              // ignore: deprecated_member_use
+                                    // ignore: deprecated_member_use
+                                    RaisedButton.icon(
+                                      onPressed: () {
+                                        setState(() {
+                                          getReqBooking.statuss = "1";
+                                          getReqBooking.updateStatus(context,
+                                              widget.requestedBooking!.id);
+                                        });
+                                      },
+                                      shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10.0))),
+                                      label: const Text(
+                                        'Accept',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      icon: const Icon(
+                                        Icons.check,
+                                        color: Colors.white,
+                                      ),
+                                      textColor: kPrimaryColor,
+                                      splashColor: Colors.white,
+                                      color: Colors.green,
+                                    ),
+                                    // ignore: deprecated_member_use
+                                    RaisedButton.icon(
+                                      onPressed: () {
+                                        setState(() {
+                                          getReqBooking.statuss = "0";
+                                          getReqBooking.updateStatus(context,
+                                              widget.requestedBooking!.id);
+                                        });
+                                      },
+                                      shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10.0))),
+                                      label: const Text(
+                                        'Reject',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      icon: const Icon(
+                                        Icons.cancel,
+                                        color: Colors.white,
+                                      ),
+                                      textColor: kPrimaryColor,
+                                      splashColor: Colors.white,
+                                      color: Colors.red,
+                                    ),
+                                    // ignore: deprecated_member_use
 
-                              const SizedBox(
-                                height: 35,
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).padding.bottom,
-                          )
+                                    const SizedBox(
+                                      height: 35,
+                                    ),
+                                  ],
+                                )
+                              : Container(),
                         ],
                       ),
                     ),

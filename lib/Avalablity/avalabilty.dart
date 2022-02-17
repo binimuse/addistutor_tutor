@@ -202,8 +202,11 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
                                                       child: InkWell(
                                                         splashColor:
                                                             kPrimaryColor, // splash color
-                                                        onTap:
-                                                            () {}, // button pressed
+                                                        onTap: () {
+                                                          setState(() {
+                                                            change = true;
+                                                          });
+                                                        }, // button pressed
                                                         child: Column(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
@@ -279,16 +282,6 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
                             ],
                           ),
                         ),
-                      ),
-                      floatingActionButton: FloatingActionButton(
-                        onPressed: () {
-                          setState(() {
-                            change = true;
-                          });
-                          // change = false;
-                        },
-                        backgroundColor: kPrimaryColor,
-                        child: const Icon(Icons.edit),
                       ),
                     ))))
         : const Center(child: CircularProgressIndicator()));

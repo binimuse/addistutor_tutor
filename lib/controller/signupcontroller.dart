@@ -41,6 +41,13 @@ class SignupController extends GetxController with StateMixin {
     return null;
   }
 
+  String? validateNamep(String value) {
+    if (value.isEmpty) {
+      return "please Provide a Password";
+    }
+    return null;
+  }
+
   String? validatePass(String value) {
     if (!validateStructure(value)) {
       return "please Provide a valid password";

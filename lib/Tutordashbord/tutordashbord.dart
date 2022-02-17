@@ -321,6 +321,22 @@ class _HomePageState extends State<TutorDahsbord>
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
+                                  Row(children: [
+                                    Icon(
+                                      Icons.location_pin,
+                                      color: kPrimaryColor,
+                                      size: 10,
+                                    ),
+                                    Text(
+                                      chat.student.location.name,
+                                      // ignore: prefer_const_constructors
+                                      style: TextStyle(
+                                        color: Colors.blueGrey,
+                                        fontSize: 12.0,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ]),
                                 ],
                               ),
                             ],
