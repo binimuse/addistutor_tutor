@@ -351,4 +351,16 @@ class RemoteServices {
       throw Exception('Failed to load Comment');
     }
   }
+
+  static Future<RequestedBooking> getsinglebooking(var bId) async {
+    res = await Network().getData("booking/${bId}");
+
+    var body = json.decode(res.body);
+
+    if (res.statusCode == 200) {
+      return RequestedBooking.fromJson(body["data"]);
+    } else {
+      throw Exception('Failed to load User' + res.statusCode.toString());
+    }
+  }
 }

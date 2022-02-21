@@ -237,6 +237,7 @@ class CategoryView extends StatelessWidget {
                                     ]),
                                   ]),
                                 ),
+                                SizedBox(height: 2),
                                 Row(children: [
                                   Icon(
                                     Icons.subject,
@@ -253,6 +254,7 @@ class CategoryView extends StatelessWidget {
                                     ),
                                   ),
                                 ]),
+                                SizedBox(height: 2),
                                 Row(children: [
                                   Icon(
                                     Icons.location_pin,
@@ -261,6 +263,23 @@ class CategoryView extends StatelessWidget {
                                   ),
                                   Text(
                                     category!.student.location.name,
+                                    // ignore: prefer_const_constructors
+                                    style: TextStyle(
+                                      color: kPrimaryColor,
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ]),
+                                SizedBox(height: 2),
+                                Row(children: [
+                                  Icon(
+                                    Icons.phone,
+                                    color: kPrimaryColor,
+                                    size: 10,
+                                  ),
+                                  Text(
+                                    category!.student.phone_no,
                                     // ignore: prefer_const_constructors
                                     style: TextStyle(
                                       color: kPrimaryColor,
