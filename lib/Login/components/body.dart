@@ -72,9 +72,11 @@ class _LoginScreenState extends State<Body> {
                     fontSize: 23),
               ),
               SizedBox(height: size.height * 0.03),
-              SvgPicture.asset(
-                "assets/icons/login.svg",
-                height: size.height * 0.35,
+              Image(
+                image: AssetImage(
+                  'assets/images/login.jpg',
+                ),
+                height: size.height * 0.25,
               ),
               SizedBox(height: size.height * 0.03),
               TextFieldContainer(

@@ -58,8 +58,10 @@ class _SplashScreenState extends State<Body> {
                     fontSize: 23),
               ),
               SizedBox(height: size.height * 0.03),
-              SvgPicture.asset(
-                "assets/icons/signup.svg",
+              Image(
+                image: AssetImage(
+                  'assets/images/b.jpg',
+                ),
                 height: size.height * 0.15,
               ),
               Form(

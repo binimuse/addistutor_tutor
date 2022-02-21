@@ -44,8 +44,13 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     );
   }
 
-  Widget _buildImage(String assetName, [double width = 250]) {
-    return SvgPicture.asset('assets/icons/$assetName', width: width);
+  Widget _buildImage(String assetName, [double width = 200]) {
+    return Image(
+      image: AssetImage(
+        'assets/images/$assetName',
+      ),
+      width: width,
+    );
   }
 
   @override
@@ -80,14 +85,14 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           title: "Choice",
           body:
               "You Can Pick tutorials that work best for you based on time,level and location",
-          image: _buildImage('login.svg'),
+          image: _buildImage('t.jpg'),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Standardization",
           body:
               "We will help standardize such as thing as time keeping,payments and professional ethics.",
-          image: _buildImage('chat.svg'),
+          image: _buildImage('p.jpg'),
           decoration: pageDecoration,
         ),
       ],
