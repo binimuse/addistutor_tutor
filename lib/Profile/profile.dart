@@ -12,11 +12,16 @@ import 'package:addistutor_tutor/controller/avlablityconroller.dart';
 import 'package:addistutor_tutor/controller/contactuscontroller.dart';
 import 'package:addistutor_tutor/controller/editprofilecontroller.dart';
 import 'package:addistutor_tutor/controller/feedbackcontroller.dart';
+import 'package:addistutor_tutor/controller/getlevelcontroller.dart';
+import 'package:addistutor_tutor/controller/getlocationcontroller.dart';
 import 'package:addistutor_tutor/controller/getnotificationcontoller.dart';
+import 'package:addistutor_tutor/controller/getqualifaicationcontroller.dart';
 import 'package:addistutor_tutor/controller/getreqestedbookingcpntroller.dart';
+import 'package:addistutor_tutor/controller/getsubcontroller.dart';
 import 'package:addistutor_tutor/controller/sendqrcodecontroller.dart';
 import 'package:addistutor_tutor/controller/signupcontroller.dart';
 import 'package:addistutor_tutor/controller/walletcontroller.dart';
+import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -47,6 +52,8 @@ bool _isLoggedIn = false;
 GoogleSignIn _googleSignIn = GoogleSignIn();
 final Avalablitycontrollerclass avalablitycontrollerclass =
     Get.put(Avalablitycontrollerclass());
+final GetLevelContoller getLevelContoller = Get.put(GetLevelContoller());
+final GetSubect getSubect = Get.put(GetSubect());
 
 class ProfileS extends StatefulWidget {
   const ProfileS({Key? key}) : super(key: key);
@@ -61,13 +68,59 @@ class _ProfilePageState extends State<ProfileS> {
     super.deactivate();
   }
 
+  GetLocationController getLocationController =
+      Get.put(GetLocationController());
+
   final EditprofileController editprofileController =
       Get.put(EditprofileController());
+
+  final Getqulificationcontroller getqulificationcontroller =
+      Get.put(Getqulificationcontroller());
   @override
   void initState() {
     super.initState();
 
     _fetchUser();
+    _getlocation();
+    _getlevel();
+    _getsub();
+    _getqulification();
+  }
+
+  List<GetLevel> level = [];
+  _getlevel() async {
+    getLevelContoller.fetchLocation();
+
+    level = getLevelContoller.listlocation.value;
+    if (location != null && location.isNotEmpty) {
+      setState(() {
+        getLevelContoller.level = level[0];
+      });
+    }
+  }
+
+  List<Subjects> sub = [];
+  _getsub() async {
+    getSubect.fetchLocation(editprofileController.lid);
+
+    sub = getSubect.listlocation.value;
+    if (sub != null && sub.isNotEmpty) {
+      setState(() {
+        getSubect.subject = sub[0];
+      });
+    }
+  }
+
+  List<GetQulification> qualification = [];
+  _getqulification() async {
+    getqulificationcontroller.fetchLocation();
+
+    qualification = getqulificationcontroller.listlocation.value;
+    if (qualification != null && qualification.isNotEmpty) {
+      setState(() {
+        getqulificationcontroller.qualification = qualification[0];
+      });
+    }
   }
 
   final RefreshController _refreshController =
@@ -79,7 +132,7 @@ class _ProfilePageState extends State<ProfileS> {
     // if failed,use refreshFailed()
 
     setState(() {
-      _fetchUser();
+      _getsub();
     });
     _refreshController.refreshCompleted();
   }
@@ -97,6 +150,17 @@ class _ProfilePageState extends State<ProfileS> {
   }
 
   var ids;
+  List<GetLocation> location = [];
+  _getlocation() async {
+    getLocationController.fetchLocation();
+
+    location = getLocationController.listlocation.value;
+    if (location != null && location.isNotEmpty) {
+      setState(() {
+        getLocationController.location = location[0];
+      });
+    }
+  }
 
   void _fetchUser() async {
     if (editprofileController.isActive.toString() == "1") {

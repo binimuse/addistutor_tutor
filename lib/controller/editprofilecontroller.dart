@@ -21,12 +21,25 @@ class EditprofileController extends GetxController with StateMixin {
   var inforesponse;
   var isLoading = false.obs;
   // ignore: non_constant_identifier_names
-
+  late var macthgender = "".obs;
+  late var since = "".obs;
   late TextEditingController firstname;
   late TextEditingController lastname;
   late TextEditingController middlename;
 
+//guarantor
+  late TextEditingController g_firstname;
+  late TextEditingController g_lastname;
+  late TextEditingController g_subcity;
+  late TextEditingController g_woreda;
+  late TextEditingController g_phone;
+  late TextEditingController g_office_phone;
+
   late TextEditingController phone;
+  late TextEditingController officephone;
+  late TextEditingController rephone;
+  late TextEditingController subcity;
+  late TextEditingController woreda;
   late TextEditingController email;
 
   //update pass
@@ -37,7 +50,11 @@ class EditprofileController extends GetxController with StateMixin {
   var pass = '';
   var forgo = '';
   var date;
-  var id;
+  var locationid;
+  var lid;
+  var level;
+  var qualifications;
+  var fieldofstudy;
   //GetLocation? selectedModel;
 
   late TextEditingController About;
@@ -49,12 +66,25 @@ class EditprofileController extends GetxController with StateMixin {
 
   @override
   void onInit() {
+    //editprofile
     firstname = TextEditingController();
     lastname = TextEditingController();
     middlename = TextEditingController();
     email = TextEditingController();
     phone = TextEditingController();
+    officephone = TextEditingController();
+    rephone = TextEditingController();
+    woreda = TextEditingController();
+    subcity = TextEditingController();
     About = TextEditingController();
+
+    //GUARANTOR CONTACT INFORMATION
+    g_firstname = TextEditingController();
+    g_lastname = TextEditingController();
+    g_subcity = TextEditingController();
+    g_woreda = TextEditingController();
+    g_phone = TextEditingController();
+    g_office_phone = TextEditingController();
 
     //update pass
     passControl = TextEditingController();
@@ -283,11 +313,24 @@ class EditprofileController extends GetxController with StateMixin {
     } else {
       print("yes am here");
       var data = {
+        "first_name": firstname.text,
+        "middle_name": middlename.text,
+        "last_name": lastname.text,
+        "gender": macthgender.value,
         "phone_no": phone.text,
+        "birth_date": date,
+        "teaching_since": since.value,
         "email": email.text,
+        "phone_no_office": officephone.text,
+        "guarantor_name": g_firstname.text,
+        "guarantor_woreda": g_woreda.text,
+        "guarantor_subcity": g_subcity.text,
+        "guarantor_phone": g_phone.text,
+        "guarantor_phone_office": g_office_phone.text,
         "about": About.text,
-
-//delete
+        "subject_id": fieldofstudy,
+        "qualification_id": qualifications,
+        "address_id": locationid,
       };
       inforesponse = await RemoteServices.editPersonalInfo(data);
       if (inforesponse.toString() == "200") {
@@ -373,9 +416,9 @@ class EditprofileController extends GetxController with StateMixin {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text(
-            'profile Not Edited',
-            style: TextStyle(
+          title: Text(
+            'profile Not Edited' + data,
+            style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w500,
               color: Colors.black,
@@ -387,6 +430,8 @@ class EditprofileController extends GetxController with StateMixin {
               onPressed: () async {
                 isLoading(false);
                 Navigator.of(context).pop(true);
+
+                Navigator.pop(context);
               },
               child: const Text('ok'),
             ),

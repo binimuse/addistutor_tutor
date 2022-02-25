@@ -363,4 +363,68 @@ class RemoteServices {
       throw Exception('Failed to load User' + res.statusCode.toString());
     }
   }
+
+  static Future<List<GetLocation>> getlocation() async {
+    // print("id.toString()");
+    //print(id.toString());
+    res = await Network().getData("location");
+
+    var body = json.decode(res.body);
+    if (res.statusCode == 200) {
+      return body
+          .map((e) => GetLocation.fromJson(e))
+          .toList()
+          .cast<GetLocation>();
+    } else {
+      throw Exception('Failed to load User' + res.statusCode.toString());
+    }
+  }
+
+  static Future<List<GetLevel>> getlevel() async {
+    // print("id.toString()");
+    //print(id.toString());
+    res = await Network().getData("tutoring-level");
+
+    var body = json.decode(res.body);
+    if (res.statusCode == 200) {
+      return body["data"]
+          .map((e) => GetLevel.fromJson(e))
+          .toList()
+          .cast<GetLevel>();
+    } else {
+      throw Exception('Failed to load Comment');
+    }
+  }
+
+  static Future<List<Subjects>> getsubject(var tid) async {
+    // print("id.toString()");
+    //print(id.toString());
+    res = await Network().getData("subjects?/tutoring_level_id${tid}");
+    print(tid);
+    var body = json.decode(res.body);
+    if (res.statusCode == 200) {
+      return body["data"]
+          .map((e) => Subjects.fromJson(e))
+          .toList()
+          .cast<Subjects>();
+    } else {
+      throw Exception('Failed to load Comment');
+    }
+  }
+
+  static Future<List<GetQulification>> getqualification() async {
+    // print("id.toString()");
+    //print(id.toString());
+    res = await Network().getData("qualifications");
+
+    var body = json.decode(res.body);
+    if (res.statusCode == 200) {
+      return body["data"]
+          .map((e) => GetQulification.fromJson(e))
+          .toList()
+          .cast<GetQulification>();
+    } else {
+      throw Exception('Failed to load Comment');
+    }
+  }
 }

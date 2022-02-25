@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:addistutor_tutor/Login/components/pendingpage.dart';
+import 'package:addistutor_tutor/Profile/profile.dart';
 import 'package:addistutor_tutor/Signup/components/or_divider.dart';
 import 'package:addistutor_tutor/Signup/components/social_icon.dart';
 import 'package:addistutor_tutor/Signup/signup_screen.dart';
@@ -432,10 +433,29 @@ class _LoginScreenState extends State<Body> {
         );
       } else {
         if (bodys["teacher_id"] == null) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const PendingScreen(),
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Text('info'),
+              content: const Text("Update your profile to continue"),
+              actions: <Widget>[
+                FlatButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(true);
+                    setState(() {
+                      isLoading = false;
+                    });
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ProfileScreen(),
+                      ),
+                    );
+                  },
+                  child: const Text('ok'),
+                ),
+              ],
             ),
           );
         } else {

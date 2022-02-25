@@ -419,3 +419,69 @@ class ReqTech {
     );
   }
 }
+
+class GetLocation {
+  int id;
+
+  String name;
+  String description;
+
+  GetLocation({
+    required this.id,
+    required this.name,
+    required this.description,
+  });
+
+  factory GetLocation.fromJson(Map<String, dynamic> json) {
+    return GetLocation(
+      id: json["id"] as int,
+      name: json["name"],
+      description: json["description"],
+    );
+  }
+}
+
+class GetLevel {
+  int id;
+
+  String title;
+  String price;
+  String description;
+
+  GetLevel({
+    required this.id,
+    required this.title,
+    required this.price,
+    required this.description,
+  });
+
+  factory GetLevel.fromJson(Map<String, dynamic> json) {
+    return GetLevel(
+      id: json["id"] as int,
+      title: json["title"],
+      price: json["price"],
+      description: json["description"],
+    );
+  }
+}
+
+class GetQulification {
+  int id;
+
+  String title;
+  String description;
+
+  GetQulification({
+    required this.id,
+    required this.title,
+    required this.description,
+  });
+
+  factory GetQulification.fromJson(Map<String, dynamic> json) {
+    return GetQulification(
+      id: json["id"] as int,
+      title: json["title"],
+      description: json["description"],
+    );
+  }
+}
