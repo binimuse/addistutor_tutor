@@ -3,12 +3,14 @@
 import 'dart:convert';
 
 import 'package:addistutor_tutor/Login/login_screen.dart';
+import 'package:addistutor_tutor/Profile/termsodservice.dart';
 import 'package:addistutor_tutor/Signup/components/social_icon.dart';
 import 'package:addistutor_tutor/components/already_have_an_account_acheck.dart';
 
 import 'package:addistutor_tutor/components/text_field_container.dart';
 import 'package:addistutor_tutor/controller/signupcontroller.dart';
 import 'package:addistutor_tutor/remote_services/api.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -167,6 +169,58 @@ class _SplashScreenState extends State<Body> {
                       ),
                     ),
                     Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 45,
+                        vertical: 16,
+                      ),
+                      alignment: Alignment.center,
+                      child: RichText(
+                        text: TextSpan(
+                            style: const TextStyle(color: Colors.grey),
+                            children: [
+                              const TextSpan(
+                                  text:
+                                      'By tapping Register you acknowledge that you have read the'),
+                              TextSpan(
+                                text: ' Privacy policy',
+                                style: const TextStyle(
+                                  color: kPrimaryColor,
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    // Navigator.push(
+                                    //   context,
+                                    //   PageRouteBuilder(
+                                    //     pageBuilder: (context, animation1, animation2) {
+                                    //       return const Privacypolicy();
+                                    //     },
+                                    //   ),
+                                    // );
+                                  },
+                              ),
+                              const TextSpan(text: ' and agree to the'),
+                              TextSpan(
+                                text: ' Term of Service',
+                                style: const TextStyle(
+                                  color: kPrimaryColor,
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    Navigator.push(
+                                      context,
+                                      PageRouteBuilder(
+                                        pageBuilder:
+                                            (context, animation1, animation2) {
+                                          return const ProductDescriptionPage();
+                                        },
+                                      ),
+                                    );
+                                  },
+                              ),
+                            ]),
+                      ),
+                    ),
+                    Container(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       // ignore: deprecated_member_use
                       child: FlatButton(
@@ -258,25 +312,25 @@ class _SplashScreenState extends State<Body> {
                           }).catchError((e) {});
                         });
 
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            title: const Text('Error'),
-                            content: Text(e.toString()),
-                            actions: <Widget>[
-                              // ignore: deprecated_member_use
-                              FlatButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop(true);
-                                  setState(() {
-                                    isLoading = false;
-                                  });
-                                },
-                                child: const Text('ok'),
-                              ),
-                            ],
-                          ),
-                        );
+                        // showDialog(
+                        //   context: context,
+                        //   builder: (context) => AlertDialog(
+                        //     title: const Text('Error'),
+                        //     content: Text(e.toString()),
+                        //     actions: <Widget>[
+                        //       // ignore: deprecated_member_use
+                        //       FlatButton(
+                        //         onPressed: () {
+                        //           Navigator.of(context).pop(true);
+                        //           setState(() {
+                        //             isLoading = false;
+                        //           });
+                        //         },
+                        //         child: const Text('ok'),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // );
                       });
                     },
                   ),

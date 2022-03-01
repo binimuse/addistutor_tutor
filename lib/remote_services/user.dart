@@ -4,17 +4,36 @@ class Teacher {
   int id;
 
   String first_name;
-
-  String last_name;
   String middle_name;
+  String last_name;
+
   String phone_no;
   String email;
   String gender;
   String rating;
+  String teaching_since;
 
   String birth_date;
 
   String about;
+  String phone_no_office;
+  String phone_no_residence;
+  String subcity;
+  String woreda;
+  String guarantor_name;
+  String guarantor_house_no;
+  String guarantor_woreda;
+  String guarantor_subcity;
+  String guarantor_phone;
+  String guarantor_phone_office;
+  String guarantor_phone_residence;
+  String employer_name;
+  String employer_position;
+  String employment_subject;
+  String employment_teaching_level;
+  String employer_city;
+  String employer_woreda;
+
   String is_active;
 
   Teacher({
@@ -26,7 +45,25 @@ class Teacher {
     required this.email,
     required this.birth_date,
     required this.about,
+    required this.phone_no_office,
+    required this.phone_no_residence,
+    required this.subcity,
+    required this.woreda,
+    required this.guarantor_name,
+    required this.guarantor_house_no,
+    required this.guarantor_woreda,
+    required this.guarantor_subcity,
+    required this.guarantor_phone,
+    required this.guarantor_phone_office,
+    required this.guarantor_phone_residence,
+    required this.employer_name,
+    required this.employer_position,
+    required this.employment_subject,
+    required this.employment_teaching_level,
+    required this.employer_city,
+    required this.employer_woreda,
     required this.rating,
+    required this.teaching_since,
     required this.gender,
     required this.is_active,
   });
@@ -39,8 +76,26 @@ class Teacher {
       middle_name: json["middle_name"],
       phone_no: json["phone_no"],
       email: json["email"],
+      teaching_since: json["teaching_since"],
       birth_date: json["birth_date"],
       about: json["about"],
+      phone_no_office: json["phone_no_office"],
+      phone_no_residence: json["phone_no_residence"],
+      subcity: json["subcity"],
+      woreda: json["woreda"],
+      guarantor_name: json["guarantor_name"],
+      guarantor_house_no: json["guarantor_house_no"],
+      guarantor_woreda: json["guarantor_woreda"],
+      guarantor_subcity: json["guarantor_subcity"],
+      guarantor_phone: json["guarantor_phone"],
+      guarantor_phone_office: json["guarantor_phone_office"],
+      guarantor_phone_residence: json["guarantor_phone_residence"],
+      employer_name: json["employer_name"],
+      employer_position: json["employer_position"],
+      employment_subject: json["employment_subject"],
+      employment_teaching_level: json["employment_teaching_level"],
+      employer_city: json["employer_city"],
+      employer_woreda: json["employer_woreda"],
       rating: json["rating"],
       gender: json["gender"],
       is_active: json["is_active"],

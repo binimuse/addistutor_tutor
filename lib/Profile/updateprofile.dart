@@ -21,14 +21,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants.dart';
 
-class EditPage extends StatefulWidget {
-  const EditPage({Key? key}) : super(key: key);
+class UpdateProfile extends StatefulWidget {
+  const UpdateProfile({Key? key}) : super(key: key);
 
   @override
   _EditPageState createState() => _EditPageState();
 }
 
-class _EditPageState extends State<EditPage> {
+class _EditPageState extends State<UpdateProfile> {
   final EditprofileController editprofileController =
       Get.put(EditprofileController());
   final GetLevelContoller getLevelContoller = Get.find();
@@ -188,7 +188,7 @@ class _EditPageState extends State<EditPage> {
                   ),
                 ),
                 title: const Text(
-                  "Edit Profile",
+                  "Update Profile",
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.w500,
@@ -277,270 +277,7 @@ class _EditPageState extends State<EditPage> {
                                 ),
                               )
                             : Container(),
-                        const Center(
-                          child: Text(
-                            "TUTOR INFORMATION",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 22,
-                              fontFamily: 'WorkSans',
-                              letterSpacing: 0.27,
-                              color: kPrimaryColor,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          controller: editprofileController.firstname,
-                          decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "First Name",
-                              focusColor: kPrimaryColor,
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
-                              fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              hintText: "your First  Name",
-                              hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
-                          validator: (value) {
-                            return editprofileController.validateName(value!);
-                          },
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          controller: editprofileController.middlename,
-                          decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Middle Name",
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
-                              focusColor: kPrimaryColor,
-                              fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              hintText: "your Middle Name",
-                              hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
-                          validator: (value) {
-                            return editprofileController.validateName(value!);
-                          },
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          controller: editprofileController.lastname,
-                          decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Last Name",
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
-                              focusColor: kPrimaryColor,
-                              fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              hintText: "your Last Name",
-                              hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
-                          validator: (value) {
-                            return editprofileController.validateName(value!);
-                          },
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        const Text(
-                          'Gender',
-                          style: TextStyle(color: kPrimaryColor, fontSize: 13),
-                        ),
-                        DropdownButtonFormField<String>(
-                          value: editprofileController.macthgender.value,
-                          validator: (value) =>
-                              value == null ? 'field required' : null,
-                          isExpanded: true,
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700),
-                          items: <String>[
-                            '',
-                            'male',
-                            'Female',
-                          ].map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(
-                                value,
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            );
-                          }).toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              editprofileController.macthgender.value = value!;
-                            });
-                          },
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        const Text(
-                          'Select BirthDate',
-                          style: TextStyle(color: kPrimaryColor, fontSize: 13),
-                        ),
-                        OutlineButton(
-                          padding: const EdgeInsets.symmetric(horizontal: 50),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          onPressed: () {
-                            _selectDate(context);
-                          },
-                          child: Text(editprofileController.date.toString(),
-                              style: const TextStyle(
-                                  fontSize: 14,
-                                  letterSpacing: 2.2,
-                                  color: Colors.black)),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        const Text(
-                          'Teaching since',
-                          style: TextStyle(color: kPrimaryColor, fontSize: 13),
-                        ),
-                        DropdownButton<String>(
-                          value: editprofileController.since.value,
-                          isExpanded: true,
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700),
-                          items: <String>[
-                            '',
-                            '2022',
-                            '2021',
-                            '2020',
-                            '2019',
-                            '2017',
-                            '2016',
-                            '2015',
-                            '2014',
-                            '2013',
-                            '2012',
-                            '2011',
-                            '2010',
-                            '2009',
-                            '2008',
-                            '2007',
-                            '2006',
-                            '2005',
-                            '2004',
-                            '2003',
-                            '2002',
-                            '2001',
-                            '2000',
-                            '1999',
-                            '1998',
-                            '1997',
-                            '1996',
-                            '1995',
-                            '1994',
-                            '1993',
-                            '1992',
-                            '1991',
-                            '1990',
-                            '1989',
-                            '1988',
-                            '1987',
-                            '1986',
-                            '1985',
-                            '1984',
-                            '1983',
-                            '1982',
-                            '1981',
-                            '1980',
-                          ].map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(
-                                value,
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            );
-                          }).toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              editprofileController.since.value = value!;
-                            });
-                          },
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        const Text(
-                          'Highest Qualification',
-                          style: TextStyle(color: kPrimaryColor, fontSize: 13),
-                        ),
-                        DropdownButton<GetQulification>(
-                          hint: Text(
-                            getqulificationcontroller.listlocation.toString(),
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400),
-                          ),
-                          isExpanded: true,
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700),
-                          items: qualification
-                              .map((e) => DropdownMenuItem(
-                                    child: Text(
-                                      e.title,
-                                      textAlign: TextAlign.left,
-                                      style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    value: e,
-                                  ))
-                              .toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              getqulificationcontroller.qualification = value!;
-
-                              editprofileController.qualifications =
-                                  value.id.toString();
-                            });
-
-                            // pop current page
-                          },
-                          value: getqulificationcontroller.qualification,
-                        ),
+                        const Center(),
                         const SizedBox(
                           height: 20,
                         ),
@@ -937,53 +674,6 @@ class _EditPageState extends State<EditPage> {
                         const SizedBox(
                           height: 20,
                         ),
-                        const Text(
-                          'Employement subject',
-                          style: TextStyle(color: kPrimaryColor, fontSize: 13),
-                        ),
-                        DropdownButton<Subjects>(
-                          hint: Text(
-                            getSubect.listlocation2.toString(),
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400),
-                          ),
-                          isExpanded: true,
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700),
-                          items: sub
-                              .map((e) => DropdownMenuItem(
-                                    child: Text(
-                                      e.title,
-                                      textAlign: TextAlign.left,
-                                      style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    value: e,
-                                  ))
-                              .toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              getSubect.subject2 = value!;
-                              editprofileController.e_subject =
-                                  value.id.toString();
-                            });
-
-                            // pop current page
-                          },
-                          value: getSubect.subject2,
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
                         const Center(
                           child: Text(
                             "ENGAGMENT PREFERENCE",
@@ -1051,47 +741,6 @@ class _EditPageState extends State<EditPage> {
                         subjectViewUI(),
                         const SizedBox(
                           height: 20,
-                        ),
-                        const Text(
-                          'Prefered tutoring location',
-                          style: TextStyle(color: kPrimaryColor, fontSize: 13),
-                        ),
-                        DropdownButton<GetLocation>(
-                          hint: Text(
-                            getLocationController.listlocation.toString(),
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400),
-                          ),
-                          isExpanded: true,
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700),
-                          items: location
-                              .map((e) => DropdownMenuItem(
-                                    child: Text(
-                                      e.name,
-                                      textAlign: TextAlign.left,
-                                      style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    value: e,
-                                  ))
-                              .toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              getLocationController.location = value!;
-                              editprofileController.locationid =
-                                  value.id.toString();
-                            });
-
-                            // pop current page
-                          },
-                          value: getLocationController.location,
                         ),
                         const SizedBox(
                           height: 20,

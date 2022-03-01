@@ -8,6 +8,7 @@ import 'package:addistutor_tutor/Login/login_screen.dart';
 import 'package:addistutor_tutor/Profile/contactus.dart';
 import 'package:addistutor_tutor/Profile/setting.dart';
 import 'package:addistutor_tutor/Profile/termsodservice.dart';
+import 'package:addistutor_tutor/Profile/updateprofile.dart';
 import 'package:addistutor_tutor/controller/avlablityconroller.dart';
 import 'package:addistutor_tutor/controller/contactuscontroller.dart';
 import 'package:addistutor_tutor/controller/editprofilecontroller.dart';
@@ -107,6 +108,7 @@ class _ProfilePageState extends State<ProfileS> {
     if (sub != null && sub.isNotEmpty) {
       setState(() {
         getSubect.subject = sub[0];
+        getSubect.subject2 = sub[0];
       });
     }
   }
@@ -256,7 +258,7 @@ class _ProfilePageState extends State<ProfileS> {
                                   PageRouteBuilder(
                                     pageBuilder:
                                         (context, animation1, animation2) =>
-                                            const EditPage(),
+                                            const UpdateProfile(),
                                     transitionDuration: Duration.zero,
                                   ),
                                 );
@@ -396,7 +398,7 @@ class _ProfilePageState extends State<ProfileS> {
                         context,
                         PageRouteBuilder(
                           pageBuilder: (context, animation1, animation2) =>
-                              const EditPage(),
+                              const UpdateProfile(),
                           transitionDuration: Duration.zero,
                         ),
                       );
@@ -444,6 +446,22 @@ class _ProfilePageState extends State<ProfileS> {
                       "Avalablity",
                     ),
                   ),
+                  _buildDivider(),
+                  const SizedBox(height: 10.0),
+                  GestureDetector(
+                      onTap: () {
+                        // Navigator.push(
+                        //   // ignore: prefer_const_constructors
+                        //   context,
+                        //   PageRouteBuilder(
+                        //     pageBuilder: (context, animation1, animation2) =>
+                        //         const SettingsFourPage(),
+                        //     transitionDuration: Duration.zero,
+                        //   ),
+                        // );
+                      },
+                      child: _buildRow(
+                          Icons.personal_injury_outlined, "My penalties")),
                   _buildDivider(),
                   const SizedBox(height: 10.0),
                   GestureDetector(

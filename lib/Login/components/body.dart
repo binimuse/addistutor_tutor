@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:addistutor_tutor/Login/components/pendingpage.dart';
+import 'package:addistutor_tutor/Profile/editprofile.dart';
 import 'package:addistutor_tutor/Profile/profile.dart';
 import 'package:addistutor_tutor/Signup/components/or_divider.dart';
 import 'package:addistutor_tutor/Signup/components/social_icon.dart';
@@ -10,11 +11,19 @@ import 'package:addistutor_tutor/Signup/signup_screen.dart';
 import 'package:addistutor_tutor/components/already_have_an_account_acheck.dart';
 
 import 'package:addistutor_tutor/components/text_field_container.dart';
+import 'package:addistutor_tutor/controller/avlablityconroller.dart';
+import 'package:addistutor_tutor/controller/editprofilecontroller.dart';
+import 'package:addistutor_tutor/controller/getlevelcontroller.dart';
+import 'package:addistutor_tutor/controller/getlocationcontroller.dart';
+import 'package:addistutor_tutor/controller/getqualifaicationcontroller.dart';
+import 'package:addistutor_tutor/controller/getsubcontroller.dart';
 import 'package:addistutor_tutor/main/main.dart';
 import 'package:addistutor_tutor/remote_services/api.dart';
+import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -33,11 +42,78 @@ class Body extends StatefulWidget {
 
 class _LoginScreenState extends State<Body> {
   bool isLoading = false;
+  GetLocationController getLocationController =
+      Get.put(GetLocationController());
 
+  final EditprofileController editprofileController =
+      Get.put(EditprofileController());
+
+  final Getqulificationcontroller getqulificationcontroller =
+      Get.put(Getqulificationcontroller());
+  final Avalablitycontrollerclass avalablitycontrollerclass =
+      Get.put(Avalablitycontrollerclass());
+  final GetLevelContoller getLevelContoller = Get.put(GetLevelContoller());
+  final GetSubect getSubect = Get.put(GetSubect());
   @override
   void initState() {
     super.initState();
+
+    // _fetchUser();
+    _getlocation();
+    _getlevel();
+    _getsub();
+    _getqulification();
     emailcon = TextEditingController();
+  }
+
+  var ids;
+  List<GetLocation> location = [];
+  _getlocation() async {
+    getLocationController.fetchLocation();
+
+    location = getLocationController.listlocation.value;
+    if (location != null && location.isNotEmpty) {
+      setState(() {
+        getLocationController.location = location[0];
+      });
+    }
+  }
+
+  List<GetLevel> level = [];
+  _getlevel() async {
+    getLevelContoller.fetchLocation();
+
+    level = getLevelContoller.listlocation.value;
+    if (location != null && location.isNotEmpty) {
+      setState(() {
+        getLevelContoller.level = level[0];
+      });
+    }
+  }
+
+  List<Subjects> sub = [];
+  _getsub() async {
+    getSubect.fetchLocation(editprofileController.lid);
+
+    sub = getSubect.listlocation.value;
+    if (sub != null && sub.isNotEmpty) {
+      setState(() {
+        getSubect.subject = sub[0];
+        getSubect.subject2 = sub[0];
+      });
+    }
+  }
+
+  List<GetQulification> qualification = [];
+  _getqulification() async {
+    getqulificationcontroller.fetchLocation();
+
+    qualification = getqulificationcontroller.listlocation.value;
+    if (qualification != null && qualification.isNotEmpty) {
+      setState(() {
+        getqulificationcontroller.qualification = qualification[0];
+      });
+    }
   }
 
   bool showPassword1 = true;
@@ -449,7 +525,7 @@ class _LoginScreenState extends State<Body> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const ProfileScreen(),
+                        builder: (context) => const EditPage(),
                       ),
                     );
                   },
