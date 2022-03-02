@@ -112,7 +112,15 @@ class _ActivityPageState extends State<Notificationclass>
             ),
           )
         : const Center(
-            child: CircularProgressIndicator(),
+            child: Text(
+              'No Recommended Tutor found',
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+                fontFamily: 'WorkSans',
+              ),
+            ),
           ));
   }
 

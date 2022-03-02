@@ -9,6 +9,8 @@ import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
 
 import 'package:addistutor_tutor/controller/editprofilecontroller.dart';
 import 'package:addistutor_tutor/controller/getreqestedbookingcpntroller.dart';
+import 'package:addistutor_tutor/controller/walletcontroller.dart';
+
 import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +40,8 @@ class _HomePageState extends State<TutorDahsbord>
     super.initState();
   }
 
+  final WalletContoller walletContoller = Get.put(WalletContoller());
+
   // ignore: prefer_typing_uninitialized_variables
   var ids;
   void _fetchUser() async {
@@ -52,6 +56,8 @@ class _HomePageState extends State<TutorDahsbord>
           ids = int.parse(body["teacher_id"]);
           getReqBooking.fetchReqBooking(body["teacher_id"]);
           getReqBooking.isfetchedsubject(true);
+          walletContoller.getbalance(ids);
+          //  _cheakwallet();
         });
 
         print("yes Id");
@@ -211,7 +217,7 @@ class _HomePageState extends State<TutorDahsbord>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const Text(
-              'Reqested Student List',
+              'Reqested Students List',
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontWeight: FontWeight.w600,

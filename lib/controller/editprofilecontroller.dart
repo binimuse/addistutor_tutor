@@ -30,7 +30,7 @@ class EditprofileController extends GetxController with StateMixin {
 //guarantor
   late TextEditingController g_firstname;
   late TextEditingController g_lastname;
-  late TextEditingController g_subcity;
+
   late TextEditingController g_woreda;
   late TextEditingController g_phone;
   late TextEditingController g_office_phone;
@@ -38,14 +38,14 @@ class EditprofileController extends GetxController with StateMixin {
   late TextEditingController phone;
   late TextEditingController officephone;
   late TextEditingController rephone;
-  late TextEditingController subcity;
+
   late TextEditingController woreda;
   late TextEditingController email;
 
   // EMPLOYMENT
   late TextEditingController e_firstname;
   late TextEditingController e_postion;
-  late TextEditingController e_subcity;
+
   late TextEditingController e_woreda;
   var e_subject;
 
@@ -58,6 +58,9 @@ class EditprofileController extends GetxController with StateMixin {
   var forgo = '';
   var date;
   var locationid;
+  var subcityid;
+  var g_subcityid;
+  var e_subcityid;
   var lid;
   var level;
   var qualifications;
@@ -83,20 +86,20 @@ class EditprofileController extends GetxController with StateMixin {
     officephone = TextEditingController();
     rephone = TextEditingController();
     woreda = TextEditingController();
-    subcity = TextEditingController();
+
     About = TextEditingController();
 
     //GUARANTOR CONTACT INFORMATION
     g_firstname = TextEditingController();
     g_lastname = TextEditingController();
-    g_subcity = TextEditingController();
+
     g_woreda = TextEditingController();
     g_phone = TextEditingController();
     g_office_phone = TextEditingController();
 //EMPLOYMENT INFORMATION
     e_firstname = TextEditingController();
     e_postion = TextEditingController();
-    e_subcity = TextEditingController();
+
     e_woreda = TextEditingController();
 
     //update pass
@@ -270,17 +273,17 @@ class EditprofileController extends GetxController with StateMixin {
           date = fetched.birth_date;
           officephone.text = fetched.phone_no_office;
           rephone.text = fetched.phone_no_residence;
-          subcity.text = fetched.subcity;
+          subcityid = fetched.subcity;
           woreda.text = fetched.woreda;
           g_firstname.text = fetched.guarantor_name;
           g_woreda.text = fetched.guarantor_woreda;
-          g_subcity.text = fetched.guarantor_subcity;
+          g_subcityid = fetched.guarantor_subcity;
           g_phone.text = fetched.guarantor_phone;
           g_office_phone.text = fetched.guarantor_phone_office;
           e_firstname.text = fetched.employer_name;
           e_postion.text = fetched.employer_position;
           e_subject = fetched.employment_subject;
-          e_subcity.text = fetched.employer_city;
+          e_subcityid = fetched.employer_city;
           e_woreda.text = fetched.employer_woreda;
 
           About.text = fetched.about;
@@ -337,13 +340,13 @@ class EditprofileController extends GetxController with StateMixin {
         "phone_no_residence": rephone.text,
         "guarantor_name": g_firstname.text,
         "guarantor_woreda": g_woreda.text,
-        "guarantor_subcity": g_subcity.text,
+        "guarantor_subcity": g_subcityid,
         "guarantor_phone": g_phone.text,
         "guarantor_phone_office": g_office_phone.text,
         "employer_name": e_firstname.text,
         "employer_position": e_postion.text,
         "employer_woreda": e_woreda.text,
-        "employer_city": e_subcity.text,
+        "employer_city": e_subcityid,
         "employment_subject": e_subject,
         "about": About.text,
         "subject_id": fieldofstudy,
@@ -376,13 +379,13 @@ class EditprofileController extends GetxController with StateMixin {
         "phone_no_residence": rephone.text,
         "guarantor_name": g_firstname.text,
         "guarantor_woreda": g_woreda.text,
-        "guarantor_subcity": g_subcity.text,
+        "guarantor_subcity": g_subcityid,
         "guarantor_phone": g_phone.text,
         "guarantor_phone_office": g_office_phone.text,
         "employer_name": e_firstname.text,
         "employer_position": e_postion.text,
         "employer_woreda": e_woreda.text,
-        "employer_city": e_subcity.text,
+        "employer_city": e_subcityid,
         "employment_subject": e_subject,
         "about": About.text,
         "subject_id": fieldofstudy,

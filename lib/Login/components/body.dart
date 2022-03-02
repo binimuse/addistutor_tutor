@@ -17,6 +17,7 @@ import 'package:addistutor_tutor/controller/getlevelcontroller.dart';
 import 'package:addistutor_tutor/controller/getlocationcontroller.dart';
 import 'package:addistutor_tutor/controller/getqualifaicationcontroller.dart';
 import 'package:addistutor_tutor/controller/getsubcontroller.dart';
+import 'package:addistutor_tutor/controller/signupcontroller.dart';
 import 'package:addistutor_tutor/main/main.dart';
 import 'package:addistutor_tutor/remote_services/api.dart';
 import 'package:addistutor_tutor/remote_services/user.dart';
@@ -44,7 +45,7 @@ class _LoginScreenState extends State<Body> {
   bool isLoading = false;
   GetLocationController getLocationController =
       Get.put(GetLocationController());
-
+  final SignupController signupController = Get.put(SignupController());
   final EditprofileController editprofileController =
       Get.put(EditprofileController());
 
@@ -75,6 +76,9 @@ class _LoginScreenState extends State<Body> {
     if (location != null && location.isNotEmpty) {
       setState(() {
         getLocationController.location = location[0];
+        getLocationController.subcity = location[0];
+        getLocationController.g_subcity = location[0];
+        getLocationController.e_subcity = location[0];
       });
     }
   }
@@ -142,7 +146,7 @@ class _LoginScreenState extends State<Body> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const Text(
-                "LOGIN",
+                "Login",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: kPrimaryColor,
@@ -151,9 +155,9 @@ class _LoginScreenState extends State<Body> {
               SizedBox(height: size.height * 0.03),
               Image(
                 image: AssetImage(
-                  'assets/images/login.jpg',
+                  'assets/images/t.jpg',
                 ),
-                height: size.height * 0.25,
+                height: size.height * 0.20,
               ),
               SizedBox(height: size.height * 0.03),
               TextFieldContainer(
@@ -321,6 +325,13 @@ class _LoginScreenState extends State<Body> {
                 },
               ),
               const OrDivider(),
+              const Text(
+                "Sign up with Google ? ",
+                style: TextStyle(color: kPrimaryColor),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -513,7 +524,7 @@ class _LoginScreenState extends State<Body> {
             context: context,
             builder: (context) => AlertDialog(
               title: const Text('info'),
-              content: const Text("Update your profile to continue"),
+              content: const Text("To continue finish your profile"),
               actions: <Widget>[
                 FlatButton(
                   onPressed: () {

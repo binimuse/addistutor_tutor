@@ -96,10 +96,10 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "PROFESSIONAL DEVELOPMENT",
+          title: "Professional development",
           body:
               "We will organize monthly professional dev't sessions to help you continue your own dev't as a teacher.",
-          image: _buildImage('b.jpg'),
+          image: _buildImage('edi.jpg'),
           decoration: pageDecoration,
         ),
       ],

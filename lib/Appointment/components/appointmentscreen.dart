@@ -56,13 +56,27 @@ class _HomePageState extends State<Appointment>
           ids = int.parse(body["teacher_id"]);
           walletContoller.getbalance(ids);
         });
-
+        _cheakwallet();
         print("yes Id");
       } else {
         print("no Id");
       }
     } else {
       print("no Token");
+    }
+  }
+
+  void _cheakwallet() async {
+    await Future.delayed(const Duration(milliseconds: 1000));
+    print(walletContoller.wallet.toString());
+    int wallet2 = int.parse(walletContoller.wallet.toString());
+
+    if (wallet2 < 300) {
+      Get.snackbar("Your Wallet Ammount is less", "Press here to Top up amount",
+          icon: Icon(Icons.person, color: kPrimaryColor.withOpacity(0.05)),
+          duration: Duration(hours: 4),
+          onTap: (_) => Get.to(WalletPage()),
+          snackPosition: SnackPosition.BOTTOM);
     }
   }
 

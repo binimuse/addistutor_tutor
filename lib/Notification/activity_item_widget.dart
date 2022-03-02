@@ -1,5 +1,6 @@
 import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
 import 'package:addistutor_tutor/Home/components/singlebooingpage.dart';
+import 'package:addistutor_tutor/Wallet/wallet.dart';
 import 'package:addistutor_tutor/controller/getreqestedbookingcpntroller.dart';
 import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +77,7 @@ class _ProfileScreenState extends State<ActivityItemWidget>
             child: Row(
               children: <Widget>[
                 const Icon(Icons.notification_add, color: kPrimaryColor),
-                widget.data!.data.message != "You have new booking"
+                widget.data!.data.message == "Booking accepted"
                     ? Expanded(
                         child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -111,39 +112,80 @@ class _ProfileScreenState extends State<ActivityItemWidget>
                                     color: DesignCourseAppTheme.grey,
                                   ))
                             ]))))
-                    : Expanded(
-                        child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: RichText(
-                                text: TextSpan(children: [
-                              TextSpan(
-                                  text: widget.data!.data.message,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 15,
-                                    fontFamily: 'WorkSans',
-                                    letterSpacing: 0.27,
-                                    color: DesignCourseAppTheme.darkText,
-                                  )),
-                              TextSpan(
-                                  text: " " + widget.data!.created_at,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w200,
-                                    fontSize: 15,
-                                    fontFamily: 'WorkSans',
-                                    letterSpacing: 0.27,
-                                    color: DesignCourseAppTheme.grey,
-                                  )),
-                            ])))),
+                    : widget.data!.data.notification_type == "wallet"
+                        ? Expanded(
+                            child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: RichText(
+                                    text: TextSpan(children: [
+                                  TextSpan(
+                                      text: widget.data!.data.message,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 15,
+                                        fontFamily: 'WorkSans',
+                                        letterSpacing: 0.27,
+                                        color: DesignCourseAppTheme.darkText,
+                                      )),
+                                  TextSpan(
+                                      text: " " + widget.data!.created_at,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w200,
+                                        fontSize: 15,
+                                        fontFamily: 'WorkSans',
+                                        letterSpacing: 0.27,
+                                        color: DesignCourseAppTheme.grey,
+                                      )),
+                                ]))))
+                        : Expanded(
+                            child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: RichText(
+                                    text: TextSpan(children: [
+                                  TextSpan(
+                                      text: widget.data!.data.message,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 15,
+                                        fontFamily: 'WorkSans',
+                                        letterSpacing: 0.27,
+                                        color: DesignCourseAppTheme.darkText,
+                                      )),
+                                  TextSpan(
+                                      text: "\nby " +
+                                          widget.data!.data.teacher_name,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 15,
+                                        fontFamily: 'WorkSans',
+                                        letterSpacing: 0.27,
+                                        color: DesignCourseAppTheme.darkText,
+                                      )),
+                                  TextSpan(
+                                      text: " " + widget.data!.created_at,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w200,
+                                        fontSize: 15,
+                                        fontFamily: 'WorkSans',
+                                        letterSpacing: 0.27,
+                                        color: DesignCourseAppTheme.grey,
+                                      )),
+                                ])))),
               ],
             ),
           ),
           onTap: () async {
-            setState(() {
-              requestedBooking.getsingle(widget.data!.data.booking_id);
-            });
-            loadData();
-            await Future.delayed(const Duration(seconds: 2));
+            if (widget.data!.data.notification_type == "wallet") {
+              Get.to(WalletPage());
+            } else {
+              setState(() {
+                requestedBooking.getsingle(widget.data!.data.booking_id);
+              });
+              loadData();
+              await Future.delayed(const Duration(seconds: 2));
+            }
           },
         ));
   }

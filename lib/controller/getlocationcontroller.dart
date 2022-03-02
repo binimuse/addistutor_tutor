@@ -7,6 +7,9 @@ class GetLocationController extends GetxController with StateMixin {
   var isfetchedlocation = false.obs;
   var sent = false.obs;
   GetLocation? location;
+  GetLocation? subcity;
+  GetLocation? g_subcity;
+  GetLocation? e_subcity;
   void fetchLocation() async {
     listlocation.value = await RemoteServices.getlocation();
 

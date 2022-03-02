@@ -391,7 +391,7 @@ class _EditPageState extends State<UpdateProfile> {
                           height: 20,
                         ),
                         TextFormField(
-                          controller: editprofileController.subcity,
+                          controller: editprofileController.subcityid,
                           decoration: const InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: 3),
                               labelText: "Subcity",
@@ -512,7 +512,7 @@ class _EditPageState extends State<UpdateProfile> {
                           height: 20,
                         ),
                         TextFormField(
-                          controller: editprofileController.g_subcity,
+                          controller: editprofileController.g_subcityid,
                           decoration: const InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: 3),
                               labelText: "Guarantor subcity",
@@ -633,7 +633,7 @@ class _EditPageState extends State<UpdateProfile> {
                           height: 20,
                         ),
                         TextFormField(
-                          controller: editprofileController.e_subcity,
+                          controller: editprofileController.e_subcityid,
                           decoration: const InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: 3),
                               labelText: "Employer subcity",

@@ -88,7 +88,17 @@ class _CategoryListViewState extends State<CategoryListView>
               ),
             ),
           )
-        : const Center(child: CircularProgressIndicator()));
+        : const Center(
+            child: Text(
+              'No  Tutor found',
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+                fontFamily: 'WorkSans',
+              ),
+            ),
+          ));
   }
 }
 

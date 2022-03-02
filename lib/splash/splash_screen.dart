@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:addistutor_tutor/Login/components/background.dart';
 import 'package:addistutor_tutor/Progress/progress.dart';
 import 'package:addistutor_tutor/main/main.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    var d = const Duration(seconds: 3);
+    var d = const Duration(seconds: 5);
 
     // delayed 3 seconds to next page
     Future.delayed(d, () {
@@ -56,47 +57,42 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              decoration: const BoxDecoration(),
-              child: Center(
-                child: Image.asset(
-                  'assets/images/lg3.png',
-                  height: 200,
-                  width: 260,
-                ),
-              ),
-            ),
-            const Text(
-              "One-on-One Tutorial Service ",
-              style: TextStyle(
-                fontSize: 16.0,
-                fontFamily: 'WorkSans',
-                fontWeight: FontWeight.bold,
-                letterSpacing: 0.4,
-                height: 0.9,
-                color: Color(0xFF4A6572),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Text(
-              "Increase your income by working flexibly!",
-              style: TextStyle(
-                fontSize: 12.0,
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.normal,
-                letterSpacing: 0.4,
-                height: 0.9,
-                color: Color(0xFF4A6572),
-              ),
-            )
-          ]),
-    );
+    return Background(
+        child: SingleChildScrollView(
+      child: Column(children: [
+        Center(
+          child: Image.asset(
+            'assets/images/lg3.png',
+            height: 150,
+            width: 360,
+          ),
+        ),
+        const Text(
+          "One-on-One Tutorial Service ",
+          style: TextStyle(
+            fontSize: 26.0,
+            fontFamily: 'WorkSans',
+            fontWeight: FontWeight.bold,
+            letterSpacing: 0.4,
+            height: 0.9,
+            color: Color(0xFF4A6572),
+          ),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        const Text(
+          "Increase your income by working flexibly!",
+          style: TextStyle(
+            fontSize: 12.0,
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.normal,
+            letterSpacing: 0.4,
+            height: 0.9,
+            color: Color(0xFF4A6572),
+          ),
+        )
+      ]),
+    ));
   }
 }

@@ -114,6 +114,9 @@ class _EditPageState extends State<EditPage> {
     if (location != null && location.isNotEmpty) {
       setState(() {
         getLocationController.location = location[0];
+        getLocationController.subcity = location[0];
+        getLocationController.g_subcity = location[0];
+        getLocationController.e_subcity = location[0];
       });
     }
   }
@@ -172,21 +175,7 @@ class _EditPageState extends State<EditPage> {
               key: editprofileController.scaffoldKey,
               appBar: AppBar(
                 backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                elevation: 1,
-                leading: Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    borderRadius:
-                        BorderRadius.circular(AppBar().preferredSize.height),
-                    child: const Icon(
-                      Icons.arrow_back_ios,
-                      color: DesignCourseAppTheme.nearlyBlack,
-                    ),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ),
+                elevation: 0,
                 title: const Text(
                   "Edit Profile",
                   style: TextStyle(
@@ -302,8 +291,6 @@ class _EditPageState extends State<EditPage> {
                               labelStyle:
                                   TextStyle(color: kPrimaryColor, fontSize: 16),
                               fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
                               hintText: "your First  Name",
                               hintStyle: TextStyle(
                                 fontSize: 12,
@@ -326,8 +313,6 @@ class _EditPageState extends State<EditPage> {
                                   TextStyle(color: kPrimaryColor, fontSize: 16),
                               focusColor: kPrimaryColor,
                               fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
                               hintText: "your Middle Name",
                               hintStyle: TextStyle(
                                 fontSize: 12,
@@ -350,8 +335,6 @@ class _EditPageState extends State<EditPage> {
                                   TextStyle(color: kPrimaryColor, fontSize: 16),
                               focusColor: kPrimaryColor,
                               fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
                               hintText: "your Last Name",
                               hintStyle: TextStyle(
                                 fontSize: 12,
@@ -404,7 +387,7 @@ class _EditPageState extends State<EditPage> {
                           height: 20,
                         ),
                         const Text(
-                          'Select BirthDate',
+                          'Select Date Of Birth',
                           style: TextStyle(color: kPrimaryColor, fontSize: 13),
                         ),
                         OutlineButton(
@@ -569,8 +552,6 @@ class _EditPageState extends State<EditPage> {
                                   TextStyle(color: kPrimaryColor, fontSize: 16),
                               focusColor: kPrimaryColor,
                               fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
                               hintText: "evan@gmail.com",
                               hintStyle: TextStyle(
                                 fontSize: 12,
@@ -594,8 +575,6 @@ class _EditPageState extends State<EditPage> {
                                   TextStyle(color: kPrimaryColor, fontSize: 16),
                               focusColor: kPrimaryColor,
                               fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
                               hintText: "0911111111",
                               hintStyle: TextStyle(
                                 fontSize: 12,
@@ -619,8 +598,6 @@ class _EditPageState extends State<EditPage> {
                                   TextStyle(color: kPrimaryColor, fontSize: 16),
                               focusColor: kPrimaryColor,
                               fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
                               hintText: "0911111111",
                               hintStyle: TextStyle(
                                 fontSize: 12,
@@ -641,8 +618,6 @@ class _EditPageState extends State<EditPage> {
                                   TextStyle(color: kPrimaryColor, fontSize: 16),
                               focusColor: kPrimaryColor,
                               fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
                               hintText: "0911111111",
                               hintStyle: TextStyle(
                                 fontSize: 12,
@@ -653,29 +628,53 @@ class _EditPageState extends State<EditPage> {
                         const SizedBox(
                           height: 20,
                         ),
-                        TextFormField(
-                          controller: editprofileController.subcity,
-                          decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Subcity",
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
-                              focusColor: kPrimaryColor,
-                              fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              hintText: "Subcity",
-                              hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
+                        const Text(
+                          'Subcity',
+                          style: TextStyle(color: kPrimaryColor, fontSize: 13),
+                        ),
+                        DropdownButton<GetLocation>(
+                          hint: Text(
+                            getLocationController.listlocation.toString(),
+                            style: const TextStyle(
                                 color: Colors.black,
-                              )),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400),
+                          ),
+                          isExpanded: true,
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700),
+                          items: location
+                              .map((e) => DropdownMenuItem(
+                                    child: Text(
+                                      e.name,
+                                      textAlign: TextAlign.left,
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    value: e,
+                                  ))
+                              .toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              getLocationController.subcity = value!;
+                              editprofileController.subcityid =
+                                  value.id.toString();
+                            });
+
+                            // pop current page
+                          },
+                          value: getLocationController.subcity,
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         TextFormField(
                           controller: editprofileController.woreda,
+                          keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: 3),
                               labelText: "Woreda",
@@ -683,8 +682,6 @@ class _EditPageState extends State<EditPage> {
                                   TextStyle(color: kPrimaryColor, fontSize: 16),
                               focusColor: kPrimaryColor,
                               fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
                               hintText: "Woreda",
                               hintStyle: TextStyle(
                                 fontSize: 12,
@@ -720,8 +717,6 @@ class _EditPageState extends State<EditPage> {
                               labelStyle:
                                   TextStyle(color: kPrimaryColor, fontSize: 16),
                               fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
                               hintText: "insert Guarantor First  Name",
                               hintStyle: TextStyle(
                                 fontSize: 12,
@@ -741,8 +736,6 @@ class _EditPageState extends State<EditPage> {
                               labelStyle:
                                   TextStyle(color: kPrimaryColor, fontSize: 16),
                               fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
                               hintText: "insert Guarantor Last  Name",
                               hintStyle: TextStyle(
                                 fontSize: 12,
@@ -755,6 +748,7 @@ class _EditPageState extends State<EditPage> {
                         ),
                         TextFormField(
                           controller: editprofileController.g_woreda,
+                          keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: 3),
                               labelText: "Guarantor woreda",
@@ -762,8 +756,6 @@ class _EditPageState extends State<EditPage> {
                               labelStyle:
                                   TextStyle(color: kPrimaryColor, fontSize: 16),
                               fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
                               hintText: "insert Guarantor woreda",
                               hintStyle: TextStyle(
                                 fontSize: 12,
@@ -774,29 +766,53 @@ class _EditPageState extends State<EditPage> {
                         const SizedBox(
                           height: 20,
                         ),
-                        TextFormField(
-                          controller: editprofileController.g_subcity,
-                          decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Guarantor subcity",
-                              focusColor: kPrimaryColor,
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
-                              fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              hintText: "insert Guarantor subcity",
-                              hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
+                        const Text(
+                          'Guarantor subcity',
+                          style: TextStyle(color: kPrimaryColor, fontSize: 13),
+                        ),
+                        DropdownButton<GetLocation>(
+                          hint: Text(
+                            getLocationController.listlocation.toString(),
+                            style: const TextStyle(
                                 color: Colors.black,
-                              )),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400),
+                          ),
+                          isExpanded: true,
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700),
+                          items: location
+                              .map((e) => DropdownMenuItem(
+                                    child: Text(
+                                      e.name,
+                                      textAlign: TextAlign.left,
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    value: e,
+                                  ))
+                              .toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              getLocationController.g_subcity = value!;
+                              editprofileController.g_subcityid =
+                                  value.id.toString();
+                            });
+
+                            // pop current page
+                          },
+                          value: getLocationController.g_subcity,
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         TextFormField(
                           controller: editprofileController.g_phone,
+                          keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: 3),
                               labelText: "Guarantor mobile number",
@@ -804,8 +820,6 @@ class _EditPageState extends State<EditPage> {
                               labelStyle:
                                   TextStyle(color: kPrimaryColor, fontSize: 16),
                               fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
                               hintText: "insert Guarantor mobile number",
                               hintStyle: TextStyle(
                                 fontSize: 12,
@@ -818,6 +832,7 @@ class _EditPageState extends State<EditPage> {
                         ),
                         TextFormField(
                           controller: editprofileController.g_office_phone,
+                          keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: 3),
                               labelText: "Guarantor office phone number",
@@ -825,8 +840,6 @@ class _EditPageState extends State<EditPage> {
                               labelStyle:
                                   TextStyle(color: kPrimaryColor, fontSize: 16),
                               fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
                               hintText: "insert Guarantor office phone number",
                               hintStyle: TextStyle(
                                 fontSize: 12,
@@ -862,8 +875,6 @@ class _EditPageState extends State<EditPage> {
                               labelStyle:
                                   TextStyle(color: kPrimaryColor, fontSize: 16),
                               fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
                               hintText: "insert  Employer name",
                               hintStyle: TextStyle(
                                 fontSize: 12,
@@ -883,8 +894,6 @@ class _EditPageState extends State<EditPage> {
                               labelStyle:
                                   TextStyle(color: kPrimaryColor, fontSize: 16),
                               fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
                               hintText: "woreda Employer position",
                               hintStyle: TextStyle(
                                 fontSize: 12,
@@ -895,29 +904,53 @@ class _EditPageState extends State<EditPage> {
                         const SizedBox(
                           height: 20,
                         ),
-                        TextFormField(
-                          controller: editprofileController.e_subcity,
-                          decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Employer subcity",
-                              focusColor: kPrimaryColor,
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
-                              fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              hintText: "insert Employer subcity",
-                              hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
+                        const Text(
+                          'Employer subcity',
+                          style: TextStyle(color: kPrimaryColor, fontSize: 13),
+                        ),
+                        DropdownButton<GetLocation>(
+                          hint: Text(
+                            getLocationController.listlocation.toString(),
+                            style: const TextStyle(
                                 color: Colors.black,
-                              )),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400),
+                          ),
+                          isExpanded: true,
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700),
+                          items: location
+                              .map((e) => DropdownMenuItem(
+                                    child: Text(
+                                      e.name,
+                                      textAlign: TextAlign.left,
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    value: e,
+                                  ))
+                              .toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              getLocationController.e_subcity = value!;
+                              editprofileController.e_subcityid =
+                                  value.id.toString();
+                            });
+
+                            // pop current page
+                          },
+                          value: getLocationController.e_subcity,
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         TextFormField(
                           controller: editprofileController.e_woreda,
+                          keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: 3),
                               labelText: "Employer woreda",
@@ -925,8 +958,6 @@ class _EditPageState extends State<EditPage> {
                               labelStyle:
                                   TextStyle(color: kPrimaryColor, fontSize: 16),
                               fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
                               hintText: "insert Employer woreda",
                               hintStyle: TextStyle(
                                 fontSize: 12,
@@ -1109,8 +1140,6 @@ class _EditPageState extends State<EditPage> {
                                     color: kPrimaryColor, fontSize: 16),
                                 focusColor: kPrimaryColor,
                                 fillColor: kPrimaryColor,
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.always,
                                 hintText: "Describe yourself",
                                 hintStyle: TextStyle(
                                   fontSize: 12,
@@ -1181,7 +1210,7 @@ class _EditPageState extends State<EditPage> {
         context: context,
         initialDate: currentDate,
         firstDate: DateTime(1900),
-        lastDate: DateTime(2050));
+        lastDate: currentDate);
     if (pickedDate != null && pickedDate != currentDate) {
       setState(() {
         currentDate = pickedDate;
@@ -1224,7 +1253,6 @@ class _EditPageState extends State<EditPage> {
             labelText: labelText,
             focusColor: kPrimaryColor,
             fillColor: kPrimaryColor,
-            floatingLabelBehavior: FloatingLabelBehavior.always,
             hintText: placeholder,
             hintStyle: const TextStyle(
               fontSize: 16,

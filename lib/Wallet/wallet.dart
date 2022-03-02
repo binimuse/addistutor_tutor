@@ -227,85 +227,324 @@ class _EditProfilePageState extends State<WalletPage> {
                                       (BuildContext context, int index) {
                                     final Transaction transaction =
                                         walletContoller.listtransaction[index];
-                                    return Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          horizontal: 32),
-                                      padding: const EdgeInsets.all(16),
-                                      decoration: const BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(20))),
-                                      child: Row(
-                                        children: <Widget>[
-                                          Stack(children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      width: 4,
-                                                      color: Theme.of(context)
-                                                          .scaffoldBackgroundColor),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                        spreadRadius: 2,
-                                                        blurRadius: 10,
-                                                        color: Colors.black
-                                                            .withOpacity(0.1),
-                                                        offset:
-                                                            const Offset(0, 10))
-                                                  ],
-                                                  color: Colors.grey[100],
-                                                  borderRadius:
-                                                      const BorderRadius.all(
-                                                          Radius.circular(18))),
-                                              child: Icon(
-                                                Icons.account_balance_wallet,
-                                                color: Colors.lightBlue[900],
-                                              ),
-                                              padding: const EdgeInsets.all(12),
-                                            ),
-                                          ]),
-                                          const SizedBox(
-                                            width: 16,
-                                          ),
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                    return transaction.status == "1"
+                                        ? Container(
+                                            margin: const EdgeInsets.symmetric(
+                                                horizontal: 32),
+                                            padding: const EdgeInsets.all(16),
+                                            decoration: const BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(20))),
+                                            child: Row(
                                               children: <Widget>[
-                                                Text(
-                                                  "payment submitted",
-                                                  style: TextStyle(
-                                                      fontSize: 18,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      color: Colors.grey[900]),
+                                                Stack(children: [
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            width: 4,
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .scaffoldBackgroundColor),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                              spreadRadius: 2,
+                                                              blurRadius: 10,
+                                                              color: Colors
+                                                                  .black
+                                                                  .withOpacity(
+                                                                      0.1),
+                                                              offset:
+                                                                  const Offset(
+                                                                      0, 10))
+                                                        ],
+                                                        color: Colors.grey[100],
+                                                        borderRadius:
+                                                            const BorderRadius
+                                                                    .all(
+                                                                Radius.circular(
+                                                                    18))),
+                                                    child: Icon(
+                                                      Icons
+                                                          .account_balance_wallet,
+                                                      color:
+                                                          Colors.lightBlue[900],
+                                                    ),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            12),
+                                                  ),
+                                                ]),
+                                                const SizedBox(
+                                                  width: 16,
+                                                ),
+                                                Expanded(
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: <Widget>[
+                                                      Text(
+                                                        "payment submitted",
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                            color: Colors
+                                                                .grey[900]),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: <Widget>[
+                                                    Text(
+                                                      transaction.amount +
+                                                          " Birr",
+                                                      style: const TextStyle(
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color: Colors
+                                                              .lightGreen),
+                                                    ),
+                                                    Text(
+                                                      transaction.date,
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color:
+                                                              Colors.grey[500]),
+                                                    ),
+                                                  ],
                                                 ),
                                               ],
                                             ),
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: <Widget>[
-                                              Text(
-                                                transaction.amount + " Birr",
-                                                style: const TextStyle(
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight.w700,
-                                                    color: Colors.lightGreen),
-                                              ),
-                                              Text(
-                                                transaction.date,
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.w700,
-                                                    color: Colors.grey[500]),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    );
+                                          )
+                                        : transaction.status == "0"
+                                            ? Container(
+                                                margin:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 32),
+                                                padding:
+                                                    const EdgeInsets.all(16),
+                                                decoration: const BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                20))),
+                                                child: Row(
+                                                  children: <Widget>[
+                                                    Stack(children: [
+                                                      Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                border: Border.all(
+                                                                    width: 4,
+                                                                    color: Theme.of(
+                                                                            context)
+                                                                        .scaffoldBackgroundColor),
+                                                                boxShadow: [
+                                                                  BoxShadow(
+                                                                      spreadRadius:
+                                                                          2,
+                                                                      blurRadius:
+                                                                          10,
+                                                                      color: Colors
+                                                                          .black
+                                                                          .withOpacity(
+                                                                              0.1),
+                                                                      offset:
+                                                                          const Offset(
+                                                                              0,
+                                                                              10))
+                                                                ],
+                                                                color: Colors
+                                                                    .grey[100],
+                                                                borderRadius:
+                                                                    const BorderRadius
+                                                                            .all(
+                                                                        Radius.circular(
+                                                                            18))),
+                                                        child: Icon(
+                                                          Icons
+                                                              .account_balance_wallet,
+                                                          color: Colors
+                                                              .lightBlue[900],
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(12),
+                                                      ),
+                                                    ]),
+                                                    const SizedBox(
+                                                      width: 16,
+                                                    ),
+                                                    Expanded(
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: <Widget>[
+                                                          Text(
+                                                            "payment declined",
+                                                            style: TextStyle(
+                                                                fontSize: 18,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700,
+                                                                color: Colors
+                                                                    .grey[900]),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: <Widget>[
+                                                        Text(
+                                                          transaction.amount +
+                                                              " Birr",
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontSize: 18,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                  color: Colors
+                                                                      .red),
+                                                        ),
+                                                        Text(
+                                                          transaction.date,
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700,
+                                                              color: Colors
+                                                                  .grey[500]),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            : Container(
+                                                margin:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 32),
+                                                padding:
+                                                    const EdgeInsets.all(16),
+                                                decoration: const BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                20))),
+                                                child: Row(
+                                                  children: <Widget>[
+                                                    Stack(children: [
+                                                      Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                border: Border.all(
+                                                                    width: 4,
+                                                                    color: Theme.of(
+                                                                            context)
+                                                                        .scaffoldBackgroundColor),
+                                                                boxShadow: [
+                                                                  BoxShadow(
+                                                                      spreadRadius:
+                                                                          2,
+                                                                      blurRadius:
+                                                                          10,
+                                                                      color: Colors
+                                                                          .black
+                                                                          .withOpacity(
+                                                                              0.1),
+                                                                      offset:
+                                                                          const Offset(
+                                                                              0,
+                                                                              10))
+                                                                ],
+                                                                color: Colors
+                                                                    .grey[100],
+                                                                borderRadius:
+                                                                    const BorderRadius
+                                                                            .all(
+                                                                        Radius.circular(
+                                                                            18))),
+                                                        child: Icon(
+                                                          Icons
+                                                              .account_balance_wallet,
+                                                          color: Colors
+                                                              .lightBlue[900],
+                                                        ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(12),
+                                                      ),
+                                                    ]),
+                                                    const SizedBox(
+                                                      width: 16,
+                                                    ),
+                                                    Expanded(
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: <Widget>[
+                                                          Text(
+                                                            "payment Pending",
+                                                            style: TextStyle(
+                                                                fontSize: 18,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700,
+                                                                color: Colors
+                                                                    .grey[900]),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: <Widget>[
+                                                        Text(
+                                                          transaction.amount +
+                                                              " Birr",
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontSize: 18,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                  color: Colors
+                                                                      .yellow),
+                                                        ),
+                                                        Text(
+                                                          transaction.date,
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700,
+                                                              color: Colors
+                                                                  .grey[500]),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
                                   },
                                   itemCount:
                                       walletContoller.listtransaction.length,

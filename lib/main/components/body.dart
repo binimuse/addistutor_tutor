@@ -47,9 +47,9 @@ class _BottomNavPageState extends State<Home> {
         children: const <Widget>[
           // HomeScreen(),
           // SearchScreen(),
+          TutorDahsbord(),
           AppointmentScreen(),
 
-          TutorDahsbord(),
           Notificationclass(),
           ProfileScreen(),
         ],

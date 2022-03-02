@@ -39,8 +39,11 @@ class _SplashScreenState extends State<Body> {
 
   bool isLoading = false;
   var inforesponse;
-
+  bool isChecked = false;
   bool _isLoggedIn = false;
+
+  bool ispassChecked = false;
+  var confirmpass;
   late GoogleSignInAccount _userObj;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   @override
@@ -53,7 +56,7 @@ class _SplashScreenState extends State<Body> {
             children: <Widget>[
               SizedBox(height: size.height * 0.05),
               const Text(
-                "SIGNUP",
+                "SIGN UP",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: kPrimaryColor,
@@ -62,7 +65,7 @@ class _SplashScreenState extends State<Body> {
               SizedBox(height: size.height * 0.03),
               Image(
                 image: AssetImage(
-                  'assets/images/b.jpg',
+                  'assets/images/login.jpg',
                 ),
                 height: size.height * 0.15,
               ),
@@ -168,58 +171,89 @@ class _SplashScreenState extends State<Body> {
                         },
                       ),
                     ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 45,
-                        vertical: 16,
-                      ),
-                      alignment: Alignment.center,
-                      child: RichText(
-                        text: TextSpan(
-                            style: const TextStyle(color: Colors.grey),
-                            children: [
-                              const TextSpan(
-                                  text:
-                                      'By tapping Register you acknowledge that you have read the'),
-                              TextSpan(
-                                text: ' Privacy policy',
-                                style: const TextStyle(
-                                  color: kPrimaryColor,
-                                ),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    // Navigator.push(
-                                    //   context,
-                                    //   PageRouteBuilder(
-                                    //     pageBuilder: (context, animation1, animation2) {
-                                    //       return const Privacypolicy();
-                                    //     },
-                                    //   ),
-                                    // );
+                    TextFieldContainer(
+                      child: TextFormField(
+                        obscureText:
+                            isPasswordTextField1 ? showPassword1 : false,
+                        cursorColor: kPrimaryColor,
+                        decoration: InputDecoration(
+                          hintText: "confirm Password",
+                          icon: const Icon(
+                            Icons.lock,
+                            color: kPrimaryColor,
+                          ),
+                          suffixIcon: isPasswordTextField1
+                              ? IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      showPassword1 = !showPassword1;
+                                    });
                                   },
-                              ),
-                              const TextSpan(text: ' and agree to the'),
-                              TextSpan(
-                                text: ' Term of Service',
-                                style: const TextStyle(
-                                  color: kPrimaryColor,
-                                ),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    Navigator.push(
-                                      context,
-                                      PageRouteBuilder(
-                                        pageBuilder:
-                                            (context, animation1, animation2) {
-                                          return const ProductDescriptionPage();
-                                        },
-                                      ),
-                                    );
-                                  },
-                              ),
-                            ]),
+                                  icon: const Icon(
+                                    Icons.remove_red_eye,
+                                    color: kPrimaryColor,
+                                  ),
+                                )
+                              : null,
+                          contentPadding: const EdgeInsets.all(10),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: kPrimaryColor, width: 2.0),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          border: InputBorder.none,
+                        ),
+                        onChanged: (values) {
+                          setState(() {
+                            confirmpass = values;
+                          });
+                        },
+                        onSaved: (value) {},
+                        validator: (value) {
+                          return signupController.validateNamep(value!);
+                        },
                       ),
                     ),
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Checkbox(
+                        value: isChecked,
+                        onChanged: (value) {
+                          setState(() {
+                            isChecked = value!;
+                          });
+                        },
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 16,
+                        ),
+                        alignment: Alignment.center,
+                        child: RichText(
+                          text: TextSpan(
+                              style: const TextStyle(color: Colors.grey),
+                              children: [
+                                TextSpan(
+                                  text: 'I agree with Term of Service',
+                                  style: const TextStyle(
+                                    color: kPrimaryColor,
+                                  ),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      Navigator.push(
+                                        context,
+                                        PageRouteBuilder(
+                                          pageBuilder: (context, animation1,
+                                              animation2) {
+                                            return const ProductDescriptionPage();
+                                          },
+                                        ),
+                                      );
+                                    },
+                                ),
+                              ]),
+                        ),
+                      ),
+                    ]),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       // ignore: deprecated_member_use
@@ -229,18 +263,61 @@ class _SplashScreenState extends State<Body> {
                         ),
                         color: kPrimaryColor,
                         onPressed: () {
-                          if (_multiSelectKey.currentState!.validate()) {
-                            register();
+                          if (signupController.password.text == confirmpass) {
+                            setState(() {
+                              ispassChecked = true;
+                            });
+                          } else {
+                            setState(() {
+                              ispassChecked = false;
+                            });
                           }
-
-                          // Navigator.push(
-                          //   context,
-                          //   PageRouteBuilder(
-                          //     pageBuilder: (context, animation1, animation2) {
-                          //       return Suggested();
-                          //     },
-                          //   ),
-                          // );
+                          if (_multiSelectKey.currentState!.validate()) {
+                            if (ispassChecked == true) {
+                              isChecked
+                                  ? register()
+                                  : showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        title: const Text('Error'),
+                                        content: const Text(
+                                            "please cheak Term of Service"),
+                                        actions: <Widget>[
+                                          // ignore: deprecated_member_use
+                                          FlatButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop(true);
+                                              setState(() {
+                                                isLoading = false;
+                                              });
+                                            },
+                                            child: const Text('ok'),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                            } else {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: const Text('Error'),
+                                  content: const Text("passowrd don't match"),
+                                  actions: <Widget>[
+                                    // ignore: deprecated_member_use
+                                    FlatButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop(true);
+                                        setState(() {
+                                          isLoading = false;
+                                        });
+                                      },
+                                      child: const Text('ok'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }
+                          }
                         },
                         child: Container(
                           width: double.infinity,
@@ -283,6 +360,13 @@ class _SplashScreenState extends State<Body> {
                 },
               ),
               const OrDivider(),
+              const Text(
+                "Sign up with Google ? ",
+                style: TextStyle(color: kPrimaryColor),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
