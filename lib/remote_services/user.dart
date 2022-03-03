@@ -481,10 +481,12 @@ class GetLocation {
   String name;
   String description;
 
+  List<Locations> locaion;
   GetLocation({
     required this.id,
     required this.name,
     required this.description,
+    required this.locaion,
   });
 
   factory GetLocation.fromJson(Map<String, dynamic> json) {
@@ -492,6 +494,8 @@ class GetLocation {
       id: json["id"] as int,
       name: json["name"],
       description: json["description"],
+      locaion: List<Locations>.from(
+          json["locations"].map((x) => Locations.fromJson(x))),
     );
   }
 }

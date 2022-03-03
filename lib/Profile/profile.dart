@@ -82,10 +82,10 @@ class _ProfilePageState extends State<ProfileS> {
     super.initState();
 
     _fetchUser();
-    _getlocation();
-    _getlevel();
-    _getsub();
-    _getqulification();
+    //_getlocation();
+    // _getlevel();
+    // _getsub();
+    // _getqulification();
   }
 
   List<GetLevel> level = [];
@@ -159,7 +159,7 @@ class _ProfilePageState extends State<ProfileS> {
     location = getLocationController.listlocation.value;
     if (location != null && location.isNotEmpty) {
       setState(() {
-        getLocationController.location = location[0];
+        getLocationController.getLocation = location[0];
       });
     }
   }
@@ -234,9 +234,9 @@ class _ProfilePageState extends State<ProfileS> {
                       children: <Widget>[
                         ProfileHeader(
                           avatar: NetworkImage(
-                              "https://tutor.oddatech.com/api/teacher-profile-picture/${ids}"),
+                              "https://nextgeneducation.et/api/teacher-profile-picture/${ids}"),
                           coverImage: NetworkImage(
-                              "https://tutor.oddatech.com/api/teacher-profile-picture/${ids}"),
+                              "https://nextgeneducation.et/api/teacher-profile-picture/${ids}"),
                           title: editprofileController.firstname.text
                                   .toString() +
                               " " +
@@ -353,7 +353,7 @@ class _ProfilePageState extends State<ProfileS> {
   final Color divider = Colors.grey.shade600;
   _buildDrawer(BuildContext context, String fname, String lastname, ids) {
     final String image =
-        "https://tutor.oddatech.com/api/teacher-profile-picture/${ids}";
+        "https://nextgeneducation.et/api/teacher-profile-picture/${ids}";
     return ClipPath(
       clipper: OvalRightBorderClipper(),
       child: Drawer(

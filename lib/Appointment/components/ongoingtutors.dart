@@ -195,7 +195,7 @@ class CategoryView extends StatelessWidget {
                                       image: DecorationImage(
                                           fit: BoxFit.contain,
                                           image: NetworkImage(
-                                              "https://tutor.oddatech.com/api/student-profile-picture/${category!.student.id}"))),
+                                              "https://nextgeneducation.et/api/student-profile-picture/${category!.student.id}"))),
                                 ),
                               ],
                             ),
@@ -245,7 +245,7 @@ class CategoryView extends StatelessWidget {
                                     ]),
                                   ]),
                                 ),
-                                SizedBox(height: 2),
+                                const SizedBox(height: 2),
                                 Row(children: [
                                   Icon(
                                     Icons.subject,
@@ -262,7 +262,7 @@ class CategoryView extends StatelessWidget {
                                     ),
                                   ),
                                 ]),
-                                SizedBox(height: 2),
+                                const SizedBox(height: 2),
                                 Row(children: [
                                   Icon(
                                     Icons.location_pin,
@@ -279,7 +279,7 @@ class CategoryView extends StatelessWidget {
                                     ),
                                   ),
                                 ]),
-                                SizedBox(height: 2),
+                                const SizedBox(height: 2),
                                 Row(children: [
                                   Icon(
                                     Icons.phone,

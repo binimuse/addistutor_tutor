@@ -59,40 +59,45 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Background(
         child: SingleChildScrollView(
-      child: Column(children: [
-        Center(
-          child: Image.asset(
-            'assets/images/lg3.png',
-            height: 150,
-            width: 360,
-          ),
-        ),
-        const Text(
-          "One-on-One Tutorial Service ",
-          style: TextStyle(
-            fontSize: 26.0,
-            fontFamily: 'WorkSans',
-            fontWeight: FontWeight.bold,
-            letterSpacing: 0.4,
-            height: 0.9,
-            color: Color(0xFF4A6572),
-          ),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        const Text(
-          "Increase your income by working flexibly!",
-          style: TextStyle(
-            fontSize: 12.0,
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.normal,
-            letterSpacing: 0.4,
-            height: 0.9,
-            color: Color(0xFF4A6572),
-          ),
-        )
-      ]),
+      child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: Image.asset(
+                'assets/images/lg3.png',
+                height: 150,
+                width: 360,
+              ),
+            ),
+            const Center(
+              child: Text(
+                "One-on-One Tutorial Service ",
+                style: TextStyle(
+                  fontSize: 26.0,
+                  fontFamily: 'WorkSans',
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 0.4,
+                  height: 0.9,
+                  color: Color(0xFF4A6572),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const Text(
+              "Increase your income by working flexibly!",
+              style: TextStyle(
+                fontSize: 12.0,
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.normal,
+                letterSpacing: 0.4,
+                height: 0.9,
+                color: Color(0xFF4A6572),
+              ),
+            )
+          ]),
     ));
   }
 }

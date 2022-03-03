@@ -8,6 +8,7 @@ import 'package:addistutor_tutor/Profile/profile.dart';
 import 'package:addistutor_tutor/Signup/components/or_divider.dart';
 import 'package:addistutor_tutor/Signup/components/social_icon.dart';
 import 'package:addistutor_tutor/Signup/signup_screen.dart';
+import 'package:addistutor_tutor/Tutordashbord/tutordashbord.dart';
 import 'package:addistutor_tutor/components/already_have_an_account_acheck.dart';
 
 import 'package:addistutor_tutor/components/text_field_container.dart';
@@ -75,7 +76,7 @@ class _LoginScreenState extends State<Body> {
     location = getLocationController.listlocation.value;
     if (location != null && location.isNotEmpty) {
       setState(() {
-        getLocationController.location = location[0];
+        getLocationController.getLocation = location[0];
         getLocationController.subcity = location[0];
         getLocationController.g_subcity = location[0];
         getLocationController.e_subcity = location[0];
@@ -550,11 +551,20 @@ class _LoginScreenState extends State<Body> {
             context,
             MaterialPageRoute(
               builder: (context) => const Scaffold(
-                body: Main(),
+                body: TutorDahsbord(),
               ),
             ),
             (route) => false,
           );
+          // Navigator.pushAndRemoveUntil(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) => const Scaffold(
+          //       body: EditPage(),
+          //     ),
+          //   ),
+          //   (route) => false,
+          // );
         }
 
         isLoading = false;

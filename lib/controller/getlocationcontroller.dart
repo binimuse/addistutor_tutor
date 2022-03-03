@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:addistutor_tutor/remote_services/service.dart';
 import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:get/get.dart';
@@ -6,10 +8,11 @@ class GetLocationController extends GetxController with StateMixin {
   var listlocation = <GetLocation>[].obs;
   var isfetchedlocation = false.obs;
   var sent = false.obs;
-  GetLocation? location;
+  GetLocation? getLocation;
   GetLocation? subcity;
   GetLocation? g_subcity;
   GetLocation? e_subcity;
+
   void fetchLocation() async {
     listlocation.value = await RemoteServices.getlocation();
 

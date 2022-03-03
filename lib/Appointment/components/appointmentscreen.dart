@@ -71,7 +71,7 @@ class _HomePageState extends State<Appointment>
     print(walletContoller.wallet.toString());
     int wallet2 = int.parse(walletContoller.wallet.toString());
 
-    if (wallet2 < 300) {
+    if (wallet2 < 100) {
       Get.snackbar("Your Wallet Ammount is less", "Press here to Top up amount",
           icon: Icon(Icons.person, color: kPrimaryColor.withOpacity(0.05)),
           duration: Duration(hours: 4),

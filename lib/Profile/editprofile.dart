@@ -31,6 +31,7 @@ class EditPage extends StatefulWidget {
 class _EditPageState extends State<EditPage> {
   final EditprofileController editprofileController =
       Get.put(EditprofileController());
+
   final GetLevelContoller getLevelContoller = Get.find();
   final GetSubect getSubect = Get.find();
   GetLocationController getLocationController = Get.find();
@@ -40,6 +41,10 @@ class _EditPageState extends State<EditPage> {
   bool _autovalidate = false;
   DateTime currentDate = DateTime.now();
   bool showsubject = false;
+  bool e_showsubject = false;
+  bool g_showsubject = false;
+  bool realsubject = false;
+  bool subc = false;
   List<XFile>? _imageFileList;
 
   set _imageFile(XFile? value) {
@@ -107,13 +112,15 @@ class _EditPageState extends State<EditPage> {
   }
 
   List<GetLocation> location = [];
+
   _getlocation() async {
     getLocationController.fetchLocation();
 
     location = getLocationController.listlocation.value;
     if (location != null && location.isNotEmpty) {
       setState(() {
-        getLocationController.location = location[0];
+        getLocationController.getLocation = location[0];
+        //   getLocationController.getLocation!.locaion = location[0];
         getLocationController.subcity = location[0];
         getLocationController.g_subcity = location[0];
         getLocationController.e_subcity = location[0];
@@ -364,7 +371,7 @@ class _EditPageState extends State<EditPage> {
                           items: <String>[
                             '',
                             'male',
-                            'Female',
+                            'female',
                           ].map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
@@ -663,12 +670,37 @@ class _EditPageState extends State<EditPage> {
                               getLocationController.subcity = value!;
                               editprofileController.subcityid =
                                   value.id.toString();
+
+                              if (getLocationController
+                                      .subcity!.locaion.length !=
+                                  0) {
+                                subc = true;
+                              } else {
+                                subc = false;
+                              }
                             });
 
                             // pop current page
                           },
                           value: getLocationController.subcity,
                         ),
+                        subc
+                            ? Expanded(
+                                child: ListView.builder(
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.vertical,
+                                    itemBuilder: (_, index) {
+                                      return Column(
+                                        children: [
+                                          getTimeBoxUIday(getLocationController
+                                              .subcity!.locaion[index].name),
+                                        ],
+                                      );
+                                    },
+                                    itemCount: getLocationController
+                                        .subcity!.locaion.length),
+                              )
+                            : Container(),
                         const SizedBox(
                           height: 20,
                         ),
@@ -801,12 +833,37 @@ class _EditPageState extends State<EditPage> {
                               getLocationController.g_subcity = value!;
                               editprofileController.g_subcityid =
                                   value.id.toString();
+
+                              if (getLocationController
+                                      .g_subcity!.locaion.length !=
+                                  0) {
+                                g_showsubject = true;
+                              } else {
+                                g_showsubject = false;
+                              }
                             });
 
                             // pop current page
                           },
                           value: getLocationController.g_subcity,
                         ),
+                        g_showsubject
+                            ? Expanded(
+                                child: ListView.builder(
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.vertical,
+                                    itemBuilder: (_, index) {
+                                      return Column(
+                                        children: [
+                                          getTimeBoxUIday(getLocationController
+                                              .g_subcity!.locaion[index].name),
+                                        ],
+                                      );
+                                    },
+                                    itemCount: getLocationController
+                                        .g_subcity!.locaion.length),
+                              )
+                            : Container(),
                         const SizedBox(
                           height: 20,
                         ),
@@ -939,12 +996,37 @@ class _EditPageState extends State<EditPage> {
                               getLocationController.e_subcity = value!;
                               editprofileController.e_subcityid =
                                   value.id.toString();
+
+                              if (getLocationController
+                                      .e_subcity!.locaion.length !=
+                                  0) {
+                                e_showsubject = true;
+                              } else {
+                                e_showsubject = false;
+                              }
                             });
 
                             // pop current page
                           },
                           value: getLocationController.e_subcity,
                         ),
+                        e_showsubject
+                            ? Expanded(
+                                child: ListView.builder(
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.vertical,
+                                    itemBuilder: (_, index) {
+                                      return Column(
+                                        children: [
+                                          getTimeBoxUIday(getLocationController
+                                              .e_subcity!.locaion[index].name),
+                                        ],
+                                      );
+                                    },
+                                    itemCount: getLocationController
+                                        .e_subcity!.locaion.length),
+                              )
+                            : Container(),
                         const SizedBox(
                           height: 20,
                         ),
@@ -1079,6 +1161,23 @@ class _EditPageState extends State<EditPage> {
                         const SizedBox(
                           height: 20,
                         ),
+                        realsubject
+                            ? Expanded(
+                                child: ListView.builder(
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.vertical,
+                                    itemBuilder: (_, index) {
+                                      return Column(
+                                        children: [
+                                          getTimeBoxUIday(getLocationController
+                                              .e_subcity!.locaion[index].name),
+                                        ],
+                                      );
+                                    },
+                                    itemCount: getLocationController
+                                        .e_subcity!.locaion.length),
+                              )
+                            : Container(),
                         subjectViewUI(),
                         const SizedBox(
                           height: 20,
@@ -1115,15 +1214,42 @@ class _EditPageState extends State<EditPage> {
                               .toList(),
                           onChanged: (value) {
                             setState(() {
-                              getLocationController.location = value!;
+                              getLocationController.getLocation = value!;
                               editprofileController.locationid =
                                   value.id.toString();
+
+                              if (getLocationController
+                                      .getLocation!.locaion.length !=
+                                  0) {
+                                showsubject = true;
+                              } else {
+                                showsubject = false;
+                              }
                             });
 
                             // pop current page
                           },
-                          value: getLocationController.location,
+                          value: getLocationController.getLocation,
                         ),
+                        showsubject
+                            ? Expanded(
+                                child: ListView.builder(
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.vertical,
+                                    itemBuilder: (_, index) {
+                                      return Column(
+                                        children: [
+                                          getTimeBoxUIday(getLocationController
+                                              .getLocation!
+                                              .locaion[index]
+                                              .name),
+                                        ],
+                                      );
+                                    },
+                                    itemCount: getLocationController
+                                        .getLocation!.locaion.length),
+                              )
+                            : Container(),
                         const SizedBox(
                           height: 20,
                         ),
@@ -1203,6 +1329,44 @@ class _EditPageState extends State<EditPage> {
             ),
           )
         : const Center(child: CircularProgressIndicator()));
+  }
+
+  Widget getTimeBoxUIday(String txt2) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: DesignCourseAppTheme.nearlyWhite,
+          borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+                color: DesignCourseAppTheme.grey.withOpacity(0.2),
+                offset: const Offset(1.1, 1.1),
+                blurRadius: 8.0),
+          ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(
+              left: 18.0, right: 18.0, top: 12.0, bottom: 12.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                txt2,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight.w200,
+                  fontSize: 14,
+                  letterSpacing: 0.27,
+                  color: DesignCourseAppTheme.grey,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   Future<void> _selectDate(BuildContext context) async {

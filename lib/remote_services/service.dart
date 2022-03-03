@@ -367,7 +367,7 @@ class RemoteServices {
   static Future<List<GetLocation>> getlocation() async {
     // print("id.toString()");
     //print(id.toString());
-    res = await Network().getData("address");
+    res = await Network().getData("address?with_address=true");
 
     var body = json.decode(res.body);
     if (res.statusCode == 200) {

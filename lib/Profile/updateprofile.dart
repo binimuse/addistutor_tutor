@@ -31,10 +31,7 @@ class UpdateProfile extends StatefulWidget {
 class _EditPageState extends State<UpdateProfile> {
   final EditprofileController editprofileController =
       Get.put(EditprofileController());
-  final GetLevelContoller getLevelContoller = Get.find();
-  final GetSubect getSubect = Get.find();
-  GetLocationController getLocationController = Get.find();
-  Getqulificationcontroller getqulificationcontroller = Get.find();
+
   final ImagePicker _picker = ImagePicker();
   ImagePicker picker = ImagePicker();
   bool _autovalidate = false;
@@ -80,10 +77,6 @@ class _EditPageState extends State<UpdateProfile> {
     editprofileController.date = DateFormat.yMd().format(DateTime.now());
 
     _fetchUser();
-    _getlocation();
-    _getlevel();
-    _getsub();
-    _getqulafication();
   }
 
   final RefreshController _refreshController =
@@ -94,9 +87,7 @@ class _EditPageState extends State<UpdateProfile> {
     await Future.delayed(const Duration(milliseconds: 1000));
     // if failed,use refreshFailed()
 
-    setState(() {
-      _getsub();
-    });
+    setState(() {});
     _refreshController.refreshCompleted();
   }
 
@@ -106,54 +97,18 @@ class _EditPageState extends State<UpdateProfile> {
     _refreshController.loadComplete();
   }
 
-  List<GetLocation> location = [];
-  _getlocation() async {
-    getLocationController.fetchLocation();
+  // List<GetLevel> level = [];
+  // _getlevel() async {
+  //   getLevelContoller.fetchLocation();
 
-    location = getLocationController.listlocation.value;
-    if (location != null && location.isNotEmpty) {
-      setState(() {
-        getLocationController.location = location[0];
-      });
-    }
-  }
-
-  List<GetLevel> level = [];
-  _getlevel() async {
-    getLevelContoller.fetchLocation();
-
-    level = getLevelContoller.listlocation.value;
-    if (level != null && level.isNotEmpty) {
-      setState(() {
-        getLevelContoller.level = level[0];
-      });
-    }
-  }
+  //   level = getLevelContoller.listlocation.value;
+  //   if (level != null && level.isNotEmpty) {
+  //     setState(() {
+  //       getLevelContoller.level = level[0];
+  //     });
+  //   }
 
   List<Subjects> sub = [];
-
-  _getsub() async {
-    getSubect.fetchLocation(editprofileController.lid);
-    sub = getSubect.listlocation.value;
-    if (sub != null && sub.isNotEmpty) {
-      setState(() {
-        getSubect.subject = sub[0];
-        getSubect.subject2 = sub[0];
-      });
-    }
-  }
-
-  List<GetQulification> qualification = [];
-  _getqulafication() async {
-    getqulificationcontroller.fetchLocation();
-
-    qualification = getqulificationcontroller.listlocation.value;
-    if (qualification != null && qualification.isNotEmpty) {
-      setState(() {
-        getqulificationcontroller.qualification = qualification[0];
-      });
-    }
-  }
 
   bool showPassword = false;
   @override
@@ -512,27 +467,6 @@ class _EditPageState extends State<UpdateProfile> {
                           height: 20,
                         ),
                         TextFormField(
-                          controller: editprofileController.g_subcityid,
-                          decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Guarantor subcity",
-                              focusColor: kPrimaryColor,
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
-                              fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              hintText: "insert Guarantor subcity",
-                              hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
                           controller: editprofileController.g_phone,
                           decoration: const InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: 3),
@@ -633,27 +567,6 @@ class _EditPageState extends State<UpdateProfile> {
                           height: 20,
                         ),
                         TextFormField(
-                          controller: editprofileController.e_subcityid,
-                          decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Employer subcity",
-                              focusColor: kPrimaryColor,
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
-                              fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              hintText: "insert Employer subcity",
-                              hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
                           controller: editprofileController.e_woreda,
                           decoration: const InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: 3),
@@ -686,61 +599,6 @@ class _EditPageState extends State<UpdateProfile> {
                               color: kPrimaryColor,
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        const Text(
-                          'Preferred level for tutoring',
-                          style: TextStyle(color: kPrimaryColor, fontSize: 13),
-                        ),
-                        DropdownButton<GetLevel>(
-                          hint: Text(
-                            getLevelContoller.listlocation.toString(),
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400),
-                          ),
-                          isExpanded: true,
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700),
-                          items: level
-                              .map((e) => DropdownMenuItem(
-                                    child: Text(
-                                      e.title,
-                                      textAlign: TextAlign.left,
-                                      style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    value: e,
-                                  ))
-                              .toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              getLevelContoller.level = value!;
-                              editprofileController.level = value.id.toString();
-                              //   lid = value.id.toString();
-                            });
-
-                            //_onRefresh();
-                            // loadData();
-                            //  getSubect.fetchLocation(value!.id.toString());
-
-                            // pop current page
-                          },
-                          value: getLevelContoller.level,
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        subjectViewUI(),
-                        const SizedBox(
-                          height: 20,
                         ),
                         const SizedBox(
                           height: 20,
@@ -952,40 +810,6 @@ class _EditPageState extends State<UpdateProfile> {
           const Text(
             'Field of study',
             style: TextStyle(color: kPrimaryColor, fontSize: 13),
-          ),
-          DropdownButton<Subjects>(
-            hint: Text(
-              getSubect.listlocation.toString(),
-              style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400),
-            ),
-            isExpanded: true,
-            style: const TextStyle(
-                color: Colors.black, fontSize: 16, fontWeight: FontWeight.w700),
-            items: sub
-                .map((e) => DropdownMenuItem(
-                      child: Text(
-                        e.title,
-                        textAlign: TextAlign.left,
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      value: e,
-                    ))
-                .toList(),
-            onChanged: (value) {
-              setState(() {
-                getSubect.subject = value!;
-                editprofileController.fieldofstudy = value.id.toString();
-              });
-
-              // pop current page
-            },
-            value: getSubect.subject,
           ),
         ]);
   }

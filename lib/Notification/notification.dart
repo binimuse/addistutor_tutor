@@ -88,7 +88,7 @@ class _ActivityPageState extends State<Notificationclass>
                   appBar: AppBar(
                     backgroundColor: Colors.white,
                     title: const Text(
-                      "Notification",
+                      "Notifications",
                       style: TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.w500,
@@ -97,23 +97,35 @@ class _ActivityPageState extends State<Notificationclass>
                       ),
                     ),
                   ),
-                  body: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {},
-                        child: ActivityItemWidget(
-                          data: getNotigicationController.listdate[index],
-                        ),
-                      );
-                    },
-                    itemCount: getNotigicationController.listdate.length,
-                  )),
+                  body: getNotigicationController.listdate.length != 0
+                      ? ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {},
+                              child: ActivityItemWidget(
+                                data: getNotigicationController.listdate[index],
+                              ),
+                            );
+                          },
+                          itemCount: getNotigicationController.listdate.length,
+                        )
+                      : Center(
+                          child: Text(
+                            'No Notification',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black,
+                              fontFamily: 'WorkSans',
+                            ),
+                          ),
+                        )),
             ),
           )
         : const Center(
             child: Text(
-              'No Recommended Tutor found',
+              'No Notification',
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w500,
