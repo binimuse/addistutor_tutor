@@ -217,7 +217,7 @@ class _HomePageState extends State<TutorDahsbord>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const Text(
-              'Reqested Students List',
+              'Requested students detail',
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontWeight: FontWeight.w600,
@@ -286,7 +286,7 @@ class _HomePageState extends State<TutorDahsbord>
                                               image: DecorationImage(
                                                   fit: BoxFit.contain,
                                                   image: NetworkImage(
-                                                      "https://nextgeneducation.et/api/student-profile-picture/${chat.student.id}"))),
+                                                      "https://tutor.oddatech.com/api/student-profile-picture/${chat.student.id}"))),
                                         ),
                                       ],
                                     ),
@@ -334,7 +334,7 @@ class _HomePageState extends State<TutorDahsbord>
                                         Row(children: [
                                           Icon(
                                             Icons.location_pin,
-                                            color: kPrimaryColor,
+                                            color: kPrimaryLightColor,
                                             size: 10,
                                           ),
                                           Text(
@@ -478,7 +478,7 @@ class _HomePageState extends State<TutorDahsbord>
                   ),
                 ),
                 Text(
-                  'Dashbord',
+                  'Dashborad',
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,

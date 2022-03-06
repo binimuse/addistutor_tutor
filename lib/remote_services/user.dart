@@ -34,8 +34,6 @@ class Teacher {
   String employer_city;
   String employer_woreda;
 
-  String is_active;
-
   Teacher({
     required this.id,
     required this.first_name,
@@ -65,7 +63,6 @@ class Teacher {
     required this.rating,
     required this.teaching_since,
     required this.gender,
-    required this.is_active,
   });
 
   factory Teacher.fromJson(Map<String, dynamic> json) {
@@ -98,7 +95,6 @@ class Teacher {
       employer_woreda: json["employer_woreda"],
       rating: json["rating"],
       gender: json["gender"],
-      is_active: json["is_active"],
     );
   }
 }
@@ -281,6 +277,7 @@ class RequestedBooking {
   String message;
   String is_active;
   String student_id;
+  String ended_at;
   List<Bookingschedule> booking_schedule;
   ReqTech teacher;
   ReqStu student;
@@ -297,6 +294,7 @@ class RequestedBooking {
     required this.teacher,
     required this.student,
     required this.subject,
+    required this.ended_at,
     required this.booking_schedule,
     required this.created_at,
   });
@@ -309,6 +307,7 @@ class RequestedBooking {
       student_id: json["student_id"],
       is_active: json["is_active"],
       created_at: json["created_at"],
+      ended_at: json["ended_at"],
       teacher: ReqTech.fromJson(json["teacher"]),
       student: ReqStu.fromJson(json["student"]),
       subject: Subjects.fromJson(json["subject"]),
@@ -323,11 +322,13 @@ class Subjects {
 
   String code;
   String title;
+  String tutoring_level_id;
 
   Subjects({
     required this.id,
     required this.code,
     required this.title,
+    required this.tutoring_level_id,
   });
 
   factory Subjects.fromJson(Map<String, dynamic> json) {
@@ -335,6 +336,7 @@ class Subjects {
       id: json["id"] as int,
       code: json["code"],
       title: json["title"],
+      tutoring_level_id: json["tutoring_level_id"],
     );
   }
 }
@@ -541,6 +543,56 @@ class GetQulification {
       id: json["id"] as int,
       title: json["title"],
       description: json["description"],
+    );
+  }
+}
+
+class Penalty {
+  int id;
+
+  String penalty;
+  String description;
+  String amount;
+
+  Penalty({
+    required this.id,
+    required this.amount,
+    required this.penalty,
+    required this.description,
+  });
+
+  factory Penalty.fromJson(Map<String, dynamic> json) {
+    return Penalty(
+      id: json["id"],
+      amount: json["amount"],
+      penalty: json["penalty"],
+      description: json["description"],
+    );
+  }
+}
+
+class GetPenalties {
+  int id;
+
+  String code;
+  String title;
+  String tutoring_level_id;
+  Penalty penalty;
+  GetPenalties({
+    required this.id,
+    required this.code,
+    required this.penalty,
+    required this.title,
+    required this.tutoring_level_id,
+  });
+
+  factory GetPenalties.fromJson(Map<String, dynamic> json) {
+    return GetPenalties(
+      id: json["id"] as int,
+      code: json["code"],
+      title: json["title"],
+      tutoring_level_id: json["tutoring_level_id"],
+      penalty: Penalty.fromJson(json["penalty"]),
     );
   }
 }

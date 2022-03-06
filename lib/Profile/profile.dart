@@ -12,15 +12,18 @@ import 'package:addistutor_tutor/Profile/updateprofile.dart';
 import 'package:addistutor_tutor/controller/avlablityconroller.dart';
 import 'package:addistutor_tutor/controller/contactuscontroller.dart';
 import 'package:addistutor_tutor/controller/editprofilecontroller.dart';
+import 'package:addistutor_tutor/controller/endbookingcontroller.dart';
 import 'package:addistutor_tutor/controller/feedbackcontroller.dart';
 import 'package:addistutor_tutor/controller/getlevelcontroller.dart';
 import 'package:addistutor_tutor/controller/getlocationcontroller.dart';
+import 'package:addistutor_tutor/controller/getmypernalityscontroller.dart';
 import 'package:addistutor_tutor/controller/getnotificationcontoller.dart';
 import 'package:addistutor_tutor/controller/getqualifaicationcontroller.dart';
 import 'package:addistutor_tutor/controller/getreqestedbookingcpntroller.dart';
 import 'package:addistutor_tutor/controller/getsubcontroller.dart';
 import 'package:addistutor_tutor/controller/sendqrcodecontroller.dart';
 import 'package:addistutor_tutor/controller/signupcontroller.dart';
+import 'package:addistutor_tutor/controller/updateprofilecontroller.dart';
 import 'package:addistutor_tutor/controller/walletcontroller.dart';
 import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +36,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../constants.dart';
 import 'editprofile.dart';
 import 'feedback_screen.dart';
+import 'mypenality.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -82,7 +86,7 @@ class _ProfilePageState extends State<ProfileS> {
     super.initState();
 
     _fetchUser();
-    //_getlocation();
+    _getlocation();
     // _getlevel();
     // _getsub();
     // _getqulification();
@@ -160,6 +164,8 @@ class _ProfilePageState extends State<ProfileS> {
     if (location != null && location.isNotEmpty) {
       setState(() {
         getLocationController.getLocation = location[0];
+        //   getLocationController.getLocation!.locaion = location[0];
+        getLocationController.subcity = location[0];
       });
     }
   }
@@ -234,9 +240,9 @@ class _ProfilePageState extends State<ProfileS> {
                       children: <Widget>[
                         ProfileHeader(
                           avatar: NetworkImage(
-                              "https://nextgeneducation.et/api/teacher-profile-picture/${ids}"),
+                              "https://tutor.oddatech.com/api/teacher-profile-picture/${ids}"),
                           coverImage: NetworkImage(
-                              "https://nextgeneducation.et/api/teacher-profile-picture/${ids}"),
+                              "https://tutor.oddatech.com/api/teacher-profile-picture/${ids}"),
                           title: editprofileController.firstname.text
                                   .toString() +
                               " " +
@@ -271,6 +277,8 @@ class _ProfilePageState extends State<ProfileS> {
                           phone: editprofileController.phone.text.toString(),
                           email: editprofileController.email.text.toString(),
                           about: editprofileController.About.text.toString(),
+                          gender: editprofileController.macthgender.value
+                              .toString(),
                         ),
                       ],
                     ),
@@ -353,7 +361,7 @@ class _ProfilePageState extends State<ProfileS> {
   final Color divider = Colors.grey.shade600;
   _buildDrawer(BuildContext context, String fname, String lastname, ids) {
     final String image =
-        "https://nextgeneducation.et/api/teacher-profile-picture/${ids}";
+        "https://tutor.oddatech.com/api/teacher-profile-picture/${ids}";
     return ClipPath(
       clipper: OvalRightBorderClipper(),
       child: Drawer(
@@ -393,32 +401,28 @@ class _ProfilePageState extends State<ProfileS> {
                   const SizedBox(height: 30.0),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        // ignore: prefer_const_constructors
+                      Navigator.push<dynamic>(
                         context,
-                        PageRouteBuilder(
-                          pageBuilder: (context, animation1, animation2) =>
+                        MaterialPageRoute<dynamic>(
+                          builder: (BuildContext context) =>
                               const UpdateProfile(),
-                          transitionDuration: Duration.zero,
                         ),
                       );
                     },
                     child: _buildRow(
                       Icons.update,
-                      "update profile",
+                      "Update profile",
                     ),
                   ),
                   _buildDivider(),
                   const SizedBox(height: 10.0),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        // ignore: prefer_const_constructors
+                      Navigator.push<dynamic>(
                         context,
-                        PageRouteBuilder(
-                          pageBuilder: (context, animation1, animation2) =>
+                        MaterialPageRoute<dynamic>(
+                          builder: (BuildContext context) =>
                               const FeedbackScreen(),
-                          transitionDuration: Duration.zero,
                         ),
                       );
                     },
@@ -431,13 +435,11 @@ class _ProfilePageState extends State<ProfileS> {
                   const SizedBox(height: 10.0),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        // ignore: prefer_const_constructors
+                      Navigator.push<dynamic>(
                         context,
-                        PageRouteBuilder(
-                          pageBuilder: (context, animation1, animation2) =>
+                        MaterialPageRoute<dynamic>(
+                          builder: (BuildContext context) =>
                               const AvalablityScreen(),
-                          transitionDuration: Duration.zero,
                         ),
                       );
                     },
@@ -450,15 +452,13 @@ class _ProfilePageState extends State<ProfileS> {
                   const SizedBox(height: 10.0),
                   GestureDetector(
                       onTap: () {
-                        // Navigator.push(
-                        //   // ignore: prefer_const_constructors
-                        //   context,
-                        //   PageRouteBuilder(
-                        //     pageBuilder: (context, animation1, animation2) =>
-                        //         const SettingsFourPage(),
-                        //     transitionDuration: Duration.zero,
-                        //   ),
-                        // );
+                        Navigator.push<dynamic>(
+                          context,
+                          MaterialPageRoute<dynamic>(
+                            builder: (BuildContext context) =>
+                                const Mypernality(),
+                          ),
+                        );
                       },
                       child: _buildRow(
                           Icons.personal_injury_outlined, "My penalties")),
@@ -466,13 +466,11 @@ class _ProfilePageState extends State<ProfileS> {
                   const SizedBox(height: 10.0),
                   GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          // ignore: prefer_const_constructors
+                        Navigator.push<dynamic>(
                           context,
-                          PageRouteBuilder(
-                            pageBuilder: (context, animation1, animation2) =>
+                          MaterialPageRoute<dynamic>(
+                            builder: (BuildContext context) =>
                                 const SettingsFourPage(),
-                            transitionDuration: Duration.zero,
                           ),
                         );
                       },
@@ -481,13 +479,11 @@ class _ProfilePageState extends State<ProfileS> {
                   const SizedBox(height: 10.0),
                   GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          // ignore: prefer_const_constructors
+                        Navigator.push<dynamic>(
                           context,
-                          PageRouteBuilder(
-                            pageBuilder: (context, animation1, animation2) =>
+                          MaterialPageRoute<dynamic>(
+                            builder: (BuildContext context) =>
                                 const ContactDetailsView(),
-                            transitionDuration: Duration.zero,
                           ),
                         );
                       },
@@ -495,13 +491,11 @@ class _ProfilePageState extends State<ProfileS> {
                   _buildDivider(),
                   GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          // ignore: prefer_const_constructors
+                        Navigator.push<dynamic>(
                           context,
-                          PageRouteBuilder(
-                            pageBuilder: (context, animation1, animation2) =>
+                          MaterialPageRoute<dynamic>(
+                            builder: (BuildContext context) =>
                                 const ProductDescriptionPage(),
-                            transitionDuration: Duration.zero,
                           ),
                         );
                       },
@@ -602,7 +596,7 @@ class _ProfilePageState extends State<ProfileS> {
                           ),
                         );
                       },
-                      child: _buildRow(Icons.logout, "Logout")),
+                      child: _buildRow(Icons.logout, "Log out")),
                   _buildDivider(),
                   const SizedBox(height: 10.0),
                 ],
@@ -626,6 +620,10 @@ class _ProfilePageState extends State<ProfileS> {
     Get.delete<SendQrcode>();
     Get.delete<GetReqBooking>();
     Get.delete<GetNotigicationController>();
+    Get.delete<GetLevelContoller>();
+    Get.delete<Updateprofilecontoller>();
+    Get.delete<GetPenalitycontoller>();
+    Get.delete<EndBookingContoller>();
 
     Navigator.push(
       context,
@@ -695,6 +693,7 @@ class _ProfilePageState extends State<ProfileS> {
 class UserInfo extends StatelessWidget {
   final String? phone;
   final String? email;
+  final String? gender;
 
   final String? about;
   const UserInfo({
@@ -702,6 +701,7 @@ class UserInfo extends StatelessWidget {
     required this.phone,
     required this.email,
     required this.about,
+    required this.gender,
   }) : super(key: key);
 
   @override
@@ -748,11 +748,12 @@ class UserInfo extends StatelessWidget {
                             title: const Text("Email"),
                             subtitle: Text(email.toString()),
                           ),
-                          // ListTile(
-                          //   leading: Icon(Icons.grade, color: kPrimaryColor),
-                          //   title: Text("Birth Day"),
-                          //   subtitle: Text(birthday.toString()),
-                          // ),
+                          ListTile(
+                            leading: const Icon(Icons.male_sharp,
+                                color: kPrimaryColor),
+                            title: const Text("Gender"),
+                            subtitle: Text(gender.toString()),
+                          ),
                           ListTile(
                             leading: const Icon(
                               Icons.person,

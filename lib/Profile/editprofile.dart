@@ -45,6 +45,11 @@ class _EditPageState extends State<EditPage> {
   bool g_showsubject = false;
   bool realsubject = false;
   bool subc = false;
+  bool g_subc = false;
+  late var locationname = "";
+  late var glocationname = "";
+  late var elocationname = "";
+  late var plocationname = "";
   List<XFile>? _imageFileList;
 
   set _imageFile(XFile? value) {
@@ -194,7 +199,7 @@ class _EditPageState extends State<EditPage> {
                 ),
               ),
               body: Form(
-                autovalidate: _autovalidate,
+                autovalidateMode: AutovalidateMode.disabled,
                 key: editprofileController.EditProf,
                 child: Container(
                   padding: const EdgeInsets.only(left: 16, top: 25, right: 16),
@@ -207,72 +212,7 @@ class _EditPageState extends State<EditPage> {
                         const SizedBox(
                           height: 15,
                         ),
-                        id != null
-                            ? Center(
-                                child: Stack(
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        _showPicker(context);
-                                      },
-                                      child: CircleAvatar(
-                                        radius: 40,
-                                        backgroundColor: kPrimaryColor,
-                                        child: _imageFileList != null
-                                            ? ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(40),
-                                                child: Image.file(
-                                                    File(_imageFileList![0]
-                                                        .path),
-                                                    width: 95,
-                                                    height: 95,
-                                                    fit: BoxFit.cover),
-                                              )
-                                            : Container(
-                                                decoration: BoxDecoration(
-                                                    color: Colors.grey[200],
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            50)),
-                                                width: 100,
-                                                height: 100,
-                                                child: Icon(
-                                                  Icons.camera_alt,
-                                                  color: Colors.grey[800],
-                                                ),
-                                              ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                        bottom: 0,
-                                        right: 0,
-                                        child: Container(
-                                          height: 30,
-                                          width: 30,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: Border.all(
-                                              width: 2,
-                                              color: Theme.of(context)
-                                                  .scaffoldBackgroundColor,
-                                            ),
-                                            color: kPrimaryColor,
-                                          ),
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              _showPicker(context);
-                                            },
-                                            child: const Icon(
-                                              Icons.edit,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        )),
-                                  ],
-                                ),
-                              )
-                            : Container(),
+
                         const Center(
                           child: Text(
                             "TUTOR INFORMATION",
@@ -292,18 +232,22 @@ class _EditPageState extends State<EditPage> {
                         TextFormField(
                           controller: editprofileController.firstname,
                           decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "First Name",
-                              focusColor: kPrimaryColor,
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
-                              fillColor: kPrimaryColor,
-                              hintText: "your First  Name",
-                              hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
+                            contentPadding: EdgeInsets.only(bottom: 3),
+                            labelText: "Name",
+                            labelStyle: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w700,
+                              color: kPrimaryColor,
+                              fontFamily: 'WorkSans',
+                            ),
+                            focusColor: kPrimaryColor,
+                            fillColor: kPrimaryColor,
+                            hintText: "your Name",
+                            hintStyle: TextStyle(
+                                color: DesignCourseAppTheme.nearlyBlack,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w300),
+                          ),
                           validator: (value) {
                             return editprofileController.validateName(value!);
                           },
@@ -314,18 +258,22 @@ class _EditPageState extends State<EditPage> {
                         TextFormField(
                           controller: editprofileController.middlename,
                           decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Middle Name",
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
-                              focusColor: kPrimaryColor,
-                              fillColor: kPrimaryColor,
-                              hintText: "your Middle Name",
-                              hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
+                            contentPadding: EdgeInsets.only(bottom: 3),
+                            labelText: "Father's name",
+                            labelStyle: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w700,
+                              color: kPrimaryColor,
+                              fontFamily: 'WorkSans',
+                            ),
+                            focusColor: kPrimaryColor,
+                            fillColor: kPrimaryColor,
+                            hintText: "your Father's name",
+                            hintStyle: TextStyle(
+                                color: DesignCourseAppTheme.nearlyBlack,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w300),
+                          ),
                           validator: (value) {
                             return editprofileController.validateName(value!);
                           },
@@ -336,18 +284,22 @@ class _EditPageState extends State<EditPage> {
                         TextFormField(
                           controller: editprofileController.lastname,
                           decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Last Name",
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
-                              focusColor: kPrimaryColor,
-                              fillColor: kPrimaryColor,
-                              hintText: "your Last Name",
-                              hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
+                            contentPadding: EdgeInsets.only(bottom: 3),
+                            labelText: "Grandfather's Name",
+                            labelStyle: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w700,
+                              color: kPrimaryColor,
+                              fontFamily: 'WorkSans',
+                            ),
+                            focusColor: kPrimaryColor,
+                            fillColor: kPrimaryColor,
+                            hintText: "Grandfather's Name",
+                            hintStyle: TextStyle(
+                                color: DesignCourseAppTheme.nearlyBlack,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w300),
+                          ),
                           validator: (value) {
                             return editprofileController.validateName(value!);
                           },
@@ -357,7 +309,12 @@ class _EditPageState extends State<EditPage> {
                         ),
                         const Text(
                           'Gender',
-                          style: TextStyle(color: kPrimaryColor, fontSize: 13),
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: kPrimaryColor,
+                            fontFamily: 'WorkSans',
+                          ),
                         ),
                         DropdownButtonFormField<String>(
                           value: editprofileController.macthgender.value,
@@ -370,17 +327,17 @@ class _EditPageState extends State<EditPage> {
                               fontWeight: FontWeight.w700),
                           items: <String>[
                             '',
-                            'male',
-                            'female',
+                            'Male',
+                            'Female',
                           ].map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
                               child: Text(
                                 value,
                                 style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold),
+                                    color: DesignCourseAppTheme.nearlyBlack,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w300),
                               ),
                             );
                           }).toList(),
@@ -395,7 +352,12 @@ class _EditPageState extends State<EditPage> {
                         ),
                         const Text(
                           'Select Date Of Birth',
-                          style: TextStyle(color: kPrimaryColor, fontSize: 13),
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: kPrimaryColor,
+                            fontFamily: 'WorkSans',
+                          ),
                         ),
                         OutlineButton(
                           padding: const EdgeInsets.symmetric(horizontal: 50),
@@ -415,7 +377,12 @@ class _EditPageState extends State<EditPage> {
                         ),
                         const Text(
                           'Teaching since',
-                          style: TextStyle(color: kPrimaryColor, fontSize: 13),
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: kPrimaryColor,
+                            fontFamily: 'WorkSans',
+                          ),
                         ),
                         DropdownButton<String>(
                           value: editprofileController.since.value,
@@ -474,9 +441,9 @@ class _EditPageState extends State<EditPage> {
                               child: Text(
                                 value,
                                 style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold),
+                                    color: DesignCourseAppTheme.nearlyBlack,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w300),
                               ),
                             );
                           }).toList(),
@@ -491,7 +458,12 @@ class _EditPageState extends State<EditPage> {
                         ),
                         const Text(
                           'Highest Qualification',
-                          style: TextStyle(color: kPrimaryColor, fontSize: 13),
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: kPrimaryColor,
+                            fontFamily: 'WorkSans',
+                          ),
                         ),
                         DropdownButton<GetQulification>(
                           hint: Text(
@@ -512,9 +484,10 @@ class _EditPageState extends State<EditPage> {
                                       e.title,
                                       textAlign: TextAlign.left,
                                       style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold),
+                                          color:
+                                              DesignCourseAppTheme.nearlyBlack,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w300),
                                     ),
                                     value: e,
                                   ))
@@ -555,16 +528,19 @@ class _EditPageState extends State<EditPage> {
                           decoration: const InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: 3),
                               labelText: "Email",
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
+                              labelStyle: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                                color: kPrimaryColor,
+                                fontFamily: 'WorkSans',
+                              ),
                               focusColor: kPrimaryColor,
                               fillColor: kPrimaryColor,
                               hintText: "evan@gmail.com",
                               hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
+                                  color: DesignCourseAppTheme.nearlyBlack,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300)),
                           validator: (value) {
                             return editprofileController.validateEmail(value!);
                           },
@@ -578,16 +554,19 @@ class _EditPageState extends State<EditPage> {
                           decoration: const InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: 3),
                               labelText: "Phone",
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
+                              labelStyle: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                                color: kPrimaryColor,
+                                fontFamily: 'WorkSans',
+                              ),
                               focusColor: kPrimaryColor,
                               fillColor: kPrimaryColor,
                               hintText: "0911111111",
                               hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
+                                  color: DesignCourseAppTheme.nearlyBlack,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300)),
                           validator: (value) {
                             return editprofileController.validateName(value!);
                           },
@@ -601,16 +580,19 @@ class _EditPageState extends State<EditPage> {
                           decoration: const InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: 3),
                               labelText: "Office phone number",
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
+                              labelStyle: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                                color: kPrimaryColor,
+                                fontFamily: 'WorkSans',
+                              ),
                               focusColor: kPrimaryColor,
                               fillColor: kPrimaryColor,
                               hintText: "0911111111",
                               hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
+                                  color: DesignCourseAppTheme.nearlyBlack,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300)),
                         ),
                         const SizedBox(
                           height: 20,
@@ -621,86 +603,106 @@ class _EditPageState extends State<EditPage> {
                           decoration: const InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: 3),
                               labelText: "Residence Phone numbe",
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
+                              labelStyle: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                                color: kPrimaryColor,
+                                fontFamily: 'WorkSans',
+                              ),
                               focusColor: kPrimaryColor,
                               fillColor: kPrimaryColor,
                               hintText: "0911111111",
                               hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
+                                  color: DesignCourseAppTheme.nearlyBlack,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300)),
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         const Text(
                           'Subcity',
-                          style: TextStyle(color: kPrimaryColor, fontSize: 13),
-                        ),
-                        DropdownButton<GetLocation>(
-                          hint: Text(
-                            getLocationController.listlocation.toString(),
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400),
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: kPrimaryColor,
+                            fontFamily: 'WorkSans',
                           ),
-                          isExpanded: true,
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700),
-                          items: location
-                              .map((e) => DropdownMenuItem(
-                                    child: Text(
-                                      e.name,
-                                      textAlign: TextAlign.left,
-                                      style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    value: e,
-                                  ))
-                              .toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              getLocationController.subcity = value!;
-                              editprofileController.subcityid =
-                                  value.id.toString();
-
-                              if (getLocationController
-                                      .subcity!.locaion.length !=
-                                  0) {
-                                subc = true;
-                              } else {
-                                subc = false;
-                              }
-                            });
-
-                            // pop current page
-                          },
-                          value: getLocationController.subcity,
                         ),
-                        subc
-                            ? Expanded(
-                                child: ListView.builder(
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    itemBuilder: (_, index) {
-                                      return Column(
-                                        children: [
-                                          getTimeBoxUIday(getLocationController
-                                              .subcity!.locaion[index].name),
-                                        ],
-                                      );
-                                    },
-                                    itemCount: getLocationController
-                                        .subcity!.locaion.length),
-                              )
-                            : Container(),
+                        Row(children: [
+                          Flexible(
+                            child: DropdownButton<GetLocation>(
+                              hint: Text(
+                                getLocationController.listlocation.toString(),
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                              isExpanded: true,
+                              style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700),
+                              items: location
+                                  .map((e) => DropdownMenuItem(
+                                        child: Text(e.name,
+                                            textAlign: TextAlign.left,
+                                            style: const TextStyle(
+                                                color: DesignCourseAppTheme
+                                                    .nearlyBlack,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w300)),
+                                        value: e,
+                                      ))
+                                  .toList(),
+                              onChanged: (value) {
+                                setState(() {
+                                  getLocationController.subcity = value!;
+                                  editprofileController.subcityid =
+                                      value.name.toString();
+
+                                  if (getLocationController
+                                          .subcity!.locaion.length !=
+                                      0) {
+                                    subc = true;
+                                  } else {
+                                    subc = false;
+                                  }
+                                });
+
+                                // pop current page
+                              },
+                              value: getLocationController.subcity,
+                            ),
+                          ),
+                          subc
+                              ? Expanded(
+                                  child: ListView.builder(
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.vertical,
+                                      itemBuilder: (_, index) {
+                                        return Column(
+                                          children: [
+                                            getTimeBoxUIday(
+                                                getLocationController.subcity!
+                                                    .locaion[index].name,
+                                                getLocationController
+                                                    .getLocation!
+                                                    .locaion[index]
+                                                    .name),
+                                          ],
+                                        );
+                                      },
+                                      itemCount: getLocationController
+                                          .subcity!.locaion.length),
+                                )
+                              : Container(),
+                          Text(
+                            locationname,
+                            style: const TextStyle(color: Colors.black38),
+                          ),
+                        ]),
                         const SizedBox(
                           height: 20,
                         ),
@@ -710,16 +712,19 @@ class _EditPageState extends State<EditPage> {
                           decoration: const InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: 3),
                               labelText: "Woreda",
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
+                              labelStyle: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                                color: kPrimaryColor,
+                                fontFamily: 'WorkSans',
+                              ),
                               focusColor: kPrimaryColor,
                               fillColor: kPrimaryColor,
                               hintText: "Woreda",
                               hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
+                                  color: DesignCourseAppTheme.nearlyBlack,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300)),
                         ),
                         const SizedBox(
                           height: 20,
@@ -746,15 +751,18 @@ class _EditPageState extends State<EditPage> {
                               contentPadding: EdgeInsets.only(bottom: 3),
                               labelText: "Guarantor First name",
                               focusColor: kPrimaryColor,
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
+                              labelStyle: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                                color: kPrimaryColor,
+                                fontFamily: 'WorkSans',
+                              ),
                               fillColor: kPrimaryColor,
                               hintText: "insert Guarantor First  Name",
                               hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
+                                  color: DesignCourseAppTheme.nearlyBlack,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300)),
                         ),
                         const SizedBox(
                           height: 20,
@@ -763,17 +771,20 @@ class _EditPageState extends State<EditPage> {
                           controller: editprofileController.g_lastname,
                           decoration: const InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Guarantor Last name",
+                              labelText: "Guarantor grandfather's name",
                               focusColor: kPrimaryColor,
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
+                              labelStyle: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                                color: kPrimaryColor,
+                                fontFamily: 'WorkSans',
+                              ),
                               fillColor: kPrimaryColor,
-                              hintText: "insert Guarantor Last  Name",
+                              hintText: "insert Guarantor grandfather's  Name",
                               hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
+                                  color: DesignCourseAppTheme.nearlyBlack,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300)),
                         ),
                         const SizedBox(
                           height: 20,
@@ -785,85 +796,104 @@ class _EditPageState extends State<EditPage> {
                               contentPadding: EdgeInsets.only(bottom: 3),
                               labelText: "Guarantor woreda",
                               focusColor: kPrimaryColor,
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
+                              labelStyle: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                                color: kPrimaryColor,
+                                fontFamily: 'WorkSans',
+                              ),
                               fillColor: kPrimaryColor,
                               hintText: "insert Guarantor woreda",
                               hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
+                                  color: DesignCourseAppTheme.nearlyBlack,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300)),
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         const Text(
                           'Guarantor subcity',
-                          style: TextStyle(color: kPrimaryColor, fontSize: 13),
-                        ),
-                        DropdownButton<GetLocation>(
-                          hint: Text(
-                            getLocationController.listlocation.toString(),
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400),
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: kPrimaryColor,
+                            fontFamily: 'WorkSans',
                           ),
-                          isExpanded: true,
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700),
-                          items: location
-                              .map((e) => DropdownMenuItem(
-                                    child: Text(
-                                      e.name,
-                                      textAlign: TextAlign.left,
-                                      style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    value: e,
-                                  ))
-                              .toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              getLocationController.g_subcity = value!;
-                              editprofileController.g_subcityid =
-                                  value.id.toString();
-
-                              if (getLocationController
-                                      .g_subcity!.locaion.length !=
-                                  0) {
-                                g_showsubject = true;
-                              } else {
-                                g_showsubject = false;
-                              }
-                            });
-
-                            // pop current page
-                          },
-                          value: getLocationController.g_subcity,
                         ),
-                        g_showsubject
-                            ? Expanded(
-                                child: ListView.builder(
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    itemBuilder: (_, index) {
-                                      return Column(
-                                        children: [
-                                          getTimeBoxUIday(getLocationController
-                                              .g_subcity!.locaion[index].name),
-                                        ],
-                                      );
-                                    },
-                                    itemCount: getLocationController
-                                        .g_subcity!.locaion.length),
-                              )
-                            : Container(),
+                        Row(children: [
+                          Flexible(
+                            child: DropdownButton<GetLocation>(
+                              hint: Text(
+                                getLocationController.listlocation.toString(),
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                              isExpanded: true,
+                              style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700),
+                              items: location
+                                  .map((e) => DropdownMenuItem(
+                                        child: Text(e.name,
+                                            textAlign: TextAlign.left,
+                                            style: const TextStyle(
+                                                color: DesignCourseAppTheme
+                                                    .nearlyBlack,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w300)),
+                                        value: e,
+                                      ))
+                                  .toList(),
+                              onChanged: (value) {
+                                setState(() {
+                                  getLocationController.g_subcity = value!;
+                                  editprofileController.g_subcityid =
+                                      value.name.toString();
+
+                                  if (getLocationController
+                                          .g_subcity!.locaion.length !=
+                                      0) {
+                                    g_subc = true;
+                                  } else {
+                                    g_subc = false;
+                                  }
+                                });
+
+                                // pop current page
+                              },
+                              value: getLocationController.g_subcity,
+                            ),
+                          ),
+                          g_subc
+                              ? Expanded(
+                                  child: ListView.builder(
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.vertical,
+                                      itemBuilder: (_, index) {
+                                        return Column(
+                                          children: [
+                                            getTimeBoxUIdayg(
+                                                getLocationController.g_subcity!
+                                                    .locaion[index].name,
+                                                getLocationController.g_subcity!
+                                                    .locaion[index].name),
+                                          ],
+                                        );
+                                      },
+                                      itemCount: getLocationController
+                                          .g_subcity!.locaion.length),
+                                )
+                              : Container(),
+                          Text(
+                            glocationname,
+                            style: const TextStyle(color: Colors.black38),
+                          ),
+                        ]),
+
                         const SizedBox(
                           height: 20,
                         ),
@@ -874,15 +904,18 @@ class _EditPageState extends State<EditPage> {
                               contentPadding: EdgeInsets.only(bottom: 3),
                               labelText: "Guarantor mobile number",
                               focusColor: kPrimaryColor,
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
+                              labelStyle: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                                color: kPrimaryColor,
+                                fontFamily: 'WorkSans',
+                              ),
                               fillColor: kPrimaryColor,
                               hintText: "insert Guarantor mobile number",
                               hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
+                                  color: DesignCourseAppTheme.nearlyBlack,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300)),
                         ),
                         const SizedBox(
                           height: 20,
@@ -894,15 +927,18 @@ class _EditPageState extends State<EditPage> {
                               contentPadding: EdgeInsets.only(bottom: 3),
                               labelText: "Guarantor office phone number",
                               focusColor: kPrimaryColor,
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
+                              labelStyle: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                                color: kPrimaryColor,
+                                fontFamily: 'WorkSans',
+                              ),
                               fillColor: kPrimaryColor,
                               hintText: "insert Guarantor office phone number",
                               hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
+                                  color: DesignCourseAppTheme.nearlyBlack,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300)),
                         ),
                         const SizedBox(
                           height: 20,
@@ -929,15 +965,18 @@ class _EditPageState extends State<EditPage> {
                               contentPadding: EdgeInsets.only(bottom: 3),
                               labelText: "Employer name",
                               focusColor: kPrimaryColor,
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
+                              labelStyle: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                                color: kPrimaryColor,
+                                fontFamily: 'WorkSans',
+                              ),
                               fillColor: kPrimaryColor,
                               hintText: "insert  Employer name",
                               hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
+                                  color: DesignCourseAppTheme.nearlyBlack,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300)),
                         ),
                         const SizedBox(
                           height: 20,
@@ -948,85 +987,105 @@ class _EditPageState extends State<EditPage> {
                               contentPadding: EdgeInsets.only(bottom: 3),
                               labelText: "Employment position",
                               focusColor: kPrimaryColor,
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
+                              labelStyle: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                                color: kPrimaryColor,
+                                fontFamily: 'WorkSans',
+                              ),
                               fillColor: kPrimaryColor,
                               hintText: "woreda Employer position",
                               hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
+                                  color: DesignCourseAppTheme.nearlyBlack,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300)),
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         const Text(
                           'Employer subcity',
-                          style: TextStyle(color: kPrimaryColor, fontSize: 13),
-                        ),
-                        DropdownButton<GetLocation>(
-                          hint: Text(
-                            getLocationController.listlocation.toString(),
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400),
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: kPrimaryColor,
+                            fontFamily: 'WorkSans',
                           ),
-                          isExpanded: true,
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700),
-                          items: location
-                              .map((e) => DropdownMenuItem(
-                                    child: Text(
-                                      e.name,
-                                      textAlign: TextAlign.left,
-                                      style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    value: e,
-                                  ))
-                              .toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              getLocationController.e_subcity = value!;
-                              editprofileController.e_subcityid =
-                                  value.id.toString();
-
-                              if (getLocationController
-                                      .e_subcity!.locaion.length !=
-                                  0) {
-                                e_showsubject = true;
-                              } else {
-                                e_showsubject = false;
-                              }
-                            });
-
-                            // pop current page
-                          },
-                          value: getLocationController.e_subcity,
                         ),
-                        e_showsubject
-                            ? Expanded(
-                                child: ListView.builder(
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    itemBuilder: (_, index) {
-                                      return Column(
-                                        children: [
-                                          getTimeBoxUIday(getLocationController
-                                              .e_subcity!.locaion[index].name),
-                                        ],
-                                      );
-                                    },
-                                    itemCount: getLocationController
-                                        .e_subcity!.locaion.length),
-                              )
-                            : Container(),
+                        Row(children: [
+                          Flexible(
+                            child: DropdownButton<GetLocation>(
+                              hint: Text(
+                                getLocationController.listlocation.toString(),
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                              isExpanded: true,
+                              style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700),
+                              items: location
+                                  .map((e) => DropdownMenuItem(
+                                        child: Text(e.name,
+                                            textAlign: TextAlign.left,
+                                            style: const TextStyle(
+                                                color: DesignCourseAppTheme
+                                                    .nearlyBlack,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w300)),
+                                        value: e,
+                                      ))
+                                  .toList(),
+                              onChanged: (value) {
+                                setState(() {
+                                  getLocationController.e_subcity = value!;
+                                  editprofileController.e_subcityid =
+                                      value.name.toString();
+
+                                  if (getLocationController
+                                          .e_subcity!.locaion.length !=
+                                      0) {
+                                    e_showsubject = true;
+                                  } else {
+                                    e_showsubject = false;
+                                  }
+                                });
+
+                                // pop current page
+                              },
+                              value: getLocationController.e_subcity,
+                            ),
+                          ),
+                          e_showsubject
+                              ? Expanded(
+                                  child: ListView.builder(
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.vertical,
+                                      itemBuilder: (_, index) {
+                                        return Column(
+                                          children: [
+                                            getTimeBoxUIdaye(
+                                              getLocationController.e_subcity!
+                                                  .locaion[index].name,
+                                              getLocationController.e_subcity!
+                                                  .locaion[index].name,
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                      itemCount: getLocationController
+                                          .e_subcity!.locaion.length),
+                                )
+                              : Container(),
+                          Text(
+                            elocationname,
+                            style: const TextStyle(color: Colors.black38),
+                          ),
+                        ]),
+
                         const SizedBox(
                           height: 20,
                         ),
@@ -1037,22 +1096,30 @@ class _EditPageState extends State<EditPage> {
                               contentPadding: EdgeInsets.only(bottom: 3),
                               labelText: "Employer woreda",
                               focusColor: kPrimaryColor,
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
+                              labelStyle: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                                color: kPrimaryColor,
+                                fontFamily: 'WorkSans',
+                              ),
                               fillColor: kPrimaryColor,
                               hintText: "insert Employer woreda",
                               hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
+                                  color: DesignCourseAppTheme.nearlyBlack,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300)),
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         const Text(
                           'Employement subject',
-                          style: TextStyle(color: kPrimaryColor, fontSize: 13),
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: kPrimaryColor,
+                            fontFamily: 'WorkSans',
+                          ),
                         ),
                         DropdownButton<Subjects>(
                           hint: Text(
@@ -1069,14 +1136,13 @@ class _EditPageState extends State<EditPage> {
                               fontWeight: FontWeight.w700),
                           items: sub
                               .map((e) => DropdownMenuItem(
-                                    child: Text(
-                                      e.title,
-                                      textAlign: TextAlign.left,
-                                      style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold),
-                                    ),
+                                    child: Text(e.title,
+                                        textAlign: TextAlign.left,
+                                        style: const TextStyle(
+                                            color: DesignCourseAppTheme
+                                                .nearlyBlack,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w300)),
                                     value: e,
                                   ))
                               .toList(),
@@ -1115,7 +1181,12 @@ class _EditPageState extends State<EditPage> {
                         ),
                         const Text(
                           'Preferred level for tutoring',
-                          style: TextStyle(color: kPrimaryColor, fontSize: 13),
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: kPrimaryColor,
+                            fontFamily: 'WorkSans',
+                          ),
                         ),
                         DropdownButton<GetLevel>(
                           hint: Text(
@@ -1132,14 +1203,13 @@ class _EditPageState extends State<EditPage> {
                               fontWeight: FontWeight.w700),
                           items: level
                               .map((e) => DropdownMenuItem(
-                                    child: Text(
-                                      e.title,
-                                      textAlign: TextAlign.left,
-                                      style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold),
-                                    ),
+                                    child: Text(e.title,
+                                        textAlign: TextAlign.left,
+                                        style: const TextStyle(
+                                            color: DesignCourseAppTheme
+                                                .nearlyBlack,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w300)),
                                     value: e,
                                   ))
                               .toList(),
@@ -1161,95 +1231,115 @@ class _EditPageState extends State<EditPage> {
                         const SizedBox(
                           height: 20,
                         ),
-                        realsubject
-                            ? Expanded(
-                                child: ListView.builder(
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    itemBuilder: (_, index) {
-                                      return Column(
-                                        children: [
-                                          getTimeBoxUIday(getLocationController
-                                              .e_subcity!.locaion[index].name),
-                                        ],
-                                      );
-                                    },
-                                    itemCount: getLocationController
-                                        .e_subcity!.locaion.length),
-                              )
-                            : Container(),
+                        // realsubject
+                        //     ? Expanded(
+                        //         child: ListView.builder(
+                        //             shrinkWrap: true,
+                        //             scrollDirection: Axis.vertical,
+                        //             itemBuilder: (_, index) {
+                        //               return Column(
+                        //                 children: [
+                        //                   getTimeBoxUIday(getLocationController
+                        //                       .e_subcity!.locaion[index].name),
+                        //                 ],
+                        //               );
+                        //             },
+                        //             itemCount: getLocationController
+                        //                 .e_subcity!.locaion.length),
+                        //       )
+                        //     : Container(),
                         subjectViewUI(),
                         const SizedBox(
                           height: 20,
                         ),
                         const Text(
                           'Prefered tutoring location',
-                          style: TextStyle(color: kPrimaryColor, fontSize: 13),
-                        ),
-                        DropdownButton<GetLocation>(
-                          hint: Text(
-                            getLocationController.listlocation.toString(),
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400),
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: kPrimaryColor,
+                            fontFamily: 'WorkSans',
                           ),
-                          isExpanded: true,
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700),
-                          items: location
-                              .map((e) => DropdownMenuItem(
-                                    child: Text(
-                                      e.name,
-                                      textAlign: TextAlign.left,
-                                      style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    value: e,
-                                  ))
-                              .toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              getLocationController.getLocation = value!;
-                              editprofileController.locationid =
-                                  value.id.toString();
-
-                              if (getLocationController
-                                      .getLocation!.locaion.length !=
-                                  0) {
-                                showsubject = true;
-                              } else {
-                                showsubject = false;
-                              }
-                            });
-
-                            // pop current page
-                          },
-                          value: getLocationController.getLocation,
                         ),
-                        showsubject
-                            ? Expanded(
-                                child: ListView.builder(
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    itemBuilder: (_, index) {
-                                      return Column(
-                                        children: [
-                                          getTimeBoxUIday(getLocationController
-                                              .getLocation!
-                                              .locaion[index]
-                                              .name),
-                                        ],
-                                      );
-                                    },
-                                    itemCount: getLocationController
-                                        .getLocation!.locaion.length),
-                              )
-                            : Container(),
+                        Row(children: [
+                          Flexible(
+                            child: DropdownButton<GetLocation>(
+                              hint: Text(
+                                getLocationController.listlocation.toString(),
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                              isExpanded: true,
+                              style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700),
+                              items: location
+                                  .map((e) => DropdownMenuItem(
+                                        child: Text(
+                                          e.name,
+                                          textAlign: TextAlign.left,
+                                          style: const TextStyle(
+                                              color: DesignCourseAppTheme
+                                                  .nearlyBlack,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w300),
+                                        ),
+                                        value: e,
+                                      ))
+                                  .toList(),
+                              onChanged: (value) {
+                                setState(() {
+                                  getLocationController.getLocation = value!;
+                                  editprofileController.locationid =
+                                      value.name.toString();
+
+                                  if (getLocationController
+                                          .getLocation!.locaion.length !=
+                                      0) {
+                                    showsubject = true;
+                                  } else {
+                                    showsubject = false;
+                                  }
+                                });
+
+                                // pop current page
+                              },
+                              value: getLocationController.getLocation,
+                            ),
+                          ),
+                          showsubject
+                              ? Expanded(
+                                  child: ListView.builder(
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.vertical,
+                                      itemBuilder: (_, index) {
+                                        return Column(
+                                          children: [
+                                            getTimeBoxUIdayp(
+                                                getLocationController
+                                                    .getLocation!
+                                                    .locaion[index]
+                                                    .name,
+                                                getLocationController
+                                                    .getLocation!
+                                                    .locaion[index]
+                                                    .name),
+                                          ],
+                                        );
+                                      },
+                                      itemCount: getLocationController
+                                          .getLocation!.locaion.length),
+                                )
+                              : Container(),
+                          Text(
+                            plocationname,
+                            style: const TextStyle(color: Colors.black38),
+                          ),
+                        ]),
+
                         const SizedBox(
                           height: 20,
                         ),
@@ -1257,40 +1347,34 @@ class _EditPageState extends State<EditPage> {
                           padding: const EdgeInsets.only(bottom: 35.0),
                           child: TextFormField(
                             keyboardType: TextInputType.multiline,
-                            maxLines: null,
+                            textInputAction: TextInputAction.newline,
                             controller: editprofileController.About,
                             decoration: const InputDecoration(
-                                contentPadding: EdgeInsets.only(bottom: 3),
-                                labelText: "About Me",
-                                labelStyle: TextStyle(
-                                    color: kPrimaryColor, fontSize: 16),
-                                focusColor: kPrimaryColor,
-                                fillColor: kPrimaryColor,
-                                hintText: "Describe yourself",
-                                hintStyle: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                )),
+                              contentPadding: EdgeInsets.only(bottom: 3),
+                              labelText: "About Me",
+                              labelStyle: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                                color: kPrimaryColor,
+                                fontFamily: 'WorkSans',
+                              ),
+                              focusColor: kPrimaryColor,
+                              fillColor: kPrimaryColor,
+                              hintText: "Describe yourself",
+                              hintStyle: TextStyle(
+                                  color: DesignCourseAppTheme.nearlyBlack,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300),
+                            ),
+                            validator: (value) {
+                              return editprofileController
+                                  .validateNameaboutme(value!);
+                            },
                           ),
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            OutlineButton(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 50),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: const Text("CANCEL",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      letterSpacing: 2.2,
-                                      color: Colors.black)),
-                            ),
                             RaisedButton(
                               onPressed: () {
                                 final isValid = editprofileController
@@ -1331,38 +1415,185 @@ class _EditPageState extends State<EditPage> {
         : const Center(child: CircularProgressIndicator()));
   }
 
-  Widget getTimeBoxUIday(String txt2) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        decoration: BoxDecoration(
-          color: DesignCourseAppTheme.nearlyWhite,
-          borderRadius: const BorderRadius.all(Radius.circular(16.0)),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: DesignCourseAppTheme.grey.withOpacity(0.2),
-                offset: const Offset(1.1, 1.1),
-                blurRadius: 8.0),
-          ],
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(
-              left: 18.0, right: 18.0, top: 12.0, bottom: 12.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                txt2,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.w200,
-                  fontSize: 14,
-                  letterSpacing: 0.27,
-                  color: DesignCourseAppTheme.grey,
-                ),
-              ),
+  Widget getTimeBoxUIday(String txt2, String name) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          editprofileController.subcityid = name.toString();
+          locationname = txt2;
+        });
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: DesignCourseAppTheme.nearlyWhite,
+            borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                  color: DesignCourseAppTheme.grey.withOpacity(0.2),
+                  offset: const Offset(1.1, 1.1),
+                  blurRadius: 8.0),
             ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(
+                left: 18.0, right: 18.0, top: 12.0, bottom: 12.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  txt2,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w200,
+                    fontSize: 14,
+                    letterSpacing: 0.27,
+                    color: DesignCourseAppTheme.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget getTimeBoxUIdayg(String txt2, String name) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          editprofileController.g_subcityid = name.toString();
+
+          glocationname = txt2;
+        });
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: DesignCourseAppTheme.nearlyWhite,
+            borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                  color: DesignCourseAppTheme.grey.withOpacity(0.2),
+                  offset: const Offset(1.1, 1.1),
+                  blurRadius: 8.0),
+            ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(
+                left: 18.0, right: 18.0, top: 12.0, bottom: 12.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  txt2,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w200,
+                    fontSize: 14,
+                    letterSpacing: 0.27,
+                    color: DesignCourseAppTheme.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget getTimeBoxUIdaye(String txt2, String name) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          editprofileController.e_subcityid = name.toString();
+          elocationname = txt2;
+        });
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: DesignCourseAppTheme.nearlyWhite,
+            borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                  color: DesignCourseAppTheme.grey.withOpacity(0.2),
+                  offset: const Offset(1.1, 1.1),
+                  blurRadius: 8.0),
+            ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(
+                left: 18.0, right: 18.0, top: 12.0, bottom: 12.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  txt2,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w200,
+                    fontSize: 14,
+                    letterSpacing: 0.27,
+                    color: DesignCourseAppTheme.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget getTimeBoxUIdayp(String txt2, String name) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          editprofileController.locationid = name.toString();
+          plocationname = txt2;
+        });
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: DesignCourseAppTheme.nearlyWhite,
+            borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                  color: DesignCourseAppTheme.grey.withOpacity(0.2),
+                  offset: const Offset(1.1, 1.1),
+                  blurRadius: 8.0),
+            ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(
+                left: 18.0, right: 18.0, top: 12.0, bottom: 12.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  txt2,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w200,
+                    fontSize: 14,
+                    letterSpacing: 0.27,
+                    color: DesignCourseAppTheme.grey,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -1427,66 +1658,6 @@ class _EditPageState extends State<EditPage> {
     );
   }
 
-  void _showPicker(context) {
-    showModalBottomSheet(
-        context: context,
-        builder: (BuildContext bc) {
-          return SafeArea(
-            child: Wrap(
-              children: <Widget>[
-                ListTile(
-                    leading: const Icon(Icons.photo_library),
-                    title: const Text('Photo Library'),
-                    onTap: () {
-                      _imgFromGallery();
-                      Navigator.of(context).pop();
-                    }),
-                ListTile(
-                  leading: const Icon(Icons.photo_camera),
-                  title: const Text('Camera'),
-                  onTap: () {
-                    _imgFromCamera();
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ),
-          );
-        });
-  }
-
-  _imgFromCamera() async {
-    try {
-      final pickedFile = await _picker.pickImage(
-        source: ImageSource.camera,
-      );
-      setState(() {
-        _imageFile = pickedFile;
-        var file = File(pickedFile!.path);
-
-        editprofileController.image = file;
-      });
-    } catch (e) {
-      setState(() {});
-    }
-  }
-
-  _imgFromGallery() async {
-    try {
-      final pickedFile = await _picker.pickImage(
-        source: ImageSource.gallery,
-      );
-      setState(() {
-        _imageFile = pickedFile;
-        File file = File(pickedFile!.path);
-
-        editprofileController.image = file;
-      });
-    } catch (e) {
-      setState(() {});
-    }
-  }
-
   subjectViewUI() {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -1494,7 +1665,12 @@ class _EditPageState extends State<EditPage> {
         children: <Widget>[
           const Text(
             'Field of study',
-            style: TextStyle(color: kPrimaryColor, fontSize: 13),
+            style: TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.w700,
+              color: kPrimaryColor,
+              fontFamily: 'WorkSans',
+            ),
           ),
           DropdownButton<Subjects>(
             hint: Text(
@@ -1509,14 +1685,12 @@ class _EditPageState extends State<EditPage> {
                 color: Colors.black, fontSize: 16, fontWeight: FontWeight.w700),
             items: sub
                 .map((e) => DropdownMenuItem(
-                      child: Text(
-                        e.title,
-                        textAlign: TextAlign.left,
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold),
-                      ),
+                      child: Text(e.title,
+                          textAlign: TextAlign.left,
+                          style: const TextStyle(
+                              color: DesignCourseAppTheme.nearlyBlack,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w300)),
                       value: e,
                     ))
                 .toList(),

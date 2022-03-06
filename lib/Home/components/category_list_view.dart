@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_string_interpolations
 
 import 'package:addistutor_tutor/Appointment/components/appointmentscreen.dart';
+import 'package:addistutor_tutor/constants.dart';
 
 import 'package:addistutor_tutor/controller/getpopulartutor.dart';
 import 'package:addistutor_tutor/remote_services/user.dart';
@@ -206,8 +207,7 @@ class CategoryView extends StatelessWidget {
                                                 ),
                                                 const Icon(
                                                   Icons.star,
-                                                  color: DesignCourseAppTheme
-                                                      .nearlyBlue,
+                                                  color: kPrimaryLightColor,
                                                   size: 20,
                                                 ),
                                               ],
@@ -242,7 +242,7 @@ class CategoryView extends StatelessWidget {
                           image: DecorationImage(
                               fit: BoxFit.cover,
                               image: NetworkImage(
-                                  "https://nextgeneducation.et/api/teacher-profile-picture/${category!.id}"))),
+                                  "https://tutor.oddatech.com/api/teacher-profile-picture/${category!.id}"))),
                     ),
                   ],
                 ),

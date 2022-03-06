@@ -14,10 +14,11 @@ class GetSubect extends GetxController with StateMixin {
   Subjects? subject2;
 
   void fetchLocation(var id) async {
+    //print(id);
     listlocation.value = await RemoteServices.getsubject(id);
 
     if (listlocation.isNotEmpty) {
-      //print(list.length.toString());
+      //  print(listlocation.length.toString());
       isfetchedlocation(true);
     }
 

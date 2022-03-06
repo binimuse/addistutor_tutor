@@ -47,7 +47,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
             ),
           ),
           title: const Text(
-            "Terms of Service ",
+            "Terms of Service",
             style: TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.w500,
@@ -75,7 +75,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
                 '10.Confidentiality\nAny confidential information about the child, his/her parents and family you may come across as a result of your tutorial service cannot be shared with third parties without the express consent of the child/parent. NextGen has the right to terminate the tutor if found guilty of breaching the confidentiality statement.  \n\n',
                 style: TextStyle(
                   fontSize: 14.0,
-                  fontFamily: 'WorkSans',
+                  fontFamily: 'Arial',
                   fontWeight: FontWeight.normal,
                   letterSpacing: 0.4,
                   height: 0.9,
@@ -105,7 +105,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   Text(
-                    "NextGen Tutorial Services",
+                    "NextGen Tutorial Services of tutors",
                     style: TextStyle(
                       fontSize: 14.0,
                       fontFamily: 'WorkSans',

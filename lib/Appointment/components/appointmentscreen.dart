@@ -10,6 +10,7 @@ import 'package:addistutor_tutor/Wallet/wallet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constants.dart';
@@ -40,6 +41,30 @@ class _HomePageState extends State<Appointment>
     _fetchUser();
 
     super.initState();
+  }
+
+  final RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
+
+  void _onRefresh() async {
+    // monitor network fetch
+    await Future.delayed(const Duration(milliseconds: 1000));
+    setState(() {
+      _fetchUser();
+    });
+    _refreshController.refreshCompleted();
+  }
+
+  void _onLoading() async {
+    // monitor network fetch
+    await Future.delayed(const Duration(milliseconds: 100));
+    // if failed,use loadFailed(),if no data return,use LoadNodata()
+    //items.add((items.length+1).toString());
+    //if(mounted)
+    // setState(() {
+
+    // });
+    _refreshController.loadComplete();
   }
 
   // ignore: prefer_typing_uninitialized_variables
@@ -87,38 +112,47 @@ class _HomePageState extends State<Appointment>
   @override
   Widget build(BuildContext context) {
     return Obx(() => walletContoller.isFetched.value
-        ? Container(
-            color: DesignCourseAppTheme.nearlyWhite,
-            child: WillPopScope(
-              onWillPop: _onBackPressed,
-              child: Scaffold(
-                backgroundColor: Colors.transparent,
-                body: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: MediaQuery.of(context).padding.top,
-                    ),
-                    getAppBarUI(),
-                    _buildDivider(),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: SizedBox(
-                          height: MediaQuery.of(context).size.height,
-                          child: Column(
-                            children: <Widget>[
-                              getCategoryUI(),
-                              Flexible(
-                                child: getPopularCourseUI(),
+        ? SmartRefresher(
+            enablePullDown: true,
+            enablePullUp: true,
+
+            //cheak pull_to_refresh
+            controller: _refreshController,
+            onRefresh: _onRefresh,
+            onLoading: _onLoading,
+            child: Container(
+                color: DesignCourseAppTheme.nearlyWhite,
+                child: WillPopScope(
+                  onWillPop: _onBackPressed,
+                  child: Scaffold(
+                    backgroundColor: Colors.transparent,
+                    body: Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: MediaQuery.of(context).padding.top,
+                        ),
+                        getAppBarUI(),
+                        _buildDivider(),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            child: SizedBox(
+                              height: MediaQuery.of(context).size.height,
+                              child: Column(
+                                children: <Widget>[
+                                  getCategoryUI(),
+                                  Flexible(
+                                    child: getPopularCourseUI(),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-            ))
+                  ),
+                )),
+          )
         : const Center(child: CircularProgressIndicator()));
   }
 
@@ -223,7 +257,7 @@ class _HomePageState extends State<Appointment>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const Text(
-              'OnGoing Tutors',
+              'Ongoing tutors',
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontWeight: FontWeight.w600,
@@ -332,13 +366,20 @@ class _HomePageState extends State<Appointment>
           ),
           GestureDetector(
             onTap: () {
-              Navigator.push(
-                // ignore: prefer_const_constructors
+              // Navigator.push(
+              //   // ignore: prefer_const_constructors
+              //   context,
+              //   PageRouteBuilder(
+              //     pageBuilder: (context, animation1, animation2) =>
+              //         const WalletPage(),
+              //     transitionDuration: Duration.zero,
+              //   ),
+              // );
+
+              Navigator.push<dynamic>(
                 context,
-                PageRouteBuilder(
-                  pageBuilder: (context, animation1, animation2) =>
-                      const WalletPage(),
-                  transitionDuration: Duration.zero,
+                MaterialPageRoute<dynamic>(
+                  builder: (BuildContext context) => WalletPage(),
                 ),
               );
             },

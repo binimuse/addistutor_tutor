@@ -4,18 +4,16 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
-import 'package:addistutor_tutor/controller/editprofilecontroller.dart';
-import 'package:addistutor_tutor/controller/getlevelcontroller.dart';
 import 'package:addistutor_tutor/controller/getlocationcontroller.dart';
-import 'package:addistutor_tutor/controller/getqualifaicationcontroller.dart';
-import 'package:addistutor_tutor/controller/getsubcontroller.dart';
+
+import 'package:addistutor_tutor/controller/updateprofilecontroller.dart';
 import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:camera_camera/camera_camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
+
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -29,20 +27,21 @@ class UpdateProfile extends StatefulWidget {
 }
 
 class _EditPageState extends State<UpdateProfile> {
-  final EditprofileController editprofileController =
-      Get.put(EditprofileController());
-
+  final Updateprofilecontoller updateprofilecontoller =
+      Get.put(Updateprofilecontoller());
+  GetLocationController getLocationController = Get.find();
   final ImagePicker _picker = ImagePicker();
   ImagePicker picker = ImagePicker();
   bool _autovalidate = false;
   DateTime currentDate = DateTime.now();
   bool showsubject = false;
   List<XFile>? _imageFileList;
-
+  bool subc = false;
   set _imageFile(XFile? value) {
     _imageFileList = value == null ? null : [value];
   }
 
+  late var locationname = "";
   var body;
   var id;
   void _fetchUser() async {
@@ -53,13 +52,13 @@ class _EditPageState extends State<UpdateProfile> {
       body = json.decode(token);
 
       if (body["teacher_id"] != null) {
-        editprofileController.fetchPf(int.parse(body["teacher_id"]));
+        updateprofilecontoller.fetchPf(int.parse(body["teacher_id"]));
         setState(() {
           id = int.parse(body["teacher_id"]);
         });
       } else {
         var noid = "noid";
-        editprofileController.fetchPf(noid);
+        updateprofilecontoller.fetchPf(noid);
       }
     } else {}
   }
@@ -74,9 +73,22 @@ class _EditPageState extends State<UpdateProfile> {
   void initState() {
     super.initState();
 
-    editprofileController.date = DateFormat.yMd().format(DateTime.now());
-
     _fetchUser();
+    _getlocation();
+  }
+
+  List<GetLocation> location = [];
+  _getlocation() async {
+    getLocationController.fetchLocation();
+
+    location = getLocationController.listlocation.value;
+    if (location != null && location.isNotEmpty) {
+      setState(() {
+        getLocationController.getLocation = location[0];
+        //   getLocationController.getLocation!.locaion = location[0];
+        getLocationController.subcity = location[0];
+      });
+    }
   }
 
   final RefreshController _refreshController =
@@ -97,23 +109,12 @@ class _EditPageState extends State<UpdateProfile> {
     _refreshController.loadComplete();
   }
 
-  // List<GetLevel> level = [];
-  // _getlevel() async {
-  //   getLevelContoller.fetchLocation();
-
-  //   level = getLevelContoller.listlocation.value;
-  //   if (level != null && level.isNotEmpty) {
-  //     setState(() {
-  //       getLevelContoller.level = level[0];
-  //     });
-  //   }
-
   List<Subjects> sub = [];
 
   bool showPassword = false;
   @override
   Widget build(BuildContext context) {
-    return Obx(() => editprofileController.isFetched.value
+    return Obx(() => updateprofilecontoller.isFetched.value
         ? SmartRefresher(
             enablePullDown: true,
             enablePullUp: true,
@@ -123,8 +124,8 @@ class _EditPageState extends State<UpdateProfile> {
             onRefresh: _onRefresh,
             onLoading: _onLoading,
             child: Scaffold(
-              resizeToAvoidBottomInset: true,
-              key: editprofileController.scaffoldKey,
+              resizeToAvoidBottomInset: false,
+              key: updateprofilecontoller.scaffoldKey,
               appBar: AppBar(
                 backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                 elevation: 1,
@@ -154,88 +155,86 @@ class _EditPageState extends State<UpdateProfile> {
               ),
               body: Form(
                 autovalidate: _autovalidate,
-                key: editprofileController.EditProf,
+                key: updateprofilecontoller.EditProf,
                 child: Container(
                   padding: const EdgeInsets.only(left: 16, top: 25, right: 16),
                   child: GestureDetector(
                     onTap: () {
-                      // FocusScope.of(context).unfocus();
+                      FocusScopeNode currentFocus = FocusScope.of(context);
+
+                      if (!currentFocus.hasPrimaryFocus) {
+                        currentFocus.unfocus();
+                      }
                     },
                     child: ListView(
                       children: [
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        id != null
-                            ? Center(
-                                child: Stack(
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        _showPicker(context);
-                                      },
-                                      child: CircleAvatar(
-                                        radius: 40,
-                                        backgroundColor: kPrimaryColor,
-                                        child: _imageFileList != null
-                                            ? ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(40),
-                                                child: Image.file(
-                                                    File(_imageFileList![0]
-                                                        .path),
-                                                    width: 95,
-                                                    height: 95,
-                                                    fit: BoxFit.cover),
-                                              )
-                                            : Container(
-                                                decoration: BoxDecoration(
-                                                    color: Colors.grey[200],
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            50)),
-                                                width: 100,
-                                                height: 100,
-                                                child: Icon(
-                                                  Icons.camera_alt,
-                                                  color: Colors.grey[800],
-                                                ),
-                                              ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                        bottom: 0,
-                                        right: 0,
-                                        child: Container(
-                                          height: 30,
-                                          width: 30,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: Border.all(
-                                              width: 2,
-                                              color: Theme.of(context)
-                                                  .scaffoldBackgroundColor,
-                                            ),
-                                            color: kPrimaryColor,
-                                          ),
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              _showPicker(context);
-                                            },
-                                            child: const Icon(
-                                              Icons.edit,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        )),
-                                  ],
-                                ),
-                              )
-                            : Container(),
-                        const Center(),
-                        const SizedBox(
-                          height: 20,
-                        ),
+                        // id != null
+                        //     ? Center(
+                        //         child: Stack(
+                        //           children: [
+                        //             GestureDetector(
+                        //               onTap: () {
+                        //                 _showPicker(context);
+                        //               },
+                        //               child: CircleAvatar(
+                        //                 radius: 40,
+                        //                 backgroundColor: kPrimaryColor,
+                        //                 child: _imageFileList != null
+                        //                     ? ClipRRect(
+                        //                         borderRadius:
+                        //                             BorderRadius.circular(40),
+                        //                         child: Image.file(
+                        //                             File(_imageFileList![0]
+                        //                                 .path),
+                        //                             width: 95,
+                        //                             height: 95,
+                        //                             fit: BoxFit.cover),
+                        //                       )
+                        //                     : Container(
+                        //                         decoration: BoxDecoration(
+                        //                             color: Colors.grey[200],
+                        //                             borderRadius:
+                        //                                 BorderRadius.circular(
+                        //                                     50)),
+                        //                         width: 100,
+                        //                         height: 100,
+                        //                         child: Icon(
+                        //                           Icons.camera_alt,
+                        //                           color: Colors.grey[800],
+                        //                         ),
+                        //                       ),
+                        //               ),
+                        //             ),
+                        //             Positioned(
+                        //                 bottom: 0,
+                        //                 right: 0,
+                        //                 child: Container(
+                        //                   height: 30,
+                        //                   width: 30,
+                        //                   decoration: BoxDecoration(
+                        //                     shape: BoxShape.circle,
+                        //                     border: Border.all(
+                        //                       width: 2,
+                        //                       color: Theme.of(context)
+                        //                           .scaffoldBackgroundColor,
+                        //                     ),
+                        //                     color: kPrimaryColor,
+                        //                   ),
+                        //                   child: GestureDetector(
+                        //                     onTap: () {
+                        //                       _showPicker(context);
+                        //                     },
+                        //                     child: const Icon(
+                        //                       Icons.edit,
+                        //                       color: Colors.white,
+                        //                     ),
+                        //                   ),
+                        //                 )),
+                        //           ],
+                        //         ),
+                        //       )
+                        //     : Container(),
+
                         const Center(
                           child: Text(
                             "CONTACT INFORMATION",
@@ -249,355 +248,213 @@ class _EditPageState extends State<UpdateProfile> {
                             ),
                           ),
                         ),
+                        // const SizedBox(
+                        //   height: 20,
+                        // ),
+                        // TextFormField(
+                        //   controller: updateprofilecontoller.email,
+                        //   decoration: const InputDecoration(
+                        //     contentPadding: EdgeInsets.only(bottom: 3),
+                        //     labelText: "Email",
+                        //     labelStyle: TextStyle(
+                        //       fontSize: 17,
+                        //       fontWeight: FontWeight.w700,
+                        //       color: kPrimaryColor,
+                        //       fontFamily: 'WorkSans',
+                        //     ),
+                        //     focusColor: kPrimaryColor,
+                        //     fillColor: kPrimaryColor,
+                        //     hintText: "evan@gmail.com",
+                        //     hintStyle: TextStyle(
+                        //         color: DesignCourseAppTheme.nearlyBlack,
+                        //         fontSize: 16,
+                        //         fontWeight: FontWeight.w300),
+                        //   ),
+                        //   validator: (value) {
+                        //     return updateprofilecontoller.validateEmail(value!);
+                        //   },
+                        // ),
                         const SizedBox(
                           height: 20,
                         ),
                         TextFormField(
-                          controller: editprofileController.email,
+                          controller: updateprofilecontoller.phone,
+                          keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Email",
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
-                              focusColor: kPrimaryColor,
-                              fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              hintText: "evan@gmail.com",
-                              hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
+                            contentPadding: EdgeInsets.only(bottom: 3),
+                            labelText: "Phone",
+                            labelStyle: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w700,
+                              color: kPrimaryColor,
+                              fontFamily: 'WorkSans',
+                            ),
+                            focusColor: kPrimaryColor,
+                            fillColor: kPrimaryColor,
+                            hintText: "0911111111",
+                            hintStyle: TextStyle(
+                                color: DesignCourseAppTheme.nearlyBlack,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w300),
+                          ),
                           validator: (value) {
-                            return editprofileController.validateEmail(value!);
+                            return updateprofilecontoller.validateName(value!);
                           },
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         TextFormField(
-                          controller: editprofileController.phone,
+                          controller: updateprofilecontoller.officephone,
                           keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Phone",
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
-                              focusColor: kPrimaryColor,
-                              fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              hintText: "0911111111",
-                              hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
-                          validator: (value) {
-                            return editprofileController.validateName(value!);
-                          },
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          controller: editprofileController.officephone,
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Office phone number",
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
-                              focusColor: kPrimaryColor,
-                              fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              hintText: "0911111111",
-                              hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          controller: editprofileController.rephone,
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Residence Phone numbe",
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
-                              focusColor: kPrimaryColor,
-                              fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              hintText: "0911111111",
-                              hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          controller: editprofileController.subcityid,
-                          decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Subcity",
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
-                              focusColor: kPrimaryColor,
-                              fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              hintText: "Subcity",
-                              hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          controller: editprofileController.woreda,
-                          decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Woreda",
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
-                              focusColor: kPrimaryColor,
-                              fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              hintText: "Woreda",
-                              hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        const Center(
-                          child: Text(
-                            "GUARANTOR CONTACT INFORMATION",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 22,
-                              fontFamily: 'WorkSans',
-                              letterSpacing: 0.27,
+                            contentPadding: EdgeInsets.only(bottom: 3),
+                            labelText: "Office phone number",
+                            labelStyle: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w700,
                               color: kPrimaryColor,
+                              fontFamily: 'WorkSans',
                             ),
+                            focusColor: kPrimaryColor,
+                            fillColor: kPrimaryColor,
+                            hintText: "0911111111",
+                            hintStyle: TextStyle(
+                                color: DesignCourseAppTheme.nearlyBlack,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w300),
                           ),
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         TextFormField(
-                          controller: editprofileController.g_firstname,
+                          controller: updateprofilecontoller.rephone,
+                          keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Guarantor First name",
-                              focusColor: kPrimaryColor,
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
-                              fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              hintText: "insert Guarantor First  Name",
-                              hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          controller: editprofileController.g_lastname,
-                          decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Guarantor Last name",
-                              focusColor: kPrimaryColor,
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
-                              fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              hintText: "insert Guarantor Last  Name",
-                              hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          controller: editprofileController.g_woreda,
-                          decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Guarantor woreda",
-                              focusColor: kPrimaryColor,
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
-                              fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              hintText: "insert Guarantor woreda",
-                              hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          controller: editprofileController.g_phone,
-                          decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Guarantor mobile number",
-                              focusColor: kPrimaryColor,
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
-                              fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              hintText: "insert Guarantor mobile number",
-                              hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          controller: editprofileController.g_office_phone,
-                          decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Guarantor office phone number",
-                              focusColor: kPrimaryColor,
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
-                              fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              hintText: "insert Guarantor office phone number",
-                              hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        const Center(
-                          child: Text(
-                            "EMPLOYMENT INFORMATION",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 22,
-                              fontFamily: 'WorkSans',
-                              letterSpacing: 0.27,
+                            contentPadding: EdgeInsets.only(bottom: 3),
+                            labelText: "Residence Phone numbe",
+                            labelStyle: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w700,
                               color: kPrimaryColor,
+                              fontFamily: 'WorkSans',
                             ),
+                            focusColor: kPrimaryColor,
+                            fillColor: kPrimaryColor,
+                            hintText: "0911111111",
+                            hintStyle: TextStyle(
+                                color: DesignCourseAppTheme.nearlyBlack,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w300),
                           ),
                         ),
                         const SizedBox(
                           height: 20,
                         ),
-                        TextFormField(
-                          controller: editprofileController.e_firstname,
-                          decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Employer name",
-                              focusColor: kPrimaryColor,
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
-                              fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              hintText: "insert  Employer name",
-                              hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
+                        const Text(
+                          'Subcity',
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: kPrimaryColor,
+                            fontFamily: 'WorkSans',
+                          ),
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          controller: editprofileController.e_postion,
-                          decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Employment position",
-                              focusColor: kPrimaryColor,
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
-                              fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              hintText: "woreda Employer position",
-                              hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          controller: editprofileController.e_woreda,
-                          decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Employer woreda",
-                              focusColor: kPrimaryColor,
-                              labelStyle:
-                                  TextStyle(color: kPrimaryColor, fontSize: 16),
-                              fillColor: kPrimaryColor,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              hintText: "insert Employer woreda",
-                              hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        const Center(
-                          child: Text(
-                            "ENGAGMENT PREFERENCE",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 22,
-                              fontFamily: 'WorkSans',
-                              letterSpacing: 0.27,
-                              color: kPrimaryColor,
+                        Row(children: [
+                          Flexible(
+                            child: DropdownButton<GetLocation>(
+                              hint: Text(
+                                getLocationController.listlocation.toString(),
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                              isExpanded: true,
+                              style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700),
+                              items: location
+                                  .map((e) => DropdownMenuItem(
+                                        child: Text(e.name,
+                                            textAlign: TextAlign.left,
+                                            style: const TextStyle(
+                                                color: DesignCourseAppTheme
+                                                    .nearlyBlack,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w300)),
+                                        value: e,
+                                      ))
+                                  .toList(),
+                              onChanged: (value) {
+                                setState(() {
+                                  getLocationController.subcity = value!;
+
+                                  if (getLocationController
+                                          .subcity!.locaion.length !=
+                                      0) {
+                                    subc = true;
+                                  } else {
+                                    subc = false;
+                                  }
+                                });
+
+                                // pop current page
+                              },
+                              value: getLocationController.subcity,
                             ),
+                          ),
+                          subc
+                              ? Expanded(
+                                  child: ListView.builder(
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.vertical,
+                                      itemBuilder: (_, index) {
+                                        return Column(
+                                          children: [
+                                            getTimeBoxUIday(
+                                                getLocationController.subcity!
+                                                    .locaion[index].name,
+                                                getLocationController
+                                                    .getLocation!
+                                                    .locaion[index]
+                                                    .name),
+                                          ],
+                                        );
+                                      },
+                                      itemCount: getLocationController
+                                          .subcity!.locaion.length),
+                                )
+                              : Container(),
+                          Text(
+                            locationname,
+                            style: const TextStyle(color: Colors.black38),
+                          ),
+                        ]),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          controller: updateprofilecontoller.woreda,
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.only(bottom: 3),
+                            labelText: "Woreda",
+                            labelStyle: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w700,
+                              color: kPrimaryColor,
+                              fontFamily: 'WorkSans',
+                            ),
+                            focusColor: kPrimaryColor,
+                            fillColor: kPrimaryColor,
+                            hintText: "Woreda",
+                            hintStyle: TextStyle(
+                                color: DesignCourseAppTheme.nearlyBlack,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w300),
                           ),
                         ),
                         const SizedBox(
@@ -607,23 +464,30 @@ class _EditPageState extends State<UpdateProfile> {
                           padding: const EdgeInsets.only(bottom: 35.0),
                           child: TextFormField(
                             keyboardType: TextInputType.multiline,
-                            maxLines: null,
-                            controller: editprofileController.About,
+                            maxLength: 150,
+                            textInputAction: TextInputAction.newline,
+                            controller: updateprofilecontoller.About,
                             decoration: const InputDecoration(
-                                contentPadding: EdgeInsets.only(bottom: 3),
-                                labelText: "About Me",
-                                labelStyle: TextStyle(
-                                    color: kPrimaryColor, fontSize: 16),
-                                focusColor: kPrimaryColor,
-                                fillColor: kPrimaryColor,
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.always,
-                                hintText: "Describe yourself",
-                                hintStyle: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                )),
+                              contentPadding: EdgeInsets.only(bottom: 3),
+                              labelText: "About Me",
+                              labelStyle: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                                color: kPrimaryColor,
+                                fontFamily: 'WorkSans',
+                              ),
+                              focusColor: kPrimaryColor,
+                              fillColor: kPrimaryColor,
+                              hintText: "Describe yourself",
+                              hintStyle: TextStyle(
+                                  color: DesignCourseAppTheme.nearlyBlack,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300),
+                            ),
+                            validator: (value) {
+                              return updateprofilecontoller
+                                  .validateNameaboutme(value!);
+                            },
                           ),
                         ),
                         Row(
@@ -645,11 +509,11 @@ class _EditPageState extends State<UpdateProfile> {
                             ),
                             RaisedButton(
                               onPressed: () {
-                                final isValid = editprofileController
+                                final isValid = updateprofilecontoller
                                     .EditProf.currentState!
                                     .validate();
                                 if (isValid == true) {
-                                  editprofileController.editProf(id, context);
+                                  updateprofilecontoller.editProf(id, context);
                                 } else {
                                   setState(() {
                                     _autovalidate =
@@ -683,18 +547,50 @@ class _EditPageState extends State<UpdateProfile> {
         : const Center(child: CircularProgressIndicator()));
   }
 
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? pickedDate = await showDatePicker(
-        context: context,
-        initialDate: currentDate,
-        firstDate: DateTime(1900),
-        lastDate: DateTime(2050));
-    if (pickedDate != null && pickedDate != currentDate) {
-      setState(() {
-        currentDate = pickedDate;
-        editprofileController.date = DateFormat.yMd().format(currentDate);
-      });
-    }
+  Widget getTimeBoxUIday(String txt2, String name) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          updateprofilecontoller.subcityid = name.toString();
+          locationname = txt2;
+        });
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: kPrimaryLightColor,
+            borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                  color: DesignCourseAppTheme.grey.withOpacity(0.2),
+                  offset: const Offset(1.1, 1.1),
+                  blurRadius: 8.0),
+            ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(
+                left: 18.0, right: 18.0, top: 12.0, bottom: 12.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  txt2,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w200,
+                    fontSize: 14,
+                    letterSpacing: 0.27,
+                    color: kPrimaryColor,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   loadData() {
@@ -731,7 +627,6 @@ class _EditPageState extends State<UpdateProfile> {
             labelText: labelText,
             focusColor: kPrimaryColor,
             fillColor: kPrimaryColor,
-            floatingLabelBehavior: FloatingLabelBehavior.always,
             hintText: placeholder,
             hintStyle: const TextStyle(
               fontSize: 16,
@@ -779,7 +674,7 @@ class _EditPageState extends State<UpdateProfile> {
         _imageFile = pickedFile;
         var file = File(pickedFile!.path);
 
-        editprofileController.image = file;
+        updateprofilecontoller.image = file;
       });
     } catch (e) {
       setState(() {});
@@ -795,7 +690,7 @@ class _EditPageState extends State<UpdateProfile> {
         _imageFile = pickedFile;
         File file = File(pickedFile!.path);
 
-        editprofileController.image = file;
+        updateprofilecontoller.image = file;
       });
     } catch (e) {
       setState(() {});

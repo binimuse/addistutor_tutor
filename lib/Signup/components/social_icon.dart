@@ -27,7 +27,7 @@ class SocalIcon extends StatelessWidget {
           ),
           shape: BoxShape.circle,
         ),
-        child: SvgPicture.asset(
+        child: Image.asset(
           iconSrc,
           height: 20,
           width: 20,

@@ -109,7 +109,7 @@ class _CategoryListViewState extends State<OnGoingTutors>
                       } else {
                         return const Center(
                           child: Text(
-                            'No Recommended Tutor found',
+                            'No Ongoing Tutor found',
                             style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w500,
@@ -195,7 +195,7 @@ class CategoryView extends StatelessWidget {
                                       image: DecorationImage(
                                           fit: BoxFit.contain,
                                           image: NetworkImage(
-                                              "https://nextgeneducation.et/api/student-profile-picture/${category!.student.id}"))),
+                                              "https://tutor.oddatech.com/api/student-profile-picture/${category!.student.id}"))),
                                 ),
                               ],
                             ),

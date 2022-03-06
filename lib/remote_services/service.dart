@@ -18,7 +18,7 @@ class RemoteServices {
   static Future<String> editPersonalInfo(var data) async {
     List<String> errors = [];
     // create multipart request
-    res = await Network().getpassedData(data, "update-profile-teacher");
+    res = await Network().getpassedData(data, "teacher-update");
 
     body = json.decode(res.body);
 
@@ -397,11 +397,12 @@ class RemoteServices {
   }
 
   static Future<List<Subjects>> getsubject(var tid) async {
-    // print("id.toString()");
-    //print(id.toString());
     res = await Network().getData("subjects?/tutoring_level_id${tid}");
-    print(tid);
+
     var body = json.decode(res.body);
+
+    print("body");
+    print(body["data"]);
     if (res.statusCode == 200) {
       return body["data"]
           .map((e) => Subjects.fromJson(e))
@@ -423,6 +424,36 @@ class RemoteServices {
           .map((e) => GetQulification.fromJson(e))
           .toList()
           .cast<GetQulification>();
+    } else {
+      throw Exception('Failed to load Comment');
+    }
+  }
+
+  static Future<String> endbooking(var ending_reason, var id) async {
+    var data = {
+      'ending_reason': ending_reason,
+    };
+    res = await Network().getpassedData(data, "booking/${id}/end");
+    body = json.decode(res.body);
+    // ignore: avoid_print
+    print("body");
+    print(body);
+    if (res.statusCode == 200) {
+      return body["success"].toString();
+    } else {
+      throw Exception('Failed to send  Mesaage');
+    }
+  }
+
+  static Future<List<GetPenalties>> getmypenality() async {
+    res = await Network().getData("my-penalties");
+    var body = json.decode(res.body);
+
+    if (res.statusCode == 200) {
+      return body["data"]
+          .map((e) => GetPenalties.fromJson(e))
+          .toList()
+          .cast<GetPenalties>();
     } else {
       throw Exception('Failed to load Comment');
     }

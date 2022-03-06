@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class EditprofileController extends GetxController with StateMixin {
+class Updateprofilecontoller extends GetxController with StateMixin {
   // ignore: non_constant_identifier_names
   GlobalKey<FormState> EditProf = GlobalKey<FormState>();
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -23,17 +23,8 @@ class EditprofileController extends GetxController with StateMixin {
   // ignore: non_constant_identifier_names
   late var macthgender = "".obs;
   late var since = "".obs;
-  late TextEditingController firstname;
-  late TextEditingController lastname;
-  late TextEditingController middlename;
 
 //guarantor
-  late TextEditingController g_firstname;
-  late TextEditingController g_lastname;
-
-  late TextEditingController g_woreda;
-  late TextEditingController g_phone;
-  late TextEditingController g_office_phone;
 
   late TextEditingController phone;
   late TextEditingController officephone;
@@ -42,29 +33,7 @@ class EditprofileController extends GetxController with StateMixin {
   late TextEditingController woreda;
   late TextEditingController email;
 
-  // EMPLOYMENT
-  late TextEditingController e_firstname;
-  late TextEditingController e_postion;
-
-  late TextEditingController e_woreda;
-  var e_subject;
-
-  //update pass
-  late TextEditingController passControl;
-  late TextEditingController newpassControl;
-  late TextEditingController confirmpassControl;
-  late TextEditingController forgotpass;
-  var pass = '';
-  var forgo = '';
-  var date;
-  var locationid;
   var subcityid;
-  var g_subcityid;
-  var e_subcityid;
-  var lid;
-  var level;
-  var qualifications;
-  var fieldofstudy;
 
   //GetLocation? selectedModel;
 
@@ -78,9 +47,7 @@ class EditprofileController extends GetxController with StateMixin {
   @override
   void onInit() {
     //editprofile
-    firstname = TextEditingController();
-    lastname = TextEditingController();
-    middlename = TextEditingController();
+
     email = TextEditingController();
     phone = TextEditingController();
     officephone = TextEditingController();
@@ -89,166 +56,13 @@ class EditprofileController extends GetxController with StateMixin {
 
     About = TextEditingController();
 
-    //GUARANTOR CONTACT INFORMATION
-    g_firstname = TextEditingController();
-    g_lastname = TextEditingController();
-
-    g_woreda = TextEditingController();
-    g_phone = TextEditingController();
-    g_office_phone = TextEditingController();
-//EMPLOYMENT INFORMATION
-    e_firstname = TextEditingController();
-    e_postion = TextEditingController();
-
-    e_woreda = TextEditingController();
-
-    //update pass
-    passControl = TextEditingController();
-    newpassControl = TextEditingController();
-    confirmpassControl = TextEditingController();
-    //forgot
-    forgotpass = TextEditingController();
     super.onInit();
   }
 
   var fetched;
   var edited = "";
 
-  void forgotpassword(BuildContext context) async {
-    try {
-      final isValid = forgot.currentState!.validate();
-
-      if (isValid == true) {
-        isLoading(true);
-        forgot.currentState!.save();
-        await forgott(context);
-      }
-    } finally {}
-  }
-
   var emailadd = "";
-  Future<void> forgott(context) async {
-    openAndCloseLoadingDialog(context);
-
-    var data = {
-      "email": forgotpass.text,
-    };
-    print(data);
-    emailadd = await RemoteServices.forgott(data);
-    print(emailadd.toString());
-    if (emailadd.toString() == "200") {
-      closeDialogforgot(true, emailadd, context);
-      isLoading(false);
-      print("yess");
-    } else {
-      //inforesponse = edited;
-      closeDialogforgot(false, emailadd, context);
-      print("noo");
-      //  print(edited.toString());
-    }
-  }
-
-  closeDialogforgot(bool stat, String data, BuildContext context) {
-    Future.delayed(const Duration(seconds: 1));
-    // Dismiss CircularProgressIndicator
-    Navigator.of(context).pop();
-    if (stat == false) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text(
-            data.toString(),
-            style: const TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w500,
-              color: Colors.black,
-              fontFamily: 'WorkSans',
-            ),
-          ),
-          actions: <Widget>[
-            FlatButton(
-              onPressed: () async {
-                Navigator.of(context).pop(true);
-                Navigator.pop(context);
-                isLoading(false);
-              },
-              child: const Text('ok'),
-            ),
-          ],
-        ),
-      );
-    } else {
-      // ignore: deprecated_member_use
-
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text(
-            'cheak your email aadress ',
-            style: TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w500,
-              color: Colors.black,
-              fontFamily: 'WorkSans',
-            ),
-          ),
-          actions: <Widget>[
-            // ignore: deprecated_member_use
-            FlatButton(
-              onPressed: () async {
-                isLoading(false);
-                Navigator.of(context).pop(true);
-
-                Navigator.pop(context);
-                isLoading(false);
-                //    openAndCloseLoadingDialog(context);
-                print("yess");
-              },
-              child: const Text('ok'),
-            ),
-          ],
-        ),
-      );
-    }
-  }
-
-  void changepass(BuildContext context) async {
-    try {
-      final isValid = changePass.currentState!.validate();
-
-      if (isValid == true) {
-        isLoading(true);
-        changePass.currentState!.save();
-        await updatePass(context);
-      }
-    } finally {
-      // ignore: todo
-      // TODO
-    }
-  }
-
-  Future<void> updatePass(context) async {
-    openAndCloseLoadingDialog(context);
-
-    var data = {
-      "old_password": passControl.text,
-      "password": newpassControl.text,
-      "password_confirmation": confirmpassControl.text,
-    };
-    print(data);
-    edited = await RemoteServices.updatepass(data);
-    //print(edited.toString());
-    if (edited.toString() == "200") {
-      closeDialogpassword(true, edited, context);
-      isLoading(false);
-      print("yess");
-    } else {
-      //inforesponse = edited;
-      closeDialogpassword(false, edited, context);
-      print("noo");
-      //  print(edited.toString());
-    }
-  }
 
   Future<void> fetchPf(var id) async {
     if (id == "noid") {
@@ -263,28 +77,14 @@ class EditprofileController extends GetxController with StateMixin {
           isFetched.value = true;
           id = fetched.id;
 
-          firstname.text = fetched.first_name;
-          lastname.text = fetched.last_name;
-          middlename.text = fetched.middle_name;
           phone.text = fetched.phone_no;
-          macthgender.value = fetched.gender;
-          since.value = fetched.teaching_since;
+
           email.text = fetched.email;
-          date = fetched.birth_date;
+
           officephone.text = fetched.phone_no_office;
           rephone.text = fetched.phone_no_residence;
           subcityid = fetched.subcity;
           woreda.text = fetched.woreda;
-          g_firstname.text = fetched.guarantor_name;
-          g_woreda.text = fetched.guarantor_woreda;
-          g_subcityid = fetched.guarantor_subcity;
-          g_phone.text = fetched.guarantor_phone;
-          g_office_phone.text = fetched.guarantor_phone_office;
-          e_firstname.text = fetched.employer_name;
-          e_postion.text = fetched.employer_position;
-          e_subject = fetched.employment_subject;
-          e_subcityid = fetched.employer_city;
-          e_woreda.text = fetched.employer_woreda;
 
           About.text = fetched.about;
 
@@ -324,33 +124,21 @@ class EditprofileController extends GetxController with StateMixin {
     openAndCloseLoadingDialog(context);
 
     print("yes am here");
+    print(email.text);
+    print(phone.text);
+    print(officephone.text);
+    print(rephone.text);
+    print(subcityid.toString());
+    print(woreda.toString());
+    print(About.text);
     var data = {
-      "first_name": firstname.text,
-      "middle_name": middlename.text,
-      "last_name": lastname.text,
-      "gender": macthgender.value,
+      // "email": email.text,
       "phone_no": phone.text,
-      "birth_date": date,
-      "teaching_since": since.value,
-      "email": email.text,
       "phone_no_office": officephone.text,
       "phone_no_residence": rephone.text,
-      "guarantor_name": g_firstname.text,
-      "guarantor_woreda": g_woreda.text,
-      "guarantor_subcity": g_subcityid,
-      "guarantor_phone": g_phone.text,
-      "guarantor_phone_office": g_office_phone.text,
-      "employer_name": e_firstname.text,
-      "employer_position": e_postion.text,
-      "employer_woreda": e_woreda.text,
-      "employer_city": e_subcityid,
-      "employment_subject": e_subject,
+      "subcity": subcityid.toString(),
+      "woreda": woreda.toString(),
       "about": About.text,
-      "subject_id": fieldofstudy,
-      "qualification_id": qualifications,
-      "address_id": locationid,
-      "subcity": subcityid,
-      "woreda": woreda,
     };
     inforesponse = await RemoteServices.editPersonalInfo(data);
     if (inforesponse.toString() == "200") {
@@ -361,76 +149,12 @@ class EditprofileController extends GetxController with StateMixin {
     }
   }
 
-  closeDialogpassword(bool stat, String data, BuildContext context) {
-    Future.delayed(const Duration(seconds: 1));
-    // Dismiss CircularProgressIndicator
-    Navigator.of(context).pop();
-    if (stat == false) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text(
-            'Password Not Updated \n ' + data.toString(),
-            style: const TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w500,
-              color: Colors.black,
-              fontFamily: 'WorkSans',
-            ),
-          ),
-          actions: <Widget>[
-            FlatButton(
-              onPressed: () async {
-                Navigator.of(context).pop(true);
-                Navigator.pop(context);
-                isLoading(false);
-              },
-              child: const Text('ok'),
-            ),
-          ],
-        ),
-      );
-    } else {
-      // ignore: deprecated_member_use
-
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text(
-            'Password Edited',
-            style: TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w500,
-              color: Colors.black,
-              fontFamily: 'WorkSans',
-            ),
-          ),
-          actions: <Widget>[
-            // ignore: deprecated_member_use
-            FlatButton(
-              onPressed: () async {
-                isLoading(false);
-                Navigator.of(context).pop(true);
-
-                Navigator.pop(context);
-                isLoading(false);
-                //    openAndCloseLoadingDialog(context);
-                print("yess");
-              },
-              child: const Text('ok'),
-            ),
-          ],
-        ),
-      );
-    }
-  }
-
   closeDialog(bool stat, String data, BuildContext context) async {
     Future.delayed(const Duration(seconds: 1));
     var body;
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     // Dismiss CircularProgressIndicator
-    Navigator.of(context).pop();
+    // Navigator.of(context).pop();
     if (stat == false) {
       showDialog(
         context: context,

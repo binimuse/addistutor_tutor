@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
 import 'package:addistutor_tutor/Wallet/topuppage.dart';
 import 'package:addistutor_tutor/constants.dart';
 import 'package:addistutor_tutor/controller/walletcontroller.dart';
@@ -102,7 +103,7 @@ class _EditProfilePageState extends State<WalletPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Text(
-                                walletContoller.wallet.toString() + ' birr',
+                                "ETB - " + walletContoller.wallet.toString(),
                                 style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 29,
@@ -118,7 +119,7 @@ class _EditProfilePageState extends State<WalletPage> {
                                     backgroundColor: Colors.white,
                                     child: ClipOval(
                                       child: Image.network(
-                                        'https://nextgeneducation.et/api/teacher-profile-picture/${ids}',
+                                        'https://tutor.oddatech.com/api/teacher-profile-picture/${ids}',
                                         fit: BoxFit.contain,
                                       ),
                                     ),
@@ -128,7 +129,7 @@ class _EditProfilePageState extends State<WalletPage> {
                             ],
                           ),
                           Text(
-                            "Available Balance",
+                            "Your Current Balance",
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16,
@@ -159,7 +160,7 @@ class _EditProfilePageState extends State<WalletPage> {
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(18))),
                                       child: Icon(
-                                        Icons.trending_down,
+                                        Icons.trending_up,
                                         color: Colors.blue[900],
                                         size: 30,
                                       ),
@@ -169,7 +170,7 @@ class _EditProfilePageState extends State<WalletPage> {
                                       height: 4,
                                     ),
                                     Text(
-                                      "Topup",
+                                      "Deposit here",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w700,
                                           fontSize: 14,
@@ -205,7 +206,7 @@ class _EditProfilePageState extends State<WalletPage> {
                                     // ignore: prefer_const_literals_to_create_immutables
                                     children: <Widget>[
                                       const Text(
-                                        "Recent approved Transactions",
+                                        "Recent Transactions",
                                         style: TextStyle(
                                             fontWeight: FontWeight.w900,
                                             fontSize: 18,
@@ -501,7 +502,7 @@ class _EditProfilePageState extends State<WalletPage> {
                                                                 .start,
                                                         children: <Widget>[
                                                           Text(
-                                                            "payment Pending",
+                                                            "payment pending",
                                                             style: TextStyle(
                                                                 fontSize: 18,
                                                                 fontWeight:

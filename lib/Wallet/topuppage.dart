@@ -106,7 +106,7 @@ class _FeedbackScreenState extends State<TopUpPage> {
                           top: MediaQuery.of(context).padding.top,
                           left: 16,
                           right: 16),
-                      child: Image.asset('assets/images/feedbackImage.png'),
+                      child: Image.asset('assets/images/t.jpg'),
                     ),
                     Padding(
                       padding:
@@ -144,7 +144,8 @@ class _FeedbackScreenState extends State<TopUpPage> {
                                 cursorColor: Colors.blue,
                                 decoration: const InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: 'Enter your Slip Id...'),
+                                    hintText:
+                                        'Enter your transaction reference number'),
                                 validator: (value) {
                                   return walletContoller.validateName(value!);
                                 },

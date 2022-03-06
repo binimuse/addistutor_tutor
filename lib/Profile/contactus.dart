@@ -43,7 +43,7 @@ class _HomePageState extends State<ContactDetailsView>
             ),
           ),
           title: const Text(
-            "Contact US",
+            "Contact us",
             style: TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.w500,

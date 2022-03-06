@@ -21,9 +21,9 @@ class Body extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              "Welcome to NextGen ",
+              "WELCOME TO NEXTGEN",
               style: TextStyle(
-                fontSize: 25.0,
+                fontSize: 28.0,
                 fontFamily: 'WorkSans',
                 fontWeight: FontWeight.bold,
                 letterSpacing: 0.4,
@@ -31,15 +31,16 @@ class Body extends StatelessWidget {
                 color: kPrimaryColor,
               ),
             ),
+            const SizedBox(height: 10),
             const Text(
-              "Tutor Applicaion",
+              "Tutor App",
               style: TextStyle(
-                fontSize: 15.0,
+                fontSize: 18.0,
                 fontFamily: 'Roboto',
                 fontWeight: FontWeight.normal,
                 letterSpacing: 0.4,
                 height: 0.9,
-                color: kPrimaryColor,
+                color: kPrimaryLightColor,
               ),
             ),
             SizedBox(height: size.height * 0.05),
@@ -51,7 +52,7 @@ class Body extends StatelessWidget {
             ),
             SizedBox(height: size.height * 0.05),
             RoundedButton(
-              text: "Login",
+              text: "Log in",
               press: () {
                 Navigator.push(
                   context,

@@ -56,13 +56,12 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   @override
   Widget build(BuildContext context) {
     const bodyStyle = TextStyle(
-      fontSize: 16.0,
-      fontFamily: 'WorkSans',
-      fontWeight: FontWeight.bold,
-      letterSpacing: 0.4,
-      height: 0.9,
-      color: Color(0xFF4A6572),
-    );
+        fontSize: 15.0,
+        fontFamily: 'Arial',
+        fontWeight: FontWeight.bold,
+        letterSpacing: 0.7,
+        wordSpacing: 0.7,
+        color: Colors.white);
 
     const pageDecoration = PageDecoration(
       titleTextStyle: TextStyle(
@@ -70,33 +69,33 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           fontFamily: 'Roboto',
           letterSpacing: 0.4,
           fontWeight: FontWeight.w800,
-          color: kPrimaryColor),
+          color: Colors.white),
       bodyTextStyle: bodyStyle,
       descriptionPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
-      pageColor: Colors.white,
+      pageColor: kPrimaryColor,
       imagePadding: EdgeInsets.zero,
     );
 
     return IntroductionScreen(
-      globalBackgroundColor: Colors.white,
+      globalBackgroundColor: kPrimaryColor,
 
       pages: [
         PageViewModel(
-          title: "Choice",
+          title: "CHOICE",
           body:
               "You Can Pick tutorials that work best for you based on time,level and location",
           image: _buildImage('t.jpg'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Standardization",
+          title: "STANDARADIZATION",
           body:
               "We will help standardize such as thing as time keeping,payments and professional ethics.",
           image: _buildImage('p.jpg'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Professional development",
+          title: "PROFESIONAL DEVELOPEMENT",
           body:
               "We will organize monthly professional dev't sessions to help you continue your own dev't as a teacher.",
           image: _buildImage('edi.jpg'),
@@ -125,13 +124,14 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       dotsDecorator: const DotsDecorator(
         size: Size(10.0, 10.0),
         color: Colors.white,
+        activeColor: kPrimaryColor,
         activeSize: Size(22.0, 10.0),
         activeShape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(25.0)),
         ),
       ),
       dotsContainerDecorator: const ShapeDecoration(
-        color: Colors.black54,
+        color: kPrimaryLightColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
         ),

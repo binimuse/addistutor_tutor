@@ -1,5 +1,6 @@
 import 'package:addistutor_tutor/Appointment/components/appointmentscreen.dart';
 import 'package:addistutor_tutor/Home/models/category.dart';
+import 'package:addistutor_tutor/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'design_course_app_theme.dart';
@@ -177,8 +178,7 @@ class CategoryView extends StatelessWidget {
                                                 ),
                                                 const Icon(
                                                   Icons.star,
-                                                  color: DesignCourseAppTheme
-                                                      .nearlyBlue,
+                                                  color: kPrimaryLightColor,
                                                   size: 20,
                                                 ),
                                               ],

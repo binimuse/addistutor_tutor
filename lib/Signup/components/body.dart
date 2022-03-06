@@ -56,7 +56,7 @@ class _SplashScreenState extends State<Body> {
             children: <Widget>[
               SizedBox(height: size.height * 0.05),
               const Text(
-                "SIGN UP",
+                "Register",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: kPrimaryColor,
@@ -84,7 +84,7 @@ class _SplashScreenState extends State<Body> {
                             Icons.person_add,
                             color: kPrimaryColor,
                           ),
-                          hintText: "Fullname",
+                          hintText: "Full Name",
                           border: InputBorder.none,
                         ),
                         validator: (value) {
@@ -177,7 +177,7 @@ class _SplashScreenState extends State<Body> {
                             isPasswordTextField1 ? showPassword1 : false,
                         cursorColor: kPrimaryColor,
                         decoration: InputDecoration(
-                          hintText: "confirm Password",
+                          hintText: "Confirm password",
                           icon: const Icon(
                             Icons.lock,
                             color: kPrimaryColor,
@@ -233,7 +233,7 @@ class _SplashScreenState extends State<Body> {
                               style: const TextStyle(color: Colors.grey),
                               children: [
                                 TextSpan(
-                                  text: 'I agree with Term of Service',
+                                  text: 'I agree with the terms of service',
                                   style: const TextStyle(
                                     color: kPrimaryColor,
                                   ),
@@ -361,7 +361,7 @@ class _SplashScreenState extends State<Body> {
               ),
               const OrDivider(),
               const Text(
-                "Sign up with Google ? ",
+                "Register with Google?",
                 style: TextStyle(color: kPrimaryColor),
               ),
               const SizedBox(
@@ -371,7 +371,7 @@ class _SplashScreenState extends State<Body> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   SocalIcon(
-                    iconSrc: "assets/icons/google-plus.svg",
+                    iconSrc: "assets/images/google.png",
                     press: () {
                       _googleSignIn.signIn().then((userData) {
                         setState(() {
@@ -617,7 +617,7 @@ class _SplashScreenState extends State<Body> {
           title: Column(mainAxisSize: MainAxisSize.min, children: const [
             SizedBox(height: 15),
             Text(
-              'Successfully registerd',
+              'Tutor registered successfully',
               style: TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
@@ -659,15 +659,33 @@ class _SplashScreenState extends State<Body> {
                     ),
                   );
                 },
-                child: Center(
-                  child: Text(
-                    "Ok",
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.bold,
-                    ),
+                child: FlatButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
+                  color: kPrimaryColor,
+                  onPressed: () {
+                    Navigator.of(context).pop(true);
+                    setState(() {
+                      isLoading = false;
+                    });
+                    Navigator.push<dynamic>(
+                      context,
+                      MaterialPageRoute<dynamic>(
+                        builder: (BuildContext context) => const LoginScreen(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                      width: 20,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'Ok',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      )),
                 ),
               ),
             ),

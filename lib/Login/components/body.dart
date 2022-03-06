@@ -147,7 +147,7 @@ class _LoginScreenState extends State<Body> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const Text(
-                "Login",
+                "Log in",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: kPrimaryColor,
@@ -271,7 +271,7 @@ class _LoginScreenState extends State<Body> {
                     alignment: Alignment.center,
                     child: isLoading == false
                         ? const Text(
-                            'Login',
+                            'Log in',
                             style: TextStyle(
                               color: Colors.white,
                             ),
@@ -327,7 +327,7 @@ class _LoginScreenState extends State<Body> {
               ),
               const OrDivider(),
               const Text(
-                "Sign up with Google ? ",
+                "Register with Google ? ",
                 style: TextStyle(color: kPrimaryColor),
               ),
               const SizedBox(
@@ -337,7 +337,7 @@ class _LoginScreenState extends State<Body> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   SocalIcon(
-                    iconSrc: "assets/icons/google-plus.svg",
+                    iconSrc: "assets/images/google.png",
                     press: () {
                       _googleSignIn.signIn().then((userData) {
                         setState(() {
@@ -503,18 +503,30 @@ class _LoginScreenState extends State<Body> {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text('Please Varify Your email'),
-            content:
-                const Text("go to your email address to confirm your email"),
+            title: const Text('Please verify your email'),
+            content: const Text("Go to your email to confirm"),
             actions: <Widget>[
               FlatButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                color: kPrimaryColor,
                 onPressed: () {
                   Navigator.of(context).pop(true);
                   setState(() {
                     isLoading = false;
                   });
                 },
-                child: const Text('ok'),
+                child: Container(
+                    width: 20,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    alignment: Alignment.center,
+                    child: const Text(
+                      'Ok',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    )),
               ),
             ],
           ),
@@ -524,10 +536,13 @@ class _LoginScreenState extends State<Body> {
           showDialog(
             context: context,
             builder: (context) => AlertDialog(
-              title: const Text('info'),
-              content: const Text("To continue finish your profile"),
+              content: const Text("To continue, complete your profile"),
               actions: <Widget>[
                 FlatButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  color: kPrimaryColor,
                   onPressed: () {
                     Navigator.of(context).pop(true);
                     setState(() {
@@ -541,7 +556,16 @@ class _LoginScreenState extends State<Body> {
                       ),
                     );
                   },
-                  child: const Text('ok'),
+                  child: Container(
+                      width: 20,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'Ok',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      )),
                 ),
               ],
             ),
@@ -551,7 +575,7 @@ class _LoginScreenState extends State<Body> {
             context,
             MaterialPageRoute(
               builder: (context) => const Scaffold(
-                body: TutorDahsbord(),
+                body: Main(),
               ),
             ),
             (route) => false,
@@ -592,7 +616,7 @@ class _LoginScreenState extends State<Body> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text('info'),
+          title: const Text('incorrect Email or password '),
           content: Text(body["message"]),
           actions: <Widget>[
             FlatButton(

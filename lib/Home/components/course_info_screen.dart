@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_typing_uninitialized_variables, unnecessary_null_comparison, prefer_const_constructors, deprecated_member_use, duplicate_ignore
 
 import 'package:addistutor_tutor/constants.dart';
+import 'package:addistutor_tutor/controller/endbookingcontroller.dart';
 import 'package:addistutor_tutor/controller/getreqestedbookingcpntroller.dart';
 import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,8 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
   IconData? _selectedIcon;
 
   final GetReqBooking getReqBooking = Get.put(GetReqBooking());
+  final EndBookingContoller endBookingContoller =
+      Get.put(EndBookingContoller());
 
   @override
   void initState() {
@@ -199,7 +202,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                 Row(children: [
                                   const Icon(
                                     Icons.location_pin,
-                                    color: kPrimaryColor,
+                                    color: kPrimaryLightColor,
                                     size: 10,
                                   ),
                                   Text(
@@ -381,7 +384,168 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                     ),
                                   ],
                                 )
-                              : Container(),
+                              : Obx(() => getReqBooking.isfetchedsubject.value
+                                  ? widget.requestedBooking!.ended_at == null
+                                      ? AnimatedOpacity(
+                                          duration:
+                                              const Duration(milliseconds: 500),
+                                          opacity: opacity3,
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 10,
+                                                bottom: 20,
+                                                right: 10),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: <Widget>[
+                                                Expanded(
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      _displayTextInputDialog(
+                                                          context,
+                                                          widget
+                                                              .requestedBooking!
+                                                              .id);
+                                                    },
+                                                    child: Container(
+                                                      height: 35,
+                                                      width: 10,
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.red,
+                                                        borderRadius:
+                                                            const BorderRadius
+                                                                .all(
+                                                          Radius.circular(16.0),
+                                                        ),
+                                                        boxShadow: <BoxShadow>[
+                                                          BoxShadow(
+                                                              color: DesignCourseAppTheme
+                                                                  .nearlyBlue
+                                                                  .withOpacity(
+                                                                      0.5),
+                                                              offset:
+                                                                  const Offset(
+                                                                      1.1, 1.1),
+                                                              blurRadius: 6.0),
+                                                        ],
+                                                      ),
+                                                      child: const Center(
+                                                        child: Text(
+                                                          'End Booking',
+                                                          textAlign:
+                                                              TextAlign.left,
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            fontSize: 18,
+                                                            letterSpacing: 0.0,
+                                                            color: Colors.white,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      : AnimatedOpacity(
+                                          duration:
+                                              const Duration(milliseconds: 500),
+                                          opacity: opacity3,
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 10,
+                                                bottom: 20,
+                                                right: 10),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: <Widget>[
+                                                Expanded(
+                                                  child: Container(
+                                                    height: 35,
+                                                    width: 10,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.red,
+                                                      borderRadius:
+                                                          const BorderRadius
+                                                              .all(
+                                                        Radius.circular(16.0),
+                                                      ),
+                                                      boxShadow: <BoxShadow>[
+                                                        BoxShadow(
+                                                            color:
+                                                                DesignCourseAppTheme
+                                                                    .nearlyBlue
+                                                                    .withOpacity(
+                                                                        0.5),
+                                                            offset:
+                                                                const Offset(
+                                                                    1.1, 1.1),
+                                                            blurRadius: 6.0),
+                                                      ],
+                                                    ),
+                                                    child: Center(
+                                                      child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            const Text(
+                                                              "Booking ended at : ",
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .left,
+                                                              style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                fontSize: 18,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              widget
+                                                                  .requestedBooking!
+                                                                  .ended_at,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .left,
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                fontSize: 18,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                            )
+                                                          ]),
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                  : Center(
+                                      child: Column(children: [
+                                      CircularProgressIndicator(),
+                                      // const Center(child: Text("No Booked Tutors"))
+                                    ]))),
                         ],
                       ),
                     ),
@@ -403,7 +567,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(18.0),
                           child: Image.network(
-                            "https://nextgeneducation.et/api/student-profile-picture/${widget.requestedBooking!.student.id}",
+                            "https://tutor.oddatech.com/api/student-profile-picture/${widget.requestedBooking!.student.id}",
                           )),
                     ))),
             Padding(
@@ -521,6 +685,60 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
         ),
       ),
     );
+  }
+
+  final TextEditingController _textFieldController = TextEditingController();
+  var valueText;
+  Future<void> _displayTextInputDialog(BuildContext context, int id) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return Form(
+            key: endBookingContoller.Formkey,
+            child: AlertDialog(
+              title: const Text('End Session'),
+              content: TextFormField(
+                onChanged: (value) {
+                  setState(() {
+                    valueText = value;
+                  });
+                },
+                controller: _textFieldController,
+                decoration: const InputDecoration(
+                    hintText: "Please enter your reason?"),
+                validator: (value) {
+                  return endBookingContoller.validateName(value!);
+                },
+              ),
+              actions: <Widget>[
+                FlatButton(
+                  color: Colors.red,
+                  textColor: Colors.white,
+                  child: const Text('CANCEL'),
+                  onPressed: () {
+                    setState(() {
+                      Navigator.pop(context);
+                    });
+                  },
+                ),
+                FlatButton(
+                  color: Colors.green,
+                  textColor: Colors.white,
+                  child: const Text('OK'),
+                  onPressed: () async {
+                    setState(() {
+                      //  codeDialog = valueText;
+                      endBookingContoller.editProf(context, valueText, id);
+                    });
+                    await Future<dynamic>.delayed(
+                        const Duration(milliseconds: 2000));
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
+          );
+        });
   }
 
   final Color active = Colors.grey.shade800;

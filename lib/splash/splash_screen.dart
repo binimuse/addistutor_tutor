@@ -6,6 +6,8 @@ import 'package:addistutor_tutor/main/main.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../constants.dart';
+
 //import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -66,22 +68,30 @@ class _SplashScreenState extends State<SplashScreen> {
             Center(
               child: Image.asset(
                 'assets/images/lg3.png',
-                height: 150,
+                height: 170,
                 width: 360,
               ),
             ),
-            const Center(
-              child: Text(
-                "One-on-One Tutorial Service ",
-                style: TextStyle(
-                  fontSize: 26.0,
-                  fontFamily: 'WorkSans',
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 0.4,
-                  height: 0.9,
-                  color: Color(0xFF4A6572),
-                ),
-              ),
+            Center(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Center(
+                      child: Text(
+                        "One-on-One \n Tutorial Service ",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 28.0,
+                          fontFamily: 'WorkSans',
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 0.4,
+                          height: 0.9,
+                          color: kPrimaryLightColor,
+                        ),
+                      ),
+                    ),
+                  ]),
             ),
             const SizedBox(
               height: 10,
@@ -89,10 +99,10 @@ class _SplashScreenState extends State<SplashScreen> {
             const Text(
               "Increase your income by working flexibly!",
               style: TextStyle(
-                fontSize: 12.0,
+                fontSize: 13.0,
                 fontFamily: 'Roboto',
                 fontWeight: FontWeight.normal,
-                letterSpacing: 0.4,
+                letterSpacing: 0.2,
                 height: 0.9,
                 color: Color(0xFF4A6572),
               ),
