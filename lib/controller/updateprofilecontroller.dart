@@ -122,30 +122,48 @@ class Updateprofilecontoller extends GetxController with StateMixin {
   Future<void> seteditInfo(ids, BuildContext context) async {
     print(ids);
     openAndCloseLoadingDialog(context);
+    var uploaded = await RemoteServices.uploadImage(image, ids.toString());
+    if (uploaded) {
+      print("rebcaa");
+      var data = {
+        "phone_no": phone.text,
+        "phone_no_office": officephone.text,
+        "phone_no_residence": rephone.text,
+        "subcity": subcityid.toString(),
+        "woreda": woreda.toString(),
+        "about": About.text,
+      };
+      inforesponse = await RemoteServices.editPersonalInfo(data);
+      if (inforesponse.toString() == "200") {
+        closeDialog(true, '', context);
+        isLoading(false);
+        update();
 
-    print("yes am here");
-    print(email.text);
-    print(phone.text);
-    print(officephone.text);
-    print(rephone.text);
-    print(subcityid.toString());
-    print(woreda.toString());
-    print(About.text);
-    var data = {
-      // "email": email.text,
-      "phone_no": phone.text,
-      "phone_no_office": officephone.text,
-      "phone_no_residence": rephone.text,
-      "subcity": subcityid.toString(),
-      "woreda": woreda.toString(),
-      "about": About.text,
-    };
-    inforesponse = await RemoteServices.editPersonalInfo(data);
-    if (inforesponse.toString() == "200") {
-      closeDialog(true, '', context);
-      isLoading(false);
+        ifupdatd(true);
+      } else {
+        closeDialog(false, inforesponse, context);
+
+        ifupdatd(false);
+      }
     } else {
-      closeDialog(false, inforesponse, context);
+      print("enku");
+      var data = {
+        // "email": email.text,
+        "phone_no": phone.text,
+        "phone_no_office": officephone.text,
+        "phone_no_residence": rephone.text,
+        "subcity": subcityid.toString(),
+        "woreda": woreda.toString(),
+        "about": About.text,
+      };
+      inforesponse = await RemoteServices.editPersonalInfo(data);
+      if (inforesponse.toString() == "200") {
+        closeDialog(true, '', context);
+        isLoading(false);
+        update();
+      } else {
+        closeDialog(false, inforesponse, context);
+      }
     }
   }
 

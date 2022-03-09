@@ -42,19 +42,21 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _checkIfLoggedIn() async {
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
-    var token = localStorage.getString('token');
+    try {
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
+      var token = localStorage.getString('token');
 
-    var user = localStorage.getString('user');
-    var bodys = json.decode(user!);
+      var user = localStorage.getString('user');
+      var bodys = json.decode(user!);
 
-    if (token != null &&
-        bodys["email_verified_at"] != null &&
-        bodys["teacher_id"] != null) {
-      setState(() {
-        isAuth = true;
-      });
-    }
+      if (token != null &&
+          bodys["email_verified_at"] != null &&
+          bodys["teacher_id"] != null) {
+        setState(() {
+          isAuth = true;
+        });
+      }
+    } catch (e) {}
   }
 
   @override
@@ -76,10 +78,10 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Center(
+                  children: const [
+                    Center(
                       child: Text(
-                        "One-on-One \n Tutorial Service ",
+                        "One-on-One \n Tutorial Service",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 28.0,

@@ -14,7 +14,7 @@ class GetReqBooking extends GetxController with StateMixin {
   var ratings;
 
   RequestedBooking? chat;
-
+  List<Bookingschedule> reqdate = [];
   var isLoading = false.obs;
   void fetchReqBooking(var bId) async {
     listsubject.value = await RemoteServices.getrequestedbooking(bId, "");
@@ -171,7 +171,7 @@ class GetReqBooking extends GetxController with StateMixin {
       session = listsubject5!.session.toString();
       location = listsubject5!.student.location.name.toString();
       //
-      // day = listsubject5!.booking_schedule.day.toString();
+      reqdate = listsubject5!.booking_schedule;
       is_active = listsubject5!.is_active.toString();
       title = listsubject5!.subject.title.toString();
 

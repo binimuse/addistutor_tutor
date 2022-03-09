@@ -1,5 +1,106 @@
 // ignore_for_file: non_constant_identifier_names
 
+class Teacher2 {
+  int id;
+
+  String first_name;
+  String middle_name;
+  String last_name;
+
+  String phone_no;
+  String email;
+  String gender;
+  String rating;
+  String teaching_since;
+
+  String birth_date;
+
+  String about;
+  String phone_no_office;
+  String phone_no_residence;
+  String subcity;
+  String woreda;
+  String guarantor_name;
+  String guarantor_house_no;
+  String guarantor_woreda;
+  String guarantor_subcity;
+  String guarantor_phone;
+  String guarantor_phone_office;
+  String guarantor_phone_residence;
+  String employer_name;
+  String employer_position;
+  String employment_subject;
+  String employment_teaching_level;
+  String employer_city;
+  String employer_woreda;
+  GetLocation2 location;
+  Teacher2({
+    required this.id,
+    required this.first_name,
+    required this.last_name,
+    required this.middle_name,
+    required this.phone_no,
+    required this.email,
+    required this.birth_date,
+    required this.about,
+    required this.phone_no_office,
+    required this.phone_no_residence,
+    required this.subcity,
+    required this.woreda,
+    required this.guarantor_name,
+    required this.guarantor_house_no,
+    required this.guarantor_woreda,
+    required this.guarantor_subcity,
+    required this.guarantor_phone,
+    required this.guarantor_phone_office,
+    required this.guarantor_phone_residence,
+    required this.employer_name,
+    required this.employer_position,
+    required this.employment_subject,
+    required this.employment_teaching_level,
+    required this.employer_city,
+    required this.employer_woreda,
+    required this.rating,
+    required this.teaching_since,
+    required this.gender,
+    required this.location,
+  });
+
+  factory Teacher2.fromJson(Map<String, dynamic> json) {
+    return Teacher2(
+      id: json["id"] as int,
+      first_name: json["first_name"],
+      last_name: json["last_name"],
+      middle_name: json["middle_name"],
+      phone_no: json["phone_no"],
+      email: json["email"],
+      teaching_since: json["teaching_since"],
+      birth_date: json["birth_date"],
+      about: json["about"],
+      phone_no_office: json["phone_no_office"],
+      phone_no_residence: json["phone_no_residence"],
+      subcity: json["subcity"],
+      woreda: json["woreda"],
+      guarantor_name: json["guarantor_name"],
+      guarantor_house_no: json["guarantor_house_no"],
+      guarantor_woreda: json["guarantor_woreda"],
+      guarantor_subcity: json["guarantor_subcity"],
+      guarantor_phone: json["guarantor_phone"],
+      guarantor_phone_office: json["guarantor_phone_office"],
+      guarantor_phone_residence: json["guarantor_phone_residence"],
+      employer_name: json["employer_name"],
+      employer_position: json["employer_position"],
+      employment_subject: json["employment_subject"],
+      employment_teaching_level: json["employment_teaching_level"],
+      employer_city: json["employer_city"],
+      employer_woreda: json["employer_woreda"],
+      rating: json["rating"],
+      gender: json["gender"],
+      location: GetLocation2.fromJson(json["location"]),
+    );
+  }
+}
+
 class Teacher {
   int id;
 
@@ -99,6 +200,23 @@ class Teacher {
   }
 }
 
+class GetLocation2 {
+  String name;
+  String description;
+
+  GetLocation2({
+    required this.name,
+    required this.description,
+  });
+
+  factory GetLocation2.fromJson(Map<String, dynamic> json) {
+    return GetLocation2(
+      name: json["name"],
+      description: json["description"],
+    );
+  }
+}
+
 class Activedays {
   String day;
   String is_active;
@@ -160,6 +278,7 @@ class ContactUS {
   String name;
   String email;
   String phone;
+  String phone2;
   String facebook;
   String twitter;
   String instagram;
@@ -169,6 +288,7 @@ class ContactUS {
     required this.name,
     required this.email,
     required this.phone,
+    required this.phone2,
     required this.facebook,
     required this.twitter,
     required this.instagram,
@@ -180,6 +300,7 @@ class ContactUS {
       name: json["name"],
       email: json["email"],
       phone: json["phone"],
+      phone2: json["secondary_phone"],
       facebook: json["facebook"],
       twitter: json["twitter"],
       instagram: json["instagram"],
@@ -313,6 +434,30 @@ class RequestedBooking {
       subject: Subjects.fromJson(json["subject"]),
       booking_schedule: List<Bookingschedule>.from(
           json["booking_schedule"].map((x) => Bookingschedule.fromJson(x))),
+    );
+  }
+}
+
+class Subjects2 {
+  int id;
+
+  String code;
+  String title;
+  String tutoring_level_id;
+
+  Subjects2({
+    required this.id,
+    required this.code,
+    required this.title,
+    required this.tutoring_level_id,
+  });
+
+  factory Subjects2.fromJson(Map<String, dynamic> json) {
+    return Subjects2(
+      id: json["id"] as int,
+      code: json["code"],
+      title: json["title"],
+      tutoring_level_id: json["tutoring_level_id"],
     );
   }
 }
@@ -593,6 +738,26 @@ class GetPenalties {
       title: json["title"],
       tutoring_level_id: json["tutoring_level_id"],
       penalty: Penalty.fromJson(json["penalty"]),
+    );
+  }
+}
+
+class Myaccount {
+  String full_name;
+  String email;
+  String phone;
+
+  Myaccount({
+    required this.full_name,
+    required this.email,
+    required this.phone,
+  });
+
+  factory Myaccount.fromJson(Map<String, dynamic> json) {
+    return Myaccount(
+      full_name: json["full_name"],
+      email: json["email"],
+      phone: json["phone"],
     );
   }
 }

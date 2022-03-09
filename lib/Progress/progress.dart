@@ -44,19 +44,18 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     );
   }
 
-  Widget _buildImage(String assetName, [double width = 200]) {
-    return Image(
-      image: AssetImage(
-        'assets/images/$assetName',
-      ),
+  Widget _buildImage(String assetName, [double width = 250]) {
+    return SvgPicture.asset(
+      'assets/icons/$assetName',
       width: width,
+      height: 250,
     );
   }
 
   @override
   Widget build(BuildContext context) {
     const bodyStyle = TextStyle(
-        fontSize: 15.0,
+        fontSize: 25.0,
         fontFamily: 'Arial',
         fontWeight: FontWeight.bold,
         letterSpacing: 0.7,
@@ -65,7 +64,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
     const pageDecoration = PageDecoration(
       titleTextStyle: TextStyle(
-          fontSize: 24.0,
+          fontSize: 35.0,
           fontFamily: 'Roboto',
           letterSpacing: 0.4,
           fontWeight: FontWeight.w800,
@@ -84,21 +83,21 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           title: "CHOICE",
           body:
               "You Can Pick tutorials that work best for you based on time,level and location",
-          image: _buildImage('t.jpg'),
+          image: _buildImage('Choice.svg'),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "STANDARADIZATION",
           body:
               "We will help standardize such as thing as time keeping,payments and professional ethics.",
-          image: _buildImage('p.jpg'),
+          image: _buildImage('Safety.svg'),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "PROFESIONAL DEVELOPEMENT",
           body:
               "We will organize monthly professional dev't sessions to help you continue your own dev't as a teacher.",
-          image: _buildImage('edi.jpg'),
+          image: _buildImage('Convenience.svg'),
           decoration: pageDecoration,
         ),
       ],

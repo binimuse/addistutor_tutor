@@ -170,7 +170,7 @@ class _EditProfilePageState extends State<WalletPage> {
                                       height: 4,
                                     ),
                                     Text(
-                                      "Deposit here",
+                                      "Attach deposit slip",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w700,
                                           fontSize: 14,
@@ -392,7 +392,7 @@ class _EditProfilePageState extends State<WalletPage> {
                                                                 .start,
                                                         children: <Widget>[
                                                           Text(
-                                                            "payment declined",
+                                                            "Payment declined",
                                                             style: TextStyle(
                                                                 fontSize: 18,
                                                                 fontWeight:

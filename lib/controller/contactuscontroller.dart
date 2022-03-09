@@ -10,6 +10,7 @@ class ContactUSContolller extends GetxController with StateMixin {
 
   var name;
   var phone;
+  var phone2;
   var email;
   var facebook;
   var twitter;
@@ -22,6 +23,7 @@ class ContactUSContolller extends GetxController with StateMixin {
     if (contact != null) {
       name = contact!.name.toString();
       phone = contact!.phone.toString();
+      phone2 = contact!.phone2.toString();
       email = contact!.email.toString();
       facebook = contact!.facebook.toString();
       twitter = contact!.twitter.toString();

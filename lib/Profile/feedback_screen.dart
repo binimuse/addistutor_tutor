@@ -48,7 +48,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                       ),
                     ),
                     title: const Text(
-                      "FeedBack",
+                      "Feedback",
                       style: TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.w500,
@@ -70,13 +70,12 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                                   top: MediaQuery.of(context).padding.top,
                                   left: 16,
                                   right: 16),
-                              child: Image.asset(
-                                  'assets/images/feedbackImage.png'),
+                              child: Image.asset('assets/images/t.jpg'),
                             ),
                             Container(
                               padding: const EdgeInsets.only(top: 8),
                               child: const Text(
-                                'Your FeedBack',
+                                'write your feedback about our service here',
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,

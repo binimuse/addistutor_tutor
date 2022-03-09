@@ -61,7 +61,7 @@ class EditprofileController extends GetxController with StateMixin {
   var subcityid;
   var g_subcityid;
   var e_subcityid;
-  var lid;
+  var lid = "";
   var level;
   var qualifications;
   var fieldofstudy;
@@ -340,6 +340,7 @@ class EditprofileController extends GetxController with StateMixin {
       "guarantor_subcity": g_subcityid,
       "guarantor_phone": g_phone.text,
       "guarantor_phone_office": g_office_phone.text,
+      "guarantor_phone_residence": g_office_phone.text,
       "employer_name": e_firstname.text,
       "employer_position": e_postion.text,
       "employer_woreda": e_woreda.text,
@@ -350,9 +351,10 @@ class EditprofileController extends GetxController with StateMixin {
       "qualification_id": qualifications,
       "address_id": locationid,
       "subcity": subcityid,
-      "woreda": woreda,
+      "woreda": woreda.toString(),
     };
     inforesponse = await RemoteServices.editPersonalInfo(data);
+    print(inforesponse.toString());
     if (inforesponse.toString() == "200") {
       closeDialog(true, '', context);
       isLoading(false);
@@ -430,7 +432,7 @@ class EditprofileController extends GetxController with StateMixin {
     var body;
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     // Dismiss CircularProgressIndicator
-    Navigator.of(context).pop();
+    //Navigator.of(context).pop();
     if (stat == false) {
       showDialog(
         context: context,

@@ -71,7 +71,6 @@ class _SplashScreenState extends State<Body> {
               ),
               Form(
                 key: _multiSelectKey,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
                 child: Column(
                   children: [
                     TextFieldContainer(
@@ -157,7 +156,6 @@ class _SplashScreenState extends State<Body> {
                                   ),
                                 )
                               : null,
-                          contentPadding: const EdgeInsets.all(10),
                           focusedBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
                                 color: kPrimaryColor, width: 2.0),
@@ -195,7 +193,6 @@ class _SplashScreenState extends State<Body> {
                                   ),
                                 )
                               : null,
-                          contentPadding: const EdgeInsets.all(10),
                           focusedBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
                                 color: kPrimaryColor, width: 2.0),

@@ -18,6 +18,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants.dart';
+import 'getmyaccount.dart';
 
 class UpdateProfile extends StatefulWidget {
   const UpdateProfile({Key? key}) : super(key: key);
@@ -40,6 +41,8 @@ class _EditPageState extends State<UpdateProfile> {
   set _imageFile(XFile? value) {
     _imageFileList = value == null ? null : [value];
   }
+
+  final GetmyAccount getmyAccount = Get.find();
 
   late var locationname = "";
   var body;
@@ -75,6 +78,17 @@ class _EditPageState extends State<UpdateProfile> {
 
     _fetchUser();
     _getlocation();
+    _getmyaccount();
+  }
+
+  void _getmyaccount() async {
+    // monitor network fetch
+    // await Future.delayed(const Duration(milliseconds: 1000));
+    getmyAccount.fetchqr();
+    setState(() {
+      updateprofilecontoller.email.text = getmyAccount.email;
+      updateprofilecontoller.phone.text = getmyAccount.phone;
+    });
   }
 
   List<GetLocation> location = [];
@@ -168,73 +182,75 @@ class _EditPageState extends State<UpdateProfile> {
                     },
                     child: ListView(
                       children: [
-                        // id != null
-                        //     ? Center(
-                        //         child: Stack(
-                        //           children: [
-                        //             GestureDetector(
-                        //               onTap: () {
-                        //                 _showPicker(context);
-                        //               },
-                        //               child: CircleAvatar(
-                        //                 radius: 40,
-                        //                 backgroundColor: kPrimaryColor,
-                        //                 child: _imageFileList != null
-                        //                     ? ClipRRect(
-                        //                         borderRadius:
-                        //                             BorderRadius.circular(40),
-                        //                         child: Image.file(
-                        //                             File(_imageFileList![0]
-                        //                                 .path),
-                        //                             width: 95,
-                        //                             height: 95,
-                        //                             fit: BoxFit.cover),
-                        //                       )
-                        //                     : Container(
-                        //                         decoration: BoxDecoration(
-                        //                             color: Colors.grey[200],
-                        //                             borderRadius:
-                        //                                 BorderRadius.circular(
-                        //                                     50)),
-                        //                         width: 100,
-                        //                         height: 100,
-                        //                         child: Icon(
-                        //                           Icons.camera_alt,
-                        //                           color: Colors.grey[800],
-                        //                         ),
-                        //                       ),
-                        //               ),
-                        //             ),
-                        //             Positioned(
-                        //                 bottom: 0,
-                        //                 right: 0,
-                        //                 child: Container(
-                        //                   height: 30,
-                        //                   width: 30,
-                        //                   decoration: BoxDecoration(
-                        //                     shape: BoxShape.circle,
-                        //                     border: Border.all(
-                        //                       width: 2,
-                        //                       color: Theme.of(context)
-                        //                           .scaffoldBackgroundColor,
-                        //                     ),
-                        //                     color: kPrimaryColor,
-                        //                   ),
-                        //                   child: GestureDetector(
-                        //                     onTap: () {
-                        //                       _showPicker(context);
-                        //                     },
-                        //                     child: const Icon(
-                        //                       Icons.edit,
-                        //                       color: Colors.white,
-                        //                     ),
-                        //                   ),
-                        //                 )),
-                        //           ],
-                        //         ),
-                        //       )
-                        //     : Container(),
-
+                        id != null
+                            ? Center(
+                                child: Stack(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        _showPicker(context);
+                                      },
+                                      child: CircleAvatar(
+                                        radius: 40,
+                                        backgroundColor: kPrimaryColor,
+                                        child: _imageFileList != null
+                                            ? ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(40),
+                                                child: Image.file(
+                                                    File(_imageFileList![0]
+                                                        .path),
+                                                    width: 95,
+                                                    height: 95,
+                                                    fit: BoxFit.cover),
+                                              )
+                                            : Container(
+                                                decoration: BoxDecoration(
+                                                    color: Colors.grey[200],
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            50)),
+                                                width: 100,
+                                                height: 100,
+                                                child: Icon(
+                                                  Icons.camera_alt,
+                                                  color: Colors.grey[800],
+                                                ),
+                                              ),
+                                      ),
+                                    ),
+                                    Positioned(
+                                        bottom: 0,
+                                        right: 0,
+                                        child: Container(
+                                          height: 30,
+                                          width: 30,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                              width: 2,
+                                              color: Theme.of(context)
+                                                  .scaffoldBackgroundColor,
+                                            ),
+                                            color: kPrimaryColor,
+                                          ),
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              _showPicker(context);
+                                            },
+                                            child: const Icon(
+                                              Icons.edit,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        )),
+                                  ],
+                                ),
+                              )
+                            : Container(),
+                        const SizedBox(
+                          height: 20,
+                        ),
                         const Center(
                           child: Text(
                             "CONTACT INFORMATION",

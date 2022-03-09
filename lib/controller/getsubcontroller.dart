@@ -8,10 +8,10 @@ class GetSubect extends GetxController with StateMixin {
   var sent = false.obs;
   Subjects? subject;
 
-  var listlocation2 = <Subjects>[].obs;
+  var listlocation2 = <Subjects2>[].obs;
   var isfetchedlocation2 = false.obs;
   var sent2 = false.obs;
-  Subjects? subject2;
+  Subjects2? subject2;
 
   void fetchLocation(var id) async {
     //print(id);
@@ -21,11 +21,14 @@ class GetSubect extends GetxController with StateMixin {
       //  print(listlocation.length.toString());
       isfetchedlocation(true);
     }
+  }
 
-    listlocation2.value = await RemoteServices.getsubject(id);
+  void fetchLocation2() async {
+    //print(id);
+    listlocation2.value = await RemoteServices.getsubject2();
 
     if (listlocation2.isNotEmpty) {
-      //print(list.length.toString());
+      //  print(listlocation.length.toString());
       isfetchedlocation2(true);
     }
   }

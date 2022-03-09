@@ -226,7 +226,7 @@ class _HomePageState extends State<Appointment>
         const Padding(
           padding: EdgeInsets.only(top: 20.0, left: 18, right: 16),
           child: Text(
-            'Top Rated Tutors ',
+            'Top rated tutors ',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontWeight: FontWeight.w600,

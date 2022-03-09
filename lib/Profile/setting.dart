@@ -23,19 +23,7 @@ bool isActive = true;
 
 final List locale = [
   {'name': 'English', 'locale': const Locale('en', 'US')},
-  {'name': 'Hindi', 'locale': const Locale('hi', 'IN')},
-  {'name': 'Arabic', 'locale': const Locale('ar', 'IN')},
   {'name': 'Amahric', 'locale': const Locale('am', 'IN')},
-  {'name': 'deutch', 'locale': const Locale('de', 'IN')},
-  {'name': 'Espaoal', 'locale': const Locale('es', 'IN')},
-  {'name': 'French', 'locale': const Locale('fr', 'IN')},
-  {'name': 'Indonesia', 'locale': const Locale('in', 'IN')},
-  {'name': 'China', 'locale': const Locale('ch', 'IN')},
-  {'name': 'Malaysia', 'locale': const Locale('ma', 'IN')},
-  {'name': 'Turkia', 'locale': const Locale('tu', 'IN')},
-  {'name': 'Italia', 'locale': const Locale('it', 'IN')},
-  {'name': 'portugal', 'locale': const Locale('po', 'IN')},
-  {'name': 'Somlia', 'locale': const Locale('so', 'IN')},
 ];
 updateLanguage(Locale locale) {
   Get.back();
@@ -158,13 +146,6 @@ class _SettingsFourPageState extends State<SettingsFourPage> {
                   ],
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            buildAccountOptionRow(context, "Privacy and Policy"),
-            const SizedBox(
-              height: 40,
             ),
             Row(
               children: const [

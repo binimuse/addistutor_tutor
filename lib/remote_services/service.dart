@@ -338,15 +338,15 @@ class RemoteServices {
     }
   }
 
-  static Future<List<Teacher>> getpopular() async {
+  static Future<List<Teacher2>> getpopular() async {
     res = await Network().getData("top-tutors");
     var body = json.decode(res.body);
 
     if (res.statusCode == 200) {
       return body["data"]
-          .map((e) => Teacher.fromJson(e))
+          .map((e) => Teacher2.fromJson(e))
           .toList()
-          .cast<Teacher>();
+          .cast<Teacher2>();
     } else {
       throw Exception('Failed to load Comment');
     }
@@ -396,12 +396,30 @@ class RemoteServices {
     }
   }
 
-  static Future<List<Subjects>> getsubject(var tid) async {
-    res = await Network().getData("subjects?/tutoring_level_id${tid}");
+  static Future<List<Subjects2>> getsubject2() async {
+    res = await Network().getData("subjects");
 
     var body = json.decode(res.body);
 
-    print("body");
+    // print("body");
+    print(body["data"]);
+    if (res.statusCode == 200) {
+      return body["data"]
+          .map((e) => Subjects2.fromJson(e))
+          .toList()
+          .cast<Subjects2>();
+    } else {
+      throw Exception('Failed to load Comment');
+    }
+  }
+
+  static Future<List<Subjects>> getsubject(var tid) async {
+    print(tid);
+    res = await Network().getData("subjects?tutoring_level_id=${tid}");
+
+    var body = json.decode(res.body);
+
+    // print("body");
     print(body["data"]);
     if (res.statusCode == 200) {
       return body["data"]
@@ -456,6 +474,17 @@ class RemoteServices {
           .cast<GetPenalties>();
     } else {
       throw Exception('Failed to load Comment');
+    }
+  }
+
+  static Future<Myaccount> getmyaacount() async {
+    res = await Network().getData("my-account");
+
+    var body = json.decode(res.body);
+    if (res.statusCode == 200) {
+      return Myaccount.fromJson(body["data"]);
+    } else {
+      throw Exception('Failed to load User' + res.statusCode.toString());
     }
   }
 }

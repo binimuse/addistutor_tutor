@@ -6,9 +6,11 @@ import 'dart:io';
 import 'package:addistutor_tutor/Avalablity/avalabilty.dart';
 import 'package:addistutor_tutor/Login/login_screen.dart';
 import 'package:addistutor_tutor/Profile/contactus.dart';
+import 'package:addistutor_tutor/Profile/getmyaccount.dart';
 import 'package:addistutor_tutor/Profile/setting.dart';
 import 'package:addistutor_tutor/Profile/termsodservice.dart';
 import 'package:addistutor_tutor/Profile/updateprofile.dart';
+import 'package:addistutor_tutor/Wallet/wallet.dart';
 import 'package:addistutor_tutor/controller/avlablityconroller.dart';
 import 'package:addistutor_tutor/controller/contactuscontroller.dart';
 import 'package:addistutor_tutor/controller/editprofilecontroller.dart';
@@ -81,12 +83,15 @@ class _ProfilePageState extends State<ProfileS> {
 
   final Getqulificationcontroller getqulificationcontroller =
       Get.put(Getqulificationcontroller());
+
+  final GetmyAccount getmyAccount = Get.put(GetmyAccount());
   @override
   void initState() {
     super.initState();
 
     _fetchUser();
     _getlocation();
+    _getmyaccount();
     // _getlevel();
     // _getsub();
     // _getqulification();
@@ -100,19 +105,6 @@ class _ProfilePageState extends State<ProfileS> {
     if (location != null && location.isNotEmpty) {
       setState(() {
         getLevelContoller.level = level[0];
-      });
-    }
-  }
-
-  List<Subjects> sub = [];
-  _getsub() async {
-    getSubect.fetchLocation(editprofileController.lid);
-
-    sub = getSubect.listlocation.value;
-    if (sub != null && sub.isNotEmpty) {
-      setState(() {
-        getSubect.subject = sub[0];
-        getSubect.subject2 = sub[0];
       });
     }
   }
@@ -138,9 +130,19 @@ class _ProfilePageState extends State<ProfileS> {
     // if failed,use refreshFailed()
 
     setState(() {
-      _getsub();
+      _getlocation();
+      _fetchUser();
+      _getmyaccount();
     });
     _refreshController.refreshCompleted();
+  }
+
+  void _getmyaccount() async {
+    // monitor network fetch
+    // await Future.delayed(const Duration(milliseconds: 1000));
+    getmyAccount.fetchqr();
+
+    setState(() {});
   }
 
   void _onLoading() async {
@@ -171,11 +173,6 @@ class _ProfilePageState extends State<ProfileS> {
   }
 
   void _fetchUser() async {
-    if (editprofileController.isActive.toString() == "1") {
-      avalablitycontrollerclass.isSelected = [true, false];
-    } else {
-      avalablitycontrollerclass.isSelected = [false, true];
-    }
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     var token = localStorage.getString('user');
 
@@ -199,35 +196,36 @@ class _ProfilePageState extends State<ProfileS> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: _onBackPressed,
-      child: Scaffold(
-        key: _key,
-        backgroundColor: Colors.grey.shade100,
-        extendBodyBehindAppBar: true,
-        extendBody: true,
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          leading: IconButton(
-            onPressed: () {
-              _key.currentState!.openDrawer();
-            },
-            icon: const Icon(
-              Icons.menu,
-              color: kPrimaryColor,
-            ),
-          ),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-        ),
-        drawer: _buildDrawer(
-          context,
-          editprofileController.firstname.text.toString(),
-          editprofileController.middlename.text.toString(),
-          ids,
-        ),
-        body: editprofileController.obx(
-            (editForm) => SmartRefresher(
+    return editprofileController.obx(
+        (editForm) => WillPopScope(
+              onWillPop: _onBackPressed,
+              child: Scaffold(
+                key: _key,
+                backgroundColor: Colors.grey.shade100,
+                extendBodyBehindAppBar: true,
+                extendBody: true,
+                appBar: AppBar(
+                  automaticallyImplyLeading: false,
+                  leading: IconButton(
+                    onPressed: () {
+                      _key.currentState!.openDrawer();
+                    },
+                    icon: const Icon(
+                      Icons.menu,
+                      color: kPrimaryLightColor,
+                      size: 30,
+                    ),
+                  ),
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                ),
+                drawer: _buildDrawer(
+                  context,
+                  editprofileController.firstname.text.toString(),
+                  editprofileController.middlename.text.toString(),
+                  ids,
+                ),
+                body: SmartRefresher(
                   enablePullDown: true,
                   enablePullUp: true,
 
@@ -284,11 +282,11 @@ class _ProfilePageState extends State<ProfileS> {
                     ),
                   ),
                 ),
-            onLoading: Center(child: loadData()),
-            onEmpty: const Text("Can't fetch data"),
-            onError: (error) => Center(child: Text(error.toString()))),
-      ),
-    );
+              ),
+            ),
+        onLoading: Center(child: loadData()),
+        onEmpty: const Text("Can't fetch data"),
+        onError: (error) => Center(child: Text(error.toString())));
   }
 
   Future<bool> _onBackPressed() async {
@@ -309,7 +307,7 @@ class _ProfilePageState extends State<ProfileS> {
               ),
             ),
             content: const Text(
-              'Are You Sure you want to Exit This App',
+              'Are you sure you want to exit this APP',
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w500,
@@ -463,6 +461,21 @@ class _ProfilePageState extends State<ProfileS> {
                       child: _buildRow(
                           Icons.personal_injury_outlined, "My penalties")),
                   _buildDivider(),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push<dynamic>(
+                        context,
+                        MaterialPageRoute<dynamic>(
+                          builder: (BuildContext context) => WalletPage(),
+                        ),
+                      );
+                    },
+                    child: _buildRow(
+                      Icons.money,
+                      "Wallet ",
+                    ),
+                  ),
+                  _buildDivider(),
                   const SizedBox(height: 10.0),
                   GestureDetector(
                       onTap: () {
@@ -512,29 +525,12 @@ class _ProfilePageState extends State<ProfileS> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0),
                             ),
-                            title: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: const [
-                                  SizedBox(height: 15),
-                                  Text(
-                                    'Message',
-                                    style: TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  SizedBox(height: 15),
-                                  Divider(
-                                    height: 1,
-                                    color: kPrimaryColor,
-                                  ),
-                                ]),
                             content: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: const [
                                   SizedBox(height: 15),
                                   Text(
-                                    'Are You Sure you want to Log Out',
+                                    'Are you sure you want to log out?',
                                     style: TextStyle(
                                       fontSize: 18.0,
                                       fontWeight: FontWeight.bold,
@@ -546,7 +542,7 @@ class _ProfilePageState extends State<ProfileS> {
                               // ignore: deprecated_member_use
                               SizedBox(
                                 width: MediaQuery.of(context).size.width,
-                                height: 50,
+                                height: 30,
                                 child: InkWell(
                                   highlightColor: Colors.grey[200],
                                   onTap: () {
@@ -571,7 +567,7 @@ class _ProfilePageState extends State<ProfileS> {
                               ),
                               SizedBox(
                                 width: MediaQuery.of(context).size.width,
-                                height: 50,
+                                height: 30,
                                 child: InkWell(
                                   borderRadius: const BorderRadius.only(
                                     bottomLeft: Radius.circular(15.0),
@@ -611,6 +607,7 @@ class _ProfilePageState extends State<ProfileS> {
   void _logout(BuildContext context) async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     localStorage.remove('token');
+    localStorage.remove('user');
     Get.delete<SignupController>();
     Get.delete<EditprofileController>();
     Get.delete<Avalablitycontrollerclass>();
@@ -624,6 +621,7 @@ class _ProfilePageState extends State<ProfileS> {
     Get.delete<Updateprofilecontoller>();
     Get.delete<GetPenalitycontoller>();
     Get.delete<EndBookingContoller>();
+    Get.delete<GetmyAccount>();
 
     Navigator.push(
       context,
@@ -714,7 +712,7 @@ class UserInfo extends StatelessWidget {
             padding: const EdgeInsets.only(left: 8.0, bottom: 4.0),
             alignment: Alignment.topLeft,
             child: const Text(
-              "User Information",
+              "Tutor information",
               style: TextStyle(
                 color: Colors.black87,
                 fontWeight: FontWeight.w500,

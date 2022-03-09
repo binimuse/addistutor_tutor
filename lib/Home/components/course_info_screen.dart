@@ -93,7 +93,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
               children: <Widget>[
                 AspectRatio(
                   aspectRatio: 1.2,
-                  child: Image.asset('assets/design_course/webInterFace.png'),
+                  child: Image.asset('assets/images/lg3.png'),
                 ),
               ],
             ),
@@ -318,234 +318,76 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                 itemCount: widget
                                     .requestedBooking!.booking_schedule.length),
                           ),
-                          widget.requestedBooking!.is_active != "1" &&
-                                  widget.requestedBooking!.is_active != "0"
-                              ? Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const SizedBox(
-                                      height: 35,
+                          widget.requestedBooking!.ended_at != null
+                              ? AnimatedOpacity(
+                                  duration: const Duration(milliseconds: 500),
+                                  opacity: opacity3,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 10, bottom: 20, right: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        Expanded(
+                                          child: Container(
+                                            height: 35,
+                                            width: 10,
+                                            decoration: BoxDecoration(
+                                              color: Colors.red,
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                Radius.circular(16.0),
+                                              ),
+                                              boxShadow: <BoxShadow>[
+                                                BoxShadow(
+                                                    color: DesignCourseAppTheme
+                                                        .nearlyBlue
+                                                        .withOpacity(0.5),
+                                                    offset:
+                                                        const Offset(1.1, 1.1),
+                                                    blurRadius: 6.0),
+                                              ],
+                                            ),
+                                            child: Center(
+                                              child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    const Text(
+                                                      "Booking ended at : ",
+                                                      textAlign: TextAlign.left,
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontSize: 18,
+                                                        letterSpacing: 0.0,
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      widget.requestedBooking!
+                                                          .ended_at,
+                                                      textAlign: TextAlign.left,
+                                                      style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontSize: 18,
+                                                        letterSpacing: 0.0,
+                                                        color: Colors.white,
+                                                      ),
+                                                    )
+                                                  ]),
+                                            ),
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                    // ignore: deprecated_member_use
-
-                                    // ignore: deprecated_member_use
-                                    RaisedButton.icon(
-                                      onPressed: () {
-                                        setState(() {
-                                          getReqBooking.statuss = "1";
-                                          getReqBooking.updateStatus(context,
-                                              widget.requestedBooking!.id);
-                                        });
-                                      },
-                                      shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10.0))),
-                                      label: const Text(
-                                        'Accept',
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                      icon: const Icon(
-                                        Icons.check,
-                                        color: Colors.white,
-                                      ),
-                                      textColor: kPrimaryColor,
-                                      splashColor: Colors.white,
-                                      color: Colors.green,
-                                    ),
-                                    // ignore: deprecated_member_use
-                                    RaisedButton.icon(
-                                      onPressed: () {
-                                        setState(() {
-                                          getReqBooking.statuss = "0";
-                                          getReqBooking.updateStatus(context,
-                                              widget.requestedBooking!.id);
-                                        });
-                                      },
-                                      shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10.0))),
-                                      label: const Text(
-                                        'Reject',
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                      icon: const Icon(
-                                        Icons.cancel,
-                                        color: Colors.white,
-                                      ),
-                                      textColor: kPrimaryColor,
-                                      splashColor: Colors.white,
-                                      color: Colors.red,
-                                    ),
-                                    // ignore: deprecated_member_use
-
-                                    const SizedBox(
-                                      height: 35,
-                                    ),
-                                  ],
+                                  ),
                                 )
-                              : Obx(() => getReqBooking.isfetchedsubject.value
-                                  ? widget.requestedBooking!.ended_at == null
-                                      ? AnimatedOpacity(
-                                          duration:
-                                              const Duration(milliseconds: 500),
-                                          opacity: opacity3,
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 10,
-                                                bottom: 20,
-                                                right: 10),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: <Widget>[
-                                                Expanded(
-                                                  child: GestureDetector(
-                                                    onTap: () {
-                                                      _displayTextInputDialog(
-                                                          context,
-                                                          widget
-                                                              .requestedBooking!
-                                                              .id);
-                                                    },
-                                                    child: Container(
-                                                      height: 35,
-                                                      width: 10,
-                                                      decoration: BoxDecoration(
-                                                        color: Colors.red,
-                                                        borderRadius:
-                                                            const BorderRadius
-                                                                .all(
-                                                          Radius.circular(16.0),
-                                                        ),
-                                                        boxShadow: <BoxShadow>[
-                                                          BoxShadow(
-                                                              color: DesignCourseAppTheme
-                                                                  .nearlyBlue
-                                                                  .withOpacity(
-                                                                      0.5),
-                                                              offset:
-                                                                  const Offset(
-                                                                      1.1, 1.1),
-                                                              blurRadius: 6.0),
-                                                        ],
-                                                      ),
-                                                      child: const Center(
-                                                        child: Text(
-                                                          'End Booking',
-                                                          textAlign:
-                                                              TextAlign.left,
-                                                          style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            fontSize: 18,
-                                                            letterSpacing: 0.0,
-                                                            color: Colors.white,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        )
-                                      : AnimatedOpacity(
-                                          duration:
-                                              const Duration(milliseconds: 500),
-                                          opacity: opacity3,
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 10,
-                                                bottom: 20,
-                                                right: 10),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: <Widget>[
-                                                Expanded(
-                                                  child: Container(
-                                                    height: 35,
-                                                    width: 10,
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.red,
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .all(
-                                                        Radius.circular(16.0),
-                                                      ),
-                                                      boxShadow: <BoxShadow>[
-                                                        BoxShadow(
-                                                            color:
-                                                                DesignCourseAppTheme
-                                                                    .nearlyBlue
-                                                                    .withOpacity(
-                                                                        0.5),
-                                                            offset:
-                                                                const Offset(
-                                                                    1.1, 1.1),
-                                                            blurRadius: 6.0),
-                                                      ],
-                                                    ),
-                                                    child: Center(
-                                                      child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            const Text(
-                                                              "Booking ended at : ",
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .left,
-                                                              style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                fontSize: 18,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                                color: Colors
-                                                                    .white,
-                                                              ),
-                                                            ),
-                                                            Text(
-                                                              widget
-                                                                  .requestedBooking!
-                                                                  .ended_at,
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .left,
-                                                              style:
-                                                                  const TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                fontSize: 18,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                                color: Colors
-                                                                    .white,
-                                                              ),
-                                                            )
-                                                          ]),
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        )
-                                  : Center(
-                                      child: Column(children: [
-                                      CircularProgressIndicator(),
-                                      // const Center(child: Text("No Booked Tutors"))
-                                    ]))),
+                              : getstutus(widget.requestedBooking),
                         ],
                       ),
                     ),
@@ -807,5 +649,188 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
         ],
       ),
     );
+  }
+
+  getstutus(RequestedBooking? requestedBooking) {
+    return widget.requestedBooking!.is_active != "1" &&
+            widget.requestedBooking!.is_active != "0"
+        ? Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const SizedBox(
+                height: 35,
+              ),
+              // ignore: deprecated_member_use
+
+              // ignore: deprecated_member_use
+              RaisedButton.icon(
+                onPressed: () {
+                  setState(() {
+                    getReqBooking.statuss = "1";
+                    getReqBooking.updateStatus(
+                        context, widget.requestedBooking!.id);
+                  });
+                },
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                label: const Text(
+                  'Accept',
+                  style: TextStyle(color: Colors.white),
+                ),
+                icon: const Icon(
+                  Icons.check,
+                  color: Colors.white,
+                ),
+                textColor: kPrimaryColor,
+                splashColor: Colors.white,
+                color: Colors.green,
+              ),
+              // ignore: deprecated_member_use
+              RaisedButton.icon(
+                onPressed: () {
+                  setState(() {
+                    getReqBooking.statuss = "0";
+                    getReqBooking.updateStatus(
+                        context, widget.requestedBooking!.id);
+                  });
+                },
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                label: const Text(
+                  'Reject',
+                  style: TextStyle(color: Colors.white),
+                ),
+                icon: const Icon(
+                  Icons.cancel,
+                  color: Colors.white,
+                ),
+                textColor: kPrimaryColor,
+                splashColor: Colors.white,
+                color: Colors.red,
+              ),
+              // ignore: deprecated_member_use
+
+              const SizedBox(
+                height: 35,
+              ),
+            ],
+          )
+        : Obx(() => getReqBooking.isfetchedsubject.value
+            ? widget.requestedBooking!.ended_at == null
+                ? AnimatedOpacity(
+                    duration: const Duration(milliseconds: 500),
+                    opacity: opacity3,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: 10, bottom: 20, right: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () {
+                                _displayTextInputDialog(
+                                    context, widget.requestedBooking!.id);
+                              },
+                              child: Container(
+                                height: 35,
+                                width: 10,
+                                decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(16.0),
+                                  ),
+                                  boxShadow: <BoxShadow>[
+                                    BoxShadow(
+                                        color: DesignCourseAppTheme.nearlyBlue
+                                            .withOpacity(0.5),
+                                        offset: const Offset(1.1, 1.1),
+                                        blurRadius: 6.0),
+                                  ],
+                                ),
+                                child: const Center(
+                                  child: Text(
+                                    'End Booking',
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 18,
+                                      letterSpacing: 0.0,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                : AnimatedOpacity(
+                    duration: const Duration(milliseconds: 500),
+                    opacity: opacity3,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: 10, bottom: 20, right: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Expanded(
+                            child: Container(
+                              height: 35,
+                              width: 10,
+                              decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(16.0),
+                                ),
+                                boxShadow: <BoxShadow>[
+                                  BoxShadow(
+                                      color: DesignCourseAppTheme.nearlyBlue
+                                          .withOpacity(0.5),
+                                      offset: const Offset(1.1, 1.1),
+                                      blurRadius: 6.0),
+                                ],
+                              ),
+                              child: Center(
+                                child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Text(
+                                        "Booking ended at : ",
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 18,
+                                          letterSpacing: 0.0,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Text(
+                                        widget.requestedBooking!.ended_at,
+                                        textAlign: TextAlign.left,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 18,
+                                          letterSpacing: 0.0,
+                                          color: Colors.white,
+                                        ),
+                                      )
+                                    ]),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+            : Center(
+                child: Column(children: [
+                CircularProgressIndicator(),
+                // const Center(child: Text("No Booked Tutors"))
+              ])));
   }
 }

@@ -9,6 +9,7 @@ import 'package:addistutor_tutor/controller/getlevelcontroller.dart';
 import 'package:addistutor_tutor/controller/getlocationcontroller.dart';
 import 'package:addistutor_tutor/controller/getqualifaicationcontroller.dart';
 import 'package:addistutor_tutor/controller/getsubcontroller.dart';
+import 'package:addistutor_tutor/remote_services/service.dart';
 import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:camera_camera/camera_camera.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +48,7 @@ class _EditPageState extends State<EditPage> {
   bool subc = false;
   bool g_subc = false;
   late var locationname = "";
+  late var lid = "";
   late var glocationname = "";
   late var elocationname = "";
   late var plocationname = "";
@@ -57,7 +59,7 @@ class _EditPageState extends State<EditPage> {
   }
 
   var body;
-  var id;
+  var ids;
   void _fetchUser() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     var token = localStorage.getString('user');
@@ -68,7 +70,7 @@ class _EditPageState extends State<EditPage> {
       if (body["teacher_id"] != null) {
         editprofileController.fetchPf(int.parse(body["teacher_id"]));
         setState(() {
-          id = int.parse(body["teacher_id"]);
+          ids = int.parse(body["teacher_id"]);
         });
       } else {
         var noid = "noid";
@@ -93,6 +95,7 @@ class _EditPageState extends State<EditPage> {
     _getlocation();
     _getlevel();
     _getsub();
+    _getsub2();
     _getqulafication();
   }
 
@@ -101,7 +104,7 @@ class _EditPageState extends State<EditPage> {
 
   void _onRefresh() async {
     // monitor network fetch
-    await Future.delayed(const Duration(milliseconds: 1000));
+    await Future.delayed(const Duration(milliseconds: 500));
     // if failed,use refreshFailed()
 
     setState(() {
@@ -146,14 +149,27 @@ class _EditPageState extends State<EditPage> {
   }
 
   List<Subjects> sub = [];
+  List<Subjects2> sub2 = [];
+  _getsub2() async {
+    getSubect.fetchLocation2();
+
+    sub2 = getSubect.listlocation2.value;
+    if (sub2 != null && sub2.isNotEmpty) {
+      setState(() {
+        getSubect.subject2 = sub2[0];
+      });
+    }
+  }
 
   _getsub() async {
     getSubect.fetchLocation(editprofileController.lid);
+    // getSubect.fetchLocation2();
     sub = getSubect.listlocation.value;
+    // sub2 = getSubect.listlocation2.value;
     if (sub != null && sub.isNotEmpty) {
       setState(() {
         getSubect.subject = sub[0];
-        getSubect.subject2 = sub[0];
+        //    getSubect.subject2 = sub2[0];
       });
     }
   }
@@ -205,7 +221,11 @@ class _EditPageState extends State<EditPage> {
                   padding: const EdgeInsets.only(left: 16, top: 25, right: 16),
                   child: GestureDetector(
                     onTap: () {
-                      // FocusScope.of(context).unfocus();
+                      FocusScopeNode currentFocus = FocusScope.of(context);
+
+                      if (!currentFocus.hasPrimaryFocus) {
+                        currentFocus.unfocus();
+                      }
                     },
                     child: ListView(
                       children: [
@@ -1121,7 +1141,7 @@ class _EditPageState extends State<EditPage> {
                             fontFamily: 'WorkSans',
                           ),
                         ),
-                        DropdownButton<Subjects>(
+                        DropdownButton<Subjects2>(
                           hint: Text(
                             getSubect.listlocation2.toString(),
                             style: const TextStyle(
@@ -1134,7 +1154,7 @@ class _EditPageState extends State<EditPage> {
                               color: Colors.black,
                               fontSize: 16,
                               fontWeight: FontWeight.w700),
-                          items: sub
+                          items: sub2
                               .map((e) => DropdownMenuItem(
                                     child: Text(e.title,
                                         textAlign: TextAlign.left,
@@ -1216,39 +1236,70 @@ class _EditPageState extends State<EditPage> {
                           onChanged: (value) {
                             setState(() {
                               getLevelContoller.level = value!;
-                              editprofileController.level = value.id.toString();
-                              //   lid = value.id.toString();
+                              editprofileController.lid = value.id.toString();
+                              lid = value.id.toString();
+                              RemoteServices.getsubject(
+                                  editprofileController.lid);
+                              _onRefresh();
+                              loadData();
                             });
-
-                            //_onRefresh();
-                            // loadData();
-                            //  getSubect.fetchLocation(value!.id.toString());
-
-                            // pop current page
+                            //setState(() {});
                           },
                           value: getLevelContoller.level,
                         ),
+
                         const SizedBox(
                           height: 20,
                         ),
-                        // realsubject
-                        //     ? Expanded(
-                        //         child: ListView.builder(
-                        //             shrinkWrap: true,
-                        //             scrollDirection: Axis.vertical,
-                        //             itemBuilder: (_, index) {
-                        //               return Column(
-                        //                 children: [
-                        //                   getTimeBoxUIday(getLocationController
-                        //                       .e_subcity!.locaion[index].name),
-                        //                 ],
-                        //               );
-                        //             },
-                        //             itemCount: getLocationController
-                        //                 .e_subcity!.locaion.length),
-                        //       )
-                        //     : Container(),
-                        subjectViewUI(),
+                        DropdownButton<Subjects>(
+                          hint: Text(
+                            getSubect.listlocation.toString(),
+                            style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400),
+                          ),
+                          isExpanded: true,
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700),
+                          items: sub
+                              .map((e) => DropdownMenuItem(
+                                    child: Text(e.title,
+                                        textAlign: TextAlign.left,
+                                        style: const TextStyle(
+                                            color: DesignCourseAppTheme
+                                                .nearlyBlack,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w300)),
+                                    value: e,
+                                  ))
+                              .toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              ////        getLevelContoller.level = value!;
+                              //      editprofileController.lid = value.id.toString();
+                              //     lid = value.id.toString();
+
+                              getSubect.subject = value!;
+                              editprofileController.subcityid =
+                                  value.id.toString();
+                            });
+
+                            // pop current page
+                          },
+                          onTap: () {
+                            setState(() {
+                              // RemoteServices.getsubject(
+                              //     editprofileController.lid);
+                              // _onRefresh();
+                              loadData();
+                            });
+                          },
+                          value: getSubect.subject,
+                        ),
+                        // subjectViewUI(),
                         const SizedBox(
                           height: 20,
                         ),
@@ -1381,7 +1432,7 @@ class _EditPageState extends State<EditPage> {
                                     .EditProf.currentState!
                                     .validate();
                                 if (isValid == true) {
-                                  editprofileController.editProf(id, context);
+                                  editprofileController.editProf(ids, context);
                                 } else {
                                   setState(() {
                                     _autovalidate =
@@ -1413,6 +1464,54 @@ class _EditPageState extends State<EditPage> {
             ),
           )
         : const Center(child: CircularProgressIndicator()));
+  }
+
+  Widget getTimeBoxUIdaysub(
+    String txt2,
+  ) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          editprofileController.lid = txt2.toString();
+          // locationname = txt2;
+        });
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: DesignCourseAppTheme.nearlyWhite,
+            borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                  color: DesignCourseAppTheme.grey.withOpacity(0.2),
+                  offset: const Offset(1.1, 1.1),
+                  blurRadius: 8.0),
+            ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(
+                left: 18.0, right: 18.0, top: 12.0, bottom: 12.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  txt2,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w200,
+                    fontSize: 14,
+                    letterSpacing: 0.27,
+                    color: DesignCourseAppTheme.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   Widget getTimeBoxUIday(String txt2, String name) {
@@ -1617,7 +1716,7 @@ class _EditPageState extends State<EditPage> {
   loadData() {
     // Here you can write your code for open new view
     EasyLoading.show();
-    Future.delayed(const Duration(milliseconds: 500), () {
+    Future.delayed(const Duration(milliseconds: 1000), () {
 // Here you can write your code
       //  _fetchUser();
       EasyLoading.dismiss();
@@ -1705,5 +1804,36 @@ class _EditPageState extends State<EditPage> {
             value: getSubect.subject,
           ),
         ]);
+  }
+}
+
+class FollowedList extends StatefulWidget {
+  final Subjects? subjects;
+
+  const FollowedList({
+    Key? key,
+    required this.subjects,
+  }) : super(key: key);
+
+  @override
+  _SettingsScreenState2 createState() => _SettingsScreenState2();
+}
+
+final GetSubect getSubect = Get.find();
+
+class _SettingsScreenState2 extends State<FollowedList> {
+  @override
+  void initState() {
+    if (widget.subjects! != null) {
+      // getSubect. .add(widget.day!.day);
+      // values.clear();
+    } else {}
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(child: Container());
   }
 }

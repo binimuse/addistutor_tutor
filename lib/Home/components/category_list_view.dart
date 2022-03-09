@@ -113,7 +113,7 @@ class CategoryView extends StatelessWidget {
       : super(key: key);
 
   final VoidCallback? callback;
-  final Teacher? category;
+  final Teacher2? category;
   final AnimationController? animationController;
   final Animation<double>? animation;
 
@@ -195,23 +195,73 @@ class CategoryView extends StatelessWidget {
                                             Row(
                                               children: <Widget>[
                                                 Text(
-                                                  '${category!.rating}',
+                                                  category!.location.name,
                                                   textAlign: TextAlign.left,
                                                   style: const TextStyle(
                                                     fontWeight: FontWeight.w200,
-                                                    fontSize: 18,
+                                                    fontSize: 12,
+                                                    fontFamily: 'WorkSans',
                                                     letterSpacing: 0.27,
                                                     color: DesignCourseAppTheme
                                                         .grey,
                                                   ),
                                                 ),
                                                 const Icon(
-                                                  Icons.star,
+                                                  Icons.location_pin,
                                                   color: kPrimaryLightColor,
-                                                  size: 20,
+                                                  size: 10,
                                                 ),
                                               ],
-                                            )
+                                            ),
+                                            category!.rating != null
+                                                ? Row(
+                                                    children: <Widget>[
+                                                      Text(
+                                                        '${category!.rating}',
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                        style: const TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w200,
+                                                          fontSize: 18,
+                                                          letterSpacing: 0.27,
+                                                          color:
+                                                              DesignCourseAppTheme
+                                                                  .grey,
+                                                        ),
+                                                      ),
+                                                      const Icon(
+                                                        Icons.star,
+                                                        color:
+                                                            kPrimaryLightColor,
+                                                        size: 20,
+                                                      ),
+                                                    ],
+                                                  )
+                                                : Row(
+                                                    children: <Widget>[
+                                                      const Text(
+                                                        '0',
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w200,
+                                                          fontSize: 18,
+                                                          letterSpacing: 0.27,
+                                                          color:
+                                                              DesignCourseAppTheme
+                                                                  .grey,
+                                                        ),
+                                                      ),
+                                                      const Icon(
+                                                        Icons.star,
+                                                        color:
+                                                            kPrimaryLightColor,
+                                                        size: 20,
+                                                      ),
+                                                    ],
+                                                  )
                                           ],
                                         ),
                                       ),

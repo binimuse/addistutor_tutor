@@ -139,7 +139,7 @@ class FeedBackScreencontroller extends GetxController with StateMixin {
 
   String? validateName(String value) {
     if (value.isEmpty) {
-      return "please Provide a FeedBack";
+      return "please provide a Feedback";
     }
     return null;
   }

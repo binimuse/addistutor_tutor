@@ -21,22 +21,33 @@ class Body extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              "WELCOME TO NEXTGEN",
+              "WELCOME TO",
               style: TextStyle(
-                fontSize: 28.0,
-                fontFamily: 'WorkSans',
+                fontSize: 30.0,
+                fontFamily: 'Arial',
                 fontWeight: FontWeight.bold,
                 letterSpacing: 0.4,
-                height: 0.9,
+                height: 1.0,
+                color: kPrimaryColor,
+              ),
+            ),
+            const Text(
+              "NEXTGEN",
+              style: TextStyle(
+                fontSize: 30.0,
+                fontFamily: 'Arial',
+                fontWeight: FontWeight.bold,
+                letterSpacing: 0.4,
+                height: 1.0,
                 color: kPrimaryColor,
               ),
             ),
             const SizedBox(height: 10),
             const Text(
-              "Tutor App",
+              "TUTOR APP",
               style: TextStyle(
-                fontSize: 18.0,
-                fontFamily: 'Roboto',
+                fontSize: 20.0,
+                fontFamily: 'Arial',
                 fontWeight: FontWeight.normal,
                 letterSpacing: 0.4,
                 height: 0.9,
@@ -46,24 +57,11 @@ class Body extends StatelessWidget {
             SizedBox(height: size.height * 0.05),
             Image(
               image: const AssetImage(
-                'assets/images/login.jpg',
+                'assets/images/new.png',
               ),
               height: size.height * 0.25,
             ),
             SizedBox(height: size.height * 0.05),
-            RoundedButton(
-              text: "Log in",
-              press: () {
-                Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    pageBuilder: (context, animation1, animation2) {
-                      return const LoginScreen();
-                    },
-                  ),
-                );
-              },
-            ),
             RoundedButton(
               text: "Register",
               color: kPrimaryLightColor,
@@ -74,6 +72,19 @@ class Body extends StatelessWidget {
                   PageRouteBuilder(
                     pageBuilder: (context, animation1, animation2) {
                       return const SignUpScreen();
+                    },
+                  ),
+                );
+              },
+            ),
+            RoundedButton(
+              text: "Log in",
+              press: () {
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation1, animation2) {
+                      return const LoginScreen();
                     },
                   ),
                 );

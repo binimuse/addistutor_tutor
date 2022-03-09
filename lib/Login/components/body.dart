@@ -64,6 +64,7 @@ class _LoginScreenState extends State<Body> {
     _getlocation();
     _getlevel();
     _getsub();
+    _getsub2();
     _getqulification();
     emailcon = TextEditingController();
   }
@@ -97,14 +98,26 @@ class _LoginScreenState extends State<Body> {
   }
 
   List<Subjects> sub = [];
+  List<Subjects2> sub2 = [];
   _getsub() async {
     getSubect.fetchLocation(editprofileController.lid);
 
     sub = getSubect.listlocation.value;
+
     if (sub != null && sub.isNotEmpty) {
       setState(() {
         getSubect.subject = sub[0];
-        getSubect.subject2 = sub[0];
+      });
+    }
+  }
+
+  _getsub2() async {
+    getSubect.fetchLocation2();
+
+    sub2 = getSubect.listlocation2.value;
+    if (sub2 != null && sub2.isNotEmpty) {
+      setState(() {
+        getSubect.subject2 = sub2[0];
       });
     }
   }
@@ -209,7 +222,6 @@ class _LoginScreenState extends State<Body> {
                             ),
                           )
                         : null,
-                    contentPadding: const EdgeInsets.all(10),
                     focusedBorder: OutlineInputBorder(
                       borderSide:
                           const BorderSide(color: kPrimaryColor, width: 2.0),
@@ -327,7 +339,7 @@ class _LoginScreenState extends State<Body> {
               ),
               const OrDivider(),
               const Text(
-                "Register with Google ? ",
+                "Register with Google? ",
                 style: TextStyle(color: kPrimaryColor),
               ),
               const SizedBox(
@@ -360,25 +372,7 @@ class _LoginScreenState extends State<Body> {
                             _isLoggedIn = false;
                           });
                         }).catchError((e) {});
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            title: const Text('Error'),
-                            content: Text(e.toString()),
-                            actions: <Widget>[
-                              // ignore: deprecated_member_use
-                              FlatButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop(true);
-                                  setState(() {
-                                    isLoading = false;
-                                  });
-                                },
-                                child: const Text('ok'),
-                              ),
-                            ],
-                          ),
-                        );
+
                         print(e);
                       });
                     },
