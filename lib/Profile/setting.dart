@@ -147,6 +147,9 @@ class _SettingsFourPageState extends State<SettingsFourPage> {
                 ),
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
             Row(
               children: const [
                 Icon(Icons.volume_up_outlined, color: kPrimaryColor),

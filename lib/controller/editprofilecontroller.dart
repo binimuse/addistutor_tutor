@@ -64,7 +64,7 @@ class EditprofileController extends GetxController with StateMixin {
   var lid = "";
   var level;
   var qualifications;
-  var fieldofstudy;
+  var subjectid;
 
   //GetLocation? selectedModel;
 
@@ -320,10 +320,35 @@ class EditprofileController extends GetxController with StateMixin {
   var image;
 
   Future<void> seteditInfo(ids, BuildContext context) async {
-    print(ids);
     openAndCloseLoadingDialog(context);
 
-    print("yes am here");
+    print(firstname.text);
+    print(middlename.text);
+    print(macthgender.value);
+
+    print(phone.text);
+    print(date);
+    print(since.value);
+    print(email.text);
+    print(officephone.text);
+    print(rephone.text);
+    print(g_woreda.text);
+    print(g_subcityid);
+    print(g_phone.text);
+    print(g_office_phone.text);
+    print(g_office_phone.text);
+    print(e_firstname.text);
+    print(e_postion.text);
+    print(e_woreda.text);
+    print(e_subcityid);
+    print(About.text);
+    print(subjectid);
+    print(qualifications);
+    print(e_postion.text);
+    print(locationid);
+    print(subcityid);
+    print(woreda.toString());
+
     var data = {
       "first_name": firstname.text,
       "middle_name": middlename.text,
@@ -347,9 +372,9 @@ class EditprofileController extends GetxController with StateMixin {
       "employer_city": e_subcityid,
       "employment_subject": e_subject,
       "about": About.text,
-      "subject_id": fieldofstudy,
-      "qualification_id": qualifications,
-      "address_id": locationid,
+      "subject_id": "1",
+      "qualification_id": "1",
+      "address_id": "1",
       "subcity": subcityid,
       "woreda": woreda.toString(),
     };

@@ -285,8 +285,14 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                               child: Row(
                                 children: <Widget>[
                                   getTimeBoxUI(1.toString(), 'Subject'),
-                                  getTimeBoxUI(widget.requestedBooking!.session,
+                                  getTimeBoxUI(
+                                      widget.requestedBooking!.session
+                                          .toString(),
                                       'session'),
+                                  getTimeBoxUI(
+                                      widget.requestedBooking!.sessiontaken
+                                          .toString(),
+                                      'session taken'),
                                 ],
                               ),
                             ),

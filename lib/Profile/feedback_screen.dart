@@ -73,7 +73,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                               child: Image.asset('assets/images/t.jpg'),
                             ),
                             Container(
-                              padding: const EdgeInsets.only(top: 8),
+                              padding: const EdgeInsets.all(8),
                               child: const Text(
                                 'write your feedback about our service here',
                                 style: TextStyle(

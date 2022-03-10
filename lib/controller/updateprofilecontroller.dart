@@ -133,7 +133,7 @@ class Updateprofilecontoller extends GetxController with StateMixin {
         "woreda": woreda.toString(),
         "about": About.text,
       };
-      inforesponse = await RemoteServices.editPersonalInfo(data);
+      inforesponse = await RemoteServices.UpdateProfile(data);
       if (inforesponse.toString() == "200") {
         closeDialog(true, '', context);
         isLoading(false);
@@ -156,7 +156,7 @@ class Updateprofilecontoller extends GetxController with StateMixin {
         "woreda": woreda.toString(),
         "about": About.text,
       };
-      inforesponse = await RemoteServices.editPersonalInfo(data);
+      inforesponse = await RemoteServices.UpdateProfile(data);
       if (inforesponse.toString() == "200") {
         closeDialog(true, '', context);
         isLoading(false);
@@ -205,7 +205,7 @@ class Updateprofilecontoller extends GetxController with StateMixin {
       localStorage.setBool('isupdated', true);
 
       var token = localStorage.getString('user');
-
+      Navigator.pop(context);
       if (token != null) {
         body = json.decode(token);
 

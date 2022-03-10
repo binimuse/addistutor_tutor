@@ -536,7 +536,6 @@ class _ProfilePageState extends State<ProfileS> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  SizedBox(height: 15),
                                 ]),
                             actions: <Widget>[
                               // ignore: deprecated_member_use
@@ -554,7 +553,7 @@ class _ProfilePageState extends State<ProfileS> {
                                       "Ok",
                                       style: TextStyle(
                                         fontSize: 18.0,
-                                        color: Theme.of(context).primaryColor,
+                                        color: Colors.red,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
@@ -582,7 +581,7 @@ class _ProfilePageState extends State<ProfileS> {
                                       "Cancel",
                                       style: TextStyle(
                                         fontSize: 16.0,
-                                        fontWeight: FontWeight.normal,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                   ),

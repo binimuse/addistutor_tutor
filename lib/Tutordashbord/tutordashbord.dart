@@ -217,7 +217,7 @@ class _HomePageState extends State<TutorDahsbord>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const Text(
-              'Requested students detail',
+              'Pending requests',
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontWeight: FontWeight.w600,
@@ -386,7 +386,7 @@ class _HomePageState extends State<TutorDahsbord>
                     height: 120,
                     child: Center(
                       child: Text(
-                        'No reqest Student found',
+                        'No request found',
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontWeight: FontWeight.normal,
@@ -434,7 +434,7 @@ class _HomePageState extends State<TutorDahsbord>
                   ),
                 ),
                 Text(
-                  'Dashborad',
+                  'Dashboard',
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,

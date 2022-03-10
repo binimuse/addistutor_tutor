@@ -209,11 +209,21 @@ class _HomePageState extends State<Mypernality>
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
                                         Text(
+                                          "BOOKING: " " " +
+                                              penalties.student_name,
+                                          // ignore: prefer_const_constructors
+                                          style: TextStyle(
+                                            color: kPrimaryColor,
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        Text(
                                           "Reason: " " " +
                                               penalties.penalty.description,
                                           // ignore: prefer_const_constructors
                                           style: TextStyle(
-                                            color: kPrimaryColor,
+                                            color: kPrimaryLightColor,
                                             fontSize: 15.0,
                                             fontWeight: FontWeight.w500,
                                           ),
@@ -235,12 +245,12 @@ class _HomePageState extends State<Mypernality>
                                   children: <Widget>[
                                     FaIcon(
                                       FontAwesomeIcons.clock,
-                                      color: kPrimaryColor,
+                                      color: kPrimaryLightColor,
                                       size: 18,
                                     ),
                                     const SizedBox(height: 5.0),
                                     Text(
-                                      "2 hours ago",
+                                      penalties.readable_date,
                                       style: TextStyle(
                                         color: Colors.grey.withOpacity(0.5),
                                         fontSize: 13.0,
@@ -308,7 +318,7 @@ class _HomePageState extends State<Mypernality>
                   ),
                 ),
                 Text(
-                  'Dashborad',
+                  'Dashboard',
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,

@@ -64,7 +64,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
     const pageDecoration = PageDecoration(
       titleTextStyle: TextStyle(
-          fontSize: 35.0,
+          fontSize: 30.0,
           fontFamily: 'Roboto',
           letterSpacing: 0.4,
           fontWeight: FontWeight.w800,

@@ -12,6 +12,7 @@ class GetLevelContoller extends GetxController with StateMixin {
 
     if (listlocation.isNotEmpty) {
       //print(list.length.toString());
+      update();
       isfetchedlocation(true);
     }
   }

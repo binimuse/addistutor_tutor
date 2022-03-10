@@ -8,6 +8,8 @@ class GetSubect extends GetxController with StateMixin {
   var sent = false.obs;
   Subjects? subject;
 
+  late List<Subjects> subjectcan;
+
   var listlocation2 = <Subjects2>[].obs;
   var isfetchedlocation2 = false.obs;
   var sent2 = false.obs;
@@ -19,6 +21,7 @@ class GetSubect extends GetxController with StateMixin {
 
     if (listlocation.isNotEmpty) {
       //  print(listlocation.length.toString());
+      update();
       isfetchedlocation(true);
     }
   }
@@ -29,6 +32,7 @@ class GetSubect extends GetxController with StateMixin {
 
     if (listlocation2.isNotEmpty) {
       //  print(listlocation.length.toString());
+      update();
       isfetchedlocation2(true);
     }
   }

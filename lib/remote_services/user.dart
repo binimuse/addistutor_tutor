@@ -395,6 +395,7 @@ class RequestedBooking {
   int id;
 
   String session;
+  int sessiontaken;
   String message;
   String is_active;
   String student_id;
@@ -409,6 +410,7 @@ class RequestedBooking {
   RequestedBooking({
     required this.id,
     required this.session,
+    required this.sessiontaken,
     required this.message,
     required this.student_id,
     required this.is_active,
@@ -429,6 +431,7 @@ class RequestedBooking {
       is_active: json["is_active"],
       created_at: json["created_at"],
       ended_at: json["ended_at"],
+      sessiontaken: json["sessions_taken"],
       teacher: ReqTech.fromJson(json["teacher"]),
       student: ReqStu.fromJson(json["student"]),
       subject: Subjects.fromJson(json["subject"]),
@@ -723,12 +726,16 @@ class GetPenalties {
   String title;
   String tutoring_level_id;
   Penalty penalty;
+  String readable_date;
+  String student_name;
   GetPenalties({
     required this.id,
     required this.code,
     required this.penalty,
     required this.title,
     required this.tutoring_level_id,
+    required this.readable_date,
+    required this.student_name,
   });
 
   factory GetPenalties.fromJson(Map<String, dynamic> json) {
@@ -738,6 +745,8 @@ class GetPenalties {
       title: json["title"],
       tutoring_level_id: json["tutoring_level_id"],
       penalty: Penalty.fromJson(json["penalty"]),
+      readable_date: json["readable_date"],
+      student_name: json["student_name"],
     );
   }
 }

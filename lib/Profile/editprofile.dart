@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
+import 'package:addistutor_tutor/Profile/getmyaccount.dart';
 import 'package:addistutor_tutor/controller/editprofilecontroller.dart';
 import 'package:addistutor_tutor/controller/getlevelcontroller.dart';
 import 'package:addistutor_tutor/controller/getlocationcontroller.dart';
@@ -32,6 +33,8 @@ class EditPage extends StatefulWidget {
 class _EditPageState extends State<EditPage> {
   final EditprofileController editprofileController =
       Get.put(EditprofileController());
+
+  final GetmyAccount getmyAccount = Get.put(GetmyAccount());
 
   final GetLevelContoller getLevelContoller = Get.find();
   final GetSubect getSubect = Get.find();
@@ -97,6 +100,17 @@ class _EditPageState extends State<EditPage> {
     _getsub();
     _getsub2();
     _getqulafication();
+  }
+
+  void _getmyaccount() async {
+    // monitor network fetch
+    // await Future.delayed(const Duration(milliseconds: 1000));
+    getmyAccount.fetchqr();
+    setState(() {
+      editprofileController.email.text = getmyAccount.email;
+      editprofileController.phone.text = getmyAccount.phone;
+      editprofileController.firstname.text = getmyAccount.full_name;
+    });
   }
 
   final RefreshController _refreshController =
@@ -696,11 +710,19 @@ class _EditPageState extends State<EditPage> {
                               value: getLocationController.subcity,
                             ),
                           ),
-                          subc
-                              ? Expanded(
+                          Text(
+                            locationname,
+                            style: const TextStyle(color: Colors.black38),
+                          ),
+                        ]),
+                        subc
+                            ? SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: SizedBox(
+                                  height: 70,
                                   child: ListView.builder(
                                       shrinkWrap: true,
-                                      scrollDirection: Axis.vertical,
+                                      scrollDirection: Axis.horizontal,
                                       itemBuilder: (_, index) {
                                         return Column(
                                           children: [
@@ -716,13 +738,9 @@ class _EditPageState extends State<EditPage> {
                                       },
                                       itemCount: getLocationController
                                           .subcity!.locaion.length),
-                                )
-                              : Container(),
-                          Text(
-                            locationname,
-                            style: const TextStyle(color: Colors.black38),
-                          ),
-                        ]),
+                                ),
+                              )
+                            : Container(),
                         const SizedBox(
                           height: 20,
                         ),
@@ -888,11 +906,20 @@ class _EditPageState extends State<EditPage> {
                               value: getLocationController.g_subcity,
                             ),
                           ),
-                          g_subc
-                              ? Expanded(
+                          Text(
+                            glocationname,
+                            style: const TextStyle(color: Colors.black38),
+                          ),
+                        ]),
+
+                        g_subc
+                            ? SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: SizedBox(
+                                  height: 70,
                                   child: ListView.builder(
                                       shrinkWrap: true,
-                                      scrollDirection: Axis.vertical,
+                                      scrollDirection: Axis.horizontal,
                                       itemBuilder: (_, index) {
                                         return Column(
                                           children: [
@@ -906,13 +933,9 @@ class _EditPageState extends State<EditPage> {
                                       },
                                       itemCount: getLocationController
                                           .g_subcity!.locaion.length),
-                                )
-                              : Container(),
-                          Text(
-                            glocationname,
-                            style: const TextStyle(color: Colors.black38),
-                          ),
-                        ]),
+                                ),
+                              )
+                            : Container(),
 
                         const SizedBox(
                           height: 20,
@@ -1133,7 +1156,7 @@ class _EditPageState extends State<EditPage> {
                           height: 20,
                         ),
                         const Text(
-                          'Employement subject',
+                          'Subject you teach',
                           style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.w700,
@@ -1185,7 +1208,7 @@ class _EditPageState extends State<EditPage> {
                         ),
                         const Center(
                           child: Text(
-                            "ENGAGMENT PREFERENCE",
+                            "ENGAGEMENT PREFERENCE",
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
@@ -1238,12 +1261,15 @@ class _EditPageState extends State<EditPage> {
                               getLevelContoller.level = value!;
                               editprofileController.lid = value.id.toString();
                               lid = value.id.toString();
+                            });
+
+                            setState(() {
                               RemoteServices.getsubject(
                                   editprofileController.lid);
                               _onRefresh();
                               loadData();
+                              _getsub();
                             });
-                            //setState(() {});
                           },
                           value: getLevelContoller.level,
                         ),
@@ -1251,6 +1277,27 @@ class _EditPageState extends State<EditPage> {
                         const SizedBox(
                           height: 20,
                         ),
+
+                        // SingleChildScrollView(
+                        //   scrollDirection: Axis.horizontal,
+                        //   child: SizedBox(
+                        //     height: 70,
+                        //     child: ListView.builder(
+                        //         shrinkWrap: true,
+                        //         scrollDirection: Axis.horizontal,
+                        //         itemBuilder: (_, index) {
+                        //           return Column(
+                        //             children: [
+                        //               getTimeBoxUIdaysu(
+                        //                 getSubect.subject!.title,
+                        //               ),
+                        //             ],
+                        //           );
+                        //         },
+                        //         itemCount: 2),
+                        //   ),
+                        // ),
+
                         DropdownButton<Subjects>(
                           hint: Text(
                             getSubect.listlocation.toString(),
@@ -1278,10 +1325,6 @@ class _EditPageState extends State<EditPage> {
                               .toList(),
                           onChanged: (value) {
                             setState(() {
-                              ////        getLevelContoller.level = value!;
-                              //      editprofileController.lid = value.id.toString();
-                              //     lid = value.id.toString();
-
                               getSubect.subject = value!;
                               editprofileController.subcityid =
                                   value.id.toString();
@@ -1289,22 +1332,15 @@ class _EditPageState extends State<EditPage> {
 
                             // pop current page
                           },
-                          onTap: () {
-                            setState(() {
-                              // RemoteServices.getsubject(
-                              //     editprofileController.lid);
-                              // _onRefresh();
-                              loadData();
-                            });
-                          },
                           value: getSubect.subject,
                         ),
+
                         // subjectViewUI(),
                         const SizedBox(
                           height: 20,
                         ),
                         const Text(
-                          'Prefered tutoring location',
+                          'Preferred tutoring location',
                           style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.w700,
@@ -1361,11 +1397,19 @@ class _EditPageState extends State<EditPage> {
                               value: getLocationController.getLocation,
                             ),
                           ),
-                          showsubject
-                              ? Expanded(
+                          Text(
+                            plocationname,
+                            style: const TextStyle(color: Colors.black38),
+                          ),
+                        ]),
+                        showsubject
+                            ? SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: SizedBox(
+                                  height: 70,
                                   child: ListView.builder(
                                       shrinkWrap: true,
-                                      scrollDirection: Axis.vertical,
+                                      scrollDirection: Axis.horizontal,
                                       itemBuilder: (_, index) {
                                         return Column(
                                           children: [
@@ -1383,14 +1427,9 @@ class _EditPageState extends State<EditPage> {
                                       },
                                       itemCount: getLocationController
                                           .getLocation!.locaion.length),
-                                )
-                              : Container(),
-                          Text(
-                            plocationname,
-                            style: const TextStyle(color: Colors.black38),
-                          ),
-                        ]),
-
+                                ),
+                              )
+                            : Container(),
                         const SizedBox(
                           height: 20,
                         ),
@@ -1398,7 +1437,7 @@ class _EditPageState extends State<EditPage> {
                           padding: const EdgeInsets.only(bottom: 35.0),
                           child: TextFormField(
                             keyboardType: TextInputType.multiline,
-                            textInputAction: TextInputAction.newline,
+                            maxLength: 200,
                             controller: editprofileController.About,
                             decoration: const InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: 3),
@@ -1428,17 +1467,7 @@ class _EditPageState extends State<EditPage> {
                           children: [
                             RaisedButton(
                               onPressed: () {
-                                final isValid = editprofileController
-                                    .EditProf.currentState!
-                                    .validate();
-                                if (isValid == true) {
-                                  editprofileController.editProf(ids, context);
-                                } else {
-                                  setState(() {
-                                    _autovalidate =
-                                        true; //enable realtime validation
-                                  });
-                                }
+                                editprofileController.editProf(ids, context);
                               },
                               color: kPrimaryColor,
                               padding:
@@ -1653,6 +1682,54 @@ class _EditPageState extends State<EditPage> {
     );
   }
 
+  Widget getTimeBoxUIdaysu(
+    String txt2,
+  ) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          // editprofileController.locationid = name.toString();
+          plocationname = txt2;
+        });
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: DesignCourseAppTheme.nearlyWhite,
+            borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                  color: DesignCourseAppTheme.grey.withOpacity(0.2),
+                  offset: const Offset(1.1, 1.1),
+                  blurRadius: 8.0),
+            ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(
+                left: 18.0, right: 18.0, top: 12.0, bottom: 12.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  txt2,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w200,
+                    fontSize: 14,
+                    letterSpacing: 0.27,
+                    color: DesignCourseAppTheme.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget getTimeBoxUIdayp(String txt2, String name) {
     return GestureDetector(
       onTap: () {
@@ -1717,8 +1794,9 @@ class _EditPageState extends State<EditPage> {
     // Here you can write your code for open new view
     EasyLoading.show();
     Future.delayed(const Duration(milliseconds: 1000), () {
-// Here you can write your code
-      //  _fetchUser();
+      setState(() {
+        _getsub();
+      });
       EasyLoading.dismiss();
     });
   }
@@ -1796,7 +1874,7 @@ class _EditPageState extends State<EditPage> {
             onChanged: (value) {
               setState(() {
                 getSubect.subject = value!;
-                editprofileController.fieldofstudy = value.id.toString();
+                editprofileController.subjectid = value.id.toString();
               });
 
               // pop current page
