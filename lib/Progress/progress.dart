@@ -82,19 +82,19 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         PageViewModel(
           title: "CHOICE",
           body:
-              "You Can Pick tutorials that work best for you based on time,level and location",
+              "You can pick tutorials that work best for you based on time,level and location.",
           image: _buildImage('Choice.svg'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "STANDARADIZATION",
+          title: "Standardisation",
           body:
-              "We will help standardize such as thing as time keeping,payments and professional ethics.",
+              "We will help standardise such things as time keeping, payments and professional ethics.",
           image: _buildImage('Safety.svg'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "PROFESIONAL DEVELOPEMENT",
+          title: "PROFESSIONAL DEVELOPMENT",
           body:
               "We will organize monthly professional dev't sessions to help you continue your own dev't as a teacher.",
           image: _buildImage('Convenience.svg'),

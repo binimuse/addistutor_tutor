@@ -12,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class EditprofileController extends GetxController with StateMixin {
   // ignore: non_constant_identifier_names
+  final GlobalKey<ScaffoldState> keyforall = GlobalKey<ScaffoldState>();
   GlobalKey<FormState> EditProf = GlobalKey<FormState>();
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -322,33 +323,6 @@ class EditprofileController extends GetxController with StateMixin {
   Future<void> seteditInfo(ids, BuildContext context) async {
     openAndCloseLoadingDialog(context);
 
-    print(firstname.text);
-    print(middlename.text);
-    print(macthgender.value);
-
-    print(phone.text);
-    print(date);
-    print(since.value);
-    print(email.text);
-    print(officephone.text);
-    print(rephone.text);
-    print(g_woreda.text);
-    print(g_subcityid);
-    print(g_phone.text);
-    print(g_office_phone.text);
-    print(g_office_phone.text);
-    print(e_firstname.text);
-    print(e_postion.text);
-    print(e_woreda.text);
-    print(e_subcityid);
-    print(About.text);
-    print(subjectid);
-    print(qualifications);
-    print(e_postion.text);
-    print(locationid);
-    print(subcityid);
-    print(woreda.toString());
-
     var data = {
       "first_name": firstname.text,
       "middle_name": middlename.text,
@@ -379,7 +353,7 @@ class EditprofileController extends GetxController with StateMixin {
       "woreda": woreda.toString(),
     };
     inforesponse = await RemoteServices.editPersonalInfo(data);
-    print(inforesponse.toString());
+
     if (inforesponse.toString() == "200") {
       closeDialog(true, '', context);
       isLoading(false);
@@ -499,7 +473,7 @@ class EditprofileController extends GetxController with StateMixin {
             context: context,
             builder: (context) => AlertDialog(
               title: const Text(
-                'profile Edited',
+                'Profile edited',
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
@@ -539,7 +513,7 @@ class EditprofileController extends GetxController with StateMixin {
             context: context,
             builder: (context) => AlertDialog(
               title: const Text(
-                'profile Edited',
+                'Profile edited',
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
@@ -548,7 +522,7 @@ class EditprofileController extends GetxController with StateMixin {
                 ),
               ),
               content: const Text(
-                'if its your first time updating your profile you will be redirected to login',
+                'If its your first time updating your profile, you will be redirected to login',
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,

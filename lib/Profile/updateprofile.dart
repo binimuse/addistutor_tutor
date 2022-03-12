@@ -422,11 +422,20 @@ class _EditPageState extends State<UpdateProfile> {
                               value: getLocationController.subcity,
                             ),
                           ),
-                          subc
-                              ? Expanded(
+                          Text(
+                            locationname,
+                            style: const TextStyle(color: Colors.black38),
+                          ),
+                        ]),
+
+                        subc
+                            ? SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: SizedBox(
+                                  height: 70,
                                   child: ListView.builder(
                                       shrinkWrap: true,
-                                      scrollDirection: Axis.vertical,
+                                      scrollDirection: Axis.horizontal,
                                       itemBuilder: (_, index) {
                                         return Column(
                                           children: [
@@ -442,13 +451,9 @@ class _EditPageState extends State<UpdateProfile> {
                                       },
                                       itemCount: getLocationController
                                           .subcity!.locaion.length),
-                                )
-                              : Container(),
-                          Text(
-                            locationname,
-                            style: const TextStyle(color: Colors.black38),
-                          ),
-                        ]),
+                                ),
+                              )
+                            : Container(),
                         const SizedBox(
                           height: 20,
                         ),
@@ -575,7 +580,7 @@ class _EditPageState extends State<UpdateProfile> {
         padding: const EdgeInsets.all(8.0),
         child: Container(
           decoration: BoxDecoration(
-            color: kPrimaryLightColor,
+            color: DesignCourseAppTheme.nearlyWhite,
             borderRadius: const BorderRadius.all(Radius.circular(16.0)),
             boxShadow: <BoxShadow>[
               BoxShadow(

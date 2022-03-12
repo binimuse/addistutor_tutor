@@ -44,6 +44,12 @@ class _ProfileScreenState extends State<ActivityItemWidget>
   var bid;
 
   @override
+  void dispose() {
+    animationController?.dispose();
+    super.dispose();
+  }
+
+  @override
   void deactivate() {
     EasyLoading.dismiss();
     super.deactivate();
@@ -52,17 +58,27 @@ class _ProfileScreenState extends State<ActivityItemWidget>
   Future<void> setData() async {
     animationController?.forward();
     await Future<dynamic>.delayed(const Duration(milliseconds: 200));
-    setState(() {
-      opacity1 = 1.0;
-    });
+    if (mounted) {
+      setState(() {
+        opacity1 = 1.0;
+      });
+    }
+
     await Future<dynamic>.delayed(const Duration(milliseconds: 200));
-    setState(() {
-      opacity2 = 1.0;
-    });
+
+    if (mounted) {
+      setState(() {
+        opacity2 = 1.0;
+      });
+    }
+
     await Future<dynamic>.delayed(const Duration(milliseconds: 200));
-    setState(() {
-      opacity3 = 1.0;
-    });
+
+    if (mounted) {
+      setState(() {
+        opacity3 = 1.0;
+      });
+    }
   }
 
   final Color divider = Colors.grey.shade600;

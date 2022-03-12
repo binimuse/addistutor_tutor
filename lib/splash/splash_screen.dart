@@ -2,8 +2,10 @@ import 'dart:convert';
 
 import 'package:addistutor_tutor/Login/components/background.dart';
 import 'package:addistutor_tutor/Progress/progress.dart';
+import 'package:addistutor_tutor/controller/walletcontroller.dart';
 import 'package:addistutor_tutor/main/main.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants.dart';
@@ -16,6 +18,8 @@ class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
+
+final WalletContoller walletContoller = Get.put(WalletContoller());
 
 class _SplashScreenState extends State<SplashScreen> {
   bool isAuth = false;
@@ -53,6 +57,7 @@ class _SplashScreenState extends State<SplashScreen> {
           bodys["email_verified_at"] != null &&
           bodys["teacher_id"] != null) {
         setState(() {
+          walletContoller.getbalance(bodys["teacher_id"]);
           isAuth = true;
         });
       }

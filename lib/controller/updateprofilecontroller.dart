@@ -120,17 +120,16 @@ class Updateprofilecontoller extends GetxController with StateMixin {
   var image;
 
   Future<void> seteditInfo(ids, BuildContext context) async {
-    print(ids);
     openAndCloseLoadingDialog(context);
+
     var uploaded = await RemoteServices.uploadImage(image, ids.toString());
     if (uploaded) {
-      print("rebcaa");
       var data = {
         "phone_no": phone.text,
         "phone_no_office": officephone.text,
         "phone_no_residence": rephone.text,
         "subcity": subcityid.toString(),
-        "woreda": woreda.toString(),
+        "woreda": woreda.text,
         "about": About.text,
       };
       inforesponse = await RemoteServices.UpdateProfile(data);
@@ -146,14 +145,14 @@ class Updateprofilecontoller extends GetxController with StateMixin {
         ifupdatd(false);
       }
     } else {
-      print("enku");
+      print(woreda.text);
       var data = {
         // "email": email.text,
         "phone_no": phone.text,
         "phone_no_office": officephone.text,
         "phone_no_residence": rephone.text,
         "subcity": subcityid.toString(),
-        "woreda": woreda.toString(),
+        "woreda": woreda.text,
         "about": About.text,
       };
       inforesponse = await RemoteServices.UpdateProfile(data);
@@ -214,7 +213,7 @@ class Updateprofilecontoller extends GetxController with StateMixin {
             context: context,
             builder: (context) => AlertDialog(
               title: const Text(
-                'profile Edited',
+                'Profile edited',
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
@@ -254,7 +253,7 @@ class Updateprofilecontoller extends GetxController with StateMixin {
             context: context,
             builder: (context) => AlertDialog(
               title: const Text(
-                'profile Edited',
+                'Profile edited',
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
@@ -263,7 +262,7 @@ class Updateprofilecontoller extends GetxController with StateMixin {
                 ),
               ),
               content: const Text(
-                'if its your first time updating your profile you will be redirected to login',
+                'If its your first time updating your profile, you will be redirected to login',
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,

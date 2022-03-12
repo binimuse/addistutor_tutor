@@ -43,6 +43,7 @@ class _HomePageState extends State<Appointment>
     super.initState();
   }
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 
@@ -51,6 +52,7 @@ class _HomePageState extends State<Appointment>
     await Future.delayed(const Duration(milliseconds: 1000));
     setState(() {
       _fetchUser();
+      // _cheakwallet();
     });
     _refreshController.refreshCompleted();
   }
@@ -81,7 +83,7 @@ class _HomePageState extends State<Appointment>
           ids = int.parse(body["teacher_id"]);
           walletContoller.getbalance(ids);
         });
-        _cheakwallet();
+        // _cheakwallet();
         print("yes Id");
       } else {
         print("no Id");
@@ -91,19 +93,27 @@ class _HomePageState extends State<Appointment>
     }
   }
 
-  void _cheakwallet() async {
-    await Future.delayed(const Duration(milliseconds: 1000));
-    print(walletContoller.wallet.toString());
-    int wallet2 = int.parse(walletContoller.wallet.toString());
+  // void _cheakwallet() async {
+  //   await Future.delayed(const Duration(milliseconds: 1000));
+  //   print(walletContoller.wallet.toString());
+  //   int wallet2 = int.parse(walletContoller.wallet.toString());
 
-    if (wallet2 < 100) {
-      Get.snackbar("Your Wallet Ammount is less", "Press here to Top up amount",
-          icon: Icon(Icons.person, color: kPrimaryColor.withOpacity(0.05)),
-          duration: Duration(hours: 4),
-          onTap: (_) => Get.to(WalletPage()),
-          snackPosition: SnackPosition.BOTTOM);
-    }
-  }
+  //   if (wallet2 < 100) {
+  //     ScaffoldMessenger.of(_scaffoldKey.currentContext!).showSnackBar(SnackBar(
+  //       content: const Text('Your wallet amount is less'),
+  //       duration: const Duration(seconds: 10),
+  //       backgroundColor: kPrimaryColor,
+  //       action: SnackBarAction(
+  //           label: 'Press here to top up amount',
+  //           textColor: kPrimaryLightColor,
+  //           onPressed: () {
+  //             Get.to(WalletPage());
+  //           }),
+  //     ));
+  //   } else {
+  //     ScaffoldMessenger.of(_scaffoldKey.currentContext!).hideCurrentSnackBar();
+  //   }
+  // }
 
   var balancewallet = 10;
 
@@ -125,6 +135,7 @@ class _HomePageState extends State<Appointment>
                 child: WillPopScope(
                   onWillPop: _onBackPressed,
                   child: Scaffold(
+                    key: _scaffoldKey,
                     backgroundColor: Colors.transparent,
                     body: Column(
                       children: <Widget>[
@@ -388,7 +399,7 @@ class _HomePageState extends State<Appointment>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    walletContoller.wallet.toString() + ' birr',
+                    walletContoller.wallet.toString().obs + ' birr',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontWeight: FontWeight.w700,

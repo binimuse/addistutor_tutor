@@ -6,6 +6,7 @@ import 'dart:io';
 import 'package:addistutor_tutor/Confirmationcode/confirmationcode.dart';
 import 'package:addistutor_tutor/Home/components/course_info_screen.dart';
 import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
+import 'package:addistutor_tutor/Wallet/wallet.dart';
 
 import 'package:addistutor_tutor/controller/editprofilecontroller.dart';
 import 'package:addistutor_tutor/controller/getreqestedbookingcpntroller.dart';
@@ -32,6 +33,8 @@ class _HomePageState extends State<TutorDahsbord>
   final EditprofileController editprofileController =
       Get.put(EditprofileController());
 
+  final WalletContoller walletContoller = Get.find();
+
   final GetReqBooking getReqBooking = Get.put(GetReqBooking());
   @override
   void initState() {
@@ -40,7 +43,29 @@ class _HomePageState extends State<TutorDahsbord>
     super.initState();
   }
 
-  final WalletContoller walletContoller = Get.put(WalletContoller());
+  void _cheakwallet() async {
+    await Future.delayed(const Duration(milliseconds: 5000));
+    print(walletContoller.wallet.toString());
+    int wallet2 = int.parse(walletContoller.wallet.toString());
+
+    if (wallet2 < 100) {
+      ScaffoldMessenger.of(editprofileController.keyforall.currentContext!)
+          .showSnackBar(SnackBar(
+        content: const Text('Your wallet amount is less'),
+        duration: const Duration(days: 1),
+        backgroundColor: kPrimaryColor,
+        action: SnackBarAction(
+            label: 'Press here to top up amount',
+            textColor: kPrimaryLightColor,
+            onPressed: () {
+              Get.to(WalletPage());
+            }),
+      ));
+    } else {
+      ScaffoldMessenger.of(editprofileController.keyforall.currentContext!)
+          .hideCurrentSnackBar();
+    }
+  }
 
   // ignore: prefer_typing_uninitialized_variables
   var ids;
@@ -57,7 +82,8 @@ class _HomePageState extends State<TutorDahsbord>
           getReqBooking.fetchReqBooking(body["teacher_id"]);
           getReqBooking.isfetchedsubject(true);
           walletContoller.getbalance(ids);
-          //  _cheakwallet();
+
+          _cheakwallet();
         });
 
         print("yes Id");
@@ -79,6 +105,7 @@ class _HomePageState extends State<TutorDahsbord>
 
     setState(() {
       _fetchUser();
+      _cheakwallet();
     });
     _refreshController.refreshCompleted();
   }
@@ -96,22 +123,23 @@ class _HomePageState extends State<TutorDahsbord>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: DesignCourseAppTheme.nearlyWhite,
-        child: SmartRefresher(
-          enablePullDown: true,
-          enablePullUp: true,
+    return Obx(() => getReqBooking.isfetchedsubject.value
+        ? Container(
+            color: DesignCourseAppTheme.nearlyWhite,
+            child: SmartRefresher(
+              enablePullDown: true,
+              enablePullUp: true,
 
-          //cheak pull_to_refresh
-          controller: _refreshController,
-          onRefresh: _onRefresh,
-          onLoading: _onLoading,
-          child: WillPopScope(
-            onWillPop: _onBackPressed,
-            child: Scaffold(
-                backgroundColor: Colors.transparent,
-                body: Obx(() => getReqBooking.isfetchedsubject.value
-                    ? Column(
+              //cheak pull_to_refresh
+              controller: _refreshController,
+              onRefresh: _onRefresh,
+              onLoading: _onLoading,
+              child: WillPopScope(
+                  onWillPop: _onBackPressed,
+                  child: Scaffold(
+                      key: editprofileController.keyforall,
+                      backgroundColor: Colors.transparent,
+                      body: Column(
                         children: <Widget>[
                           SizedBox(
                             height: MediaQuery.of(context).padding.top,
@@ -133,17 +161,17 @@ class _HomePageState extends State<TutorDahsbord>
                             ),
                           ),
                         ],
-                      )
-                    : Center(
-                        child: Padding(
-                        padding: const EdgeInsets.only(top: 406),
-                        child: Column(children: [
-                          CircularProgressIndicator(),
-                          Center(child: Text("No Reqested Tutor list"))
-                        ]),
-                      )))),
-          ),
-        ));
+                      ))),
+            ),
+          )
+        : Center(
+            child: Padding(
+            padding: const EdgeInsets.only(top: 406),
+            child: Column(children: [
+              CircularProgressIndicator(),
+              Center(child: Text("No Reqested Tutor list"))
+            ]),
+          )));
   }
 
   Future<bool> _onBackPressed() async {
@@ -383,20 +411,29 @@ class _HomePageState extends State<TutorDahsbord>
                     ),
                   )
                 : SizedBox(
-                    height: 120,
-                    child: Center(
-                      child: Text(
-                        'No request found',
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontWeight: FontWeight.normal,
-                          fontSize: 12,
-                          fontFamily: 'Roboto',
-                          letterSpacing: 0.27,
-                          color: DesignCourseAppTheme.darkerText,
-                        ),
-                      ),
-                    ),
+                    height: 320,
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Center(
+                              child: CircularProgressIndicator(
+                            color: kPrimaryColor,
+                          )),
+                          Center(
+                            child: Text(
+                              'No request found',
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontWeight: FontWeight.normal,
+                                fontSize: 12,
+                                fontFamily: 'Roboto',
+                                letterSpacing: 0.27,
+                                color: DesignCourseAppTheme.darkerText,
+                              ),
+                            ),
+                          ),
+                        ]),
                   ),
           ],
         ),

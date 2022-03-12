@@ -628,11 +628,14 @@ class _SplashScreenState extends State<Body> {
           ]),
           content: Column(mainAxisSize: MainAxisSize.min, children: const [
             SizedBox(height: 15),
-            Text(
-              'please verify your email address to login',
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'please verify your email address to login',
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             SizedBox(height: 15),

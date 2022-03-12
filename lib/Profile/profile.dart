@@ -92,6 +92,9 @@ class _ProfilePageState extends State<ProfileS> {
     _fetchUser();
     _getlocation();
     _getmyaccount();
+
+    // _cheakwallet();
+
     // _getlevel();
     // _getsub();
     // _getqulification();
@@ -133,6 +136,7 @@ class _ProfilePageState extends State<ProfileS> {
       _getlocation();
       _fetchUser();
       _getmyaccount();
+      // _cheakwallet();
     });
     _refreshController.refreshCompleted();
   }
@@ -192,15 +196,13 @@ class _ProfilePageState extends State<ProfileS> {
     } else {}
   }
 
-  final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     return editprofileController.obx(
         (editForm) => WillPopScope(
               onWillPop: _onBackPressed,
               child: Scaffold(
-                key: _key,
+                key: editprofileController.keyforall,
                 backgroundColor: Colors.grey.shade100,
                 extendBodyBehindAppBar: true,
                 extendBody: true,
@@ -208,7 +210,8 @@ class _ProfilePageState extends State<ProfileS> {
                   automaticallyImplyLeading: false,
                   leading: IconButton(
                     onPressed: () {
-                      _key.currentState!.openDrawer();
+                      editprofileController.keyforall.currentState!
+                          .openDrawer();
                     },
                     icon: const Icon(
                       Icons.menu,
@@ -443,7 +446,7 @@ class _ProfilePageState extends State<ProfileS> {
                     },
                     child: _buildRow(
                       Icons.event_available,
-                      "Avalablity",
+                      "Availability",
                     ),
                   ),
                   _buildDivider(),
@@ -472,7 +475,7 @@ class _ProfilePageState extends State<ProfileS> {
                     },
                     child: _buildRow(
                       Icons.money,
-                      "Wallet ",
+                      "Wallet",
                     ),
                   ),
                   _buildDivider(),
@@ -516,7 +519,9 @@ class _ProfilePageState extends State<ProfileS> {
                   _buildDivider(),
                   const SizedBox(height: 10.0),
                   GestureDetector(
-                      onTap: () {
+                      onTap: () async {
+                        Scaffold.of(context).removeCurrentSnackBar();
+
                         showDialog(
                           context: context,
                           builder: (context) => AlertDialog(
@@ -528,12 +533,14 @@ class _ProfilePageState extends State<ProfileS> {
                             content: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: const [
-                                  SizedBox(height: 15),
-                                  Text(
-                                    'Are you sure you want to log out?',
-                                    style: TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.bold,
+                                  Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text(
+                                      'Are you sure you want to log out?',
+                                      style: TextStyle(
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ]),
@@ -546,14 +553,18 @@ class _ProfilePageState extends State<ProfileS> {
                                   highlightColor: Colors.grey[200],
                                   onTap: () {
                                     Navigator.of(context).pop(true);
+                                    setState(() {
+                                      ScaffoldMessenger.of(context)
+                                          .hideCurrentSnackBar();
+                                    });
                                     _logout(context);
                                   },
-                                  child: Center(
+                                  child: const Center(
                                     child: Text(
                                       "Ok",
                                       style: TextStyle(
                                         fontSize: 18.0,
-                                        color: Colors.red,
+                                        color: kPrimaryColor,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),

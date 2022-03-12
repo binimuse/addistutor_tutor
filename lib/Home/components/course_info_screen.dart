@@ -131,7 +131,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                         children: <Widget>[
                           Padding(
                             padding: const EdgeInsets.only(
-                                top: 32.0, left: 18, right: 16),
+                                top: 10.0, left: 18, right: 16),
                             child: Text(
                               "Student info",
                               textAlign: TextAlign.left,
@@ -146,7 +146,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                           ),
                           Padding(
                             padding: const EdgeInsets.only(
-                                left: 16, right: 16, bottom: 8, top: 16),
+                                left: 16, right: 16, bottom: 8, top: 10),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -248,7 +248,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                               : Container(),
                           Padding(
                             padding: const EdgeInsets.only(
-                                top: 10.0, left: 18, right: 16),
+                                top: 0.0, left: 18, right: 16),
                             child: Text(
                               widget.requestedBooking!.student.about,
                               textAlign: TextAlign.left,
@@ -264,7 +264,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                           _buildDivider(),
                           Padding(
                             padding: const EdgeInsets.only(
-                                top: 10.0, left: 18, right: 16),
+                                top: 0.0, left: 18, right: 16),
                             child: Text(
                               "Booking info",
                               textAlign: TextAlign.left,

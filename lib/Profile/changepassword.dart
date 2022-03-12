@@ -113,7 +113,7 @@ class _EditProfilePageState extends State<ChangePassword> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const Text(
-                                  "old Password",
+                                  "Old password",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16),
@@ -165,7 +165,7 @@ class _EditProfilePageState extends State<ChangePassword> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const Text(
-                                  "new Password",
+                                  "New password",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16),
@@ -218,7 +218,7 @@ class _EditProfilePageState extends State<ChangePassword> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const Text(
-                                  "Confirm new Password",
+                                  "Confirm new password",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16),

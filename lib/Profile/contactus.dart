@@ -82,7 +82,7 @@ class _HomePageState extends State<ContactDetailsView>
                       children: [
                         ListTile(
                             title: const Text(
-                              'Phone',
+                              'phone number',
                               style: TextStyle(
                                 fontSize: 17,
                                 fontWeight: FontWeight.bold,
@@ -114,7 +114,7 @@ class _HomePageState extends State<ContactDetailsView>
                             )),
                         ListTile(
                             title: const Text(
-                              'Secondary phone',
+                              'phone number',
                               style: TextStyle(
                                 fontSize: 17,
                                 fontWeight: FontWeight.bold,

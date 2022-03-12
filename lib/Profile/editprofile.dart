@@ -431,6 +431,7 @@ class _EditPageState extends State<EditPage> {
                             '2021',
                             '2020',
                             '2019',
+                            '2018',
                             '2017',
                             '2016',
                             '2015',
@@ -1326,8 +1327,7 @@ class _EditPageState extends State<EditPage> {
                           onChanged: (value) {
                             setState(() {
                               getSubect.subject = value!;
-                              editprofileController.subcityid =
-                                  value.id.toString();
+                              //        editprofileController.subcityid =      value.id.toString();
                             });
 
                             // pop current page
@@ -1548,6 +1548,7 @@ class _EditPageState extends State<EditPage> {
       onTap: () {
         setState(() {
           editprofileController.subcityid = name.toString();
+
           locationname = txt2;
         });
       },

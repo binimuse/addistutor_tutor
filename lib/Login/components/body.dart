@@ -19,6 +19,7 @@ import 'package:addistutor_tutor/controller/getlocationcontroller.dart';
 import 'package:addistutor_tutor/controller/getqualifaicationcontroller.dart';
 import 'package:addistutor_tutor/controller/getsubcontroller.dart';
 import 'package:addistutor_tutor/controller/signupcontroller.dart';
+import 'package:addistutor_tutor/controller/walletcontroller.dart';
 import 'package:addistutor_tutor/main/main.dart';
 import 'package:addistutor_tutor/remote_services/api.dart';
 import 'package:addistutor_tutor/remote_services/user.dart';
@@ -56,6 +57,7 @@ class _LoginScreenState extends State<Body> {
       Get.put(Avalablitycontrollerclass());
   final GetLevelContoller getLevelContoller = Get.put(GetLevelContoller());
   final GetSubect getSubect = Get.put(GetSubect());
+  final WalletContoller walletContoller = Get.put(WalletContoller());
   @override
   void initState() {
     super.initState();
@@ -66,10 +68,34 @@ class _LoginScreenState extends State<Body> {
     _getsub();
     _getsub2();
     _getqulification();
+    _fetchUser();
     emailcon = TextEditingController();
   }
 
   var ids;
+  void _fetchUser() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var token = localStorage.getString('user');
+
+    if (token != null) {
+      var body = json.decode(token);
+
+      if (body["teacher_id"] != null) {
+        setState(() {
+          ids = int.parse(body["teacher_id"]);
+
+          walletContoller.getbalance(ids);
+        });
+
+        print("yes Id");
+      } else {
+        print("no Id");
+      }
+    } else {
+      print("no Token");
+    }
+  }
+
   List<GetLocation> location = [];
   _getlocation() async {
     getLocationController.fetchLocation();
@@ -92,7 +118,9 @@ class _LoginScreenState extends State<Body> {
     level = getLevelContoller.listlocation.value;
     if (location != null && location.isNotEmpty) {
       setState(() {
-        getLevelContoller.level = level[0];
+        try {
+          getLevelContoller.level = level[0];
+        } catch (e) {}
       });
     }
   }
@@ -574,15 +602,6 @@ class _LoginScreenState extends State<Body> {
             ),
             (route) => false,
           );
-          // Navigator.pushAndRemoveUntil(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => const Scaffold(
-          //       body: EditPage(),
-          //     ),
-          //   ),
-          //   (route) => false,
-          // );
         }
 
         isLoading = false;

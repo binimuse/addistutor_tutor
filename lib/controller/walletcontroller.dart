@@ -46,7 +46,7 @@ class WalletContoller extends GetxController with StateMixin {
       // balnce = balance;
       // ignore: unnecessary_null_comparison
       wallet = balnce!.wallet_amount.toString();
-
+      update();
       isFetched(true);
     }
   }

@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:addistutor_tutor/Wallet/wallet.dart';
 import 'package:addistutor_tutor/controller/getnotificationcontoller.dart';
 import 'package:addistutor_tutor/controller/getreqestedbookingcpntroller.dart';
 import 'package:addistutor_tutor/remote_services/user.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../constants.dart';
 import 'activity_item_widget.dart';
 
 class Notificationclass extends StatefulWidget {
@@ -30,10 +32,29 @@ class _ActivityPageState extends State<Notificationclass>
   void initState() {
     Future.delayed(Duration.zero, () async {
       getNotigicationController.fetchNotfication();
+      // _cheakwallet();
     });
 
     super.initState();
   }
+
+  // void _cheakwallet() async {
+  //   await Future.delayed(const Duration(milliseconds: 1000));
+  //   print(walletContoller.wallet.toString());
+  //   int wallet2 = int.parse(walletContoller.wallet.toString());
+
+  //   if (wallet2 < 100) {
+  //     Get.snackbar("Your wallet amount is less", "Press here to top up amount",
+  //         icon: Icon(Icons.person, color: kPrimaryColor.withOpacity(0.05)),
+  //         duration: Duration(seconds: 10),
+  //         onTap: (_) => Get.to(WalletPage()),
+  //         snackPosition: SnackPosition.BOTTOM);
+  //   } else {
+  //     setState(() {
+  //       ScaffoldMessenger.of(context).clearSnackBars();
+  //     });
+  //   }
+  // }
 
   List<RequestedBooking> subject = [];
   var ids;
@@ -46,6 +67,7 @@ class _ActivityPageState extends State<Notificationclass>
     await Future.delayed(const Duration(milliseconds: 1000));
     setState(() {
       getNotigicationController.fetchNotfication();
+      //   _cheakwallet();
     });
     _refreshController.refreshCompleted();
   }
