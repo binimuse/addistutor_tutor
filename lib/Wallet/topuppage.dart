@@ -182,6 +182,7 @@ class _FeedbackScreenState extends State<TopUpPage> {
                               child: TextFormField(
                                 controller: walletContoller.ammount,
                                 maxLines: null,
+                                keyboardType: TextInputType.number,
                                 onChanged: (String txt) {},
                                 style: const TextStyle(
                                   fontFamily: AppTheme.fontName,
@@ -191,7 +192,7 @@ class _FeedbackScreenState extends State<TopUpPage> {
                                 cursorColor: Colors.blue,
                                 decoration: const InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: 'Enter your Ammount...'),
+                                    hintText: 'Enter your amount...'),
                                 validator: (value) {
                                   return walletContoller.validateName(value!);
                                 },
@@ -255,31 +256,93 @@ class _FeedbackScreenState extends State<TopUpPage> {
     );
   }
 
+  // Widget _buildComposer() {
+  //   return Padding(
+  //     padding: const EdgeInsets.all(4.0),
+  //     child: Center(
+  //       child: Stack(
+  //         children: [
+  //           GestureDetector(
+  //             onTap: () {
+  //               _showPicker(context);
+  //             },
+  //             child: CircleAvatar(
+  //               radius: 40,
+  //               backgroundColor: kPrimaryColor,
+  //               child: _imageFileList != null
+  //                   ? ClipRRect(
+  //                       borderRadius: BorderRadius.circular(40),
+  //                       child: Image.file(File(_imageFileList![0].path),
+  //                           width: 95, height: 95, fit: BoxFit.cover),
+  //                     )
+  //                   : Container(
+  //                       decoration: BoxDecoration(
+  //                           color: Colors.grey[200],
+  //                           borderRadius: BorderRadius.circular(50)),
+  //                       width: 100,
+  //                       height: 100,
+  //                       child: Icon(
+  //                         Icons.file_upload_sharp,
+  //                         color: Colors.grey[800],
+  //                       ),
+  //                     ),
+  //             ),
+  //           ),
+  //           Positioned(
+  //               bottom: 0,
+  //               right: 0,
+  //               child: Container(
+  //                 height: 30,
+  //                 width: 65,
+  //                 decoration: BoxDecoration(
+  //                   shape: BoxShape.circle,
+  //                   border: Border.all(
+  //                     width: 2,
+  //                     color: Theme.of(context).scaffoldBackgroundColor,
+  //                   ),
+  //                   color: Colors.transparent,
+  //                 ),
+  //                 child: GestureDetector(
+  //                   onTap: () {
+  //                     _showPicker(context);
+  //                   },
+  //                   child: const Text("Upload your bank slip",
+  //                       style: TextStyle(color: kPrimaryColor)),
+  //                 ),
+  //               )),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+
   Widget _buildComposer() {
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Center(
-        child: Stack(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             GestureDetector(
               onTap: () {
                 _showPicker(context);
               },
               child: CircleAvatar(
-                radius: 40,
+                radius: 50,
                 backgroundColor: kPrimaryColor,
                 child: _imageFileList != null
                     ? ClipRRect(
                         borderRadius: BorderRadius.circular(40),
                         child: Image.file(File(_imageFileList![0].path),
-                            width: 95, height: 95, fit: BoxFit.cover),
+                            width: 100, height: 105, fit: BoxFit.contain),
                       )
                     : Container(
                         decoration: BoxDecoration(
                             color: Colors.grey[200],
                             borderRadius: BorderRadius.circular(50)),
                         width: 100,
-                        height: 100,
+                        height: 120,
                         child: Icon(
                           Icons.file_upload_sharp,
                           color: Colors.grey[800],
@@ -287,28 +350,13 @@ class _FeedbackScreenState extends State<TopUpPage> {
                       ),
               ),
             ),
-            Positioned(
-                bottom: 0,
-                right: 0,
-                child: Container(
-                  height: 30,
-                  width: 65,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      width: 2,
-                      color: Theme.of(context).scaffoldBackgroundColor,
-                    ),
-                    color: Colors.transparent,
-                  ),
-                  child: GestureDetector(
-                    onTap: () {
-                      _showPicker(context);
-                    },
-                    child: const Text("Upload",
-                        style: TextStyle(color: kPrimaryColor)),
-                  ),
-                )),
+            GestureDetector(
+              onTap: () {
+                _showPicker(context);
+              },
+              child: const Text("Upload your bank slip",
+                  style: TextStyle(color: kPrimaryColor)),
+            ),
           ],
         ),
       ),

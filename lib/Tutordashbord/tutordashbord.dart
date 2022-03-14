@@ -168,7 +168,7 @@ class _HomePageState extends State<TutorDahsbord>
             child: Padding(
             padding: const EdgeInsets.only(top: 406),
             child: Column(children: [
-              CircularProgressIndicator(),
+              // CircularProgressIndicator(),
               Center(child: Text("No Reqested Tutor list"))
             ]),
           )));
@@ -192,7 +192,7 @@ class _HomePageState extends State<TutorDahsbord>
               ),
             ),
             content: const Text(
-              'Are You Sure you want to Exit This App',
+              'Are You Sure you want to Exit This app',
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w500,
@@ -416,10 +416,6 @@ class _HomePageState extends State<TutorDahsbord>
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Center(
-                              child: CircularProgressIndicator(
-                            color: kPrimaryColor,
-                          )),
                           Center(
                             child: Text(
                               'No request found',

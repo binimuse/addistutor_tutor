@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:addistutor_tutor/Login/components/pendingpage.dart';
 import 'package:addistutor_tutor/Profile/editprofile.dart';
+import 'package:addistutor_tutor/Profile/getmyaccount.dart';
 import 'package:addistutor_tutor/Profile/profile.dart';
 import 'package:addistutor_tutor/Signup/components/or_divider.dart';
 import 'package:addistutor_tutor/Signup/components/social_icon.dart';
@@ -58,6 +59,7 @@ class _LoginScreenState extends State<Body> {
   final GetLevelContoller getLevelContoller = Get.put(GetLevelContoller());
   final GetSubect getSubect = Get.put(GetSubect());
   final WalletContoller walletContoller = Get.put(WalletContoller());
+  final GetmyAccount getmyAccount = Get.put(GetmyAccount());
   @override
   void initState() {
     super.initState();
@@ -68,8 +70,15 @@ class _LoginScreenState extends State<Body> {
     _getsub();
     _getsub2();
     _getqulification();
+    _getmyaccount();
     _fetchUser();
     emailcon = TextEditingController();
+  }
+
+  void _getmyaccount() async {
+    // monitor network fetch
+    // await Future.delayed(const Duration(milliseconds: 1000));
+    getmyAccount.fetchqr();
   }
 
   var ids;
@@ -558,7 +567,7 @@ class _LoginScreenState extends State<Body> {
           showDialog(
             context: context,
             builder: (context) => AlertDialog(
-              content: const Text("To continue, complete your profile"),
+              content: const Text("To continue, please complete your profile."),
               actions: <Widget>[
                 FlatButton(
                   shape: RoundedRectangleBorder(

@@ -170,13 +170,15 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              const Padding(
-                                padding: EdgeInsets.all(16),
-                                child: Text(
-                                  'selected Dates',
-                                  style: TextStyle(color: Colors.black45),
-                                ),
-                              ),
+                              change
+                                  ? const Padding(
+                                      padding: EdgeInsets.all(16),
+                                      child: Text(
+                                        'selected Dates',
+                                        style: TextStyle(color: Colors.black45),
+                                      ),
+                                    )
+                                  : Container(),
                               FutureBuilder(
                                   future: RemoteServices.fetchdaya(),
                                   builder: (BuildContext context,

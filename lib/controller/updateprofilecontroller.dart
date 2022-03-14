@@ -213,7 +213,7 @@ class Updateprofilecontoller extends GetxController with StateMixin {
             context: context,
             builder: (context) => AlertDialog(
               title: const Text(
-                'Profile edited',
+                'Successfully saved',
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
@@ -240,20 +240,20 @@ class Updateprofilecontoller extends GetxController with StateMixin {
                     Navigator.pop(context);
                     isLoading(false);
                   },
-                  child: const Text('ok'),
+                  child: const Text('OK'),
                 ),
               ],
             ),
           );
 
           //    openAndCloseLoadingDialog(context);
-          print("yess");
+
         } else {
           showDialog(
             context: context,
             builder: (context) => AlertDialog(
               title: const Text(
-                'Profile edited',
+                'Successfully saved',
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
@@ -262,7 +262,7 @@ class Updateprofilecontoller extends GetxController with StateMixin {
                 ),
               ),
               content: const Text(
-                'If its your first time updating your profile, you will be redirected to login',
+                'If this is your first time updating your profile, you will be redirected to the log in page.',
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
@@ -285,7 +285,7 @@ class Updateprofilecontoller extends GetxController with StateMixin {
                       ),
                     );
                   },
-                  child: const Text('ok'),
+                  child: const Text('OK'),
                 ),
               ],
             ),
@@ -322,21 +322,21 @@ class Updateprofilecontoller extends GetxController with StateMixin {
 
   String? validateName(String value) {
     if (value.isEmpty) {
-      return "please Provide a name";
+      return "Please provide a name";
     }
     return null;
   }
 
   String? validateNamep(String value) {
     if (value.isEmpty) {
-      return "please Provide a Password";
+      return "Please provide a Password";
     }
     return null;
   }
 
   String? validatePass(String value) {
     if (!validateStructure(value)) {
-      return "please Provide a valid password";
+      return "Please provide a valid password";
     }
     return null;
   }

@@ -544,7 +544,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
           return Form(
             key: endBookingContoller.Formkey,
             child: AlertDialog(
-              title: const Text('End Session'),
+              title: const Text('End Session?'),
               content: TextFormField(
                 onChanged: (value) {
                   setState(() {
@@ -552,8 +552,8 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                   });
                 },
                 controller: _textFieldController,
-                decoration: const InputDecoration(
-                    hintText: "Please enter your reason?"),
+                decoration:
+                    const InputDecoration(hintText: "Please enter reason"),
                 validator: (value) {
                   return endBookingContoller.validateName(value!);
                 },
@@ -572,7 +572,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                 FlatButton(
                   color: Colors.green,
                   textColor: Colors.white,
-                  child: const Text('OK'),
+                  child: const Text('Submit'),
                   onPressed: () async {
                     setState(() {
                       //  codeDialog = valueText;

@@ -187,7 +187,7 @@ class Avalablitycontrollerclass extends GetxController with StateMixin {
 
   String? validateName(String value) {
     if (value.isEmpty) {
-      return "please Provide a name";
+      return "Please provide a name";
     }
     return null;
   }

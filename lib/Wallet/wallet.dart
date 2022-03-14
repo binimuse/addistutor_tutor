@@ -286,7 +286,7 @@ class _EditProfilePageState extends State<WalletPage> {
                                                             .start,
                                                     children: <Widget>[
                                                       Text(
-                                                        "payment submitted",
+                                                        "Payment submitted",
                                                         style: TextStyle(
                                                             fontSize: 18,
                                                             fontWeight:

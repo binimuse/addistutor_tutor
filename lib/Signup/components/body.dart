@@ -13,13 +13,11 @@ import 'package:addistutor_tutor/remote_services/api.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../constants.dart';
 import 'background.dart';
 import 'or_divider.dart';
@@ -65,7 +63,7 @@ class _SplashScreenState extends State<Body> {
               SizedBox(height: size.height * 0.03),
               Image(
                 image: AssetImage(
-                  'assets/images/login.jpg',
+                  'assets/images/t.jpg',
                 ),
                 height: size.height * 0.15,
               ),
@@ -214,6 +212,8 @@ class _SplashScreenState extends State<Body> {
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       Checkbox(
                         value: isChecked,
+                        activeColor: kPrimaryColor,
+                        checkColor: kPrimaryLightColor,
                         onChanged: (value) {
                           setState(() {
                             isChecked = value!;
@@ -278,7 +278,7 @@ class _SplashScreenState extends State<Body> {
                                       builder: (context) => AlertDialog(
                                         title: const Text('Error'),
                                         content: const Text(
-                                            "please cheak Term of Service"),
+                                            "please check terms of service"),
                                         actions: <Widget>[
                                           // ignore: deprecated_member_use
                                           FlatButton(
@@ -298,7 +298,7 @@ class _SplashScreenState extends State<Body> {
                                 context: context,
                                 builder: (context) => AlertDialog(
                                   title: const Text('Error'),
-                                  content: const Text("passowrd don't match"),
+                                  content: const Text("Password don't match"),
                                   actions: <Widget>[
                                     // ignore: deprecated_member_use
                                     FlatButton(
@@ -614,7 +614,7 @@ class _SplashScreenState extends State<Body> {
           title: Column(mainAxisSize: MainAxisSize.min, children: const [
             SizedBox(height: 15),
             Text(
-              'Tutor registered successfully',
+              'Registered successfully',
               style: TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
@@ -631,7 +631,7 @@ class _SplashScreenState extends State<Body> {
             Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
-                'please verify your email address to login',
+                'Please check your email inbox to verify your email address before you log in.',
                 style: TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold,
@@ -681,7 +681,7 @@ class _SplashScreenState extends State<Body> {
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       alignment: Alignment.center,
                       child: const Text(
-                        'Ok',
+                        'OK',
                         style: TextStyle(
                           color: Colors.white,
                         ),

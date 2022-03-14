@@ -64,7 +64,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
     const pageDecoration = PageDecoration(
       titleTextStyle: TextStyle(
-          fontSize: 30.0,
+          fontSize: 25.0,
           fontFamily: 'Roboto',
           letterSpacing: 0.4,
           fontWeight: FontWeight.w800,
@@ -82,7 +82,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         PageViewModel(
           title: "CHOICE",
           body:
-              "You can pick tutorials that work best for you based on time,level and location.",
+              "You can pick tutorials that work best for you based on time, level and location.",
           image: _buildImage('Choice.svg'),
           decoration: pageDecoration,
         ),
@@ -96,7 +96,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         PageViewModel(
           title: "PROFESSIONAL DEVELOPMENT",
           body:
-              "We will organize monthly professional dev't sessions to help you continue your own dev't as a teacher.",
+              "We will organize monthly professional development sessions to help you continue your own development as a teacher.",
           image: _buildImage('Convenience.svg'),
           decoration: pageDecoration,
         ),

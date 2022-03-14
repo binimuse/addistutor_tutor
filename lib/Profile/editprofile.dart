@@ -34,7 +34,7 @@ class _EditPageState extends State<EditPage> {
   final EditprofileController editprofileController =
       Get.put(EditprofileController());
 
-  final GetmyAccount getmyAccount = Get.put(GetmyAccount());
+  final GetmyAccount getmyAccount = Get.find();
 
   final GetLevelContoller getLevelContoller = Get.find();
   final GetSubect getSubect = Get.find();
@@ -100,6 +100,7 @@ class _EditPageState extends State<EditPage> {
     _getsub();
     _getsub2();
     _getqulafication();
+    _getmyaccount();
   }
 
   void _getmyaccount() async {
@@ -110,6 +111,8 @@ class _EditPageState extends State<EditPage> {
       editprofileController.email.text = getmyAccount.email;
       editprofileController.phone.text = getmyAccount.phone;
       editprofileController.firstname.text = getmyAccount.full_name;
+
+      print(getmyAccount.email);
     });
   }
 
@@ -235,10 +238,10 @@ class _EditPageState extends State<EditPage> {
                   padding: const EdgeInsets.only(left: 16, top: 25, right: 16),
                   child: GestureDetector(
                     onTap: () {
-                      FocusScopeNode currentFocus = FocusScope.of(context);
-
-                      if (!currentFocus.hasPrimaryFocus) {
-                        currentFocus.unfocus();
+                      FocusScopeNode currentScope = FocusScope.of(context);
+                      if (!currentScope.hasPrimaryFocus &&
+                          currentScope.hasFocus) {
+                        FocusManager.instance.primaryFocus!.unfocus();
                       }
                     },
                     child: ListView(
@@ -276,7 +279,7 @@ class _EditPageState extends State<EditPage> {
                             ),
                             focusColor: kPrimaryColor,
                             fillColor: kPrimaryColor,
-                            hintText: "your Name",
+                            hintText: "Your name",
                             hintStyle: TextStyle(
                                 color: DesignCourseAppTheme.nearlyBlack,
                                 fontSize: 16,
@@ -560,6 +563,7 @@ class _EditPageState extends State<EditPage> {
                         ),
                         TextFormField(
                           controller: editprofileController.email,
+                          readOnly: true,
                           decoration: const InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: 3),
                               labelText: "Email",
@@ -716,32 +720,32 @@ class _EditPageState extends State<EditPage> {
                             style: const TextStyle(color: Colors.black38),
                           ),
                         ]),
-                        subc
-                            ? SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: SizedBox(
-                                  height: 70,
-                                  child: ListView.builder(
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.horizontal,
-                                      itemBuilder: (_, index) {
-                                        return Column(
-                                          children: [
-                                            getTimeBoxUIday(
-                                                getLocationController.subcity!
-                                                    .locaion[index].name,
-                                                getLocationController
-                                                    .getLocation!
-                                                    .locaion[index]
-                                                    .name),
-                                          ],
-                                        );
-                                      },
-                                      itemCount: getLocationController
-                                          .subcity!.locaion.length),
-                                ),
-                              )
-                            : Container(),
+                        // subc
+                        //     ? SingleChildScrollView(
+                        //         scrollDirection: Axis.horizontal,
+                        //         child: SizedBox(
+                        //           height: 70,
+                        //           child: ListView.builder(
+                        //               shrinkWrap: true,
+                        //               scrollDirection: Axis.horizontal,
+                        //               itemBuilder: (_, index) {
+                        //                 return Column(
+                        //                   children: [
+                        //                     getTimeBoxUIday(
+                        //                         getLocationController.subcity!
+                        //                             .locaion[index].name,
+                        //                         getLocationController
+                        //                             .getLocation!
+                        //                             .locaion[index]
+                        //                             .name),
+                        //                   ],
+                        //                 );
+                        //               },
+                        //               itemCount: getLocationController
+                        //                   .subcity!.locaion.length),
+                        //         ),
+                        //       )
+                        //     : Container(),
                         const SizedBox(
                           height: 20,
                         ),

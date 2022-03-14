@@ -112,7 +112,7 @@ class WalletContoller extends GetxController with StateMixin {
                 Navigator.of(context).pop(true);
                 Navigator.pop(context);
               },
-              child: const Text('ok'),
+              child: const Text('OK'),
             ),
           ],
         ),
@@ -124,7 +124,7 @@ class WalletContoller extends GetxController with StateMixin {
         context: context,
         builder: (context) => AlertDialog(
           title: const Text(
-            'Wallet Sucess',
+            'Thank you for making the deposit. The administrator is verifying your deposit. Please wait.',
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w500,
@@ -144,7 +144,7 @@ class WalletContoller extends GetxController with StateMixin {
                 //       builder: (context) => const ProfileScreen()),
                 // );
               },
-              child: const Text('ok'),
+              child: const Text('OK'),
             ),
           ],
         ),
@@ -175,7 +175,7 @@ class WalletContoller extends GetxController with StateMixin {
 
   String? validateName(String value) {
     if (value.isEmpty) {
-      return "please Provide a FeedBack";
+      return "Please provide a FeedBack";
     }
     return null;
   }
