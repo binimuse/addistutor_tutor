@@ -104,7 +104,7 @@ class _HomePageState extends State<ContactDetailsView>
                                   onPressed: () {},
                                   child: const Icon(
                                     Icons.call,
-                                    color: kPrimaryLightColor,
+                                    color: kPrimaryColor,
                                   ),
                                   style: TextButton.styleFrom(
                                       backgroundColor: Colors.white,
@@ -136,7 +136,7 @@ class _HomePageState extends State<ContactDetailsView>
                                   onPressed: () {},
                                   child: const Icon(
                                     Icons.call,
-                                    color: kPrimaryLightColor,
+                                    color: kPrimaryColor,
                                   ),
                                   style: TextButton.styleFrom(
                                       backgroundColor: Colors.white,
@@ -168,7 +168,7 @@ class _HomePageState extends State<ContactDetailsView>
                                   onPressed: () {},
                                   child: const Icon(
                                     Icons.email,
-                                    color: kPrimaryLightColor,
+                                    color: kPrimaryColor,
                                   ),
                                   style: TextButton.styleFrom(
                                       backgroundColor: Colors.white,
@@ -202,7 +202,7 @@ class _HomePageState extends State<ContactDetailsView>
                                   onPressed: () {},
                                   child: const Icon(
                                     Icons.link,
-                                    color: kPrimaryLightColor,
+                                    color: kPrimaryColor,
                                   ),
                                   style: TextButton.styleFrom(
                                       backgroundColor: Colors.white,

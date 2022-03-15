@@ -246,21 +246,37 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                       ),
                                     ])
                               : Container(),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 0.0, left: 18, right: 16),
-                            child: Text(
-                              widget.requestedBooking!.student.about,
-                              textAlign: TextAlign.left,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w200,
-                                fontSize: 15,
-                                fontFamily: 'WorkSans',
-                                letterSpacing: 0.27,
-                                color: DesignCourseAppTheme.grey,
-                              ),
-                            ),
-                          ),
+                          widget.requestedBooking!.student.about != null
+                              ? Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 0.0, left: 18, right: 16),
+                                  child: Text(
+                                    widget.requestedBooking!.student.about,
+                                    textAlign: TextAlign.left,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w200,
+                                      fontSize: 15,
+                                      fontFamily: 'WorkSans',
+                                      letterSpacing: 0.27,
+                                      color: DesignCourseAppTheme.grey,
+                                    ),
+                                  ),
+                                )
+                              : Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 0.0, left: 18, right: 16),
+                                  child: Text(
+                                    "",
+                                    textAlign: TextAlign.left,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w200,
+                                      fontSize: 15,
+                                      fontFamily: 'WorkSans',
+                                      letterSpacing: 0.27,
+                                      color: DesignCourseAppTheme.grey,
+                                    ),
+                                  ),
+                                ),
                           _buildDivider(),
                           Padding(
                             padding: const EdgeInsets.only(

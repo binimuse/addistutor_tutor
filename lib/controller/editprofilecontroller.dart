@@ -295,7 +295,7 @@ class EditprofileController extends GetxController with StateMixin {
         }
         change(fetched, status: RxStatus.success());
       } on Exception {
-        change(null, status: RxStatus.error("Something went wrong"));
+        //change(null, status: RxStatus.error("Something went wrong"));
 
         // ignore: todo
         // TODO

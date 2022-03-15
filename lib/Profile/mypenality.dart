@@ -132,7 +132,7 @@ class _HomePageState extends State<Mypernality>
                       child: Padding(
                       padding: const EdgeInsets.only(top: 406),
                       child: Column(children: [
-                        CircularProgressIndicator(),
+                        // CircularProgressIndicator(),
                         Center(child: Text("No Penalties"))
                       ]),
                     )))),
