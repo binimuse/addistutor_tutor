@@ -11,6 +11,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:new_version/new_version.dart';
 
 void main() {
   HttpOverrides.global = MyHttpOverrides();
@@ -36,6 +37,25 @@ class _MyHomePageState extends State<MyApp> {
     _connectivity.myStream.listen((source) {
       setState(() => _source = source);
     });
+
+    final newVersion = NewVersion(
+      //iOSId: 'com.google.Vespa',
+      androidId: 'com.example.addistutor_tutor',
+    );
+
+    // You can let the plugin handle fetching the status and showing a dialog,
+    // or you can fetch the status and display your own dialog, or no dialog.
+    const simpleBehavior = true;
+
+    if (simpleBehavior) {
+      basicStatusCheck(newVersion);
+    } else {
+      //  advancedStatusCheck(newVersion);
+    }
+  }
+
+  basicStatusCheck(NewVersion newVersion) {
+    newVersion.showAlertIfNecessary(context: context);
   }
 
   // This widget is the root of your application.

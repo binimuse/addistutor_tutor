@@ -318,7 +318,7 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
       const Padding(
         padding: EdgeInsets.all(16),
         child: Text(
-          'select your available date to give a tutor',
+          'Select your available date to give a tutor',
           style: TextStyle(color: Colors.black45),
         ),
       ),
@@ -424,7 +424,7 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
       const Padding(
         padding: EdgeInsets.all(16),
         child: Text(
-          'select your availability ',
+          'Select your availability ',
           style: TextStyle(color: Colors.black45),
         ),
       ),
@@ -470,8 +470,6 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
                   avalablitycontrollerclass.onchange(true);
                   avalablitycontrollerclass.isa =
                       avalablitycontrollerclass.isSelected[0];
-                  print(avalablitycontrollerclass.isa);
-                  print("on" + avalablitycontrollerclass.onchange.toString());
                 });
               },
               isSelected: avalablitycontrollerclass.isSelected,
@@ -482,41 +480,3 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
     ]);
   }
 }
-
-// class FollowedList extends StatefulWidget {
-//   final Activedays? day;
-
-//   const FollowedList({
-//     Key? key,
-//     required this.day,
-//   }) : super(key: key);
-
-//   @override
-//   _SettingsScreenState2 createState() => _SettingsScreenState2();
-// }
-
-// final Avalablitycontrollerclass avalablitycontrollerclass =
-//     Get.put(Avalablitycontrollerclass());
-
-// class _SettingsScreenState2 extends State<FollowedList> {
-//   @override
-//   void initState() {
-//     // TODO: implement initState
-
-//     if (widget.day!.day != null) {
-//       avalablitycontrollerclass.selecteddate.add(widget.day!.day);
-//       print(avalablitycontrollerclass.selecteddate);
-
-//       // values.clear();
-//     } else {
-//       avalablitycontrollerclass.selecteddate.clear();
-//     }
-
-//     super.initState();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Material(child: Container());
-//   }
-// }

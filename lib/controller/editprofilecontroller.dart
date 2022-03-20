@@ -533,9 +533,11 @@ class EditprofileController extends GetxController with StateMixin {
               actions: <Widget>[
                 // ignore: deprecated_member_use
                 FlatButton(
-                  onPressed: () async {
-                    isLoading(false);
-
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  color: kPrimaryColor,
+                  onPressed: () {
                     Navigator.push(
                       context,
                       PageRouteBuilder(
@@ -545,7 +547,16 @@ class EditprofileController extends GetxController with StateMixin {
                       ),
                     );
                   },
-                  child: const Text('OK'),
+                  child: Container(
+                      width: 25,
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'OK',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      )),
                 ),
               ],
             ),

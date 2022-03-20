@@ -38,9 +38,8 @@ class _HomePageState extends State<Appointment>
     with SingleTickerProviderStateMixin {
   @override
   void initState() {
-    _fetchUser();
-
     super.initState();
+    _fetchUser();
   }
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -268,7 +267,7 @@ class _HomePageState extends State<Appointment>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const Text(
-              'Ongoing tutors',
+              'Ongoing sessions',
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontWeight: FontWeight.w600,

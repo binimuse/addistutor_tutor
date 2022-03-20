@@ -242,13 +242,12 @@ class _ProfilePageState extends State<ProfileS> {
                         ProfileHeader(
                           avatar: NetworkImage(
                               "https://tutor.oddatech.com/api/teacher-profile-picture/${ids}"),
-                          coverImage: NetworkImage(
-                              "https://tutor.oddatech.com/api/teacher-profile-picture/${ids}"),
+                          coverImage: const NetworkImage(
+                              "https://tutor.oddatech.com/lg3.png"),
                           title: editprofileController.firstname.text
                                   .toString() +
                               " " +
                               editprofileController.middlename.text.toString(),
-                          subtitle: "Tutor",
                           actions: <Widget>[
                             MaterialButton(
                               color: Colors.white,
@@ -804,7 +803,7 @@ class ProfileHeader extends StatelessWidget {
     return Stack(
       children: <Widget>[
         Ink(
-          height: 200,
+          height: 170,
           decoration: BoxDecoration(
             image: DecorationImage(
                 image: coverImage as ImageProvider<Object>, fit: BoxFit.cover),

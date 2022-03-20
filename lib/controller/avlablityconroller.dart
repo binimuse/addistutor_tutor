@@ -131,7 +131,7 @@ class Avalablitycontrollerclass extends GetxController with StateMixin {
         context: context,
         builder: (context) => AlertDialog(
           title: const Text(
-            'Avalablity Not Edited',
+            'Availability Not Edited',
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w500,
@@ -157,7 +157,7 @@ class Avalablitycontrollerclass extends GetxController with StateMixin {
         context: context,
         builder: (context) => AlertDialog(
           title: const Text(
-            'Avalablity Edited',
+            'Availability Edited',
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w500,

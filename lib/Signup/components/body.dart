@@ -566,7 +566,7 @@ class _SplashScreenState extends State<Body> {
           content: Column(mainAxisSize: MainAxisSize.min, children: const [
             SizedBox(height: 15),
             Text(
-              "Running TO a probelm please try again",
+              "Running tO a problem please try again",
               style: TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
@@ -681,7 +681,7 @@ class _SplashScreenState extends State<Body> {
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       alignment: Alignment.center,
                       child: const Text(
-                        'OK',
+                        'OK ',
                         style: TextStyle(
                           color: Colors.white,
                         ),

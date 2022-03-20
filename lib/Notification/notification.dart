@@ -30,12 +30,11 @@ class _ActivityPageState extends State<Notificationclass>
   final GetReqBooking getReqBooking = Get.put(GetReqBooking());
   @override
   void initState() {
+    super.initState();
     Future.delayed(Duration.zero, () async {
       getNotigicationController.fetchNotfication();
       // _cheakwallet();
     });
-
-    super.initState();
   }
 
   // void _cheakwallet() async {

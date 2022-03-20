@@ -428,32 +428,6 @@ class _EditPageState extends State<UpdateProfile> {
                           ),
                         ]),
 
-                        subc
-                            ? SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: SizedBox(
-                                  height: 70,
-                                  child: ListView.builder(
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.horizontal,
-                                      itemBuilder: (_, index) {
-                                        return Column(
-                                          children: [
-                                            getTimeBoxUIday(
-                                                getLocationController.subcity!
-                                                    .locaion[index].name,
-                                                getLocationController
-                                                    .getLocation!
-                                                    .locaion[index]
-                                                    .name),
-                                          ],
-                                        );
-                                      },
-                                      itemCount: getLocationController
-                                          .subcity!.locaion.length),
-                                ),
-                              )
-                            : Container(),
                         const SizedBox(
                           height: 20,
                         ),
@@ -485,7 +459,7 @@ class _EditPageState extends State<UpdateProfile> {
                           padding: const EdgeInsets.only(bottom: 35.0),
                           child: TextFormField(
                             keyboardType: TextInputType.multiline,
-                            maxLength: 150,
+                            maxLength: 200,
                             textInputAction: TextInputAction.newline,
                             controller: updateprofilecontoller.About,
                             decoration: const InputDecoration(

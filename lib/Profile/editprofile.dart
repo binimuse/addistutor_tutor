@@ -917,31 +917,6 @@ class _EditPageState extends State<EditPage> {
                           ),
                         ]),
 
-                        g_subc
-                            ? SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: SizedBox(
-                                  height: 70,
-                                  child: ListView.builder(
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.horizontal,
-                                      itemBuilder: (_, index) {
-                                        return Column(
-                                          children: [
-                                            getTimeBoxUIdayg(
-                                                getLocationController.g_subcity!
-                                                    .locaion[index].name,
-                                                getLocationController.g_subcity!
-                                                    .locaion[index].name),
-                                          ],
-                                        );
-                                      },
-                                      itemCount: getLocationController
-                                          .g_subcity!.locaion.length),
-                                ),
-                              )
-                            : Container(),
-
                         const SizedBox(
                           height: 20,
                         ),
@@ -1042,7 +1017,7 @@ class _EditPageState extends State<EditPage> {
                                 fontFamily: 'WorkSans',
                               ),
                               fillColor: kPrimaryColor,
-                              hintText: "woreda employer position",
+                              hintText: "Employer position",
                               hintStyle: TextStyle(
                                   color: DesignCourseAppTheme.nearlyBlack,
                                   fontSize: 16,
@@ -1107,27 +1082,6 @@ class _EditPageState extends State<EditPage> {
                               value: getLocationController.e_subcity,
                             ),
                           ),
-                          e_showsubject
-                              ? Expanded(
-                                  child: ListView.builder(
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.vertical,
-                                      itemBuilder: (_, index) {
-                                        return Column(
-                                          children: [
-                                            getTimeBoxUIdaye(
-                                              getLocationController.e_subcity!
-                                                  .locaion[index].name,
-                                              getLocationController.e_subcity!
-                                                  .locaion[index].name,
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                      itemCount: getLocationController
-                                          .e_subcity!.locaion.length),
-                                )
-                              : Container(),
                           Text(
                             elocationname,
                             style: const TextStyle(color: Colors.black38),
@@ -1406,34 +1360,7 @@ class _EditPageState extends State<EditPage> {
                             style: const TextStyle(color: Colors.black38),
                           ),
                         ]),
-                        showsubject
-                            ? SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: SizedBox(
-                                  height: 70,
-                                  child: ListView.builder(
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.horizontal,
-                                      itemBuilder: (_, index) {
-                                        return Column(
-                                          children: [
-                                            getTimeBoxUIdayp(
-                                                getLocationController
-                                                    .getLocation!
-                                                    .locaion[index]
-                                                    .name,
-                                                getLocationController
-                                                    .getLocation!
-                                                    .locaion[index]
-                                                    .name),
-                                          ],
-                                        );
-                                      },
-                                      itemCount: getLocationController
-                                          .getLocation!.locaion.length),
-                                ),
-                              )
-                            : Container(),
+
                         const SizedBox(
                           height: 20,
                         ),

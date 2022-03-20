@@ -146,8 +146,8 @@ class Updateprofilecontoller extends GetxController with StateMixin {
       }
     } else {
       print(woreda.text);
+
       var data = {
-        // "email": email.text,
         "phone_no": phone.text,
         "phone_no_office": officephone.text,
         "phone_no_residence": rephone.text,

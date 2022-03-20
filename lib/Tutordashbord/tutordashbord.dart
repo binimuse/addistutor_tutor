@@ -46,25 +46,31 @@ class _HomePageState extends State<TutorDahsbord>
   void _cheakwallet() async {
     await Future.delayed(const Duration(milliseconds: 5000));
     print(walletContoller.wallet.toString());
-    int wallet2 = int.parse(walletContoller.wallet.toString());
 
-    if (wallet2 < 100) {
-      ScaffoldMessenger.of(editprofileController.keyforall.currentContext!)
-          .showSnackBar(SnackBar(
-        content: const Text('Your wallet amount is less'),
-        duration: const Duration(days: 1),
-        backgroundColor: kPrimaryColor,
-        action: SnackBarAction(
-            label: 'Press here to top up amount',
-            textColor: kPrimaryLightColor,
-            onPressed: () {
-              Get.to(WalletPage());
-            }),
-      ));
-    } else {
-      ScaffoldMessenger.of(editprofileController.keyforall.currentContext!)
-          .hideCurrentSnackBar();
-    }
+    try {
+      int wallet2 = int.parse(walletContoller.wallet.toString());
+
+      if (wallet2 < 100) {
+        ScaffoldMessenger.of(editprofileController.keyforall.currentContext!)
+            .showSnackBar(SnackBar(
+          behavior: SnackBarBehavior.floating,
+          margin: EdgeInsets.only(bottom: 65.0),
+          content: const Text('Your wallet amount is less'),
+          duration: const Duration(days: 1),
+          backgroundColor: kPrimaryColor,
+          action: SnackBarAction(
+              label: 'Press here to top up amount',
+              textColor: kPrimaryLightColor,
+              onPressed: () {
+                Get.to(WalletPage());
+              }),
+        ));
+      } else {
+        ScaffoldMessenger.of(editprofileController.keyforall.currentContext!)
+            .hideCurrentSnackBar();
+      }
+      // ignore: empty_catches
+    } catch (e) {}
   }
 
   // ignore: prefer_typing_uninitialized_variables
@@ -418,7 +424,7 @@ class _HomePageState extends State<TutorDahsbord>
                         children: [
                           Center(
                             child: Text(
-                              'No request found',
+                              'No pending request yet',
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontWeight: FontWeight.normal,
