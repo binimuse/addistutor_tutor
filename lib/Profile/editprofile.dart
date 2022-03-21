@@ -814,7 +814,7 @@ class _EditPageState extends State<EditPage> {
                           controller: editprofileController.g_lastname,
                           decoration: const InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Guarantor grandfather's name",
+                              labelText: "Guarantor father's name",
                               focusColor: kPrimaryColor,
                               labelStyle: TextStyle(
                                 fontSize: 17,
@@ -823,7 +823,7 @@ class _EditPageState extends State<EditPage> {
                                 fontFamily: 'WorkSans',
                               ),
                               fillColor: kPrimaryColor,
-                              hintText: "insert guarantor grandfather's name",
+                              hintText: "insert guarantor father's name",
                               hintStyle: TextStyle(
                                   color: DesignCourseAppTheme.nearlyBlack,
                                   fontSize: 16,

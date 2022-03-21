@@ -36,7 +36,7 @@ class _CategoryListViewState extends State<OnGoingTutors>
     animationController = AnimationController(
         duration: const Duration(milliseconds: 2000), vsync: this);
     setState(() {
-      // getNotigicationController.isfetchedlocation(true);
+      getNotigicationController.isfetchedlocation(true);
       _fetchUser();
     });
 

@@ -677,11 +677,11 @@ class _SplashScreenState extends State<Body> {
                     );
                   },
                   child: Container(
-                      width: 20,
+                      width: 25,
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       alignment: Alignment.center,
                       child: const Text(
-                        'OK ',
+                        'OK',
                         style: TextStyle(
                           color: Colors.white,
                         ),

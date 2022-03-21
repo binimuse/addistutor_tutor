@@ -66,7 +66,7 @@ class _FeedbackScreenState extends State<TopUpPage> {
       child: SafeArea(
         top: false,
         child: Scaffold(
-          resizeToAvoidBottomInset: false,
+          resizeToAvoidBottomInset: true,
           appBar: AppBar(
             backgroundColor: Colors.white,
             leading: Material(

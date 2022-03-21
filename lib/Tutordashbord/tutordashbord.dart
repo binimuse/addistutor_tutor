@@ -45,7 +45,8 @@ class _HomePageState extends State<TutorDahsbord>
 
   void _cheakwallet() async {
     await Future.delayed(const Duration(milliseconds: 5000));
-    print(walletContoller.wallet.toString());
+    ScaffoldMessenger.of(editprofileController.keyforall.currentContext!)
+        .hideCurrentSnackBar();
 
     try {
       int wallet2 = int.parse(walletContoller.wallet.toString());
