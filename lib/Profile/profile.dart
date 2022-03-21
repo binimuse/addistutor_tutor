@@ -560,7 +560,7 @@ class _ProfilePageState extends State<ProfileS> {
                                   },
                                   child: const Center(
                                     child: Text(
-                                      "Ok",
+                                      "Yes",
                                       style: TextStyle(
                                         fontSize: 18.0,
                                         color: kPrimaryColor,

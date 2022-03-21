@@ -437,7 +437,7 @@ class EditprofileController extends GetxController with StateMixin {
         context: context,
         builder: (context) => AlertDialog(
           title: Text(
-            'profile Not Edited' + data,
+            'Profile incomplete. ' + data,
             style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w500,

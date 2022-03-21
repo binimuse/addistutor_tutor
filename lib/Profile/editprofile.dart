@@ -305,7 +305,7 @@ class _EditPageState extends State<EditPage> {
                             ),
                             focusColor: kPrimaryColor,
                             fillColor: kPrimaryColor,
-                            hintText: "your father's name",
+                            hintText: "Your father's name",
                             hintStyle: TextStyle(
                                 color: DesignCourseAppTheme.nearlyBlack,
                                 fontSize: 16,
@@ -774,7 +774,7 @@ class _EditPageState extends State<EditPage> {
                         ),
                         const Center(
                           child: Text(
-                            "GUARANTOR CONTACT INFORMATION",
+                            "GUARANTOR'S CONTACT INFORMATION",
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
@@ -792,7 +792,7 @@ class _EditPageState extends State<EditPage> {
                           controller: editprofileController.g_firstname,
                           decoration: const InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Guarantor first name",
+                              labelText: "Guarantor's first name",
                               focusColor: kPrimaryColor,
                               labelStyle: TextStyle(
                                 fontSize: 17,
@@ -801,7 +801,7 @@ class _EditPageState extends State<EditPage> {
                                 fontFamily: 'WorkSans',
                               ),
                               fillColor: kPrimaryColor,
-                              hintText: "insert guarantor first name",
+                              hintText: "Insert guarantor's first name",
                               hintStyle: TextStyle(
                                   color: DesignCourseAppTheme.nearlyBlack,
                                   fontSize: 16,
@@ -814,7 +814,7 @@ class _EditPageState extends State<EditPage> {
                           controller: editprofileController.g_lastname,
                           decoration: const InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Guarantor father's name",
+                              labelText: "Guarantor's father's name",
                               focusColor: kPrimaryColor,
                               labelStyle: TextStyle(
                                 fontSize: 17,
@@ -823,7 +823,7 @@ class _EditPageState extends State<EditPage> {
                                 fontFamily: 'WorkSans',
                               ),
                               fillColor: kPrimaryColor,
-                              hintText: "insert guarantor father's name",
+                              hintText: "Insert guarantor father's name",
                               hintStyle: TextStyle(
                                   color: DesignCourseAppTheme.nearlyBlack,
                                   fontSize: 16,
@@ -837,7 +837,7 @@ class _EditPageState extends State<EditPage> {
                           keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Guarantor woreda",
+                              labelText: "Guarantor's woreda",
                               focusColor: kPrimaryColor,
                               labelStyle: TextStyle(
                                 fontSize: 17,
@@ -846,7 +846,7 @@ class _EditPageState extends State<EditPage> {
                                 fontFamily: 'WorkSans',
                               ),
                               fillColor: kPrimaryColor,
-                              hintText: "insert guarantor woreda",
+                              hintText: "Insert guarantor woreda",
                               hintStyle: TextStyle(
                                   color: DesignCourseAppTheme.nearlyBlack,
                                   fontSize: 16,
@@ -925,7 +925,7 @@ class _EditPageState extends State<EditPage> {
                           keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Guarantor mobile number",
+                              labelText: "Guarantor's mobile number",
                               focusColor: kPrimaryColor,
                               labelStyle: TextStyle(
                                 fontSize: 17,
@@ -934,7 +934,7 @@ class _EditPageState extends State<EditPage> {
                                 fontFamily: 'WorkSans',
                               ),
                               fillColor: kPrimaryColor,
-                              hintText: "insert guarantor mobile number",
+                              hintText: "Insert guarantor mobile number",
                               hintStyle: TextStyle(
                                   color: DesignCourseAppTheme.nearlyBlack,
                                   fontSize: 16,
@@ -948,7 +948,7 @@ class _EditPageState extends State<EditPage> {
                           keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "Guarantor office phone number",
+                              labelText: "Guarantor's office phone number",
                               focusColor: kPrimaryColor,
                               labelStyle: TextStyle(
                                 fontSize: 17,
@@ -957,7 +957,7 @@ class _EditPageState extends State<EditPage> {
                                 fontFamily: 'WorkSans',
                               ),
                               fillColor: kPrimaryColor,
-                              hintText: "insert guarantor office phone number",
+                              hintText: "Insert guarantor office phone number",
                               hintStyle: TextStyle(
                                   color: DesignCourseAppTheme.nearlyBlack,
                                   fontSize: 16,
@@ -995,7 +995,7 @@ class _EditPageState extends State<EditPage> {
                                 fontFamily: 'WorkSans',
                               ),
                               fillColor: kPrimaryColor,
-                              hintText: "insert  employer name",
+                              hintText: "Insert  employer name",
                               hintStyle: TextStyle(
                                   color: DesignCourseAppTheme.nearlyBlack,
                                   fontSize: 16,
@@ -1105,7 +1105,7 @@ class _EditPageState extends State<EditPage> {
                                 fontFamily: 'WorkSans',
                               ),
                               fillColor: kPrimaryColor,
-                              hintText: "insert employer woreda",
+                              hintText: "Insert employer woreda",
                               hintStyle: TextStyle(
                                   color: DesignCourseAppTheme.nearlyBlack,
                                   fontSize: 16,

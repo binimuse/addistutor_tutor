@@ -37,7 +37,7 @@ class Body extends StatelessWidget {
                 fontSize: 30.0,
                 fontFamily: 'Arial',
                 fontWeight: FontWeight.bold,
-                letterSpacing: 0.4,
+                letterSpacing: 0.7,
                 height: 1.0,
                 color: kPrimaryColor,
               ),
@@ -59,7 +59,7 @@ class Body extends StatelessWidget {
               image: const AssetImage(
                 'assets/images/new.png',
               ),
-              height: size.height * 0.25,
+              height: size.height * 0.29,
             ),
             SizedBox(height: size.height * 0.05),
             RoundedButton(

@@ -634,7 +634,7 @@ class _SplashScreenState extends State<Body> {
                 'Please check your email inbox to verify your email address before you log in.',
                 style: TextStyle(
                   fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.normal,
                 ),
               ),
             ),

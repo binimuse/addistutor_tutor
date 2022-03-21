@@ -73,7 +73,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
       pages: [
         PageViewModel(
-          title: "Register Request",
+          title: "Register",
           body: "Complete all the fields in the registration page.",
           image: _buildImage('login.svg'),
           decoration: pageDecoration,

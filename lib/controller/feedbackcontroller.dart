@@ -88,7 +88,7 @@ class FeedBackScreencontroller extends GetxController with StateMixin {
         context: context,
         builder: (context) => AlertDialog(
           title: const Text(
-            'FeedBack Sucess',
+            'Successfully recorded. Thank you for your feedback.',
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w500,

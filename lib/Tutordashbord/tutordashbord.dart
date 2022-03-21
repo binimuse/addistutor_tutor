@@ -199,7 +199,7 @@ class _HomePageState extends State<TutorDahsbord>
               ),
             ),
             content: const Text(
-              'Are You Sure you want to Exit This app',
+              'Are You Sure you want to exit This app',
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w500,
