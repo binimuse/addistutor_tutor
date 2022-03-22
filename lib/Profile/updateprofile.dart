@@ -137,334 +137,171 @@ class _EditPageState extends State<UpdateProfile> {
             controller: _refreshController,
             onRefresh: _onRefresh,
             onLoading: _onLoading,
-            child: Scaffold(
-              resizeToAvoidBottomInset: false,
-              key: updateprofilecontoller.scaffoldKey,
-              appBar: AppBar(
-                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                elevation: 1,
-                leading: Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    borderRadius:
-                        BorderRadius.circular(AppBar().preferredSize.height),
-                    child: const Icon(
-                      Icons.arrow_back_ios,
-                      color: DesignCourseAppTheme.nearlyBlack,
+            child: Builder(builder: (context) {
+              return Scaffold(
+                resizeToAvoidBottomInset: false,
+                key: updateprofilecontoller.scaffoldKey,
+                appBar: AppBar(
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                  elevation: 1,
+                  leading: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius:
+                          BorderRadius.circular(AppBar().preferredSize.height),
+                      child: const Icon(
+                        Icons.arrow_back_ios,
+                        color: DesignCourseAppTheme.nearlyBlack,
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
                     ),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
+                  ),
+                  title: const Text(
+                    "Update Profile",
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                      fontFamily: 'WorkSans',
+                    ),
                   ),
                 ),
-                title: const Text(
-                  "Update Profile",
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black,
-                    fontFamily: 'WorkSans',
-                  ),
-                ),
-              ),
-              body: Form(
-                autovalidate: _autovalidate,
-                key: updateprofilecontoller.EditProf,
-                child: Container(
-                  padding: const EdgeInsets.only(left: 16, top: 25, right: 16),
-                  child: GestureDetector(
-                    onTap: () {
-                      FocusScopeNode currentFocus = FocusScope.of(context);
+                body: Form(
+                  autovalidate: _autovalidate,
+                  key: updateprofilecontoller.EditProf,
+                  child: Container(
+                    padding:
+                        const EdgeInsets.only(left: 16, top: 25, right: 16),
+                    child: GestureDetector(
+                      onTap: () {
+                        FocusScopeNode currentFocus = FocusScope.of(context);
 
-                      if (!currentFocus.hasPrimaryFocus) {
-                        currentFocus.unfocus();
-                      }
-                    },
-                    child: ListView(
-                      children: [
-                        id != null
-                            ? Center(
-                                child: Stack(
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        _showPicker(context);
-                                      },
-                                      child: CircleAvatar(
-                                        radius: 40,
-                                        backgroundColor: kPrimaryColor,
-                                        child: _imageFileList != null
-                                            ? ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(40),
-                                                child: Image.file(
-                                                    File(_imageFileList![0]
-                                                        .path),
-                                                    width: 95,
-                                                    height: 95,
-                                                    fit: BoxFit.cover),
-                                              )
-                                            : Container(
-                                                decoration: BoxDecoration(
-                                                    color: Colors.grey[200],
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            50)),
-                                                width: 100,
-                                                height: 100,
-                                                child: Icon(
-                                                  Icons.camera_alt,
-                                                  color: Colors.grey[800],
+                        if (!currentFocus.hasPrimaryFocus) {
+                          currentFocus.unfocus();
+                        }
+                      },
+                      child: ListView(
+                        children: [
+                          id != null
+                              ? Center(
+                                  child: Stack(
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          _showPicker(context);
+                                        },
+                                        child: CircleAvatar(
+                                          radius: 40,
+                                          backgroundColor: kPrimaryColor,
+                                          child: _imageFileList != null
+                                              ? ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(40),
+                                                  child: Image.file(
+                                                      File(_imageFileList![0]
+                                                          .path),
+                                                      width: 95,
+                                                      height: 95,
+                                                      fit: BoxFit.cover),
+                                                )
+                                              : Container(
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.grey[200],
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50)),
+                                                  width: 100,
+                                                  height: 100,
+                                                  child: Icon(
+                                                    Icons.camera_alt,
+                                                    color: Colors.grey[800],
+                                                  ),
                                                 ),
-                                              ),
+                                        ),
                                       ),
-                                    ),
-                                    Positioned(
-                                        bottom: 0,
-                                        right: 0,
-                                        child: Container(
-                                          height: 30,
-                                          width: 30,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: Border.all(
-                                              width: 2,
-                                              color: Theme.of(context)
-                                                  .scaffoldBackgroundColor,
+                                      Positioned(
+                                          bottom: 0,
+                                          right: 0,
+                                          child: Container(
+                                            height: 30,
+                                            width: 30,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                width: 2,
+                                                color: Theme.of(context)
+                                                    .scaffoldBackgroundColor,
+                                              ),
+                                              color: kPrimaryColor,
                                             ),
-                                            color: kPrimaryColor,
-                                          ),
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              _showPicker(context);
-                                            },
-                                            child: const Icon(
-                                              Icons.edit,
-                                              color: Colors.white,
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                _showPicker(context);
+                                              },
+                                              child: const Icon(
+                                                Icons.edit,
+                                                color: Colors.white,
+                                              ),
                                             ),
-                                          ),
-                                        )),
-                                  ],
-                                ),
-                              )
-                            : Container(),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        const Center(
-                          child: Text(
-                            "CONTACT INFORMATION",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 22,
-                              fontFamily: 'WorkSans',
-                              letterSpacing: 0.27,
-                              color: kPrimaryColor,
-                            ),
+                                          )),
+                                    ],
+                                  ),
+                                )
+                              : Container(),
+                          const SizedBox(
+                            height: 20,
                           ),
-                        ),
-                        // const SizedBox(
-                        //   height: 20,
-                        // ),
-                        // TextFormField(
-                        //   controller: updateprofilecontoller.email,
-                        //   decoration: const InputDecoration(
-                        //     contentPadding: EdgeInsets.only(bottom: 3),
-                        //     labelText: "Email",
-                        //     labelStyle: TextStyle(
-                        //       fontSize: 17,
-                        //       fontWeight: FontWeight.w700,
-                        //       color: kPrimaryColor,
-                        //       fontFamily: 'WorkSans',
-                        //     ),
-                        //     focusColor: kPrimaryColor,
-                        //     fillColor: kPrimaryColor,
-                        //     hintText: "evan@gmail.com",
-                        //     hintStyle: TextStyle(
-                        //         color: DesignCourseAppTheme.nearlyBlack,
-                        //         fontSize: 16,
-                        //         fontWeight: FontWeight.w300),
-                        //   ),
-                        //   validator: (value) {
-                        //     return updateprofilecontoller.validateEmail(value!);
-                        //   },
-                        // ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          controller: updateprofilecontoller.phone,
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.only(bottom: 3),
-                            labelText: "Phone",
-                            labelStyle: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700,
-                              color: kPrimaryColor,
-                              fontFamily: 'WorkSans',
-                            ),
-                            focusColor: kPrimaryColor,
-                            fillColor: kPrimaryColor,
-                            hintText: "0911111111",
-                            hintStyle: TextStyle(
-                                color: DesignCourseAppTheme.nearlyBlack,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300),
-                          ),
-                          validator: (value) {
-                            return updateprofilecontoller.validateName(value!);
-                          },
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          controller: updateprofilecontoller.officephone,
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.only(bottom: 3),
-                            labelText: "Office phone number",
-                            labelStyle: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700,
-                              color: kPrimaryColor,
-                              fontFamily: 'WorkSans',
-                            ),
-                            focusColor: kPrimaryColor,
-                            fillColor: kPrimaryColor,
-                            hintText: "0911111111",
-                            hintStyle: TextStyle(
-                                color: DesignCourseAppTheme.nearlyBlack,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          controller: updateprofilecontoller.rephone,
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.only(bottom: 3),
-                            labelText: "Residence Phone numbe",
-                            labelStyle: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700,
-                              color: kPrimaryColor,
-                              fontFamily: 'WorkSans',
-                            ),
-                            focusColor: kPrimaryColor,
-                            fillColor: kPrimaryColor,
-                            hintText: "0911111111",
-                            hintStyle: TextStyle(
-                                color: DesignCourseAppTheme.nearlyBlack,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        const Text(
-                          'Subcity',
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w700,
-                            color: kPrimaryColor,
-                            fontFamily: 'WorkSans',
-                          ),
-                        ),
-                        Row(children: [
-                          Flexible(
-                            child: DropdownButton<GetLocation>(
-                              hint: Text(
-                                getLocationController.listlocation.toString(),
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400),
+                          const Center(
+                            child: Text(
+                              "CONTACT INFORMATION",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 22,
+                                fontFamily: 'WorkSans',
+                                letterSpacing: 0.27,
+                                color: kPrimaryColor,
                               ),
-                              isExpanded: true,
-                              style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700),
-                              items: location
-                                  .map((e) => DropdownMenuItem(
-                                        child: Text(e.name,
-                                            textAlign: TextAlign.left,
-                                            style: const TextStyle(
-                                                color: DesignCourseAppTheme
-                                                    .nearlyBlack,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w300)),
-                                        value: e,
-                                      ))
-                                  .toList(),
-                              onChanged: (value) {
-                                setState(() {
-                                  getLocationController.subcity = value!;
-
-                                  if (getLocationController
-                                          .subcity!.locaion.length !=
-                                      0) {
-                                    subc = true;
-                                  } else {
-                                    subc = false;
-                                  }
-                                });
-
-                                // pop current page
-                              },
-                              value: getLocationController.subcity,
                             ),
                           ),
-                          Text(
-                            locationname,
-                            style: const TextStyle(color: Colors.black38),
+                          // const SizedBox(
+                          //   height: 20,
+                          // ),
+                          // TextFormField(
+                          //   controller: updateprofilecontoller.email,
+                          //   decoration: const InputDecoration(
+                          //     contentPadding: EdgeInsets.only(bottom: 3),
+                          //     labelText: "Email",
+                          //     labelStyle: TextStyle(
+                          //       fontSize: 17,
+                          //       fontWeight: FontWeight.w700,
+                          //       color: kPrimaryColor,
+                          //       fontFamily: 'WorkSans',
+                          //     ),
+                          //     focusColor: kPrimaryColor,
+                          //     fillColor: kPrimaryColor,
+                          //     hintText: "evan@gmail.com",
+                          //     hintStyle: TextStyle(
+                          //         color: DesignCourseAppTheme.nearlyBlack,
+                          //         fontSize: 16,
+                          //         fontWeight: FontWeight.w300),
+                          //   ),
+                          //   validator: (value) {
+                          //     return updateprofilecontoller.validateEmail(value!);
+                          //   },
+                          // ),
+                          const SizedBox(
+                            height: 20,
                           ),
-                        ]),
-
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          controller: updateprofilecontoller.woreda,
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.only(bottom: 3),
-                            labelText: "Woreda",
-                            labelStyle: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700,
-                              color: kPrimaryColor,
-                              fontFamily: 'WorkSans',
-                            ),
-                            focusColor: kPrimaryColor,
-                            fillColor: kPrimaryColor,
-                            hintText: "Woreda",
-                            hintStyle: TextStyle(
-                                color: DesignCourseAppTheme.nearlyBlack,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 35.0),
-                          child: TextFormField(
-                            keyboardType: TextInputType.multiline,
-                            maxLength: 200,
-                            textInputAction: TextInputAction.newline,
-                            controller: updateprofilecontoller.About,
+                          TextFormField(
+                            enableInteractiveSelection: false,
+                            controller: updateprofilecontoller.phone,
+                            keyboardType: TextInputType.number,
                             decoration: const InputDecoration(
                               contentPadding: EdgeInsets.only(bottom: 3),
-                              labelText: "About Me",
+                              labelText: "Phone",
                               labelStyle: TextStyle(
                                 fontSize: 17,
                                 fontWeight: FontWeight.w700,
@@ -473,7 +310,7 @@ class _EditPageState extends State<UpdateProfile> {
                               ),
                               focusColor: kPrimaryColor,
                               fillColor: kPrimaryColor,
-                              hintText: "Describe yourself",
+                              hintText: "0911111111",
                               hintStyle: TextStyle(
                                   color: DesignCourseAppTheme.nearlyBlack,
                                   fontSize: 16,
@@ -481,63 +318,238 @@ class _EditPageState extends State<UpdateProfile> {
                             ),
                             validator: (value) {
                               return updateprofilecontoller
-                                  .validateNameaboutme(value!);
+                                  .validateName(value!);
                             },
                           ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            OutlineButton(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 50),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
-                              onPressed: () {
-                                Navigator.pop(context);
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          TextFormField(
+                            enableInteractiveSelection: false,
+                            controller: updateprofilecontoller.officephone,
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                              contentPadding: EdgeInsets.only(bottom: 3),
+                              labelText: "Office phone number",
+                              labelStyle: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                                color: kPrimaryColor,
+                                fontFamily: 'WorkSans',
+                              ),
+                              focusColor: kPrimaryColor,
+                              fillColor: kPrimaryColor,
+                              hintText: "0911111111",
+                              hintStyle: TextStyle(
+                                  color: DesignCourseAppTheme.nearlyBlack,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          TextFormField(
+                            enableInteractiveSelection: false,
+                            controller: updateprofilecontoller.rephone,
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                              contentPadding: EdgeInsets.only(bottom: 3),
+                              labelText: "Residence Phone numbe",
+                              labelStyle: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                                color: kPrimaryColor,
+                                fontFamily: 'WorkSans',
+                              ),
+                              focusColor: kPrimaryColor,
+                              fillColor: kPrimaryColor,
+                              hintText: "0911111111",
+                              hintStyle: TextStyle(
+                                  color: DesignCourseAppTheme.nearlyBlack,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          const Text(
+                            'Subcity',
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w700,
+                              color: kPrimaryColor,
+                              fontFamily: 'WorkSans',
+                            ),
+                          ),
+                          Row(children: [
+                            Flexible(
+                              child: DropdownButton<GetLocation>(
+                                hint: Text(
+                                  getLocationController.listlocation.toString(),
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                isExpanded: true,
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700),
+                                items: location
+                                    .map((e) => DropdownMenuItem(
+                                          child: Text(e.name,
+                                              textAlign: TextAlign.left,
+                                              style: const TextStyle(
+                                                  color: DesignCourseAppTheme
+                                                      .nearlyBlack,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w300)),
+                                          value: e,
+                                        ))
+                                    .toList(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    FocusScope.of(context)
+                                        .requestFocus(new FocusNode());
+                                    getLocationController.subcity = value!;
+
+                                    if (getLocationController
+                                            .subcity!.locaion.length !=
+                                        0) {
+                                      subc = true;
+                                    } else {
+                                      subc = false;
+                                    }
+                                  });
+
+                                  // pop current page
+                                },
+                                value: getLocationController.subcity,
+                              ),
+                            ),
+                            Text(
+                              locationname,
+                              style: const TextStyle(color: Colors.black38),
+                            ),
+                          ]),
+
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          TextFormField(
+                            enableInteractiveSelection: false,
+                            controller: updateprofilecontoller.woreda,
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                              contentPadding: EdgeInsets.only(bottom: 3),
+                              labelText: "Woreda",
+                              labelStyle: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                                color: kPrimaryColor,
+                                fontFamily: 'WorkSans',
+                              ),
+                              focusColor: kPrimaryColor,
+                              fillColor: kPrimaryColor,
+                              hintText: "Woreda",
+                              hintStyle: TextStyle(
+                                  color: DesignCourseAppTheme.nearlyBlack,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 35.0),
+                            child: TextFormField(
+                              enableInteractiveSelection: false,
+                              keyboardType: TextInputType.multiline,
+                              maxLength: 200,
+                              textInputAction: TextInputAction.newline,
+                              controller: updateprofilecontoller.About,
+                              decoration: const InputDecoration(
+                                contentPadding: EdgeInsets.only(bottom: 3),
+                                labelText: "About Me",
+                                labelStyle: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w700,
+                                  color: kPrimaryColor,
+                                  fontFamily: 'WorkSans',
+                                ),
+                                focusColor: kPrimaryColor,
+                                fillColor: kPrimaryColor,
+                                hintText: "Describe yourself",
+                                hintStyle: TextStyle(
+                                    color: DesignCourseAppTheme.nearlyBlack,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w300),
+                              ),
+                              validator: (value) {
+                                return updateprofilecontoller
+                                    .validateNameaboutme(value!);
                               },
-                              child: const Text("CANCEL",
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              OutlineButton(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 50),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20)),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text("CANCEL",
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        letterSpacing: 2.2,
+                                        color: Colors.black)),
+                              ),
+                              RaisedButton(
+                                onPressed: () {
+                                  final isValid = updateprofilecontoller
+                                      .EditProf.currentState!
+                                      .validate();
+                                  if (isValid == true) {
+                                    updateprofilecontoller.editProf(
+                                        id, context);
+                                  } else {
+                                    setState(() {
+                                      _autovalidate =
+                                          true; //enable realtime validation
+                                    });
+                                  }
+                                },
+                                color: kPrimaryColor,
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 50),
+                                elevation: 2,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: const Text(
+                                  "SAVE",
                                   style: TextStyle(
                                       fontSize: 14,
                                       letterSpacing: 2.2,
-                                      color: Colors.black)),
-                            ),
-                            RaisedButton(
-                              onPressed: () {
-                                final isValid = updateprofilecontoller
-                                    .EditProf.currentState!
-                                    .validate();
-                                if (isValid == true) {
-                                  updateprofilecontoller.editProf(id, context);
-                                } else {
-                                  setState(() {
-                                    _autovalidate =
-                                        true; //enable realtime validation
-                                  });
-                                }
-                              },
-                              color: kPrimaryColor,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 50),
-                              elevation: 2,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: const Text(
-                                "SAVE",
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    letterSpacing: 2.2,
-                                    color: Colors.white),
-                              ),
-                            )
-                          ],
-                        )
-                      ],
+                                      color: Colors.white),
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ),
+              );
+            }),
           )
         : const Center(child: CircularProgressIndicator()));
   }
@@ -703,4 +715,9 @@ class _EditPageState extends State<UpdateProfile> {
           ),
         ]);
   }
+}
+
+class AlwaysDisabledFocusNode extends FocusNode {
+  @override
+  bool get hasFocus => false;
 }

@@ -806,7 +806,8 @@ class ProfileHeader extends StatelessWidget {
           height: 170,
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: coverImage as ImageProvider<Object>, fit: BoxFit.cover),
+                image: coverImage as ImageProvider<Object>,
+                fit: BoxFit.contain),
           ),
         ),
         Ink(

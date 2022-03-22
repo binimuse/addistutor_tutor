@@ -380,6 +380,8 @@ class _EditPageState extends State<EditPage> {
                           }).toList(),
                           onChanged: (value) {
                             setState(() {
+                              FocusScope.of(context)
+                                  .requestFocus(new FocusNode());
                               editprofileController.macthgender.value = value!;
                             });
                           },
@@ -487,6 +489,8 @@ class _EditPageState extends State<EditPage> {
                           }).toList(),
                           onChanged: (value) {
                             setState(() {
+                              FocusScope.of(context)
+                                  .requestFocus(new FocusNode());
                               editprofileController.since.value = value!;
                             });
                           },
@@ -532,6 +536,8 @@ class _EditPageState extends State<EditPage> {
                               .toList(),
                           onChanged: (value) {
                             setState(() {
+                              FocusScope.of(context)
+                                  .requestFocus(new FocusNode());
                               getqulificationcontroller.qualification = value!;
 
                               editprofileController.qualifications =
@@ -697,6 +703,8 @@ class _EditPageState extends State<EditPage> {
                                   .toList(),
                               onChanged: (value) {
                                 setState(() {
+                                  FocusScope.of(context)
+                                      .requestFocus(new FocusNode());
                                   getLocationController.subcity = value!;
                                   editprofileController.subcityid =
                                       value.name.toString();
@@ -893,6 +901,8 @@ class _EditPageState extends State<EditPage> {
                                   .toList(),
                               onChanged: (value) {
                                 setState(() {
+                                  FocusScope.of(context)
+                                      .requestFocus(new FocusNode());
                                   getLocationController.g_subcity = value!;
                                   editprofileController.g_subcityid =
                                       value.name.toString();
@@ -1064,6 +1074,8 @@ class _EditPageState extends State<EditPage> {
                                   .toList(),
                               onChanged: (value) {
                                 setState(() {
+                                  FocusScope.of(context)
+                                      .requestFocus(new FocusNode());
                                   getLocationController.e_subcity = value!;
                                   editprofileController.e_subcityid =
                                       value.name.toString();
@@ -1150,6 +1162,8 @@ class _EditPageState extends State<EditPage> {
                               .toList(),
                           onChanged: (value) {
                             setState(() {
+                              FocusScope.of(context)
+                                  .requestFocus(new FocusNode());
                               getSubect.subject2 = value!;
                               editprofileController.e_subject =
                                   value.id.toString();
@@ -1217,6 +1231,8 @@ class _EditPageState extends State<EditPage> {
                               .toList(),
                           onChanged: (value) {
                             setState(() {
+                              FocusScope.of(context)
+                                  .requestFocus(new FocusNode());
                               getLevelContoller.level = value!;
                               editprofileController.lid = value.id.toString();
                               lid = value.id.toString();
@@ -1284,6 +1300,8 @@ class _EditPageState extends State<EditPage> {
                               .toList(),
                           onChanged: (value) {
                             setState(() {
+                              FocusScope.of(context)
+                                  .requestFocus(new FocusNode());
                               getSubect.subject = value!;
                               //        editprofileController.subcityid =      value.id.toString();
                             });
@@ -1337,6 +1355,8 @@ class _EditPageState extends State<EditPage> {
                                   .toList(),
                               onChanged: (value) {
                                 setState(() {
+                                  FocusScope.of(context)
+                                      .requestFocus(new FocusNode());
                                   getLocationController.getLocation = value!;
                                   editprofileController.locationid =
                                       value.name.toString();
@@ -1805,6 +1825,7 @@ class _EditPageState extends State<EditPage> {
                 .toList(),
             onChanged: (value) {
               setState(() {
+                FocusScope.of(context).requestFocus(new FocusNode());
                 getSubect.subject = value!;
                 editprofileController.subjectid = value.id.toString();
               });

@@ -52,6 +52,7 @@ class _HomePageState extends State<Appointment>
     setState(() {
       _fetchUser();
       // _cheakwallet();
+      walletContoller.isFetched(true);
     });
     _refreshController.refreshCompleted();
   }

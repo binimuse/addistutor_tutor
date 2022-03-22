@@ -45,8 +45,6 @@ class _HomePageState extends State<TutorDahsbord>
 
   void _cheakwallet() async {
     await Future.delayed(const Duration(milliseconds: 5000));
-    ScaffoldMessenger.of(editprofileController.keyforall.currentContext!)
-        .hideCurrentSnackBar();
 
     try {
       int wallet2 = int.parse(walletContoller.wallet.toString());
@@ -60,7 +58,7 @@ class _HomePageState extends State<TutorDahsbord>
           duration: const Duration(days: 1),
           backgroundColor: kPrimaryColor,
           action: SnackBarAction(
-              label: 'Press here to top up amount',
+              label: 'Press here to top up',
               textColor: kPrimaryLightColor,
               onPressed: () {
                 Get.to(WalletPage());
@@ -112,7 +110,7 @@ class _HomePageState extends State<TutorDahsbord>
 
     setState(() {
       _fetchUser();
-      _cheakwallet();
+      //  _cheakwallet();
     });
     _refreshController.refreshCompleted();
   }
