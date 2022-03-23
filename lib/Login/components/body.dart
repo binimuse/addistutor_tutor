@@ -205,8 +205,8 @@ class _LoginScreenState extends State<Body> {
               ),
               SizedBox(height: size.height * 0.03),
               Image(
-                image: AssetImage(
-                  'assets/images/t.jpg',
+                image: const AssetImage(
+                  'assets/images/new.png',
                 ),
                 height: size.height * 0.20,
               ),

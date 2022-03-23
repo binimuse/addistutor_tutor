@@ -229,17 +229,22 @@ class _HomePageState extends State<ContactDetailsView>
                     color: Colors.transparent,
                     child: Column(
                       children: [
-                        ListTile(
-                          title: const Text(
-                            'Telegram',
-                            style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                              color: kPrimaryColor,
-                              fontFamily: 'WorkSans',
+                        GestureDetector(
+                          onTap: () {
+                            _launchURLfb(contactUSContolller.telegram);
+                          },
+                          child: ListTile(
+                            title: const Text(
+                              'Telegram',
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                                color: kPrimaryColor,
+                                fontFamily: 'WorkSans',
+                              ),
                             ),
+                            trailing: Image.asset('assets/images/telegram.png'),
                           ),
-                          trailing: Image.asset('assets/images/telegram.png'),
                         ),
                         GestureDetector(
                           onTap: () {

@@ -355,6 +355,13 @@ class Updateprofilecontoller extends GetxController with StateMixin {
     return null;
   }
 
+  String? validateworeda(String value) {
+    if (value.isEmpty) {
+      return "Please provide woreda";
+    }
+    return null;
+  }
+
   void openAndCloseLoadingDialog(BuildContext context) {
     showDialog(
       context: context,

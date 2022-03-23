@@ -283,6 +283,7 @@ class ContactUS {
   String twitter;
   String instagram;
   String linkedin;
+  String telegram;
 
   ContactUS({
     required this.name,
@@ -293,6 +294,7 @@ class ContactUS {
     required this.twitter,
     required this.instagram,
     required this.linkedin,
+    required this.telegram,
   });
 
   factory ContactUS.fromJson(Map<String, dynamic> json) {
@@ -305,6 +307,7 @@ class ContactUS {
       twitter: json["twitter"],
       instagram: json["instagram"],
       linkedin: json["linkedin"],
+      telegram: json["telegram"],
     );
   }
 }

@@ -150,14 +150,8 @@ class _ProfilePageState extends State<ProfileS> {
   }
 
   void _onLoading() async {
-    // monitor network fetch
     await Future.delayed(const Duration(milliseconds: 500));
-    // if failed,use loadFailed(),if no data return,use LoadNodata()
-    //items.add((items.length+1).toString());
-    //if(mounted)
-    // setState(() {
 
-    // });
     _refreshController.loadComplete();
   }
 
