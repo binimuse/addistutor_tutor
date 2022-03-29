@@ -303,7 +303,7 @@ class _ProfilePageState extends State<ProfileS> {
               ),
             ),
             content: const Text(
-              'Are you sure you want to exit this app',
+              'Are you sure you want to exit this app?',
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w500,

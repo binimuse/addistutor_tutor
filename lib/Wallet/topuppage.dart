@@ -7,6 +7,7 @@ import 'package:addistutor_tutor/Profile/app_theme.dart';
 import 'package:addistutor_tutor/controller/walletcontroller.dart';
 import 'package:camera_camera/camera_camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -103,10 +104,12 @@ class _FeedbackScreenState extends State<TopUpPage> {
                   children: <Widget>[
                     Container(
                       padding: EdgeInsets.only(
-                          top: MediaQuery.of(context).padding.top,
-                          left: 16,
-                          right: 16),
-                      child: Image.asset('assets/images/t.jpg'),
+                          top: 16, left: 16, right: 16, bottom: 17),
+                      child: SvgPicture.asset(
+                        'assets/icons/pay.svg',
+                        height: 160,
+                        width: 60,
+                      ),
                     ),
                     Padding(
                       padding:

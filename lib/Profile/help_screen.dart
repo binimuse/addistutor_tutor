@@ -81,13 +81,13 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         PageViewModel(
           title: "Tutor Selection",
           body:
-              "The system will generate choices of tutor for you and you indicate your first and second choices.",
+              "The system will generate a selection of tutors as per your requirement. You can select one of your choice.",
           image: _buildImage('chat.svg'),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Tutor Contact",
-          body: "The selected tutor contacts you and finalizes a mangement.",
+          body: "The selected tutor contacts you and finalizes a management.",
           image: _buildImage('signup.svg'),
           decoration: pageDecoration,
         ),

@@ -52,7 +52,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
               fontSize: 25,
               fontWeight: FontWeight.w500,
               color: Colors.black,
-              fontFamily: 'WorkSans',
+              fontFamily: 'Arial',
             ),
           ),
         ),
@@ -83,7 +83,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
                 textAlign: TextAlign.justify,
                 style: TextStyle(
                   fontSize: 14.0,
-                  fontFamily: 'WorkSans',
+                  fontFamily: 'Arial',
                   fontWeight: FontWeight.normal,
                   letterSpacing: 0.4,
                   height: 0.9,
@@ -116,7 +116,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
                 textAlign: TextAlign.justify,
                 style: TextStyle(
                   fontSize: 14.0,
-                  fontFamily: 'WorkSans',
+                  fontFamily: 'Arial',
                   fontWeight: FontWeight.normal,
                   letterSpacing: 0.4,
                   height: 0.9,
@@ -149,7 +149,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
                 textAlign: TextAlign.justify,
                 style: TextStyle(
                   fontSize: 14.0,
-                  fontFamily: 'WorkSans',
+                  fontFamily: 'Arial',
                   fontWeight: FontWeight.normal,
                   letterSpacing: 0.4,
                   height: 0.9,
@@ -182,7 +182,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
                 textAlign: TextAlign.justify,
                 style: TextStyle(
                   fontSize: 14.0,
-                  fontFamily: 'WorkSans',
+                  fontFamily: 'Arial',
                   fontWeight: FontWeight.normal,
                   letterSpacing: 0.4,
                   height: 0.9,
@@ -215,7 +215,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
                 textAlign: TextAlign.justify,
                 style: TextStyle(
                   fontSize: 14.0,
-                  fontFamily: 'WorkSans',
+                  fontFamily: 'Arial',
                   fontWeight: FontWeight.normal,
                   letterSpacing: 0.4,
                   height: 0.9,
@@ -248,7 +248,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
                 textAlign: TextAlign.justify,
                 style: TextStyle(
                   fontSize: 14.0,
-                  fontFamily: 'WorkSans',
+                  fontFamily: 'Arial',
                   fontWeight: FontWeight.normal,
                   letterSpacing: 0.4,
                   height: 0.9,
@@ -281,7 +281,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
                 textAlign: TextAlign.justify,
                 style: TextStyle(
                   fontSize: 14.0,
-                  fontFamily: 'WorkSans',
+                  fontFamily: 'Arial',
                   fontWeight: FontWeight.normal,
                   letterSpacing: 0.4,
                   height: 0.9,
@@ -314,7 +314,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
                 textAlign: TextAlign.justify,
                 style: TextStyle(
                   fontSize: 14.0,
-                  fontFamily: 'WorkSans',
+                  fontFamily: 'Arial',
                   fontWeight: FontWeight.normal,
                   letterSpacing: 0.4,
                   height: 0.9,
@@ -347,7 +347,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
                 textAlign: TextAlign.justify,
                 style: TextStyle(
                   fontSize: 14.0,
-                  fontFamily: 'WorkSans',
+                  fontFamily: 'Arial',
                   fontWeight: FontWeight.normal,
                   letterSpacing: 0.4,
                   height: 0.9,
@@ -380,7 +380,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
                 textAlign: TextAlign.justify,
                 style: TextStyle(
                   fontSize: 14.0,
-                  fontFamily: 'WorkSans',
+                  fontFamily: 'Arial',
                   fontWeight: FontWeight.normal,
                   letterSpacing: 0.4,
                   height: 0.9,
@@ -414,7 +414,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
                     "NextGen Tutorial Services of tutors",
                     style: TextStyle(
                       fontSize: 14.0,
-                      fontFamily: 'WorkSans',
+                      fontFamily: 'Arial',
                       fontWeight: FontWeight.bold,
                       letterSpacing: 0.4,
                       height: 0.9,
