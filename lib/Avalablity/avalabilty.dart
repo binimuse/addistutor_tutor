@@ -154,7 +154,7 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
                           ),
                         ),
                         title: const Text(
-                          "Tutor Availability",
+                          "Your Availability",
                           style: TextStyle(
                             fontSize: 25,
                             fontWeight: FontWeight.w500,
@@ -174,7 +174,7 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
                                   ? const Padding(
                                       padding: EdgeInsets.all(16),
                                       child: Text(
-                                        'selected Dates',
+                                        'Selected dates',
                                         style: TextStyle(color: Colors.black45),
                                       ),
                                     )
@@ -318,7 +318,7 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
       const Padding(
         padding: EdgeInsets.all(16),
         child: Text(
-          'Select your available date to give a tutor',
+          'Select the dates you prefer for tutoring',
           style: TextStyle(color: Colors.black45),
         ),
       ),

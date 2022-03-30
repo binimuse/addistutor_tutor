@@ -47,7 +47,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
             ),
           ),
           title: const Text(
-            "Terms of Service",
+            "Terms of service",
             style: TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.w500,
@@ -112,7 +112,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
             const Padding(
               padding: EdgeInsets.all(18.0),
               child: Text(
-                ' \nA sibling can join a session provided that s/he is in the same category (KG, first cycle primary, second cycle primary, secondary or Preparatory) as the child to whom the service is requested. In such instances no additional payment is required. However, if the sibling is not in the same category or it is more than one sibling, a separate booking needs to be made.\n\n',
+                ' \nA sibling can join a session provided that he/she is in the same category (KG, first cycle primary, second cycle primary, secondary or Preparatory) as the child to whom the service is requested. In such instances no additional payment is required. However, if the sibling is not in the same category or it is more than one sibling, a separate booking needs to be made.\n\n',
                 textAlign: TextAlign.justify,
                 style: TextStyle(
                   fontSize: 14.0,
@@ -261,7 +261,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
             const Padding(
               padding: EdgeInsets.only(top: 8.0),
               child: Text(
-                '7.Dressing code \n',
+                '7. Dress code \n',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16.0,
@@ -411,7 +411,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   Text(
-                    "NextGen Tutorial Services of tutors",
+                    "Terms of service for students",
                     style: TextStyle(
                       fontSize: 14.0,
                       fontFamily: 'Arial',

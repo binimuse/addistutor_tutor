@@ -54,7 +54,7 @@ class _HomePageState extends State<TutorDahsbord>
             .showSnackBar(SnackBar(
           behavior: SnackBarBehavior.floating,
           margin: EdgeInsets.only(bottom: 65.0),
-          content: const Text('Your wallet amount is less'),
+          content: const Text('Your wallet has insufficient balance.'),
           duration: const Duration(days: 1),
           backgroundColor: kPrimaryColor,
           action: SnackBarAction(
@@ -423,7 +423,7 @@ class _HomePageState extends State<TutorDahsbord>
                         children: [
                           Center(
                             child: Text(
-                              'No pending request yet',
+                              'No request yet',
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontWeight: FontWeight.normal,
@@ -496,7 +496,7 @@ class _HomePageState extends State<TutorDahsbord>
             },
             child: Column(children: [
               Text(
-                'Scan Qr',
+                'Scan QR code',
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,

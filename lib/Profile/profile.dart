@@ -455,7 +455,7 @@ class _ProfilePageState extends State<ProfileS> {
                         );
                       },
                       child: _buildRow(
-                          Icons.personal_injury_outlined, "My penalties")),
+                          Icons.personal_injury_outlined, "Penalties")),
                   _buildDivider(),
                   GestureDetector(
                     onTap: () {
@@ -508,7 +508,7 @@ class _ProfilePageState extends State<ProfileS> {
                           ),
                         );
                       },
-                      child: _buildRow(Icons.rule, "Terms of Service")),
+                      child: _buildRow(Icons.rule, "Terms of service")),
                   _buildDivider(),
                   const SizedBox(height: 10.0),
                   GestureDetector(

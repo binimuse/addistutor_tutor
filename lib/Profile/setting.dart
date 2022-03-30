@@ -23,7 +23,7 @@ bool isActive = true;
 
 final List locale = [
   {'name': 'English', 'locale': const Locale('en', 'US')},
-  {'name': 'Amahric', 'locale': const Locale('am', 'IN')},
+  {'name': 'Amharic/አማርኛ', 'locale': const Locale('am', 'IN')},
 ];
 updateLanguage(Locale locale) {
   Get.back();

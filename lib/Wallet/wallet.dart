@@ -502,7 +502,7 @@ class _EditProfilePageState extends State<WalletPage> {
                                                                 .start,
                                                         children: <Widget>[
                                                           Text(
-                                                            "payment pending",
+                                                            "Deposit approval \n pending",
                                                             style: TextStyle(
                                                                 fontSize: 18,
                                                                 fontWeight:

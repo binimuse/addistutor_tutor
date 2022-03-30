@@ -1,17 +1,22 @@
-// ignore_for_file: non_constant_identifier_names, prefer_typing_uninitialized_variables, unnecessary_null_comparison, duplicate_ignore, deprecated_member_use
+// ignore_for_file: non_constant_identifier_names, prefer_typing_uninitialized_variables, unnecessary_null_comparison, duplicate_ignore, deprecated_member_use, empty_catches
 
-import 'package:addistutor_tutor/constants.dart';
+import 'package:addistutor_tutor/Login/login_screen.dart';
 import 'package:addistutor_tutor/remote_services/service.dart';
-import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/state_manager.dart';
 import 'package:flutter/material.dart';
 
-class WalletContoller extends GetxController with StateMixin {
+import '../constants.dart';
+
+class OtpController extends GetxController with StateMixin {
   GlobalKey<FormState> Formkey = GlobalKey<FormState>();
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  late TextEditingController ammount;
+  late TextEditingController otp1;
+  late TextEditingController otp2;
+  late TextEditingController otp3;
+  late TextEditingController otp4;
   late TextEditingController slipid;
 
   var inforesponse;
@@ -19,47 +24,29 @@ class WalletContoller extends GetxController with StateMixin {
   var isFetched = false.obs;
   @override
   void onInit() {
-    ammount = TextEditingController();
+    otp1 = TextEditingController();
+    otp2 = TextEditingController();
+    otp3 = TextEditingController();
+    otp4 = TextEditingController();
+
     slipid = TextEditingController();
 
     super.onInit();
-  }
-
-  var listtransaction = <Transaction>[].obs;
-  var isfetchedtransaction = false.obs;
-
-  void gettransaction(var id) async {
-    listtransaction.value = await RemoteServices.transaction(id);
-    if (listtransaction != null) {
-      isfetchedtransaction(true);
-    }
   }
 
   var balnce;
 
   var wallet;
 
-  void getbalance(var id) async {
-    balnce = await RemoteServices.balance(id);
-
-    if (balnce != null) {
-      // balnce = balance;
-      // ignore: unnecessary_null_comparison
-      wallet = balnce!.wallet_amount.toString();
-      update();
-      isFetched(true);
-    }
-  }
-
   var image;
-  void editProf(BuildContext context, id) async {
+  void editProf(BuildContext context, phone) async {
     try {
       final isValid = Formkey.currentState!.validate();
 
-      if (isValid == true && image != null) {
+      if (isValid == true) {
         isLoading(true);
         Formkey.currentState!.save();
-        await seteditInfo(context, image, id);
+        await seteditInfo(context, phone);
       }
     } finally {
       // ignore: todo
@@ -68,15 +55,21 @@ class WalletContoller extends GetxController with StateMixin {
     }
   }
 
-  Future<void> seteditInfo(BuildContext context, image, id) async {
+  var otps;
+  Future<void> seteditInfo(BuildContext context, phone) async {
     openAndCloseLoadingDialog(context);
 
+    otps = otp1.text.toString() +
+        otp2.text.toString() +
+        otp3.text.toString() +
+        otp4.text.toString();
+
     var data = {
-      "slip_id": slipid.text,
-      "amount": ammount.text,
+      "phone": phone,
+      "confirmation_token": otps,
     };
 
-    inforesponse = await RemoteServices.wallet(image, data, id);
+    inforesponse = await RemoteServices.otp(data);
     if (inforesponse.toString() == "200") {
       closeDialog(true, '', context);
       isLoading(false);
@@ -109,10 +102,11 @@ class WalletContoller extends GetxController with StateMixin {
             FlatButton(
               onPressed: () async {
                 isLoading(false);
+                update();
                 Navigator.of(context).pop(true);
                 Navigator.pop(context);
               },
-              child: const Text('OK'),
+              child: const Text('ok'),
             ),
           ],
         ),
@@ -120,33 +114,12 @@ class WalletContoller extends GetxController with StateMixin {
     } else {
       // ignore: deprecated_member_use
 
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text(
-            'Thank you for making the deposit. The administrator will verify and approve your deposit soon.',
-            style: TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w500,
-              color: Colors.black,
-              fontFamily: 'WorkSans',
-            ),
-          ),
-          actions: <Widget>[
-            FlatButton(
-              onPressed: () {
-                isLoading(false);
-                Navigator.of(context).pop(true);
-                Navigator.pop(context);
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) => const ProfileScreen()),
-                // );
-              },
-              child: const Text('OK'),
-            ),
-          ],
+      Navigator.push(
+        context,
+        PageRouteBuilder(
+          pageBuilder: (context, animation1, animation2) {
+            return const LoginScreen();
+          },
         ),
       );
     }
@@ -175,7 +148,7 @@ class WalletContoller extends GetxController with StateMixin {
 
   String? validateName(String value) {
     if (value.isEmpty) {
-      return "Please provide a FeedBack";
+      return "please Provide a FeedBack";
     }
     return null;
   }

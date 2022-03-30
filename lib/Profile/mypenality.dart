@@ -75,7 +75,6 @@ class _HomePageState extends State<Mypernality>
         color: DesignCourseAppTheme.nearlyWhite,
         child: SmartRefresher(
           enablePullDown: true,
-          enablePullUp: true,
 
           //cheak pull_to_refresh
           controller: _refreshController,
@@ -342,7 +341,7 @@ class _HomePageState extends State<Mypernality>
             },
             child: Column(children: [
               Text(
-                'Scan Qr',
+                'Scan QR code',
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,

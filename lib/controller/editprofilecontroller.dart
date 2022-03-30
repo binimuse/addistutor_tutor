@@ -586,7 +586,7 @@ class EditprofileController extends GetxController with StateMixin {
 
   String? validateEmail(String value) {
     if (!GetUtils.isEmail(value)) {
-      return "Provide a valid Email";
+      return "Provide a valid email";
     }
     return null;
   }
@@ -600,7 +600,7 @@ class EditprofileController extends GetxController with StateMixin {
 
   String? validateNamep(String value) {
     if (value.isEmpty) {
-      return "Please provide a Password";
+      return "Please provide a eassword";
     }
     return null;
   }

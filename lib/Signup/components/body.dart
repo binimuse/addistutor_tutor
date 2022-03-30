@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:addistutor_tutor/Login/login_screen.dart';
 import 'package:addistutor_tutor/Profile/termsodservice.dart';
+import 'package:addistutor_tutor/Signup/components/otp.dart';
 import 'package:addistutor_tutor/Signup/components/social_icon.dart';
 import 'package:addistutor_tutor/components/already_have_an_account_acheck.dart';
 
@@ -117,12 +118,12 @@ class _SplashScreenState extends State<Body> {
                             Icons.phone,
                             color: kPrimaryColor,
                           ),
-                          hintText: "Phone",
+                          hintText: "Phone 2519",
                           border: InputBorder.none,
                         ),
-                        keyboardType: TextInputType.number,
-                        inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly
+                        keyboardType: TextInputType.phone,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(RegExp('[0-9]+')),
                         ],
                         validator: (value) {
                           return signupController.validatephone(value!);
@@ -631,7 +632,7 @@ class _SplashScreenState extends State<Body> {
             Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
-                'Please check your email inbox to verify your email address before you log in.',
+                'Please check your email inbox or your sms  to verify your email address  or phone number  before you log in.',
                 style: TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.normal,
@@ -652,10 +653,16 @@ class _SplashScreenState extends State<Body> {
                   setState(() {
                     isLoading = false;
                   });
+                  // Navigator.push<dynamic>(
+                  //   context,
+                  //   MaterialPageRoute<dynamic>(
+                  //     builder: (BuildContext context) => const LoginScreen(),
+                  //   ),
+                  // );
                   Navigator.push<dynamic>(
                     context,
                     MaterialPageRoute<dynamic>(
-                      builder: (BuildContext context) => const LoginScreen(),
+                      builder: (BuildContext context) => OTPPage(),
                     ),
                   );
                 },
@@ -669,10 +676,17 @@ class _SplashScreenState extends State<Body> {
                     setState(() {
                       isLoading = false;
                     });
+                    // Navigator.push<dynamic>(
+                    //   context,
+                    //   MaterialPageRoute<dynamic>(
+                    //     builder: (BuildContext context) => const LoginScreen(),
+                    //   ),
+                    // );
+
                     Navigator.push<dynamic>(
                       context,
                       MaterialPageRoute<dynamic>(
-                        builder: (BuildContext context) => const LoginScreen(),
+                        builder: (BuildContext context) => OTPPage(),
                       ),
                     );
                   },
