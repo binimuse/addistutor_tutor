@@ -248,7 +248,102 @@ class _FeedbackScreenState extends State<TopUpPage> {
                           ),
                         ),
                       ),
-                    )
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(children: [
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(top: 16, left: 20, right: 20),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: AppTheme.white,
+                            borderRadius: BorderRadius.circular(8),
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(
+                                  color: Colors.grey.withOpacity(0.8),
+                                  offset: const Offset(4, 4),
+                                  blurRadius: 8),
+                            ],
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(25),
+                            child: Container(
+                              padding: const EdgeInsets.all(4.0),
+                              constraints: const BoxConstraints(
+                                  minHeight: 40, maxHeight: 160),
+                              color: AppTheme.white,
+                              child: SingleChildScrollView(
+                                padding: const EdgeInsets.only(
+                                    left: 10, right: 10, top: 0, bottom: 0),
+                                child: Column(children: [
+                                  Text(
+                                    "Commercial Bank of Ethiopia",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 14,
+                                        color: kPrimaryColor),
+                                  ),
+                                  Text(
+                                    "1000461903767",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 14,
+                                        color: kPrimaryLightColor),
+                                  ),
+                                ]),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(top: 16, left: 10, right: 10),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: AppTheme.white,
+                            borderRadius: BorderRadius.circular(8),
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(
+                                  color: Colors.grey.withOpacity(0.8),
+                                  offset: const Offset(4, 4),
+                                  blurRadius: 8),
+                            ],
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(25),
+                            child: Container(
+                              padding: const EdgeInsets.all(4.0),
+                              constraints: const BoxConstraints(
+                                  minHeight: 40, maxHeight: 160),
+                              color: AppTheme.white,
+                              child: SingleChildScrollView(
+                                padding: const EdgeInsets.only(
+                                    left: 10, right: 10, top: 0, bottom: 0),
+                                child: Column(children: [
+                                  Text(
+                                    "Berhan International Bank",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 14,
+                                        color: kPrimaryColor),
+                                  ),
+                                  Text(
+                                    "2001130411334",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 14,
+                                        color: kPrimaryLightColor),
+                                  ),
+                                ]),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ]),
                   ],
                 ),
               ),
