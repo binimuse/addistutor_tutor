@@ -7,6 +7,7 @@ import 'package:addistutor_tutor/Profile/editprofile.dart';
 import 'package:addistutor_tutor/Profile/getmyaccount.dart';
 import 'package:addistutor_tutor/Profile/profile.dart';
 import 'package:addistutor_tutor/Signup/components/or_divider.dart';
+import 'package:addistutor_tutor/Signup/components/otp.dart';
 import 'package:addistutor_tutor/Signup/components/social_icon.dart';
 import 'package:addistutor_tutor/Signup/signup_screen.dart';
 import 'package:addistutor_tutor/Tutordashbord/tutordashbord.dart';
@@ -534,8 +535,8 @@ class _LoginScreenState extends State<Body> {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text('Please verify your email'),
-            content: const Text("Go to your email to confirm"),
+            title: const Text('Please verify your email or otp'),
+            content: const Text("Go to your email or sms to confirm"),
             actions: <Widget>[
               FlatButton(
                 shape: RoundedRectangleBorder(
@@ -547,6 +548,12 @@ class _LoginScreenState extends State<Body> {
                   setState(() {
                     isLoading = false;
                   });
+                  Navigator.push<dynamic>(
+                    context,
+                    MaterialPageRoute<dynamic>(
+                      builder: (BuildContext context) => OTPPage(),
+                    ),
+                  );
                 },
                 child: Container(
                     width: 20,

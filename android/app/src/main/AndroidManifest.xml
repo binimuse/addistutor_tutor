@@ -2,17 +2,17 @@
     package="com.example.addistutor_tutor">
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+   
+    
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:required="true" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" android:required="true" />
+
 
     <uses-permission android:name="android.permission.STORAGE_INTERNAL"/>
     <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA" /> 
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>  
+   
    <application
-        android:label="NextGen tutor"
+        android:label="NEXTGEN tutor"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
