@@ -40,7 +40,7 @@ class _MyHomePageState extends State<MyApp> {
 
     final newVersion = NewVersion(
       //iOSId: 'com.google.Vespa',
-      androidId: 'com.example.addistutor_tutor',
+      androidId: 'com.next.addistutor_tutor',
     );
 
     // You can let the plugin handle fetching the status and showing a dialog,

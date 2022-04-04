@@ -1,4 +1,4 @@
-package com.example.addistutor_tutor
+package com.next.addistutor_tutor
 
 import io.flutter.embedding.android.FlutterActivity
 

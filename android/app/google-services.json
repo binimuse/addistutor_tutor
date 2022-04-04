@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:247875710956:android:fc1439ff15925a3ee45ac9",
         "android_client_info": {
-          "package_name": "com.example.addistutor_tutor"
+          "package_name": "com.next.addistutor_tutor"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "247875710956-q5kjemkp0b037ju6ft02gr9mtivvdiu8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.addistutor_tutor",
+            "package_name": "com.next.addistutor_tutor",
             "certificate_hash": "3bb79baf44eb35819c5055130e4b2a9cad11ee20"
           }
         },
