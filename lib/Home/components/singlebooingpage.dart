@@ -362,7 +362,7 @@ class _CourseInfoScreenState extends State<SinglebookingPage>
                               child: ClipRRect(
                                   borderRadius: BorderRadius.circular(18.0),
                                   child: Image.network(
-                                    "https://tutor.oddatech.com/api/teacher-profile-picture/${requestedBooking.tid}",
+                                    "https://nextgeneducation.et/api/teacher-profile-picture/${requestedBooking.tid}",
                                   )),
                             ))),
                     Padding(

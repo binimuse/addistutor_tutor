@@ -431,7 +431,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(18.0),
                           child: Image.network(
-                            "https://tutor.oddatech.com/api/student-profile-picture/${widget.requestedBooking!.student.id}",
+                            "https://nextgeneducation.et/api/student-profile-picture/${widget.requestedBooking!.student.id}",
                           )),
                     ))),
             Padding(

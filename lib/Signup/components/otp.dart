@@ -1,8 +1,3 @@
-/**
- * Author: Damodar Lohani
- * profile: https://github.com/lohanidamodar
-  */
-
 import 'package:addistutor_tutor/Login/login_screen.dart';
 import 'package:addistutor_tutor/controller/otpcontroller.dart';
 import 'package:addistutor_tutor/controller/signupcontroller.dart';

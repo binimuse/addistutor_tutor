@@ -319,7 +319,7 @@ class _HomePageState extends State<TutorDahsbord>
                                               image: DecorationImage(
                                                   fit: BoxFit.contain,
                                                   image: NetworkImage(
-                                                      "https://tutor.oddatech.com/api/student-profile-picture/${chat.student.id}"))),
+                                                      "https://nextgeneducation.et/student-profile-picture/${chat.student.id}"))),
                                         ),
                                       ],
                                     ),

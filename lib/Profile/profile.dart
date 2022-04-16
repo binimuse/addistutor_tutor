@@ -235,9 +235,9 @@ class _ProfilePageState extends State<ProfileS> {
                       children: <Widget>[
                         ProfileHeader(
                           avatar: NetworkImage(
-                              "https://tutor.oddatech.com/api/teacher-profile-picture/${ids}"),
+                              "https://nextgeneducation.et/api/teacher-profile-picture/${ids}"),
                           coverImage: const NetworkImage(
-                              "https://tutor.oddatech.com/lg3.png"),
+                              "https://nextgeneducation.et/lg3.png"),
                           title: editprofileController.firstname.text
                                   .toString() +
                               " " +
@@ -355,7 +355,7 @@ class _ProfilePageState extends State<ProfileS> {
   final Color divider = Colors.grey.shade600;
   _buildDrawer(BuildContext context, String fname, String lastname, ids) {
     final String image =
-        "https://tutor.oddatech.com/api/teacher-profile-picture/${ids}";
+        "https://nextgeneducation.et/api/teacher-profile-picture/${ids}";
     return ClipPath(
       clipper: OvalRightBorderClipper(),
       child: Drawer(

@@ -41,10 +41,11 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>we need this permision  to upload image for  update profile, to send image to admin dashbord, and to scan QR codes</string>
 	<key>NSCameraUsageDescription</key>
-	<string>This app needs camera access to scan QR codes</string>
+	<string>we need this permision  to take image from camera for  update profile, to send image to admin dashbord,and to scan QR codes</string>
 </dict>
 </plist>

@@ -102,9 +102,6 @@ class OtpController extends GetxController with StateMixin {
             FlatButton(
               onPressed: () async {
                 isLoading(false);
-                update();
-                Navigator.of(context).pop(true);
-                Navigator.pop(context);
               },
               child: const Text('ok'),
             ),
