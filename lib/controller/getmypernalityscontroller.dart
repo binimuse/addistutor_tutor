@@ -2,10 +2,8 @@
 
 import 'package:addistutor_tutor/remote_services/service.dart';
 import 'package:addistutor_tutor/remote_services/user.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../constants.dart';
 
 class GetPenalitycontoller extends GetxController with StateMixin {
   var listsubject = <GetPenalties>[].obs;

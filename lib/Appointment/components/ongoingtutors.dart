@@ -2,7 +2,6 @@
 
 import 'dart:convert';
 
-import 'package:addistutor_tutor/Home/components/course_info_qr.dart';
 import 'package:addistutor_tutor/Home/components/course_info_screen.dart';
 import 'package:addistutor_tutor/controller/getnotificationcontoller.dart';
 import 'package:addistutor_tutor/remote_services/service.dart';

@@ -75,9 +75,9 @@ class EndBookingContoller extends GetxController with StateMixin {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text(
+          title: const Text(
             "Session ended failed.",
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w500,
               color: Colors.black,

@@ -386,6 +386,7 @@ class _SplashScreenState extends State<Body> {
 
                         // register();
                       }).catchError((e) {
+                        print(e);
                         setState(() {
                           _googleSignIn.signOut().then((value) {
                             setState(() {
@@ -394,25 +395,7 @@ class _SplashScreenState extends State<Body> {
                           }).catchError((e) {});
                         });
 
-                        // showDialog(
-                        //   context: context,
-                        //   builder: (context) => AlertDialog(
-                        //     title: const Text('Error'),
-                        //     content: Text(e.toString()),
-                        //     actions: <Widget>[
-                        //       // ignore: deprecated_member_use
-                        //       FlatButton(
-                        //         onPressed: () {
-                        //           Navigator.of(context).pop(true);
-                        //           setState(() {
-                        //             isLoading = false;
-                        //           });
-                        //         },
-                        //         child: const Text('ok'),
-                        //       ),
-                        //     ],
-                        //   ),
-                        // );
+               
                       });
                     },
                   ),

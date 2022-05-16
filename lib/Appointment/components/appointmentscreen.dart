@@ -42,7 +42,7 @@ class _HomePageState extends State<Appointment>
     _fetchUser();
   }
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 

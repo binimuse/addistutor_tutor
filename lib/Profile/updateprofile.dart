@@ -169,7 +169,6 @@ class _EditPageState extends State<UpdateProfile> {
                   ),
                 ),
                 body: Form(
-                  autovalidate: _autovalidate,
                   key: updateprofilecontoller.EditProf,
                   child: Container(
                     padding:

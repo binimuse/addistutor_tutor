@@ -252,7 +252,7 @@ class _FeedbackScreenState extends State<TopUpPage> {
                     const SizedBox(
                       height: 20,
                     ),
-                    Row(children: [
+                    Column(children: [
                       Padding(
                         padding:
                             const EdgeInsets.only(top: 16, left: 20, right: 20),

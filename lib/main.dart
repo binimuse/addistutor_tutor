@@ -50,7 +50,24 @@ class _MyHomePageState extends State<MyApp> {
     if (simpleBehavior) {
       basicStatusCheck(newVersion);
     } else {
-      //  advancedStatusCheck(newVersion);
+      advancedStatusCheck(newVersion);
+    }
+  }
+
+  advancedStatusCheck(NewVersion newVersion) async {
+    final status = await newVersion.getVersionStatus();
+    if (status != null) {
+      debugPrint(status.releaseNotes);
+      debugPrint(status.appStoreLink);
+      debugPrint(status.localVersion);
+      debugPrint(status.storeVersion);
+      debugPrint(status.canUpdate.toString());
+      newVersion.showUpdateDialog(
+        context: context,
+        versionStatus: status,
+        dialogTitle: 'NEXTGEN tutor',
+        dialogText: 'New Update',
+      );
     }
   }
 
