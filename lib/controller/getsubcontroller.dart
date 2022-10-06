@@ -1,3 +1,5 @@
+// ignore_for_file: empty_catches
+
 import 'package:addistutor_tutor/remote_services/service.dart';
 import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:get/get.dart';

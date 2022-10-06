@@ -2,15 +2,12 @@
 
 import 'dart:convert';
 
-import 'package:addistutor_tutor/Login/components/pendingpage.dart';
 import 'package:addistutor_tutor/Profile/editprofile.dart';
 import 'package:addistutor_tutor/Profile/getmyaccount.dart';
-import 'package:addistutor_tutor/Profile/profile.dart';
 import 'package:addistutor_tutor/Signup/components/or_divider.dart';
 import 'package:addistutor_tutor/Signup/components/otp.dart';
 import 'package:addistutor_tutor/Signup/components/social_icon.dart';
 import 'package:addistutor_tutor/Signup/signup_screen.dart';
-import 'package:addistutor_tutor/Tutordashbord/tutordashbord.dart';
 import 'package:addistutor_tutor/components/already_have_an_account_acheck.dart';
 
 import 'package:addistutor_tutor/components/text_field_container.dart';
@@ -27,7 +24,6 @@ import 'package:addistutor_tutor/remote_services/api.dart';
 import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';

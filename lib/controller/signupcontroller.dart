@@ -2,7 +2,6 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
 import 'package:flutter/material.dart';
 
 class SignupController extends GetxController with StateMixin {

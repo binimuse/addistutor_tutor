@@ -850,7 +850,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                     ),
                   )
             : Center(
-                child: Column(children: [
+                child: Column(children: const [
                 CircularProgressIndicator(),
                 // const Center(child: Text("No Booked Tutors"))
               ])));

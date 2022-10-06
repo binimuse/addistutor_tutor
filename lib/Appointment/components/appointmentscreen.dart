@@ -7,7 +7,6 @@ import 'package:addistutor_tutor/Appointment/components/ongoingtutors.dart';
 import 'package:addistutor_tutor/Home/components/category_list_view.dart';
 import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
 import 'package:addistutor_tutor/Wallet/wallet.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';

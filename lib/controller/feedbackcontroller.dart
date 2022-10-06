@@ -2,7 +2,6 @@
 
 import 'package:addistutor_tutor/constants.dart';
 import 'package:addistutor_tutor/remote_services/service.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:flutter/material.dart';

@@ -2,7 +2,6 @@
 
 import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
 import 'design_course_app_theme.dart';
@@ -20,9 +19,7 @@ class CourseInfoQr extends StatefulWidget {
 
 class _CourseInfoScreenState extends State<CourseInfoQr>
     with TickerProviderStateMixin {
-  final double _initialRating = 0.0;
   bool rating = false;
-  IconData? _selectedIcon;
   final double infoHeight = 364.0;
   AnimationController? animationController;
   Animation<double>? animation;

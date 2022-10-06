@@ -7,7 +7,6 @@ import 'package:addistutor_tutor/constants.dart';
 import 'package:addistutor_tutor/remote_services/service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Updateprofilecontoller extends GetxController with StateMixin {

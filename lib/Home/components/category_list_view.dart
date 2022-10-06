@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_string_interpolations
+// ignore_for_file: unnecessary_string_interpolations, unnecessary_null_comparison
 
 import 'package:addistutor_tutor/Appointment/components/appointmentscreen.dart';
 import 'package:addistutor_tutor/constants.dart';
@@ -239,8 +239,8 @@ class CategoryView extends StatelessWidget {
                                                     ],
                                                   )
                                                 : Row(
-                                                    children: <Widget>[
-                                                      const Text(
+                                                    children: const <Widget>[
+                                                      Text(
                                                         '0',
                                                         textAlign:
                                                             TextAlign.left,
@@ -254,7 +254,7 @@ class CategoryView extends StatelessWidget {
                                                                   .grey,
                                                         ),
                                                       ),
-                                                      const Icon(
+                                                      Icon(
                                                         Icons.star,
                                                         color:
                                                             kPrimaryLightColor,
