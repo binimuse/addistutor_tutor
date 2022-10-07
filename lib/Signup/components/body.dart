@@ -357,50 +357,6 @@ class _SplashScreenState extends State<Body> {
                   );
                 },
               ),
-              const OrDivider(),
-              const Text(
-                "Register with Google?",
-                style: TextStyle(color: kPrimaryColor),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SocalIcon(
-                    iconSrc: "assets/images/google.png",
-                    press: () {
-                      _googleSignIn.signIn().then((userData) {
-                        setState(() {
-                          _isLoggedIn = true;
-                          _userObj = userData!;
-                        });
-
-                        signupController.email.text = _userObj.email;
-                        signupController.fullname.text = _userObj.displayName!;
-
-                        if (_isLoggedIn) {
-                          registerbygoogle();
-                        }
-
-                        // register();
-                      }).catchError((e) {
-                        print(e);
-                        setState(() {
-                          _googleSignIn.signOut().then((value) {
-                            setState(() {
-                              _isLoggedIn = false;
-                            });
-                          }).catchError((e) {});
-                        });
-
-               
-                      });
-                    },
-                  ),
-                ],
-              )
             ],
           ),
         ),

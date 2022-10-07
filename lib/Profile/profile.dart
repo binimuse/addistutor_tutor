@@ -510,7 +510,102 @@ class _ProfilePageState extends State<ProfileS> {
                       },
                       child: _buildRow(Icons.rule, "Terms of service")),
                   _buildDivider(),
-                  const SizedBox(height: 10.0),
+                  GestureDetector(
+                    onTap: () {
+                      Scaffold.of(context).removeCurrentSnackBar();
+
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          elevation: 0,
+                          backgroundColor: const Color(0xffffffff),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: const [
+                                Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Text(
+                                    'Are you sure you want to remove this account?',
+                                    style: TextStyle(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ]),
+                          actions: <Widget>[
+                            // ignore: deprecated_member_use
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              height: 20,
+                              child: InkWell(
+                                highlightColor: Colors.grey[200],
+                                onTap: () {
+                                  // Navigator.of(context).pop(true);
+                                  // setState(() {
+                                  //   ScaffoldMessenger.of(context)
+                                  //       .hideCurrentSnackBar();
+                                  // });
+                                  // _logout(context);
+                                },
+                                child: const Center(
+                                  child: Text(
+                                    "Yes",
+                                    style: TextStyle(
+                                      fontSize: 15.0,
+                                      color: kPrimaryColor,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            SizedBox(
+                              height: 20,
+                            ),
+                            const Divider(
+                              height: 1,
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              height: 20,
+                              child: InkWell(
+                                borderRadius: const BorderRadius.only(
+                                  bottomLeft: Radius.circular(15.0),
+                                  bottomRight: Radius.circular(15.0),
+                                ),
+                                highlightColor: Colors.grey[200],
+                                onTap: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Center(
+                                  child: Text(
+                                    "Cancel",
+                                    style: TextStyle(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    child: _buildRow(
+                      Icons.person_remove_alt_1,
+                      "Remove account",
+                    ),
+                  ),
+                  _buildDivider(),
                   GestureDetector(
                       onTap: () async {
                         Scaffold.of(context).removeCurrentSnackBar();
