@@ -373,6 +373,20 @@ class Notifications {
   }
 }
 
+class Remove {
+  String id;
+
+  Remove({
+    required this.id,
+  });
+
+  factory Remove.fromJson(Map<String, dynamic> json) {
+    return Remove(
+      id: json["id"],
+    );
+  }
+}
+
 class Locations {
   int id;
 

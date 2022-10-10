@@ -23,6 +23,7 @@ import 'package:addistutor_tutor/controller/getnotificationcontoller.dart';
 import 'package:addistutor_tutor/controller/getqualifaicationcontroller.dart';
 import 'package:addistutor_tutor/controller/getreqestedbookingcpntroller.dart';
 import 'package:addistutor_tutor/controller/getsubcontroller.dart';
+import 'package:addistutor_tutor/controller/removeaccountcontroller.dart';
 import 'package:addistutor_tutor/controller/sendqrcodecontroller.dart';
 import 'package:addistutor_tutor/controller/signupcontroller.dart';
 import 'package:addistutor_tutor/controller/updateprofilecontroller.dart';
@@ -83,6 +84,9 @@ class _ProfilePageState extends State<ProfileS> {
 
   final Getqulificationcontroller getqulificationcontroller =
       Get.put(Getqulificationcontroller());
+
+  final RemoveScreencontroller removeaccount =
+      Get.put(RemoveScreencontroller());
 
   final GetmyAccount getmyAccount = Get.put(GetmyAccount());
   @override
@@ -543,13 +547,23 @@ class _ProfilePageState extends State<ProfileS> {
                               height: 20,
                               child: InkWell(
                                 highlightColor: Colors.grey[200],
-                                onTap: () {
-                                  // Navigator.of(context).pop(true);
-                                  // setState(() {
-                                  //   ScaffoldMessenger.of(context)
-                                  //       .hideCurrentSnackBar();
-                                  // });
-                                  // _logout(context);
+                                onTap: () async {
+                                  SharedPreferences localStorage =
+                                      await SharedPreferences.getInstance();
+                                  var token = localStorage.getString('user');
+
+                                  if (token != null) {
+                                    var body = json.decode(token);
+
+                                    if (body["id"] != null) {
+                                      setState(() {
+                                        ids = body["id"];
+                                        removeaccount.seteditInfo(context, ids);
+                                      });
+                                    } else {
+                                      var noid = "noid";
+                                    }
+                                  } else {}
                                 },
                                 child: const Center(
                                   child: Text(
