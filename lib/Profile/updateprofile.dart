@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
+import 'package:addistutor_tutor/Profile/dropdown_common_model.dart';
+import 'package:addistutor_tutor/components/form_drop_down_widget.dart';
 import 'package:addistutor_tutor/controller/getlocationcontroller.dart';
 
 import 'package:addistutor_tutor/controller/updateprofilecontroller.dart';
@@ -94,15 +96,15 @@ class _EditPageState extends State<UpdateProfile> {
   List<GetLocation> location = [];
   _getlocation() async {
     getLocationController.fetchLocation();
-
-    location = getLocationController.listlocation.value;
-    if (location != null && location.isNotEmpty) {
-      setState(() {
-        getLocationController.getLocation = location[0];
-        //   getLocationController.getLocation!.locaion = location[0];
-        getLocationController.subcity = location[0];
-      });
-    }
+    print("===>>>>>>Printing ${getLocationController.listlocation.length} ");
+    // location = getLocationController.listlocation.value;
+    // if (location != null && location.isNotEmpty) {
+    //   setState(() {
+    //     getLocationController.getLocation = location[0];
+    //     //   getLocationController.getLocation!.locaion = location[0];
+    //     getLocationController.subcity = location[0];
+    //   });
+    // }
   }
 
   final RefreshController _refreshController =
@@ -382,58 +384,71 @@ class _EditPageState extends State<UpdateProfile> {
                               fontFamily: 'WorkSans',
                             ),
                           ),
-                          Row(children: [
-                            Flexible(
-                              child: DropdownButton<GetLocation>(
-                                hint: Text(
-                                  getLocationController.listlocation.toString(),
-                                  style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                isExpanded: true,
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700),
-                                items: location
-                                    .map((e) => DropdownMenuItem(
-                                          child: Text(e.name,
-                                              textAlign: TextAlign.left,
-                                              style: const TextStyle(
-                                                  color: DesignCourseAppTheme
-                                                      .nearlyBlack,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w300)),
-                                          value: e,
-                                        ))
-                                    .toList(),
-                                onChanged: (value) {
-                                  setState(() {
-                                    FocusScope.of(context)
-                                        .requestFocus(new FocusNode());
-                                    getLocationController.subcity = value!;
 
-                                    if (getLocationController
-                                            .subcity!.locaion.length !=
-                                        0) {
-                                      subc = true;
-                                    } else {
-                                      subc = false;
-                                    }
-                                  });
 
-                                  // pop current page
-                                },
-                                value: getLocationController.subcity,
-                              ),
-                            ),
-                            Text(
-                              locationname,
-                              style: const TextStyle(color: Colors.black38),
-                            ),
-                          ]),
+
+                          FormDropDownWidget(
+                            hintText: "Select Subcity".trArgs(),
+                            options: getLocationController.listlocation.value,
+                            value:
+                                getLocationController.listlocationvalue.value,
+                            onChanged: (GetLocation subcitymodel) {
+                              getLocationController
+                                  .setLocationStatus(subcitymodel);
+                            },
+                          ),
+                          // Row(children: [
+                          //   Flexible(
+                          //     child: DropdownButton<GetLocation>(
+                          //       hint: Text(
+                          //         getLocationController.listlocation.toString(),
+                          //         style: const TextStyle(
+                          //             color: Colors.black,
+                          //             fontSize: 16,
+                          //             fontWeight: FontWeight.w400),
+                          //       ),
+                          //       isExpanded: true,
+                          //       style: const TextStyle(
+                          //           color: Colors.black,
+                          //           fontSize: 16,
+                          //           fontWeight: FontWeight.w700),
+                          //       items: location
+                          //           .map((e) => DropdownMenuItem(
+                          //                 child: Text(e.name,
+                          //                     textAlign: TextAlign.left,
+                          //                     style: const TextStyle(
+                          //                         color: DesignCourseAppTheme
+                          //                             .nearlyBlack,
+                          //                         fontSize: 16,
+                          //                         fontWeight: FontWeight.w300)),
+                          //                 value: e,
+                          //               ))
+                          //           .toList(),
+                          //       onChanged: (value) {
+                          //         setState(() {
+                          //           FocusScope.of(context)
+                          //               .requestFocus(new FocusNode());
+                          //           getLocationController.subcity = value!;
+
+                          //           if (getLocationController
+                          //                   .subcity!.locaion.length !=
+                          //               0) {
+                          //             subc = true;
+                          //           } else {
+                          //             subc = false;
+                          //           }
+                          //         });
+
+                          //         // pop current page
+                          //       },
+                          //       value: getLocationController.subcity,
+                          //     ),
+                          //   ),
+                          //   Text(
+                          //     locationname,
+                          //     style: const TextStyle(color: Colors.black38),
+                          //   ),
+                          // ]),
 
                           const SizedBox(
                             height: 20,

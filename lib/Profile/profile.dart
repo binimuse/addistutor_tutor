@@ -107,25 +107,11 @@ class _ProfilePageState extends State<ProfileS> {
   List<GetLevel> level = [];
   _getlevel() async {
     getLevelContoller.fetchLocation();
-
-    level = getLevelContoller.listlocation.value;
-    if (location != null && location.isNotEmpty) {
-      setState(() {
-        getLevelContoller.level = level[0];
-      });
-    }
   }
 
   List<GetQulification> qualification = [];
   _getqulification() async {
     getqulificationcontroller.fetchLocation();
-
-    qualification = getqulificationcontroller.listlocation.value;
-    if (qualification != null && qualification.isNotEmpty) {
-      setState(() {
-        getqulificationcontroller.qualification = qualification[0];
-      });
-    }
   }
 
   final RefreshController _refreshController =
@@ -164,14 +150,14 @@ class _ProfilePageState extends State<ProfileS> {
   _getlocation() async {
     getLocationController.fetchLocation();
 
-    location = getLocationController.listlocation.value;
-    if (location != null && location.isNotEmpty) {
-      setState(() {
-        getLocationController.getLocation = location[0];
-        //   getLocationController.getLocation!.locaion = location[0];
-        getLocationController.subcity = location[0];
-      });
-    }
+    // location = getLocationController.listlocation.value;
+    // if (location != null && location.isNotEmpty) {
+    //   setState(() {
+    //     getLocationController.getLocation = location[0];
+    //     //   getLocationController.getLocation!.locaion = location[0];
+    //     getLocationController.subcity = location[0];
+    //   });
+    // }
   }
 
   void _fetchUser() async {

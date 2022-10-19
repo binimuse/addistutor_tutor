@@ -167,6 +167,8 @@ class Teacher {
   });
 
   factory Teacher.fromJson(Map<String, dynamic> json) {
+    print("dfdfdfd ${json}");
+
     return Teacher(
       id: json["id"] as int,
       first_name: json["first_name"],
@@ -482,8 +484,32 @@ class Subjects2 {
   }
 }
 
+class GetCategory {
+  String id;
+
+  String name;
+  String description;
+  String additional_price;
+
+  GetCategory({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.additional_price,
+  });
+
+  factory GetCategory.fromJson(Map<String, dynamic> json) {
+    return GetCategory(
+      id: json["id"].toString(),
+      name: json["name"],
+      description: json["description"],
+      additional_price: json["additional_price"],
+    );
+  }
+}
+
 class Subjects {
-  int id;
+  String id;
 
   String code;
   String title;
@@ -498,7 +524,7 @@ class Subjects {
 
   factory Subjects.fromJson(Map<String, dynamic> json) {
     return Subjects(
-      id: json["id"] as int,
+      id: json["id"].toString(),
       code: json["code"],
       title: json["title"],
       tutoring_level_id: json["tutoring_level_id"],
@@ -643,7 +669,7 @@ class ReqTech {
 }
 
 class GetLocation {
-  int id;
+  String id;
 
   String name;
   String description;
@@ -658,7 +684,7 @@ class GetLocation {
 
   factory GetLocation.fromJson(Map<String, dynamic> json) {
     return GetLocation(
-      id: json["id"] as int,
+      id: json["id"].toString(),
       name: json["name"],
       description: json["description"],
       locaion: List<Locations>.from(
@@ -668,7 +694,7 @@ class GetLocation {
 }
 
 class GetLevel {
-  int id;
+  String id;
 
   String title;
   String price;
@@ -683,7 +709,7 @@ class GetLevel {
 
   factory GetLevel.fromJson(Map<String, dynamic> json) {
     return GetLevel(
-      id: json["id"] as int,
+      id: json["id"].toString(),
       title: json["title"],
       price: json["price"],
       description: json["description"],
@@ -692,7 +718,7 @@ class GetLevel {
 }
 
 class GetQulification {
-  int id;
+  String id;
 
   String title;
   String description;
@@ -705,7 +731,7 @@ class GetQulification {
 
   factory GetQulification.fromJson(Map<String, dynamic> json) {
     return GetQulification(
-      id: json["id"] as int,
+      id: json["id"].toString(),
       title: json["title"],
       description: json["description"],
     );

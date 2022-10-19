@@ -40,6 +40,8 @@ class RemoteServices {
 
   static Future<String> UpdateProfile(var data) async {
     List<String> errors = [];
+    print("===> data ${data}");
+
     // create multipart request
     res = await Network().getpassedData(data, "teacher-update");
 
@@ -390,16 +392,18 @@ class RemoteServices {
   static Future<List<GetLocation>> getlocation() async {
     // print("id.toString()");
     //print(id.toString());
+
     res = await Network().getData("address?with_address=true");
 
     var body = json.decode(res.body);
+
     if (res.statusCode == 200) {
       return body
           .map((e) => GetLocation.fromJson(e))
           .toList()
           .cast<GetLocation>();
     } else {
-      throw Exception('Failed to load User' + res.statusCode.toString());
+      throw Exception('Failed to load address' + res.statusCode.toString());
     }
   }
 
@@ -431,6 +435,22 @@ class RemoteServices {
           .map((e) => Subjects2.fromJson(e))
           .toList()
           .cast<Subjects2>();
+    } else {
+      throw Exception('Failed to load Comment');
+    }
+  }
+
+  static Future<List<GetCategory>> getcategory() async {
+    // print("id.toString()");
+    //print(id.toString());
+    res = await Network().getData("employment-category");
+
+    var body = json.decode(res.body);
+    if (res.statusCode == 200) {
+      return body["data"]
+          .map((e) => GetCategory.fromJson(e))
+          .toList()
+          .cast<GetCategory>();
     } else {
       throw Exception('Failed to load Comment');
     }

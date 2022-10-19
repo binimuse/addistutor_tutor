@@ -3,16 +3,21 @@ import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:get/get.dart';
 
 class Getqulificationcontroller extends GetxController with StateMixin {
-  var listlocation = <GetQulification>[].obs;
+  RxList<GetQulification> listQulification = List<GetQulification>.of([]).obs;
+  final listQulificationvalue = Rxn<GetQulification>();
   var isfetchedlocation = false.obs;
   var sent = false.obs;
   GetQulification? qualification;
   void fetchLocation() async {
-    listlocation.value = await RemoteServices.getqualification();
+    listQulification.value = await RemoteServices.getqualification();
 
-    if (listlocation.isNotEmpty) {
+    if (listQulification.isNotEmpty) {
       //print(list.length.toString());
       isfetchedlocation(true);
     }
+  }
+
+  void setLevelStatus(GetQulification zonemodel) {
+    listQulificationvalue.value = zonemodel;
   }
 }

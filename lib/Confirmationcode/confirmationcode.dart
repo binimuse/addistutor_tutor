@@ -71,7 +71,7 @@ class _FeedbackScreenState extends State<CodeScreen> {
               ),
             ),
             title: const Text(
-              "Qr Code",
+              "QR Code",
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.w500,
@@ -152,7 +152,7 @@ class _FeedbackScreenState extends State<CodeScreen> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10.0))),
                         label: const Text(
-                          'Scan Qr Code',
+                          'Scan QR Code',
                           style: TextStyle(color: Colors.white),
                         ),
                         icon: const Icon(

@@ -4,10 +4,18 @@ import 'dart:convert';
 
 import 'package:addistutor_tutor/Login/login_screen.dart';
 import 'package:addistutor_tutor/constants.dart';
+import 'package:addistutor_tutor/controller/getcategorycontroller.dart';
+import 'package:addistutor_tutor/controller/getlevelcontroller.dart';
+import 'package:addistutor_tutor/controller/getlocationcontroller.dart';
+import 'package:addistutor_tutor/controller/getqualifaicationcontroller.dart';
 import 'package:addistutor_tutor/remote_services/service.dart';
+import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart' show SharedPreferences;
+import 'package:shared_preferences/shared_preferences.dart'
+    show SharedPreferences;
+
+import 'getsubcontroller.dart';
 
 class EditprofileController extends GetxController with StateMixin {
   // ignore: non_constant_identifier_names
@@ -57,7 +65,7 @@ class EditprofileController extends GetxController with StateMixin {
   var pass = '';
   var forgo = '';
   var date;
-  var locationid;
+
   var subcityid;
   var g_subcityid;
   var e_subcityid;
@@ -310,7 +318,7 @@ class EditprofileController extends GetxController with StateMixin {
         isLoading(true);
         EditProf.currentState!.save();
         await seteditInfo(id, context);
-      }
+      } else {}
     } finally {
       // ignore: todo
       // TODO
@@ -318,6 +326,13 @@ class EditprofileController extends GetxController with StateMixin {
   }
 
   var image;
+  GetLocationController getLocationController = Get.find();
+
+  GetLevelContoller getLevelContoller = Get.put(GetLevelContoller());
+  Getqulificationcontroller getqulificationcontroller =
+      Get.put(Getqulificationcontroller());
+  GetSubect subjects = Get.put(GetSubect());
+  GetCatgroryContoller getCatgroryContoller = Get.put(GetCatgroryContoller());
 
   Future<void> seteditInfo(ids, BuildContext context) async {
     openAndCloseLoadingDialog(context);
@@ -333,22 +348,43 @@ class EditprofileController extends GetxController with StateMixin {
       "email": email.text,
       "phone_no_office": officephone.text,
       "phone_no_residence": rephone.text,
-      "guarantor_name": g_firstname.text,
+      "guarantor_name": g_firstname.text.isEmpty ? "" : g_firstname.text,
       "guarantor_woreda": g_woreda.text,
-      "guarantor_subcity": g_subcityid,
+      "guarantor_subcity":
+          getLocationController.listlocationvalue_gu.value == null
+              ? ""
+              : getLocationController.listlocationvalue_gu.value!.name,
       "guarantor_phone": g_phone.text,
       "guarantor_phone_office": g_office_phone.text,
       "guarantor_phone_residence": g_office_phone.text,
       "employer_name": e_firstname.text,
       "employer_position": e_postion.text,
       "employer_woreda": e_woreda.text,
-      "employer_city": e_subcityid,
-      "employment_subject": e_subject,
+      "employer_city": getLocationController.listlocationvalue_e.value == null
+          ? ""
+          : getLocationController.listlocationvalue_e.value!.name,
+      "employment_subject": subjects.listSubjectvalue_e.value == null
+          ? ""
+          : subjects.listSubjectvalue_e.value!.title,
+      "employment_category_id":
+          getCatgroryContoller.listlistCategoryvalue.value == null
+              ? ""
+              : getCatgroryContoller.listlistCategoryvalue.value!.id,
       "about": About.text,
-      "subject_id": "1",
-      "qualification_id": "1",
-      "address_id": "1",
-      "subcity": subcityid,
+      "subject_id": subjects.listSubjectvalue_e.value == null
+          ? " "
+          : subjects.listSubjectvalue_e.value!.id,
+      "qualification_id":
+          getqulificationcontroller.listQulificationvalue.value == null
+              ? ""
+              : getqulificationcontroller.listQulificationvalue.value!.id,
+      "address_id":
+          getLocationController.listlocationvalue_location.value == null
+              ? ""
+              : getLocationController.listlocationvalue_location.value!.id,
+      "subcity": getLocationController.listlocationvalue_e.value == null
+          ? ""
+          : getLocationController.listlocationvalue_e.value!.name,
       "woreda": woreda.toString(),
     };
     inforesponse = await RemoteServices.editPersonalInfo(data);

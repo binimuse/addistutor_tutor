@@ -5,10 +5,14 @@ import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:get/get.dart';
 
 class GetLocationController extends GetxController with StateMixin {
-  var listlocation = <GetLocation>[].obs;
+  RxList<GetLocation> listlocation = List<GetLocation>.of([]).obs;
+  final listlocationvalue = Rxn<GetLocation>();
+  final listlocationvalue_gu = Rxn<GetLocation>();
+  final listlocationvalue_e = Rxn<GetLocation>();
+  final listlocationvalue_location = Rxn<GetLocation>();
   var isfetchedlocation = false.obs;
   var sent = false.obs;
-  GetLocation? getLocation;
+
   GetLocation? subcity;
   GetLocation? g_subcity;
   GetLocation? e_subcity;
@@ -21,6 +25,24 @@ class GetLocationController extends GetxController with StateMixin {
         //print(list.length.toString());
         isfetchedlocation(true);
       }
-    } catch (e) {}
+    } catch (e) {
+      print("===>>>>>>Printing erroro ");
+    }
+  }
+
+  void setLocationStatus(GetLocation zonemodel) {
+    listlocationvalue.value = zonemodel;
+  }
+
+  void setLocationStatusgu(GetLocation zonemodel) {
+    listlocationvalue_gu.value = zonemodel;
+  }
+
+  void setLocationStatuse(GetLocation zonemodel) {
+    listlocationvalue_e.value = zonemodel;
+  }
+
+  void setLocationStatuslocation(GetLocation zonemodel) {
+    listlocationvalue_location.value = zonemodel;
   }
 }

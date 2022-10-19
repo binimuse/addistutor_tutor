@@ -5,7 +5,9 @@ import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:get/get.dart';
 
 class GetSubect extends GetxController with StateMixin {
-  var listlocation = <Subjects>[].obs;
+  RxList<Subjects> listSubject = List<Subjects>.of([]).obs;
+  final listSubjectvalue = Rxn<Subjects>();
+  final listSubjectvalue_e = Rxn<Subjects>();
   var isfetchedlocation = false.obs;
   var sent = false.obs;
   Subjects? subject;
@@ -19,13 +21,17 @@ class GetSubect extends GetxController with StateMixin {
 
   void fetchLocation(var id) async {
     //print(id);
-    listlocation.value = await RemoteServices.getsubject(id);
+    listSubject.value = await RemoteServices.getsubject(id);
 
-    if (listlocation.isNotEmpty) {
+    if (listSubject.isNotEmpty) {
       //  print(listlocation.length.toString());
       update();
       isfetchedlocation(true);
     }
+  }
+
+  void setSubectStatus(Subjects zonemodel) {
+    listSubjectvalue.value = zonemodel;
   }
 
   void fetchLocation2() async {
@@ -39,5 +45,9 @@ class GetSubect extends GetxController with StateMixin {
       }
     } catch (e) {}
     //print(id);
+  }
+
+  void setSubectStatus_e(Subjects zonemodel) {
+    listSubjectvalue_e.value = zonemodel;
   }
 }

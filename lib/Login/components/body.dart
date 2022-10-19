@@ -106,43 +106,26 @@ class _LoginScreenState extends State<Body> {
   _getlocation() async {
     getLocationController.fetchLocation();
 
-    location = getLocationController.listlocation.value;
-    if (location != null && location.isNotEmpty) {
-      setState(() {
-        getLocationController.getLocation = location[0];
-        getLocationController.subcity = location[0];
-        getLocationController.g_subcity = location[0];
-        getLocationController.e_subcity = location[0];
-      });
-    }
+    // location = getLocationController.listlocation.value;
+    // if (location != null && location.isNotEmpty) {
+    //   setState(() {
+    //     getLocationController.getLocation = location[0];
+    //     getLocationController.subcity = location[0];
+    //     getLocationController.g_subcity = location[0];
+    //     getLocationController.e_subcity = location[0];
+    //   });
+    // }
   }
 
   List<GetLevel> level = [];
   _getlevel() async {
     getLevelContoller.fetchLocation();
-
-    level = getLevelContoller.listlocation.value;
-    if (location != null && location.isNotEmpty) {
-      setState(() {
-        try {
-          getLevelContoller.level = level[0];
-        } catch (e) {}
-      });
-    }
   }
 
   List<Subjects> sub = [];
   List<Subjects2> sub2 = [];
   _getsub() async {
     getSubect.fetchLocation(editprofileController.lid);
-
-    sub = getSubect.listlocation.value;
-
-    if (sub != null && sub.isNotEmpty) {
-      setState(() {
-        getSubect.subject = sub[0];
-      });
-    }
   }
 
   _getsub2() async {
@@ -159,13 +142,6 @@ class _LoginScreenState extends State<Body> {
   List<GetQulification> qualification = [];
   _getqulification() async {
     getqulificationcontroller.fetchLocation();
-
-    qualification = getqulificationcontroller.listlocation.value;
-    if (qualification != null && qualification.isNotEmpty) {
-      setState(() {
-        getqulificationcontroller.qualification = qualification[0];
-      });
-    }
   }
 
   bool showPassword1 = true;

@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:addistutor_tutor/Login/login_screen.dart';
 import 'package:addistutor_tutor/constants.dart';
+import 'package:addistutor_tutor/controller/getlocationcontroller.dart';
 import 'package:addistutor_tutor/remote_services/service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,7 +23,7 @@ class Updateprofilecontoller extends GetxController with StateMixin {
   // ignore: non_constant_identifier_names
   late var macthgender = "".obs;
   late var since = "".obs;
-
+  GetLocationController getLocationController = Get.find();
 //guarantor
 
   late TextEditingController phone;
@@ -71,7 +72,7 @@ class Updateprofilecontoller extends GetxController with StateMixin {
       try {
         //  openAndCloseLoadingDialog();
         fetched = await RemoteServices.fetchpf(id);
-        //   print(fetched);
+
         if (fetched != "") {
           isFetched.value = true;
           id = fetched.id;
@@ -127,7 +128,7 @@ class Updateprofilecontoller extends GetxController with StateMixin {
         "phone_no": phone.text,
         "phone_no_office": officephone.text,
         "phone_no_residence": rephone.text,
-        "subcity": subcityid.toString(),
+        "subcity": getLocationController.listlocationvalue.value!.name,
         "woreda": woreda.text,
         "about": About.text,
       };
@@ -144,13 +145,14 @@ class Updateprofilecontoller extends GetxController with StateMixin {
         ifupdatd(false);
       }
     } else {
-      print(woreda.text);
+      print("am here");
+      print(getLocationController.listlocationvalue.value!.name);
 
       var data = {
         "phone_no": phone.text,
         "phone_no_office": officephone.text,
         "phone_no_residence": rephone.text,
-        "subcity": subcityid.toString(),
+        "subcity": getLocationController.listlocationvalue.value!.name,
         "woreda": woreda.text,
         "about": About.text,
       };
@@ -160,6 +162,7 @@ class Updateprofilecontoller extends GetxController with StateMixin {
         isLoading(false);
         update();
       } else {
+        print(inforesponse.toString());
         closeDialog(false, inforesponse, context);
       }
     }

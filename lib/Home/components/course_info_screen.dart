@@ -220,6 +220,9 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                               ],
                             ),
                           ),
+                          SizedBox(
+                            height: 10,
+                          ),
                           widget.requestedBooking!.is_active == "1"
                               ? Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -253,6 +256,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                   child: Text(
                                     widget.requestedBooking!.student.about,
                                     textAlign: TextAlign.left,
+                                    maxLines: 10,
                                     style: const TextStyle(
                                       fontWeight: FontWeight.w200,
                                       fontSize: 15,
