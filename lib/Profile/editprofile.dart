@@ -37,8 +37,7 @@ class EditPage extends StatefulWidget {
 class _EditPageState extends State<EditPage> {
   final EditprofileController editprofileController =
       Get.put(EditprofileController());
-
-  final GetmyAccount getmyAccount = Get.find();
+  final GetmyAccount getmyAccount = Get.put(GetmyAccount());
 
   final GetLevelContoller getLevelContoller = Get.find();
   final GetSubect getSubect = Get.find();
@@ -61,7 +60,7 @@ class _EditPageState extends State<EditPage> {
   late var elocationname = "";
   late var plocationname = "";
   List<XFile>? _imageFileList;
-
+  var showSubject = true.obs;
   set _imageFile(XFile? value) {
     _imageFileList = value == null ? null : [value];
   }
@@ -204,1190 +203,1201 @@ class _EditPageState extends State<EditPage> {
               key: editprofileController.EditProf,
               child: Container(
                 padding: const EdgeInsets.only(left: 16, top: 25, right: 16),
-                child: GestureDetector(
-                  onTap: () {
-                    FocusScopeNode currentScope = FocusScope.of(context);
-                    if (!currentScope.hasPrimaryFocus &&
-                        currentScope.hasFocus) {
-                      FocusManager.instance.primaryFocus!.unfocus();
-                    }
-                  },
-                  child: ListView(
-                    children: [
-                      const SizedBox(
-                        height: 15,
-                      ),
+                child: ListView(
+                  children: [
+                    const SizedBox(
+                      height: 15,
+                    ),
 
-                      const Center(
-                        child: Text(
-                          "TUTOR INFORMATION",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 22,
-                            fontFamily: 'WorkSans',
-                            letterSpacing: 0.27,
-                            color: kPrimaryColor,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: editprofileController.firstname,
-                        decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.only(bottom: 3),
-                          labelText: "Name",
-                          labelStyle: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w700,
-                            color: kPrimaryColor,
-                            fontFamily: 'WorkSans',
-                          ),
-                          focusColor: kPrimaryColor,
-                          fillColor: kPrimaryColor,
-                          hintText: "Your name",
-                          hintStyle: TextStyle(
-                              color: DesignCourseAppTheme.nearlyBlack,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w300),
-                        ),
-                        validator: (value) {
-                          return editprofileController.validateName(value!);
-                        },
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: editprofileController.middlename,
-                        decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.only(bottom: 3),
-                          labelText: "Father's name",
-                          labelStyle: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w700,
-                            color: kPrimaryColor,
-                            fontFamily: 'WorkSans',
-                          ),
-                          focusColor: kPrimaryColor,
-                          fillColor: kPrimaryColor,
-                          hintText: "Your father's name",
-                          hintStyle: TextStyle(
-                              color: DesignCourseAppTheme.nearlyBlack,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w300),
-                        ),
-                        validator: (value) {
-                          return editprofileController.validateName(value!);
-                        },
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: editprofileController.lastname,
-                        decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.only(bottom: 3),
-                          labelText: "Grandfather's name",
-                          labelStyle: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w700,
-                            color: kPrimaryColor,
-                            fontFamily: 'WorkSans',
-                          ),
-                          focusColor: kPrimaryColor,
-                          fillColor: kPrimaryColor,
-                          hintText: "Grandfather's name",
-                          hintStyle: TextStyle(
-                              color: DesignCourseAppTheme.nearlyBlack,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w300),
-                        ),
-                        validator: (value) {
-                          return editprofileController.validateName(value!);
-                        },
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        'Gender',
+                    const Center(
+                      child: Text(
+                        "TUTOR INFORMATION",
+                        textAlign: TextAlign.left,
                         style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 22,
+                          fontFamily: 'WorkSans',
+                          letterSpacing: 0.27,
+                          color: kPrimaryColor,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: editprofileController.firstname,
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.only(bottom: 3),
+                        labelText: "Name",
+                        labelStyle: TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.w700,
                           color: kPrimaryColor,
                           fontFamily: 'WorkSans',
                         ),
-                      ),
-                      DropdownButtonFormField<String>(
-                        value: editprofileController.macthgender.value,
-                        validator: (value) =>
-                            value == null ? 'field required' : null,
-                        isExpanded: true,
-                        style: const TextStyle(
-                            color: Colors.black,
+                        focusColor: kPrimaryColor,
+                        fillColor: kPrimaryColor,
+                        hintText: "Your name",
+                        hintStyle: TextStyle(
+                            color: DesignCourseAppTheme.nearlyBlack,
                             fontSize: 16,
-                            fontWeight: FontWeight.w700),
-                        items: <String>[
-                          '',
-                          'Male',
-                          'Female',
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
-                              style: const TextStyle(
-                                  color: DesignCourseAppTheme.nearlyBlack,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w300),
-                            ),
-                          );
-                        }).toList(),
-                        onChanged: (value) {
-                          setState(() {
-                            FocusScope.of(context)
-                                .requestFocus(new FocusNode());
-                            editprofileController.macthgender.value = value!;
-                          });
-                        },
+                            fontWeight: FontWeight.w300),
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        'Select date Of birth',
-                        style: TextStyle(
+                      validator: (value) {
+                        return editprofileController.validateName(value!);
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: editprofileController.middlename,
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.only(bottom: 3),
+                        labelText: "Father's name",
+                        labelStyle: TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.w700,
                           color: kPrimaryColor,
                           fontFamily: 'WorkSans',
                         ),
+                        focusColor: kPrimaryColor,
+                        fillColor: kPrimaryColor,
+                        hintText: "Your father's name",
+                        hintStyle: TextStyle(
+                            color: DesignCourseAppTheme.nearlyBlack,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w300),
                       ),
-                      OutlineButton(
-                        padding: const EdgeInsets.symmetric(horizontal: 50),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                        onPressed: () {
-                          _selectDate(context);
-                        },
-                        child: Text(editprofileController.date.toString(),
+                      validator: (value) {
+                        return editprofileController.validateName(value!);
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: editprofileController.lastname,
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.only(bottom: 3),
+                        labelText: "Grandfather's name",
+                        labelStyle: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w700,
+                          color: kPrimaryColor,
+                          fontFamily: 'WorkSans',
+                        ),
+                        focusColor: kPrimaryColor,
+                        fillColor: kPrimaryColor,
+                        hintText: "Grandfather's name",
+                        hintStyle: TextStyle(
+                            color: DesignCourseAppTheme.nearlyBlack,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w300),
+                      ),
+                      validator: (value) {
+                        return editprofileController.validateName(value!);
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      'Gender',
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700,
+                        color: kPrimaryColor,
+                        fontFamily: 'WorkSans',
+                      ),
+                    ),
+                    DropdownButtonFormField<String>(
+                      value: editprofileController.macthgender.value,
+                      validator: (value) =>
+                          value == null ? 'field required' : null,
+                      isExpanded: true,
+                      style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700),
+                      items: <String>[
+                        '',
+                        'Male',
+                        'Female',
+                      ].map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(
+                            value,
                             style: const TextStyle(
-                                fontSize: 14,
-                                letterSpacing: 2.2,
-                                color: Colors.black)),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        'Teaching since',
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w700,
-                          color: kPrimaryColor,
-                          fontFamily: 'WorkSans',
-                        ),
-                      ),
-                      DropdownButton<String>(
-                        value: editprofileController.since.value,
-                        isExpanded: true,
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700),
-                        items: <String>[
-                          '',
-                          '2022',
-                          '2021',
-                          '2020',
-                          '2019',
-                          '2018',
-                          '2017',
-                          '2016',
-                          '2015',
-                          '2014',
-                          '2013',
-                          '2012',
-                          '2011',
-                          '2010',
-                          '2009',
-                          '2008',
-                          '2007',
-                          '2006',
-                          '2005',
-                          '2004',
-                          '2003',
-                          '2002',
-                          '2001',
-                          '2000',
-                          '1999',
-                          '1998',
-                          '1997',
-                          '1996',
-                          '1995',
-                          '1994',
-                          '1993',
-                          '1992',
-                          '1991',
-                          '1990',
-                          '1989',
-                          '1988',
-                          '1987',
-                          '1986',
-                          '1985',
-                          '1984',
-                          '1983',
-                          '1982',
-                          '1981',
-                          '1980',
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
-                              style: const TextStyle(
-                                  color: DesignCourseAppTheme.nearlyBlack,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w300),
-                            ),
-                          );
-                        }).toList(),
-                        onChanged: (value) {
-                          setState(() {
-                            FocusScope.of(context)
-                                .requestFocus(new FocusNode());
-                            editprofileController.since.value = value!;
-                          });
-                        },
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        'Highest qualification',
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w700,
-                          color: kPrimaryColor,
-                          fontFamily: 'WorkSans',
-                        ),
-                      ),
-
-                      FormDropDownWidgetQul(
-                        hintText: "Select qualification".trArgs(),
-                        options:
-                            getqulificationcontroller.listQulification.value,
-                        value: getqulificationcontroller
-                            .listQulificationvalue.value,
-                        onChanged: (GetQulification subcitymodel) {
-                          getqulificationcontroller
-                              .setLevelStatus(subcitymodel);
-                        },
-                      ),
-                      // DropdownButton<GetQulification>(
-                      //   hint: Text(
-                      //     getqulificationcontroller.listlocation.toString(),
-                      //     style: const TextStyle(
-                      //         color: Colors.black,
-                      //         fontSize: 16,
-                      //         fontWeight: FontWeight.w400),
-                      //   ),
-                      //   isExpanded: true,
-                      //   style: const TextStyle(
-                      //       color: Colors.black,
-                      //       fontSize: 16,
-                      //       fontWeight: FontWeight.w700),
-                      //   items: qualification
-                      //       .map((e) => DropdownMenuItem(
-                      //             child: Text(
-                      //               e.title,
-                      //               textAlign: TextAlign.left,
-                      //               style: const TextStyle(
-                      //                   color:
-                      //                       DesignCourseAppTheme.nearlyBlack,
-                      //                   fontSize: 16,
-                      //                   fontWeight: FontWeight.w300),
-                      //             ),
-                      //             value: e,
-                      //           ))
-                      //       .toList(),
-                      //   onChanged: (value) {
-                      //     setState(() {
-                      //       FocusScope.of(context)
-                      //           .requestFocus(new FocusNode());
-                      //       getqulificationcontroller.qualification = value!;
-
-                      //       editprofileController.qualifications =
-                      //           value.id.toString();
-                      //     });
-
-                      //     // pop current page
-                      //   },
-                      //   value: getqulificationcontroller.qualification,
-                      // ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Center(
-                        child: Text(
-                          "CONTACT INFORMATION",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 22,
-                            fontFamily: 'WorkSans',
-                            letterSpacing: 0.27,
-                            color: kPrimaryColor,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: editprofileController.email,
-                        readOnly: true,
-                        decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.only(bottom: 3),
-                            labelText: "Email",
-                            labelStyle: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700,
-                              color: kPrimaryColor,
-                              fontFamily: 'WorkSans',
-                            ),
-                            focusColor: kPrimaryColor,
-                            fillColor: kPrimaryColor,
-                            hintText: "evan@gmail.com",
-                            hintStyle: TextStyle(
-                                color: DesignCourseAppTheme.nearlyBlack,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300)),
-                        validator: (value) {
-                          return editprofileController.validateEmail(value!);
-                        },
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: editprofileController.phone,
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.only(bottom: 3),
-                            labelText: "Phone",
-                            labelStyle: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700,
-                              color: kPrimaryColor,
-                              fontFamily: 'WorkSans',
-                            ),
-                            focusColor: kPrimaryColor,
-                            fillColor: kPrimaryColor,
-                            hintText: "0911111111",
-                            hintStyle: TextStyle(
-                                color: DesignCourseAppTheme.nearlyBlack,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300)),
-                        validator: (value) {
-                          return editprofileController.validateName(value!);
-                        },
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: editprofileController.officephone,
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.only(bottom: 3),
-                            labelText: "Office phone number",
-                            labelStyle: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700,
-                              color: kPrimaryColor,
-                              fontFamily: 'WorkSans',
-                            ),
-                            focusColor: kPrimaryColor,
-                            fillColor: kPrimaryColor,
-                            hintText: "0911111111",
-                            hintStyle: TextStyle(
-                                color: DesignCourseAppTheme.nearlyBlack,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300)),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: editprofileController.rephone,
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.only(bottom: 3),
-                            labelText: "Residence Phone numbe",
-                            labelStyle: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700,
-                              color: kPrimaryColor,
-                              fontFamily: 'WorkSans',
-                            ),
-                            focusColor: kPrimaryColor,
-                            fillColor: kPrimaryColor,
-                            hintText: "0911111111",
-                            hintStyle: TextStyle(
-                                color: DesignCourseAppTheme.nearlyBlack,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300)),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        'Subcity',
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w700,
-                          color: kPrimaryColor,
-                          fontFamily: 'WorkSans',
-                        ),
-                      ),
-                      FormDropDownWidget(
-                        hintText: "Select Subcity".trArgs(),
-                        options: getLocationController.listlocation.value,
-                        value: getLocationController.listlocationvalue.value,
-                        onChanged: (GetLocation subcitymodel) {
-                          getLocationController.setLocationStatus(subcitymodel);
-                        },
-                      ),
-                      // Row(children: [
-                      //   Flexible(
-                      //     child: DropdownButton<GetLocation>(
-                      //       hint: Text(
-                      //         getLocationController.listlocation.toString(),
-                      //         style: const TextStyle(
-                      //             color: Colors.black,
-                      //             fontSize: 16,
-                      //             fontWeight: FontWeight.w400),
-                      //       ),
-                      //       isExpanded: true,
-                      //       style: const TextStyle(
-                      //           color: Colors.black,
-                      //           fontSize: 16,
-                      //           fontWeight: FontWeight.w700),
-                      //       items: location
-                      //           .map((e) => DropdownMenuItem(
-                      //                 child: Text(e.name,
-                      //                     textAlign: TextAlign.left,
-                      //                     style: const TextStyle(
-                      //                         color: DesignCourseAppTheme
-                      //                             .nearlyBlack,
-                      //                         fontSize: 16,
-                      //                         fontWeight: FontWeight.w300)),
-                      //                 value: e,
-                      //               ))
-                      //           .toList(),
-                      //       onChanged: (value) {
-                      //         setState(() {
-                      //           FocusScope.of(context)
-                      //               .requestFocus(new FocusNode());
-                      //           getLocationController.subcity = value!;
-                      //           editprofileController.subcityid =
-                      //               value.name.toString();
-
-                      //           if (getLocationController
-                      //                   .subcity!.locaion.length !=
-                      //               0) {
-                      //             subc = true;
-                      //           } else {
-                      //             subc = false;
-                      //           }
-                      //         });
-
-                      //         // pop current page
-                      //       },
-                      //       value: getLocationController.subcity,
-                      //     ),
-                      //   ),
-                      //   Text(
-                      //     locationname,
-                      //     style: const TextStyle(color: Colors.black38),
-                      //   ),
-                      // ]),
-                      // subc
-                      //     ? SingleChildScrollView(
-                      //         scrollDirection: Axis.horizontal,
-                      //         child: SizedBox(
-                      //           height: 70,
-                      //           child: ListView.builder(
-                      //               shrinkWrap: true,
-                      //               scrollDirection: Axis.horizontal,
-                      //               itemBuilder: (_, index) {
-                      //                 return Column(
-                      //                   children: [
-                      //                     getTimeBoxUIday(
-                      //                         getLocationController.subcity!
-                      //                             .locaion[index].name,
-                      //                         getLocationController
-                      //                             .getLocation!
-                      //                             .locaion[index]
-                      //                             .name),
-                      //                   ],
-                      //                 );
-                      //               },
-                      //               itemCount: getLocationController
-                      //                   .subcity!.locaion.length),
-                      //         ),
-                      //       )
-                      //     : Container(),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: editprofileController.woreda,
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.only(bottom: 3),
-                            labelText: "Woreda",
-                            labelStyle: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700,
-                              color: kPrimaryColor,
-                              fontFamily: 'WorkSans',
-                            ),
-                            focusColor: kPrimaryColor,
-                            fillColor: kPrimaryColor,
-                            hintText: "Woreda",
-                            hintStyle: TextStyle(
-                                color: DesignCourseAppTheme.nearlyBlack,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300)),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Center(
-                        child: Text(
-                          "GUARANTOR'S CONTACT INFORMATION",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 22,
-                            fontFamily: 'WorkSans',
-                            letterSpacing: 0.27,
-                            color: kPrimaryColor,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: editprofileController.g_firstname,
-                        decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.only(bottom: 3),
-                            labelText: "Guarantor's first name",
-                            focusColor: kPrimaryColor,
-                            labelStyle: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700,
-                              color: kPrimaryColor,
-                              fontFamily: 'WorkSans',
-                            ),
-                            fillColor: kPrimaryColor,
-                            hintText: "Insert guarantor's first name",
-                            hintStyle: TextStyle(
-                                color: DesignCourseAppTheme.nearlyBlack,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300)),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: editprofileController.g_lastname,
-                        decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.only(bottom: 3),
-                            labelText: "Guarantor's father's name",
-                            focusColor: kPrimaryColor,
-                            labelStyle: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700,
-                              color: kPrimaryColor,
-                              fontFamily: 'WorkSans',
-                            ),
-                            fillColor: kPrimaryColor,
-                            hintText: "Insert guarantor's father's name",
-                            hintStyle: TextStyle(
-                                color: DesignCourseAppTheme.nearlyBlack,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300)),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: editprofileController.g_woreda,
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.only(bottom: 3),
-                            labelText: "Guarantor's woreda",
-                            focusColor: kPrimaryColor,
-                            labelStyle: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700,
-                              color: kPrimaryColor,
-                              fontFamily: 'WorkSans',
-                            ),
-                            fillColor: kPrimaryColor,
-                            hintText: "Insert guarantor's woreda",
-                            hintStyle: TextStyle(
-                                color: DesignCourseAppTheme.nearlyBlack,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300)),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        "Guarantor's subcity",
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w700,
-                          color: kPrimaryColor,
-                          fontFamily: 'WorkSans',
-                        ),
-                      ),
-
-                      FormDropDownWidget(
-                        hintText: "Select Subcity".trArgs(),
-                        options: getLocationController.listlocation.value,
-                        value: getLocationController.listlocationvalue_gu.value,
-                        onChanged: (GetLocation subcitymodel) {
-                          getLocationController
-                              .setLocationStatusgu(subcitymodel);
-                        },
-                      ),
-                      // Row(children: [
-                      //   Flexible(
-                      //     child: DropdownButton<GetLocation>(
-                      //       hint: Text(
-                      //         getLocationController.listlocation.toString(),
-                      //         style: const TextStyle(
-                      //             color: Colors.black,
-                      //             fontSize: 16,
-                      //             fontWeight: FontWeight.w400),
-                      //       ),
-                      //       isExpanded: true,
-                      //       style: const TextStyle(
-                      //           color: Colors.black,
-                      //           fontSize: 16,
-                      //           fontWeight: FontWeight.w700),
-                      //       items: location
-                      //           .map((e) => DropdownMenuItem(
-                      //                 child: Text(e.name,
-                      //                     textAlign: TextAlign.left,
-                      //                     style: const TextStyle(
-                      //                         color: DesignCourseAppTheme
-                      //                             .nearlyBlack,
-                      //                         fontSize: 16,
-                      //                         fontWeight: FontWeight.w300)),
-                      //                 value: e,
-                      //               ))
-                      //           .toList(),
-                      //       onChanged: (value) {
-                      //         setState(() {
-                      //           FocusScope.of(context)
-                      //               .requestFocus(new FocusNode());
-                      //           getLocationController.g_subcity = value!;
-                      //           editprofileController.g_subcityid =
-                      //               value.name.toString();
-
-                      //           if (getLocationController
-                      //                   .g_subcity!.locaion.length !=
-                      //               0) {
-                      //             g_subc = true;
-                      //           } else {
-                      //             g_subc = false;
-                      //           }
-                      //         });
-
-                      //         // pop current page
-                      //       },
-                      //       value: getLocationController.g_subcity,
-                      //     ),
-                      //   ),
-                      //   Text(
-                      //     glocationname,
-                      //     style: const TextStyle(color: Colors.black38),
-                      //   ),
-                      // ]),
-
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: editprofileController.g_phone,
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.only(bottom: 3),
-                            labelText: "Guarantor's mobile number",
-                            focusColor: kPrimaryColor,
-                            labelStyle: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700,
-                              color: kPrimaryColor,
-                              fontFamily: 'WorkSans',
-                            ),
-                            fillColor: kPrimaryColor,
-                            hintText: "Insert guarantor's mobile number",
-                            hintStyle: TextStyle(
-                                color: DesignCourseAppTheme.nearlyBlack,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300)),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: editprofileController.g_office_phone,
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.only(bottom: 3),
-                            labelText: "Guarantor's office phone number",
-                            focusColor: kPrimaryColor,
-                            labelStyle: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700,
-                              color: kPrimaryColor,
-                              fontFamily: 'WorkSans',
-                            ),
-                            fillColor: kPrimaryColor,
-                            hintText: "Insert guarantor's office phone number",
-                            hintStyle: TextStyle(
-                                color: DesignCourseAppTheme.nearlyBlack,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300)),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Center(
-                        child: Text(
-                          "EMPLOYMENT INFORMATION",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 22,
-                            fontFamily: 'WorkSans',
-                            letterSpacing: 0.27,
-                            color: kPrimaryColor,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        'Employment Category',
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w700,
-                          color: kPrimaryColor,
-                          fontFamily: 'WorkSans',
-                        ),
-                      ),
-                      FormDropDownWidgetCat(
-                        hintText: "Select Category".trArgs(),
-                        options: getCatgrory.listCategory.value,
-                        value: getCatgrory.listlistCategoryvalue.value,
-                        onChanged: (GetCategory subcitymodel) {
-                          getCatgrory.setSubectStatus(subcitymodel);
-                        },
-                      ),
-                      TextFormField(
-                        controller: editprofileController.e_firstname,
-                        decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.only(bottom: 3),
-                            labelText: "Employer name",
-                            focusColor: kPrimaryColor,
-                            labelStyle: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700,
-                              color: kPrimaryColor,
-                              fontFamily: 'WorkSans',
-                            ),
-                            fillColor: kPrimaryColor,
-                            hintText: "Insert  employer name",
-                            hintStyle: TextStyle(
-                                color: DesignCourseAppTheme.nearlyBlack,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300)),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: editprofileController.e_postion,
-                        decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.only(bottom: 3),
-                            labelText: "Employment position",
-                            focusColor: kPrimaryColor,
-                            labelStyle: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700,
-                              color: kPrimaryColor,
-                              fontFamily: 'WorkSans',
-                            ),
-                            fillColor: kPrimaryColor,
-                            hintText: "Employment position",
-                            hintStyle: TextStyle(
-                                color: DesignCourseAppTheme.nearlyBlack,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300)),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        'Employer subcity',
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w700,
-                          color: kPrimaryColor,
-                          fontFamily: 'WorkSans',
-                        ),
-                      ),
-                      FormDropDownWidget(
-                        hintText: "Select Subcity".trArgs(),
-                        options: getLocationController.listlocation.value,
-                        value: getLocationController.listlocationvalue_e.value,
-                        onChanged: (GetLocation subcitymodel) {
-                          getLocationController
-                              .setLocationStatuse(subcitymodel);
-                        },
-                      ),
-                      // Row(children: [
-                      //   Flexible(
-                      //     child: DropdownButton<GetLocation>(
-                      //       hint: Text(
-                      //         getLocationController.listlocation.toString(),
-                      //         style: const TextStyle(
-                      //             color: Colors.black,
-                      //             fontSize: 16,
-                      //             fontWeight: FontWeight.w400),
-                      //       ),
-                      //       isExpanded: true,
-                      //       style: const TextStyle(
-                      //           color: Colors.black,
-                      //           fontSize: 16,
-                      //           fontWeight: FontWeight.w700),
-                      //       items: location
-                      //           .map((e) => DropdownMenuItem(
-                      //                 child: Text(e.name,
-                      //                     textAlign: TextAlign.left,
-                      //                     style: const TextStyle(
-                      //                         color: DesignCourseAppTheme
-                      //                             .nearlyBlack,
-                      //                         fontSize: 16,
-                      //                         fontWeight: FontWeight.w300)),
-                      //                 value: e,
-                      //               ))
-                      //           .toList(),
-                      //       onChanged: (value) {
-                      //         setState(() {
-                      //           FocusScope.of(context)
-                      //               .requestFocus(new FocusNode());
-                      //           getLocationController.e_subcity = value!;
-                      //           editprofileController.e_subcityid =
-                      //               value.name.toString();
-
-                      //           if (getLocationController
-                      //                   .e_subcity!.locaion.length !=
-                      //               0) {
-                      //             e_showsubject = true;
-                      //           } else {
-                      //             e_showsubject = false;
-                      //           }
-                      //         });
-
-                      //         // pop current page
-                      //       },
-                      //       value: getLocationController.e_subcity,
-                      //     ),
-                      //   ),
-                      //   Text(
-                      //     elocationname,
-                      //     style: const TextStyle(color: Colors.black38),
-                      //   ),
-                      // ]),
-
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: editprofileController.e_woreda,
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.only(bottom: 3),
-                            labelText: "Employer woreda",
-                            focusColor: kPrimaryColor,
-                            labelStyle: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700,
-                              color: kPrimaryColor,
-                              fontFamily: 'WorkSans',
-                            ),
-                            fillColor: kPrimaryColor,
-                            hintText: "Insert employer woreda",
-                            hintStyle: TextStyle(
-                                color: DesignCourseAppTheme.nearlyBlack,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300)),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        'Subject you teach',
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w700,
-                          color: kPrimaryColor,
-                          fontFamily: 'WorkSans',
-                        ),
-                      ),
-
-                      FormDropDownWidgetSub(
-                        hintText: "Select Subject".trArgs(),
-                        options: getSubect.listSubject.value,
-                        value: getSubect.listSubjectvalue_e.value,
-                        onChanged: (Subjects subcitymodel) {
-                          getSubect.setSubectStatus_e(subcitymodel);
-                        },
-                      ),
-
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Center(
-                        child: Text(
-                          "ENGAGEMENT PREFERENCE",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 22,
-                            fontFamily: 'WorkSans',
-                            letterSpacing: 0.27,
-                            color: kPrimaryColor,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        'Preferred level for tutoring',
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w700,
-                          color: kPrimaryColor,
-                          fontFamily: 'WorkSans',
-                        ),
-                      ),
-                      FormDropDownWidgetLevel(
-                        hintText: "Preferred level for tutoring".trArgs(),
-                        options: getLevelContoller.listlevel.value,
-                        value: getLevelContoller.listlevelvalue.value,
-                        onChanged: (GetLevel subcitymodel) {
-                          getLevelContoller.setLevelStatus(subcitymodel);
-                        },
-                      ),
-                      // DropdownButton<GetLevel>(
-                      //   hint: Text(
-                      //     getLevelContoller.listlevel.toString(),
-                      //     style: const TextStyle(
-                      //         color: Colors.black,
-                      //         fontSize: 16,
-                      //         fontWeight: FontWeight.w400),
-                      //   ),
-                      //   isExpanded: true,
-                      //   style: const TextStyle(
-                      //       color: Colors.black,
-                      //       fontSize: 16,
-                      //       fontWeight: FontWeight.w700),
-                      //   items: level
-                      //       .map((e) => DropdownMenuItem(
-                      //             child: Text(e.title,
-                      //                 textAlign: TextAlign.left,
-                      //                 style: const TextStyle(
-                      //                     color: DesignCourseAppTheme
-                      //                         .nearlyBlack,
-                      //                     fontSize: 16,
-                      //                     fontWeight: FontWeight.w300)),
-                      //             value: e,
-                      //           ))
-                      //       .toList(),
-                      //   onChanged: (value) {
-                      //     setState(() {
-                      //       FocusScope.of(context)
-                      //           .requestFocus( FocusNode());
-                      //       getLevelContoller.level = value!;
-                      //       editprofileController.lid = value.id.toString();
-                      //       lid = value.id.toString();
-                      //     });
-
-                      //     setState(() {
-                      //       RemoteServices.getsubject(
-                      //           editprofileController.lid);
-                      //       _onRefresh();
-                      //       loadData();
-                      //       _getsub();
-                      //     });
-                      //   },
-                      //   value: getLevelContoller.level,
-                      // ),
-
-                      const SizedBox(
-                        height: 20,
-                      ),
-
-                      // SingleChildScrollView(
-                      //   scrollDirection: Axis.horizontal,
-                      //   child: SizedBox(
-                      //     height: 70,
-                      //     child: ListView.builder(
-                      //         shrinkWrap: true,
-                      //         scrollDirection: Axis.horizontal,
-                      //         itemBuilder: (_, index) {
-                      //           return Column(
-                      //             children: [
-                      //               getTimeBoxUIdaysu(
-                      //                 getSubect.subject!.title,
-                      //               ),
-                      //             ],
-                      //           );
-                      //         },
-                      //         itemCount: 2),
-                      //   ),
-                      // ),
-
-                      const Text(
-                        'Field of study',
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w700,
-                          color: kPrimaryColor,
-                          fontFamily: 'WorkSans',
-                        ),
-                      ),
-                      FormDropDownWidgetSub(
-                        hintText: "Select Subject".trArgs(),
-                        options: getSubect.listSubject.value,
-                        value: getSubect.listSubjectvalue.value,
-                        onChanged: (Subjects subcitymodel) {
-                          getSubect.setSubectStatus(subcitymodel);
-                        },
-                      ),
-
-                      // subjectViewUI(),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        'Preferred tutoring location',
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w700,
-                          color: kPrimaryColor,
-                          fontFamily: 'WorkSans',
-                        ),
-                      ),
-
-                      FormDropDownWidget(
-                        hintText: "Select location".trArgs(),
-                        options: getLocationController.listlocation.value,
-                        value: getLocationController
-                            .listlocationvalue_location.value,
-                        onChanged: (GetLocation subcitymodel) {
-                          getLocationController
-                              .setLocationStatuslocation(subcitymodel);
-
-                          setState(() {
-                            FocusScope.of(context)
-                                .requestFocus(new FocusNode());
-
-                            if (getLocationController.listlocation.length !=
-                                0) {
-                              showsubject = true;
-                            } else {
-                              showsubject = false;
-                            }
-                          });
-                        },
-                      ),
-
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 35.0),
-                        child: TextFormField(
-                          keyboardType: TextInputType.multiline,
-                          maxLength: 200,
-                          controller: editprofileController.About,
-                          decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.only(bottom: 3),
-                            labelText: "About Me",
-                            labelStyle: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700,
-                              color: kPrimaryColor,
-                              fontFamily: 'WorkSans',
-                            ),
-                            focusColor: kPrimaryColor,
-                            fillColor: kPrimaryColor,
-                            hintText: "Describe yourself",
-                            hintStyle: TextStyle(
                                 color: DesignCourseAppTheme.nearlyBlack,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w300),
                           ),
-                          validator: (value) {
-                            return editprofileController
-                                .validateNameaboutme(value!);
-                          },
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          FocusScope.of(context).requestFocus(new FocusNode());
+                          editprofileController.macthgender.value = value!;
+                        });
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      'Select date Of birth',
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700,
+                        color: kPrimaryColor,
+                        fontFamily: 'WorkSans',
+                      ),
+                    ),
+                    OutlineButton(
+                      padding: const EdgeInsets.symmetric(horizontal: 50),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      onPressed: () {
+                        _selectDate(context);
+                      },
+                      child: Text(editprofileController.date.toString(),
+                          style: const TextStyle(
+                              fontSize: 14,
+                              letterSpacing: 2.2,
+                              color: Colors.black)),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      'Teaching since',
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700,
+                        color: kPrimaryColor,
+                        fontFamily: 'WorkSans',
+                      ),
+                    ),
+                    DropdownButton<String>(
+                      value: editprofileController.since.value,
+                      isExpanded: true,
+                      style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700),
+                      items: <String>[
+                        '',
+                        '2022',
+                        '2021',
+                        '2020',
+                        '2019',
+                        '2018',
+                        '2017',
+                        '2016',
+                        '2015',
+                        '2014',
+                        '2013',
+                        '2012',
+                        '2011',
+                        '2010',
+                        '2009',
+                        '2008',
+                        '2007',
+                        '2006',
+                        '2005',
+                        '2004',
+                        '2003',
+                        '2002',
+                        '2001',
+                        '2000',
+                        '1999',
+                        '1998',
+                        '1997',
+                        '1996',
+                        '1995',
+                        '1994',
+                        '1993',
+                        '1992',
+                        '1991',
+                        '1990',
+                        '1989',
+                        '1988',
+                        '1987',
+                        '1986',
+                        '1985',
+                        '1984',
+                        '1983',
+                        '1982',
+                        '1981',
+                        '1980',
+                      ].map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(
+                            value,
+                            style: const TextStyle(
+                                color: DesignCourseAppTheme.nearlyBlack,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w300),
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          FocusScope.of(context).requestFocus(new FocusNode());
+                          editprofileController.since.value = value!;
+                        });
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      'Highest qualification',
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700,
+                        color: kPrimaryColor,
+                        fontFamily: 'WorkSans',
+                      ),
+                    ),
+
+                    FormDropDownWidgetQul(
+                      hintText: "Select qualification".trArgs(),
+                      options: getqulificationcontroller.listQulification.value,
+                      value:
+                          getqulificationcontroller.listQulificationvalue.value,
+                      onChanged: (GetQulification subcitymodel) {
+                        getqulificationcontroller.setLevelStatus(subcitymodel);
+                      },
+                    ),
+                    // DropdownButton<GetQulification>(
+                    //   hint: Text(
+                    //     getqulificationcontroller.listlocation.toString(),
+                    //     style: const TextStyle(
+                    //         color: Colors.black,
+                    //         fontSize: 16,
+                    //         fontWeight: FontWeight.w400),
+                    //   ),
+                    //   isExpanded: true,
+                    //   style: const TextStyle(
+                    //       color: Colors.black,
+                    //       fontSize: 16,
+                    //       fontWeight: FontWeight.w700),
+                    //   items: qualification
+                    //       .map((e) => DropdownMenuItem(
+                    //             child: Text(
+                    //               e.title,
+                    //               textAlign: TextAlign.left,
+                    //               style: const TextStyle(
+                    //                   color:
+                    //                       DesignCourseAppTheme.nearlyBlack,
+                    //                   fontSize: 16,
+                    //                   fontWeight: FontWeight.w300),
+                    //             ),
+                    //             value: e,
+                    //           ))
+                    //       .toList(),
+                    //   onChanged: (value) {
+                    //     setState(() {
+                    //       FocusScope.of(context)
+                    //           .requestFocus(new FocusNode());
+                    //       getqulificationcontroller.qualification = value!;
+
+                    //       editprofileController.qualifications =
+                    //           value.id.toString();
+                    //     });
+
+                    //     // pop current page
+                    //   },
+                    //   value: getqulificationcontroller.qualification,
+                    // ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Center(
+                      child: Text(
+                        "CONTACT INFORMATION",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 22,
+                          fontFamily: 'WorkSans',
+                          letterSpacing: 0.27,
+                          color: kPrimaryColor,
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          RaisedButton(
-                            onPressed: () {
-                              editprofileController.editProf(ids, context);
-                            },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: editprofileController.email,
+                      readOnly: true,
+                      decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.only(bottom: 3),
+                          labelText: "Email",
+                          labelStyle: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
                             color: kPrimaryColor,
-                            padding: const EdgeInsets.symmetric(horizontal: 50),
-                            elevation: 2,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            child: const Text(
-                              "SAVE",
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  letterSpacing: 2.2,
-                                  color: Colors.white),
+                            fontFamily: 'WorkSans',
+                          ),
+                          focusColor: kPrimaryColor,
+                          fillColor: kPrimaryColor,
+                          hintText: "evan@gmail.com",
+                          hintStyle: TextStyle(
+                              color: DesignCourseAppTheme.nearlyBlack,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w300)),
+                      validator: (value) {
+                        return editprofileController.validateEmail(value!);
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: editprofileController.phone,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.only(bottom: 3),
+                          labelText: "Phone",
+                          labelStyle: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: kPrimaryColor,
+                            fontFamily: 'WorkSans',
+                          ),
+                          focusColor: kPrimaryColor,
+                          fillColor: kPrimaryColor,
+                          hintText: "0911111111",
+                          hintStyle: TextStyle(
+                              color: DesignCourseAppTheme.nearlyBlack,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w300)),
+                      validator: (value) {
+                        return editprofileController.validateName(value!);
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: editprofileController.officephone,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.only(bottom: 3),
+                          labelText: "Office phone number",
+                          labelStyle: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: kPrimaryColor,
+                            fontFamily: 'WorkSans',
+                          ),
+                          focusColor: kPrimaryColor,
+                          fillColor: kPrimaryColor,
+                          hintText: "0911111111",
+                          hintStyle: TextStyle(
+                              color: DesignCourseAppTheme.nearlyBlack,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w300)),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: editprofileController.rephone,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.only(bottom: 3),
+                          labelText: "Residence Phone numbe",
+                          labelStyle: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: kPrimaryColor,
+                            fontFamily: 'WorkSans',
+                          ),
+                          focusColor: kPrimaryColor,
+                          fillColor: kPrimaryColor,
+                          hintText: "0911111111",
+                          hintStyle: TextStyle(
+                              color: DesignCourseAppTheme.nearlyBlack,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w300)),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      'Subcity',
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700,
+                        color: kPrimaryColor,
+                        fontFamily: 'WorkSans',
+                      ),
+                    ),
+                    FormDropDownWidget(
+                      hintText: "Select Subcity".trArgs(),
+                      options: getLocationController.listlocation.value,
+                      value: getLocationController.listlocationvalue.value,
+                      onChanged: (GetLocation subcitymodel) {
+                        getLocationController.setLocationStatus(subcitymodel);
+                      },
+                    ),
+                    // Row(children: [
+                    //   Flexible(
+                    //     child: DropdownButton<GetLocation>(
+                    //       hint: Text(
+                    //         getLocationController.listlocation.toString(),
+                    //         style: const TextStyle(
+                    //             color: Colors.black,
+                    //             fontSize: 16,
+                    //             fontWeight: FontWeight.w400),
+                    //       ),
+                    //       isExpanded: true,
+                    //       style: const TextStyle(
+                    //           color: Colors.black,
+                    //           fontSize: 16,
+                    //           fontWeight: FontWeight.w700),
+                    //       items: location
+                    //           .map((e) => DropdownMenuItem(
+                    //                 child: Text(e.name,
+                    //                     textAlign: TextAlign.left,
+                    //                     style: const TextStyle(
+                    //                         color: DesignCourseAppTheme
+                    //                             .nearlyBlack,
+                    //                         fontSize: 16,
+                    //                         fontWeight: FontWeight.w300)),
+                    //                 value: e,
+                    //               ))
+                    //           .toList(),
+                    //       onChanged: (value) {
+                    //         setState(() {
+                    //           FocusScope.of(context)
+                    //               .requestFocus(new FocusNode());
+                    //           getLocationController.subcity = value!;
+                    //           editprofileController.subcityid =
+                    //               value.name.toString();
+
+                    //           if (getLocationController
+                    //                   .subcity!.locaion.length !=
+                    //               0) {
+                    //             subc = true;
+                    //           } else {
+                    //             subc = false;
+                    //           }
+                    //         });
+
+                    //         // pop current page
+                    //       },
+                    //       value: getLocationController.subcity,
+                    //     ),
+                    //   ),
+                    //   Text(
+                    //     locationname,
+                    //     style: const TextStyle(color: Colors.black38),
+                    //   ),
+                    // ]),
+                    // subc
+                    //     ? SingleChildScrollView(
+                    //         scrollDirection: Axis.horizontal,
+                    //         child: SizedBox(
+                    //           height: 70,
+                    //           child: ListView.builder(
+                    //               shrinkWrap: true,
+                    //               scrollDirection: Axis.horizontal,
+                    //               itemBuilder: (_, index) {
+                    //                 return Column(
+                    //                   children: [
+                    //                     getTimeBoxUIday(
+                    //                         getLocationController.subcity!
+                    //                             .locaion[index].name,
+                    //                         getLocationController
+                    //                             .getLocation!
+                    //                             .locaion[index]
+                    //                             .name),
+                    //                   ],
+                    //                 );
+                    //               },
+                    //               itemCount: getLocationController
+                    //                   .subcity!.locaion.length),
+                    //         ),
+                    //       )
+                    //     : Container(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: editprofileController.woreda,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.only(bottom: 3),
+                          labelText: "Woreda",
+                          labelStyle: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: kPrimaryColor,
+                            fontFamily: 'WorkSans',
+                          ),
+                          focusColor: kPrimaryColor,
+                          fillColor: kPrimaryColor,
+                          hintText: "Woreda",
+                          hintStyle: TextStyle(
+                              color: DesignCourseAppTheme.nearlyBlack,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w300)),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Center(
+                      child: Text(
+                        "GUARANTOR'S CONTACT INFORMATION",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 22,
+                          fontFamily: 'WorkSans',
+                          letterSpacing: 0.27,
+                          color: kPrimaryColor,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: editprofileController.g_firstname,
+                      decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.only(bottom: 3),
+                          labelText: "Guarantor's first name",
+                          focusColor: kPrimaryColor,
+                          labelStyle: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: kPrimaryColor,
+                            fontFamily: 'WorkSans',
+                          ),
+                          fillColor: kPrimaryColor,
+                          hintText: "Insert guarantor's first name",
+                          hintStyle: TextStyle(
+                              color: DesignCourseAppTheme.nearlyBlack,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w300)),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: editprofileController.g_lastname,
+                      decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.only(bottom: 3),
+                          labelText: "Guarantor's father's name",
+                          focusColor: kPrimaryColor,
+                          labelStyle: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: kPrimaryColor,
+                            fontFamily: 'WorkSans',
+                          ),
+                          fillColor: kPrimaryColor,
+                          hintText: "Insert guarantor's father's name",
+                          hintStyle: TextStyle(
+                              color: DesignCourseAppTheme.nearlyBlack,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w300)),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: editprofileController.g_woreda,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.only(bottom: 3),
+                          labelText: "Guarantor's woreda",
+                          focusColor: kPrimaryColor,
+                          labelStyle: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: kPrimaryColor,
+                            fontFamily: 'WorkSans',
+                          ),
+                          fillColor: kPrimaryColor,
+                          hintText: "Insert guarantor's woreda",
+                          hintStyle: TextStyle(
+                              color: DesignCourseAppTheme.nearlyBlack,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w300)),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "Guarantor's subcity",
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700,
+                        color: kPrimaryColor,
+                        fontFamily: 'WorkSans',
+                      ),
+                    ),
+
+                    FormDropDownWidget(
+                      hintText: "Select Subcity".trArgs(),
+                      options: getLocationController.listlocation.value,
+                      value: getLocationController.listlocationvalue_gu.value,
+                      onChanged: (GetLocation subcitymodel) {
+                        getLocationController.setLocationStatusgu(subcitymodel);
+                      },
+                    ),
+                    // Row(children: [
+                    //   Flexible(
+                    //     child: DropdownButton<GetLocation>(
+                    //       hint: Text(
+                    //         getLocationController.listlocation.toString(),
+                    //         style: const TextStyle(
+                    //             color: Colors.black,
+                    //             fontSize: 16,
+                    //             fontWeight: FontWeight.w400),
+                    //       ),
+                    //       isExpanded: true,
+                    //       style: const TextStyle(
+                    //           color: Colors.black,
+                    //           fontSize: 16,
+                    //           fontWeight: FontWeight.w700),
+                    //       items: location
+                    //           .map((e) => DropdownMenuItem(
+                    //                 child: Text(e.name,
+                    //                     textAlign: TextAlign.left,
+                    //                     style: const TextStyle(
+                    //                         color: DesignCourseAppTheme
+                    //                             .nearlyBlack,
+                    //                         fontSize: 16,
+                    //                         fontWeight: FontWeight.w300)),
+                    //                 value: e,
+                    //               ))
+                    //           .toList(),
+                    //       onChanged: (value) {
+                    //         setState(() {
+                    //           FocusScope.of(context)
+                    //               .requestFocus(new FocusNode());
+                    //           getLocationController.g_subcity = value!;
+                    //           editprofileController.g_subcityid =
+                    //               value.name.toString();
+
+                    //           if (getLocationController
+                    //                   .g_subcity!.locaion.length !=
+                    //               0) {
+                    //             g_subc = true;
+                    //           } else {
+                    //             g_subc = false;
+                    //           }
+                    //         });
+
+                    //         // pop current page
+                    //       },
+                    //       value: getLocationController.g_subcity,
+                    //     ),
+                    //   ),
+                    //   Text(
+                    //     glocationname,
+                    //     style: const TextStyle(color: Colors.black38),
+                    //   ),
+                    // ]),
+
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: editprofileController.g_phone,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.only(bottom: 3),
+                          labelText: "Guarantor's mobile number",
+                          focusColor: kPrimaryColor,
+                          labelStyle: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: kPrimaryColor,
+                            fontFamily: 'WorkSans',
+                          ),
+                          fillColor: kPrimaryColor,
+                          hintText: "Insert guarantor's mobile number",
+                          hintStyle: TextStyle(
+                              color: DesignCourseAppTheme.nearlyBlack,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w300)),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: editprofileController.g_office_phone,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.only(bottom: 3),
+                          labelText: "Guarantor's office phone number",
+                          focusColor: kPrimaryColor,
+                          labelStyle: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: kPrimaryColor,
+                            fontFamily: 'WorkSans',
+                          ),
+                          fillColor: kPrimaryColor,
+                          hintText: "Insert guarantor's office phone number",
+                          hintStyle: TextStyle(
+                              color: DesignCourseAppTheme.nearlyBlack,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w300)),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Center(
+                      child: Text(
+                        "EMPLOYMENT INFORMATION",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 22,
+                          fontFamily: 'WorkSans',
+                          letterSpacing: 0.27,
+                          color: kPrimaryColor,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      'Employment Category',
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700,
+                        color: kPrimaryColor,
+                        fontFamily: 'WorkSans',
+                      ),
+                    ),
+                    FormDropDownWidgetCat(
+                      hintText: "Select Category".trArgs(),
+                      options: getCatgrory.listCategory.value,
+                      value: getCatgrory.listlistCategoryvalue.value,
+                      onChanged: (GetCategory subcitymodel) {
+                        getCatgrory.setSubectStatus(subcitymodel);
+
+                        print(subcitymodel.name);
+                        if (subcitymodel.name == "Others") {
+                          setState(() {
+                            showSubject(false);
+                          });
+                        } else {
+                          setState(() {
+                            showSubject(true);
+                          });
+                        }
+                      },
+                    ),
+                    TextFormField(
+                      controller: editprofileController.e_firstname,
+                      decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.only(bottom: 3),
+                          labelText: "Employer name",
+                          focusColor: kPrimaryColor,
+                          labelStyle: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: kPrimaryColor,
+                            fontFamily: 'WorkSans',
+                          ),
+                          fillColor: kPrimaryColor,
+                          hintText: "Insert  employer name",
+                          hintStyle: TextStyle(
+                              color: DesignCourseAppTheme.nearlyBlack,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w300)),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: editprofileController.e_postion,
+                      decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.only(bottom: 3),
+                          labelText: "Employment position",
+                          focusColor: kPrimaryColor,
+                          labelStyle: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: kPrimaryColor,
+                            fontFamily: 'WorkSans',
+                          ),
+                          fillColor: kPrimaryColor,
+                          hintText: "Employment position",
+                          hintStyle: TextStyle(
+                              color: DesignCourseAppTheme.nearlyBlack,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w300)),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      'Employer subcity',
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700,
+                        color: kPrimaryColor,
+                        fontFamily: 'WorkSans',
+                      ),
+                    ),
+                    FormDropDownWidget(
+                      hintText: "Select Subcity".trArgs(),
+                      options: getLocationController.listlocation.value,
+                      value: getLocationController.listlocationvalue_e.value,
+                      onChanged: (GetLocation subcitymodel) {
+                        getLocationController.setLocationStatuse(subcitymodel);
+                      },
+                    ),
+                    // Row(children: [
+                    //   Flexible(
+                    //     child: DropdownButton<GetLocation>(
+                    //       hint: Text(
+                    //         getLocationController.listlocation.toString(),
+                    //         style: const TextStyle(
+                    //             color: Colors.black,
+                    //             fontSize: 16,
+                    //             fontWeight: FontWeight.w400),
+                    //       ),
+                    //       isExpanded: true,
+                    //       style: const TextStyle(
+                    //           color: Colors.black,
+                    //           fontSize: 16,
+                    //           fontWeight: FontWeight.w700),
+                    //       items: location
+                    //           .map((e) => DropdownMenuItem(
+                    //                 child: Text(e.name,
+                    //                     textAlign: TextAlign.left,
+                    //                     style: const TextStyle(
+                    //                         color: DesignCourseAppTheme
+                    //                             .nearlyBlack,
+                    //                         fontSize: 16,
+                    //                         fontWeight: FontWeight.w300)),
+                    //                 value: e,
+                    //               ))
+                    //           .toList(),
+                    //       onChanged: (value) {
+                    //         setState(() {
+                    //           FocusScope.of(context)
+                    //               .requestFocus(new FocusNode());
+                    //           getLocationController.e_subcity = value!;
+                    //           editprofileController.e_subcityid =
+                    //               value.name.toString();
+
+                    //           if (getLocationController
+                    //                   .e_subcity!.locaion.length !=
+                    //               0) {
+                    //             e_showsubject = true;
+                    //           } else {
+                    //             e_showsubject = false;
+                    //           }
+                    //         });
+
+                    //         // pop current page
+                    //       },
+                    //       value: getLocationController.e_subcity,
+                    //     ),
+                    //   ),
+                    //   Text(
+                    //     elocationname,
+                    //     style: const TextStyle(color: Colors.black38),
+                    //   ),
+                    // ]),
+
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: editprofileController.e_woreda,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.only(bottom: 3),
+                          labelText: "Employer woreda",
+                          focusColor: kPrimaryColor,
+                          labelStyle: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: kPrimaryColor,
+                            fontFamily: 'WorkSans',
+                          ),
+                          fillColor: kPrimaryColor,
+                          hintText: "Insert employer woreda",
+                          hintStyle: TextStyle(
+                              color: DesignCourseAppTheme.nearlyBlack,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w300)),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    showSubject.isTrue
+                        ? const Text(
+                            'Subject you teach',
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w700,
+                              color: kPrimaryColor,
+                              fontFamily: 'WorkSans',
                             ),
                           )
-                        ],
-                      )
-                    ],
-                  ),
+                        : SizedBox(),
+
+                    showSubject.isTrue
+                        ? FormDropDownWidgetSub(
+                            hintText: "Select Subject".trArgs(),
+                            options: getSubect.listSubject.value,
+                            value: getSubect.listSubjectvalue_e.value,
+                            onChanged: (Subjects subcitymodel) {
+                              getSubect.setSubectStatus_e(subcitymodel);
+                            },
+                          )
+                        : SizedBox(),
+
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Center(
+                      child: Text(
+                        "ENGAGEMENT PREFERENCE",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 22,
+                          fontFamily: 'WorkSans',
+                          letterSpacing: 0.27,
+                          color: kPrimaryColor,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      'Preferred level for tutoring',
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700,
+                        color: kPrimaryColor,
+                        fontFamily: 'WorkSans',
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    showSubject.isTrue
+                        ? FormDropDownWidgetLevel(
+                            hintText: "Preferred level for tutoring".trArgs(),
+                            options: getLevelContoller.listlevel.value,
+                            value: getLevelContoller.listlevelvalue.value,
+                            onChanged: (GetLevel subcitymodel) {
+                              getLevelContoller.setLevelStatus(subcitymodel);
+                            },
+                          )
+                        : Text(
+                            'Primery',
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.black,
+                              fontFamily: 'WorkSans',
+                            ),
+                          ),
+                    // DropdownButton<GetLevel>(
+                    //   hint: Text(
+                    //     getLevelContoller.listlevel.toString(),
+                    //     style: const TextStyle(
+                    //         color: Colors.black,
+                    //         fontSize: 16,
+                    //         fontWeight: FontWeight.w400),
+                    //   ),
+                    //   isExpanded: true,
+                    //   style: const TextStyle(
+                    //       color: Colors.black,
+                    //       fontSize: 16,
+                    //       fontWeight: FontWeight.w700),
+                    //   items: level
+                    //       .map((e) => DropdownMenuItem(
+                    //             child: Text(e.title,
+                    //                 textAlign: TextAlign.left,
+                    //                 style: const TextStyle(
+                    //                     color: DesignCourseAppTheme
+                    //                         .nearlyBlack,
+                    //                     fontSize: 16,
+                    //                     fontWeight: FontWeight.w300)),
+                    //             value: e,
+                    //           ))
+                    //       .toList(),
+                    //   onChanged: (value) {
+                    //     setState(() {
+                    //       FocusScope.of(context)
+                    //           .requestFocus( FocusNode());
+                    //       getLevelContoller.level = value!;
+                    //       editprofileController.lid = value.id.toString();
+                    //       lid = value.id.toString();
+                    //     });
+
+                    //     setState(() {
+                    //       RemoteServices.getsubject(
+                    //           editprofileController.lid);
+                    //       _onRefresh();
+                    //       loadData();
+                    //       _getsub();
+                    //     });
+                    //   },
+                    //   value: getLevelContoller.level,
+                    // ),
+
+                    const SizedBox(
+                      height: 20,
+                    ),
+
+                    // SingleChildScrollView(
+                    //   scrollDirection: Axis.horizontal,
+                    //   child: SizedBox(
+                    //     height: 70,
+                    //     child: ListView.builder(
+                    //         shrinkWrap: true,
+                    //         scrollDirection: Axis.horizontal,
+                    //         itemBuilder: (_, index) {
+                    //           return Column(
+                    //             children: [
+                    //               getTimeBoxUIdaysu(
+                    //                 getSubect.subject!.title,
+                    //               ),
+                    //             ],
+                    //           );
+                    //         },
+                    //         itemCount: 2),
+                    //   ),
+                    // ),
+
+                    const Text(
+                      'Field of study',
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700,
+                        color: kPrimaryColor,
+                        fontFamily: 'WorkSans',
+                      ),
+                    ),
+                    FormDropDownWidgetSub(
+                      hintText: "Select Subject".trArgs(),
+                      options: getSubect.listSubject.value,
+                      value: getSubect.listSubjectvalue.value,
+                      onChanged: (Subjects subcitymodel) {
+                        getSubect.setSubectStatus(subcitymodel);
+                      },
+                    ),
+
+                    // subjectViewUI(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      'Preferred tutoring location',
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700,
+                        color: kPrimaryColor,
+                        fontFamily: 'WorkSans',
+                      ),
+                    ),
+
+                    FormDropDownWidget(
+                      hintText: "Select location".trArgs(),
+                      options: getLocationController.listlocation.value,
+                      value: getLocationController
+                          .listlocationvalue_location.value,
+                      onChanged: (GetLocation subcitymodel) {
+                        getLocationController
+                            .setLocationStatuslocation(subcitymodel);
+
+                        setState(() {
+                          FocusScope.of(context).requestFocus(new FocusNode());
+
+                          if (getLocationController.listlocation.length != 0) {
+                            showsubject = true;
+                          } else {
+                            showsubject = false;
+                          }
+                        });
+                      },
+                    ),
+
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 35.0),
+                      child: TextFormField(
+                        keyboardType: TextInputType.multiline,
+                        maxLength: 200,
+                        controller: editprofileController.About,
+                        decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.only(bottom: 3),
+                          labelText: "About Me",
+                          labelStyle: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: kPrimaryColor,
+                            fontFamily: 'WorkSans',
+                          ),
+                          focusColor: kPrimaryColor,
+                          fillColor: kPrimaryColor,
+                          hintText: "Describe yourself",
+                          hintStyle: TextStyle(
+                              color: DesignCourseAppTheme.nearlyBlack,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w300),
+                        ),
+                        validator: (value) {
+                          return editprofileController
+                              .validateNameaboutme(value!);
+                        },
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        RaisedButton(
+                          onPressed: () {
+                            editprofileController.editProf(ids, context);
+                          },
+                          color: kPrimaryColor,
+                          padding: const EdgeInsets.symmetric(horizontal: 50),
+                          elevation: 2,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          child: const Text(
+                            "SAVE",
+                            style: TextStyle(
+                                fontSize: 14,
+                                letterSpacing: 2.2,
+                                color: Colors.white),
+                          ),
+                        )
+                      ],
+                    )
+                  ],
                 ),
               ),
             ),
