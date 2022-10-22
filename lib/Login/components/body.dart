@@ -102,7 +102,6 @@ class _LoginScreenState extends State<Body> {
     }
   }
 
-  List<GetLocation> location = [];
   _getlocation() async {
     getLocationController.fetchLocation();
 

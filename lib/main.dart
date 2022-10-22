@@ -110,7 +110,7 @@ class _MyHomePageState extends State<MyApp> {
               debugShowCheckedModeBanner: false,
               translations: LocaleString(),
               locale: const Locale('en', 'US'),
-              title: 'Flutter Auth',
+              title: 'NextGen',
               theme: ThemeData(
                 primaryColor: kPrimaryColor,
                 scaffoldBackgroundColor: Colors.white,
@@ -128,7 +128,7 @@ class _MyHomePageState extends State<MyApp> {
       return GetMaterialApp(
         translations: LocaleString(),
         locale: const Locale('en', 'US'),
-        title: 'Flutter Auth',
+        title: 'NextGen',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           scaffoldBackgroundColor: kPrimaryColor,

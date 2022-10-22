@@ -6,6 +6,7 @@ import 'package:path/path.dart';
 
 class Network {
   final String _url = 'https://tutor.oddatech.com/api/';
+  //final String _url = 'https://nextgeneducation.et/api/';
   // ignore: prefer_typing_uninitialized_variables
   var token;
 

@@ -93,7 +93,6 @@ class _EditPageState extends State<UpdateProfile> {
     });
   }
 
-  List<GetLocation> location = [];
   _getlocation() async {
     getLocationController.fetchLocation();
     print("===>>>>>>Printing ${getLocationController.listlocation.length} ");
@@ -384,8 +383,6 @@ class _EditPageState extends State<UpdateProfile> {
                               fontFamily: 'WorkSans',
                             ),
                           ),
-
-
 
                           FormDropDownWidget(
                             hintText: "Select Subcity".trArgs(),
@@ -722,8 +719,8 @@ class _EditPageState extends State<UpdateProfile> {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          const Text(
+        children: const <Widget>[
+          Text(
             'Field of study',
             style: TextStyle(color: kPrimaryColor, fontSize: 13),
           ),

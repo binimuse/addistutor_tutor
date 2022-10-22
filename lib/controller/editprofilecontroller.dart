@@ -326,8 +326,9 @@ class EditprofileController extends GetxController with StateMixin {
   }
 
   var image;
-  GetLocationController getLocationController = Get.find();
 
+  GetLocationController getLocationController =
+      Get.put(GetLocationController());
   GetLevelContoller getLevelContoller = Get.put(GetLevelContoller());
   Getqulificationcontroller getqulificationcontroller =
       Get.put(Getqulificationcontroller());

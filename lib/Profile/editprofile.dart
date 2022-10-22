@@ -16,9 +16,7 @@ import 'package:addistutor_tutor/controller/getlevelcontroller.dart';
 import 'package:addistutor_tutor/controller/getlocationcontroller.dart';
 import 'package:addistutor_tutor/controller/getqualifaicationcontroller.dart';
 import 'package:addistutor_tutor/controller/getsubcontroller.dart';
-import 'package:addistutor_tutor/remote_services/service.dart';
 import 'package:addistutor_tutor/remote_services/user.dart';
-import 'package:camera_camera/camera_camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -148,8 +146,6 @@ class _EditPageState extends State<EditPage> {
 
     _refreshController.loadComplete();
   }
-
-  List<GetLocation> location = [];
 
   _getlocation() async {
     getLocationController.fetchLocation();
@@ -1046,7 +1042,7 @@ class _EditPageState extends State<EditPage> {
                               fontFamily: 'WorkSans',
                             ),
                             fillColor: kPrimaryColor,
-                            hintText: "Employer position",
+                            hintText: "Employment position",
                             hintStyle: TextStyle(
                                 color: DesignCourseAppTheme.nearlyBlack,
                                 fontSize: 16,
@@ -1321,6 +1317,18 @@ class _EditPageState extends State<EditPage> {
                         onChanged: (GetLocation subcitymodel) {
                           getLocationController
                               .setLocationStatuslocation(subcitymodel);
+
+                          setState(() {
+                            FocusScope.of(context)
+                                .requestFocus(new FocusNode());
+
+                            if (getLocationController.listlocation.length !=
+                                0) {
+                              showsubject = true;
+                            } else {
+                              showsubject = false;
+                            }
+                          });
                         },
                       ),
 

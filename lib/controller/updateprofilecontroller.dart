@@ -128,7 +128,9 @@ class Updateprofilecontoller extends GetxController with StateMixin {
         "phone_no": phone.text,
         "phone_no_office": officephone.text,
         "phone_no_residence": rephone.text,
-        "subcity": getLocationController.listlocationvalue.value!.name,
+        "subcity": getLocationController.listlocationvalue.value == null
+            ? subcityid
+            : getLocationController.listlocationvalue.value!.name,
         "woreda": woreda.text,
         "about": About.text,
       };
@@ -145,14 +147,15 @@ class Updateprofilecontoller extends GetxController with StateMixin {
         ifupdatd(false);
       }
     } else {
-      print("am here");
-      print(getLocationController.listlocationvalue.value!.name);
+ 
 
       var data = {
         "phone_no": phone.text,
         "phone_no_office": officephone.text,
         "phone_no_residence": rephone.text,
-        "subcity": getLocationController.listlocationvalue.value!.name,
+        "subcity": getLocationController.listlocationvalue.value == null
+            ? subcityid
+            : getLocationController.listlocationvalue.value!.name,
         "woreda": woreda.text,
         "about": About.text,
       };

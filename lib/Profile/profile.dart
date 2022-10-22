@@ -146,7 +146,7 @@ class _ProfilePageState extends State<ProfileS> {
   }
 
   var ids;
-  List<GetLocation> location = [];
+
   _getlocation() async {
     getLocationController.fetchLocation();
 

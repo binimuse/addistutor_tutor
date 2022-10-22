@@ -75,7 +75,7 @@ class OTPPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    "Already cheacked email address?",
+                    "Already checked email address?",
                     style: const TextStyle(color: kPrimaryColor),
                   ),
                 ],

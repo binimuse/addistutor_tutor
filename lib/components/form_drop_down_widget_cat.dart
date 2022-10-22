@@ -2,7 +2,6 @@
 
 import 'package:addistutor_tutor/components/custom_sizes.dart';
 import 'package:addistutor_tutor/components/screen_utils.dart';
-import 'package:addistutor_tutor/controller/getcategorycontroller.dart';
 import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
