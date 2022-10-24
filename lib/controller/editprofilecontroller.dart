@@ -365,7 +365,7 @@ class EditprofileController extends GetxController with StateMixin {
           ? ""
           : getLocationController.listlocationvalue_e.value!.name,
       "employment_subject": subjects.listSubjectvalue_e.value == null
-          ? ""
+          ? "1"
           : subjects.listSubjectvalue_e.value!.title,
       "employment_category_id":
           getCatgroryContoller.listlistCategoryvalue.value == null
@@ -373,7 +373,7 @@ class EditprofileController extends GetxController with StateMixin {
               : getCatgroryContoller.listlistCategoryvalue.value!.id,
       "about": About.text,
       "subject_id": subjects.listSubjectvalue_e.value == null
-          ? " "
+          ? "1 "
           : subjects.listSubjectvalue_e.value!.id,
       "qualification_id":
           getqulificationcontroller.listQulificationvalue.value == null

@@ -1213,7 +1213,7 @@ class _EditPageState extends State<EditPage> {
                             },
                           )
                         : Text(
-                            'Primery',
+                            'Primary',
                             style: TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.w700,

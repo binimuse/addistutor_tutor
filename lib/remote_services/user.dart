@@ -126,6 +126,7 @@ class Teacher {
   String guarantor_woreda;
   String guarantor_subcity;
   String guarantor_phone;
+  int earned_amount;
   String guarantor_phone_office;
   String guarantor_phone_residence;
   String employer_name;
@@ -147,6 +148,7 @@ class Teacher {
     required this.phone_no_office,
     required this.phone_no_residence,
     required this.subcity,
+    required this.earned_amount,
     required this.woreda,
     required this.guarantor_name,
     required this.guarantor_house_no,
@@ -188,6 +190,7 @@ class Teacher {
       guarantor_woreda: json["guarantor_woreda"],
       guarantor_subcity: json["guarantor_subcity"],
       guarantor_phone: json["guarantor_phone"],
+      earned_amount: json["earned_amount"],
       guarantor_phone_office: json["guarantor_phone_office"],
       guarantor_phone_residence: json["guarantor_phone_residence"],
       employer_name: json["employer_name"],

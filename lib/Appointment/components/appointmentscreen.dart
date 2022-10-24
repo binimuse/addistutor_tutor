@@ -120,50 +120,48 @@ class _HomePageState extends State<Appointment>
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => walletContoller.isFetched.value
-        ? SmartRefresher(
-            enablePullDown: true,
-            enablePullUp: true,
+    return SmartRefresher(
+        enablePullDown: true,
+        enablePullUp: true,
 
-            //cheak pull_to_refresh
-            controller: _refreshController,
-            onRefresh: _onRefresh,
-            onLoading: _onLoading,
-            child: Container(
-                color: DesignCourseAppTheme.nearlyWhite,
-                child: WillPopScope(
-                  onWillPop: _onBackPressed,
-                  child: Scaffold(
-                    key: _scaffoldKey,
-                    backgroundColor: Colors.transparent,
-                    body: Column(
-                      children: <Widget>[
-                        SizedBox(
-                          height: MediaQuery.of(context).padding.top,
-                        ),
-                        getAppBarUI(),
-                        _buildDivider(),
-                        Expanded(
-                          child: SingleChildScrollView(
-                            child: SizedBox(
-                              height: MediaQuery.of(context).size.height,
-                              child: Column(
-                                children: <Widget>[
-                                  getCategoryUI(),
-                                  Flexible(
-                                    child: getPopularCourseUI(),
-                                  ),
-                                ],
+        //cheak pull_to_refresh
+        controller: _refreshController,
+        onRefresh: _onRefresh,
+        onLoading: _onLoading,
+        child: Container(
+            color: DesignCourseAppTheme.nearlyWhite,
+            child: WillPopScope(
+                onWillPop: _onBackPressed,
+                child: Obx(
+                  () => walletContoller.isFetched.value
+                      ? Scaffold(
+                          key: _scaffoldKey,
+                          backgroundColor: Colors.transparent,
+                          body: Column(
+                            children: <Widget>[
+                              SizedBox(
+                                height: MediaQuery.of(context).padding.top,
                               ),
-                            ),
+                              // getAppBarUI(),
+                              _buildDivider(),
+                              Expanded(
+                                child: SizedBox(
+                                  height: MediaQuery.of(context).size.height,
+                                  child: Column(
+                                    children: <Widget>[
+                                      getCategoryUI(),
+                                      Flexible(
+                                        child: getPopularCourseUI(),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )),
-          )
-        : const Center(child: CircularProgressIndicator()));
+                        )
+                      : const Center(child: CircularProgressIndicator()),
+                ))));
   }
 
   Future<bool> _onBackPressed() async {
@@ -374,51 +372,31 @@ class _HomePageState extends State<Appointment>
               ],
             ),
           ),
-          GestureDetector(
-            onTap: () {
-              // Navigator.push(
-              //   // ignore: prefer_const_constructors
-              //   context,
-              //   PageRouteBuilder(
-              //     pageBuilder: (context, animation1, animation2) =>
-              //         const WalletPage(),
-              //     transitionDuration: Duration.zero,
-              //   ),
-              // );
-
-              Navigator.push<dynamic>(
-                context,
-                MaterialPageRoute<dynamic>(
-                  builder: (BuildContext context) => WalletPage(),
+          Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  walletContoller.wallet.toString().obs + ' birr',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 23,
+                    letterSpacing: 0.2,
+                    color: kPrimaryColor,
+                  ),
                 ),
-              );
-            },
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    walletContoller.wallet.toString().obs + ' birr',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 23,
-                      letterSpacing: 0.2,
-                      color: kPrimaryColor,
-                    ),
+                Text(
+                  'Available Balance',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14,
+                    letterSpacing: 0.2,
+                    color: DesignCourseAppTheme.grey,
                   ),
-                  Text(
-                    'Available Balance',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 14,
-                      letterSpacing: 0.2,
-                      color: DesignCourseAppTheme.grey,
-                    ),
-                  ),
-                ]),
-          ),
+                ),
+              ]),
         ],
       ),
     );

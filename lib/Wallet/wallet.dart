@@ -6,6 +6,7 @@ import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
 import 'package:addistutor_tutor/Wallet/topuppage.dart';
 import 'package:addistutor_tutor/constants.dart';
 import 'package:addistutor_tutor/controller/walletcontroller.dart';
+import 'package:addistutor_tutor/remote_services/service.dart';
 
 import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:flutter/material.dart';
@@ -24,11 +25,35 @@ final WalletContoller walletContoller = Get.put(WalletContoller());
 class _EditProfilePageState extends State<WalletPage> {
   late Balance? balance;
   var ids;
+  var fetched;
+  var earned_amount = "".obs;
+
   @override
   void initState() {
     _fetchUser();
 
     super.initState();
+  }
+
+  Future<void> fetchPf(var id) async {
+    try {
+      //  openAndCloseLoadingDialog();
+      fetched = await RemoteServices.fetchpf(id);
+      //   print(fetched);
+      if (fetched != "") {
+        earned_amount.value = fetched.earned_amount.toString();
+        print("hii ${earned_amount.value}");
+
+        await Future.delayed(const Duration(seconds: 1));
+        // Dismiss CircularProgressIndicator
+        //   Navigator.of(Get.context!).pop();
+      } else {
+        print(fetched.printError);
+      }
+    } on Exception {
+      // ignore: todo
+      // TODO
+    }
   }
 
   void _fetchUser() async {
@@ -39,6 +64,8 @@ class _EditProfilePageState extends State<WalletPage> {
       var body = json.decode(token);
 
       if (body["teacher_id"] != null) {
+        print("hii ${body["teacher_id"]}");
+        fetchPf(int.parse(body["teacher_id"]));
         setState(() {
           ids = int.parse(body["teacher_id"]);
           walletContoller.getbalance(ids);
@@ -130,6 +157,16 @@ class _EditProfilePageState extends State<WalletPage> {
                           ),
                           Text(
                             "Your Current Balance",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 16,
+                                color: Colors.blue[100]),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            "Earned amount " + earned_amount.value,
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16,
