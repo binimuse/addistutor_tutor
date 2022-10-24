@@ -1,8 +1,7 @@
-// ignore_for_file: prefer_typing_uninitialized_variables, unused_local_variable, unnecessary_brace_in_string_interps
+// ignore_for_file: prefer_typing_uninitialized_variables, unused_local_variable, unnecessary_brace_in_string_interps, non_constant_identifier_names
 
 import 'dart:convert';
 
-import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
 import 'package:addistutor_tutor/Wallet/topuppage.dart';
 import 'package:addistutor_tutor/constants.dart';
 import 'package:addistutor_tutor/controller/walletcontroller.dart';
@@ -42,13 +41,13 @@ class _EditProfilePageState extends State<WalletPage> {
       //   print(fetched);
       if (fetched != "") {
         earned_amount.value = fetched.earned_amount.toString();
-        print("hii ${earned_amount.value}");
+      
 
         await Future.delayed(const Duration(seconds: 1));
         // Dismiss CircularProgressIndicator
         //   Navigator.of(Get.context!).pop();
       } else {
-        print(fetched.printError);
+       
       }
     } on Exception {
       // ignore: todo
@@ -64,7 +63,7 @@ class _EditProfilePageState extends State<WalletPage> {
       var body = json.decode(token);
 
       if (body["teacher_id"] != null) {
-        print("hii ${body["teacher_id"]}");
+      
         fetchPf(int.parse(body["teacher_id"]));
         setState(() {
           ids = int.parse(body["teacher_id"]);
@@ -162,7 +161,7 @@ class _EditProfilePageState extends State<WalletPage> {
                                 fontSize: 16,
                                 color: Colors.blue[100]),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Text(

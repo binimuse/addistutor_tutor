@@ -1,3 +1,5 @@
+// ignore_for_file: import_of_legacy_library_into_null_safe, prefer_typing_uninitialized_variables
+
 import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
 import 'package:addistutor_tutor/Home/components/singlebooingpage.dart';
 import 'package:addistutor_tutor/Wallet/wallet.dart';
@@ -194,7 +196,7 @@ class _ProfileScreenState extends State<ActivityItemWidget>
           ),
           onTap: () async {
             if (widget.data!.data.notification_type == "wallet") {
-              Get.to(() => WalletPage());
+              Get.to(() => const WalletPage());
             } else {
               setState(() {
                 requestedBooking.getsingle(widget.data!.data.booking_id);

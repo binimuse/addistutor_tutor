@@ -1,7 +1,8 @@
+// ignore_for_file: empty_catches
+
 import 'dart:convert';
 
 import 'package:addistutor_tutor/Login/components/background.dart';
-import 'package:addistutor_tutor/Profile/editprofile.dart';
 import 'package:addistutor_tutor/Progress/progress.dart';
 import 'package:addistutor_tutor/controller/walletcontroller.dart';
 import 'package:addistutor_tutor/main/main.dart';

@@ -1,6 +1,5 @@
 import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
 import 'package:addistutor_tutor/controller/editprofilecontroller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -9,7 +8,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
 
 import 'dart:convert';
-import 'dart:ui';
 
 import 'package:shared_preferences/shared_preferences.dart';
 

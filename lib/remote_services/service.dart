@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_null_comparison, duplicate_ignore, unnecessary_brace_in_string_interps, deprecated_member_use
+// ignore_for_file: unnecessary_null_comparison, duplicate_ignore, unnecessary_brace_in_string_interps, deprecated_member_use, non_constant_identifier_names
 
 import 'dart:convert';
 
@@ -40,7 +40,7 @@ class RemoteServices {
 
   static Future<String> UpdateProfile(var data) async {
     List<String> errors = [];
-    print("===> data ${data}");
+  
 
     // create multipart request
     res = await Network().getpassedData(data, "teacher-update");
@@ -429,7 +429,7 @@ class RemoteServices {
     var body = json.decode(res.body);
 
     // print("body");
-    print(body["data"]);
+  
     if (res.statusCode == 200) {
       return body["data"]
           .map((e) => Subjects2.fromJson(e))
@@ -457,13 +457,12 @@ class RemoteServices {
   }
 
   static Future<List<Subjects>> getsubject(var tid) async {
-    print(tid);
+   
     res = await Network().getData("subjects?tutoring_level_id=${tid}");
 
     var body = json.decode(res.body);
 
-    // print("body");
-    print(body["data"]);
+
     if (res.statusCode == 200) {
       return body["data"]
           .map((e) => Subjects.fromJson(e))
@@ -490,15 +489,14 @@ class RemoteServices {
     }
   }
 
-  static Future<String> endbooking(var ending_reason, var id) async {
+  static Future<String> endbooking(var endingReason, var id) async {
     var data = {
-      'ending_reason': ending_reason,
+      'ending_reason': endingReason,
     };
     res = await Network().getpassedData(data, "booking/${id}/end");
     body = json.decode(res.body);
     // ignore: avoid_print
-    print("body");
-    print(body);
+   
     if (res.statusCode == 200) {
       return body["success"].toString();
     } else {
@@ -555,7 +553,6 @@ class RemoteServices {
   }
 
   static Future<Remove> remove(var id) async {
-    List<String> errors = [];
     // create multipart request
     res = await Network().getpassedData(null, "account/${id}/remove");
 

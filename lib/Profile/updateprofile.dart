@@ -1,16 +1,14 @@
-// ignore_for_file: import_of_legacy_library_into_null_safe, prefer_typing_uninitialized_variables, deprecated_member_use
+// ignore_for_file: import_of_legacy_library_into_null_safe, prefer_typing_uninitialized_variables, deprecated_member_use, invalid_use_of_protected_member
 
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
-import 'package:addistutor_tutor/Profile/dropdown_common_model.dart';
 import 'package:addistutor_tutor/components/form_drop_down_widget.dart';
 import 'package:addistutor_tutor/controller/getlocationcontroller.dart';
 
 import 'package:addistutor_tutor/controller/updateprofilecontroller.dart';
 import 'package:addistutor_tutor/remote_services/user.dart';
-import 'package:camera_camera/camera_camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -35,7 +33,6 @@ class _EditPageState extends State<UpdateProfile> {
   GetLocationController getLocationController = Get.find();
   final ImagePicker _picker = ImagePicker();
   ImagePicker picker = ImagePicker();
-  bool _autovalidate = false;
   DateTime currentDate = DateTime.now();
   bool showsubject = false;
   List<XFile>? _imageFileList;
@@ -95,7 +92,7 @@ class _EditPageState extends State<UpdateProfile> {
 
   _getlocation() async {
     getLocationController.fetchLocation();
-    print("===>>>>>>Printing ${getLocationController.listlocation.length} ");
+   
     // location = getLocationController.listlocation.value;
     // if (location != null && location.isNotEmpty) {
     //   setState(() {
@@ -533,8 +530,7 @@ class _EditPageState extends State<UpdateProfile> {
                                         id, context);
                                   } else {
                                     setState(() {
-                                      _autovalidate =
-                                          true; //enable realtime validation
+//enable realtime validation
                                     });
                                   }
                                 },

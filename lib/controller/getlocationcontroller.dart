@@ -26,7 +26,7 @@ class GetLocationController extends GetxController with StateMixin {
         isfetchedlocation(true);
       }
     } catch (e) {
-      print("===>>>>>>Printing erroro ");
+     
     }
   }
 

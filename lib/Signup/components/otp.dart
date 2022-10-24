@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable, prefer_typing_uninitialized_variables
+
 import 'package:addistutor_tutor/Login/login_screen.dart';
 import 'package:addistutor_tutor/controller/otpcontroller.dart';
 import 'package:addistutor_tutor/controller/signupcontroller.dart';
@@ -12,7 +14,7 @@ final inputBorder = OutlineInputBorder(
 );
 
 final inputDecoration = InputDecoration(
-  contentPadding: EdgeInsets.symmetric(vertical: 16.0),
+  contentPadding: const EdgeInsets.symmetric(vertical: 16.0),
   border: inputBorder,
   focusedBorder: inputBorder,
   enabledBorder: inputBorder,
@@ -22,7 +24,9 @@ class OTPPage extends StatelessWidget {
   var otpval;
   final OtpController otpController = Get.put(OtpController());
   SignupController signupController = Get.find();
-  static final String path = "lib/src/pages/misc/otp.dart";
+  static const String path = "lib/src/pages/misc/otp.dart";
+
+  OTPPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +35,7 @@ class OTPPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: Container(
         padding: const EdgeInsets.all(16.0),
@@ -40,17 +44,17 @@ class OTPPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 30.0),
-            Text(
+            const Text(
               "Please enter the 4-digit OTP",
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 18.0),
             ),
             const SizedBox(height: 20.0),
-            OTPFields(),
+            const OTPFields(),
             const SizedBox(height: 20.0),
             const SizedBox(height: 10.0),
             TextButton(
-              child: Text(
+              child: const Text(
                 "RESEND OTP",
                 style: TextStyle(
                   color: kPrimaryLightColor,
@@ -73,10 +77,10 @@ class OTPPage extends StatelessWidget {
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
+                children: const <Widget>[
                   Text(
                     "Already checked email address?",
-                    style: const TextStyle(color: kPrimaryColor),
+                    style: TextStyle(color: kPrimaryColor),
                   ),
                 ],
               ),
@@ -88,9 +92,9 @@ class OTPPage extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0)),
                 padding: const EdgeInsets.all(16.0),
-                minimumSize: Size(200, 60),
+                minimumSize: const Size(200, 60),
               ),
-              child: Text(
+              child: const Text(
                 "Confirm",
                 style: TextStyle(
                   fontSize: 18.0,
@@ -121,7 +125,7 @@ class _OTPFieldsState extends State<OTPFields> {
   FocusNode? pin2FN;
   FocusNode? pin3FN;
   FocusNode? pin4FN;
-  final pinStyle = TextStyle(fontSize: 32, fontWeight: FontWeight.bold);
+  final pinStyle = const TextStyle(fontSize: 32, fontWeight: FontWeight.bold);
 
   @override
   void initState() {

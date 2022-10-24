@@ -1,7 +1,5 @@
 // ignore_for_file: prefer_const_constructors, duplicate_ignore, prefer_const_literals_to_create_immutables, avoid_print, unnecessary_null_comparison, deprecated_member_use
 
-import 'dart:convert';
-import 'dart:io';
 
 import 'package:addistutor_tutor/Confirmationcode/confirmationcode.dart';
 import 'package:addistutor_tutor/Home/components/course_info_screen.dart';
@@ -9,16 +7,12 @@ import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
 
 import 'package:addistutor_tutor/controller/editprofilecontroller.dart';
 import 'package:addistutor_tutor/controller/getmypernalityscontroller.dart';
-import 'package:addistutor_tutor/controller/getreqestedbookingcpntroller.dart';
-import 'package:addistutor_tutor/controller/walletcontroller.dart';
 
 import 'package:addistutor_tutor/remote_services/user.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constants.dart';
 
@@ -139,11 +133,6 @@ class _HomePageState extends State<Mypernality>
   }
 
   final Color divider = Colors.grey.shade600;
-  Divider _buildDivider() {
-    return Divider(
-      color: divider,
-    );
-  }
 
   Widget getPopularCourseUI() {
     return SingleChildScrollView(
@@ -153,7 +142,7 @@ class _HomePageState extends State<Mypernality>
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            getPenality.listsubject.length != 0
+            getPenality.listsubject.isNotEmpty
                 ? SizedBox(
                     child: ListView.builder(
                       physics: const ScrollPhysics(),

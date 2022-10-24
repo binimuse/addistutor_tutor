@@ -169,7 +169,7 @@ class Teacher {
   });
 
   factory Teacher.fromJson(Map<String, dynamic> json) {
-    print("dfdfdfd ${json}");
+
 
     return Teacher(
       id: json["id"] as int,

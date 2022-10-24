@@ -13,7 +13,6 @@ import 'package:addistutor_tutor/controller/getreqestedbookingcpntroller.dart';
 import 'package:addistutor_tutor/controller/walletcontroller.dart';
 
 import 'package:addistutor_tutor/remote_services/user.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -260,7 +259,7 @@ class _HomePageState extends State<TutorDahsbord>
                 color: DesignCourseAppTheme.darkerText,
               ),
             ),
-            getReqBooking.listsubject.length != 0
+            getReqBooking.listsubject.isNotEmpty
                 ? SizedBox(
                     child: ListView.builder(
                       physics: const ScrollPhysics(),

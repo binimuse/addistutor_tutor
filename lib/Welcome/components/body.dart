@@ -3,8 +3,6 @@ import 'package:addistutor_tutor/Signup/signup_screen.dart';
 import 'package:addistutor_tutor/components/rounded_button.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_svg/svg.dart';
-
 import '../../constants.dart';
 import 'background.dart';
 

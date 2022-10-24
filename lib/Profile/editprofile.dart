@@ -1,7 +1,6 @@
-// ignore_for_file: import_of_legacy_library_into_null_safe, prefer_typing_uninitialized_variables, deprecated_member_use
+// ignore_for_file: import_of_legacy_library_into_null_safe, prefer_typing_uninitialized_variables, deprecated_member_use, non_constant_identifier_names, invalid_use_of_protected_member, unnecessary_null_comparison
 
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
 import 'package:addistutor_tutor/Profile/getmyaccount.dart';
@@ -22,7 +21,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants.dart';
@@ -44,9 +42,7 @@ class _EditPageState extends State<EditPage> {
   final GetCatgroryContoller getCatgrory = Get.find();
   GetLocationController getLocationController = Get.find();
   Getqulificationcontroller getqulificationcontroller = Get.find();
-  final ImagePicker _picker = ImagePicker();
   ImagePicker picker = ImagePicker();
-  bool _autovalidate = false;
   DateTime currentDate = DateTime.now();
   bool showsubject = false;
   bool e_showsubject = false;
@@ -59,11 +55,7 @@ class _EditPageState extends State<EditPage> {
   late var glocationname = "";
   late var elocationname = "";
   late var plocationname = "";
-  List<XFile>? _imageFileList;
   var showSubject = true.obs;
-  set _imageFile(XFile? value) {
-    _imageFileList = value == null ? null : [value];
-  }
 
   var body;
   var ids;
@@ -80,7 +72,7 @@ class _EditPageState extends State<EditPage> {
           ids = int.parse(body["teacher_id"]);
         });
       } else {
-        print("hahahah");
+     
         var noid = "noid";
         editprofileController.fetchPf(noid);
       }
@@ -122,29 +114,12 @@ class _EditPageState extends State<EditPage> {
       editprofileController.phone.text = getmyAccount.phone;
       editprofileController.firstname.text = getmyAccount.full_name;
 
-      print(getmyAccount.email);
+     
     });
   }
 
-  final RefreshController _refreshController =
-      RefreshController(initialRefresh: false);
 
-  void _onRefresh() async {
-    // monitor network fetch
-    await Future.delayed(const Duration(milliseconds: 500));
-    // if failed,use refreshFailed()
 
-    setState(() {
-      _getsub();
-    });
-    _refreshController.refreshCompleted();
-  }
-
-  void _onLoading() async {
-    await Future.delayed(const Duration(milliseconds: 1000));
-
-    _refreshController.loadComplete();
-  }
 
   _getlocation() async {
     getLocationController.fetchLocation();
@@ -161,7 +136,7 @@ class _EditPageState extends State<EditPage> {
     getSubect.fetchLocation2();
 
     sub2 = getSubect.listlocation2.value;
-    if (sub2 != null && sub2.isNotEmpty) {
+    if (sub2.isNotEmpty) {
       setState(() {
         getSubect.subject2 = sub2[0];
       });
@@ -339,7 +314,7 @@ class _EditPageState extends State<EditPage> {
                       }).toList(),
                       onChanged: (value) {
                         setState(() {
-                          FocusScope.of(context).requestFocus(new FocusNode());
+                          FocusScope.of(context).requestFocus(FocusNode());
                           editprofileController.macthgender.value = value!;
                         });
                       },
@@ -447,7 +422,7 @@ class _EditPageState extends State<EditPage> {
                       }).toList(),
                       onChanged: (value) {
                         setState(() {
-                          FocusScope.of(context).requestFocus(new FocusNode());
+                          FocusScope.of(context).requestFocus(FocusNode());
                           editprofileController.since.value = value!;
                         });
                       },
@@ -992,7 +967,7 @@ class _EditPageState extends State<EditPage> {
                       onChanged: (GetCategory subcitymodel) {
                         getCatgrory.setSubectStatus(subcitymodel);
 
-                        print(subcitymodel.name);
+                       
                         if (subcitymodel.name == "Others") {
                           setState(() {
                             showSubject(false);
@@ -1156,7 +1131,7 @@ class _EditPageState extends State<EditPage> {
                               fontFamily: 'WorkSans',
                             ),
                           )
-                        : SizedBox(),
+                        : const SizedBox(),
 
                     showSubject.isTrue
                         ? FormDropDownWidgetSub(
@@ -1167,7 +1142,7 @@ class _EditPageState extends State<EditPage> {
                               getSubect.setSubectStatus_e(subcitymodel);
                             },
                           )
-                        : SizedBox(),
+                        : const SizedBox(),
 
                     const SizedBox(
                       height: 20,
@@ -1200,7 +1175,7 @@ class _EditPageState extends State<EditPage> {
                         fontFamily: 'WorkSans',
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     showSubject.isTrue
@@ -1212,7 +1187,7 @@ class _EditPageState extends State<EditPage> {
                               getLevelContoller.setLevelStatus(subcitymodel);
                             },
                           )
-                        : Text(
+                        : const Text(
                             'Primary',
                             style: TextStyle(
                               fontSize: 17,
@@ -1332,9 +1307,9 @@ class _EditPageState extends State<EditPage> {
                             .setLocationStatuslocation(subcitymodel);
 
                         setState(() {
-                          FocusScope.of(context).requestFocus(new FocusNode());
+                          FocusScope.of(context).requestFocus(FocusNode());
 
-                          if (getLocationController.listlocation.length != 0) {
+                          if (getLocationController.listlocation.isNotEmpty) {
                             showsubject = true;
                           } else {
                             showsubject = false;
@@ -1532,7 +1507,7 @@ class _EditPageState extends State<EditPage> {
                 Text(
                   txt2,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.w200,
                     fontSize: 14,
                     letterSpacing: 0.27,

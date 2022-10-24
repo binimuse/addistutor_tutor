@@ -37,7 +37,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants.dart';
-import 'editprofile.dart';
 import 'feedback_screen.dart';
 import 'mypenality.dart';
 
@@ -452,7 +451,7 @@ class _ProfilePageState extends State<ProfileS> {
                       Navigator.push<dynamic>(
                         context,
                         MaterialPageRoute<dynamic>(
-                          builder: (BuildContext context) => WalletPage(),
+                          builder: (BuildContext context) => const WalletPage(),
                         ),
                       );
                     },
@@ -547,7 +546,6 @@ class _ProfilePageState extends State<ProfileS> {
                                         removeaccount.seteditInfo(context, ids);
                                       });
                                     } else {
-                                      var noid = "noid";
                                     }
                                   } else {}
                                 },
@@ -564,13 +562,13 @@ class _ProfilePageState extends State<ProfileS> {
                               ),
                             ),
 
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             const Divider(
                               height: 1,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             SizedBox(

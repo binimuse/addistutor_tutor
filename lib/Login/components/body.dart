@@ -1,12 +1,10 @@
-// ignore_for_file: prefer_typing_uninitialized_variables, duplicate_ignore, avoid_print, deprecated_member_use
+// ignore_for_file: prefer_typing_uninitialized_variables, duplicate_ignore, avoid_print, deprecated_member_use, invalid_use_of_protected_member
 
 import 'dart:convert';
 
 import 'package:addistutor_tutor/Profile/editprofile.dart';
 import 'package:addistutor_tutor/Profile/getmyaccount.dart';
-import 'package:addistutor_tutor/Signup/components/or_divider.dart';
 import 'package:addistutor_tutor/Signup/components/otp.dart';
-import 'package:addistutor_tutor/Signup/components/social_icon.dart';
 import 'package:addistutor_tutor/Signup/signup_screen.dart';
 import 'package:addistutor_tutor/components/already_have_an_account_acheck.dart';
 
@@ -25,8 +23,7 @@ import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart' show SharedPreferences;
 
 import '../../../constants.dart';
 import 'background.dart';
@@ -131,7 +128,7 @@ class _LoginScreenState extends State<Body> {
     getSubect.fetchLocation2();
 
     sub2 = getSubect.listlocation2.value;
-    if (sub2 != null && sub2.isNotEmpty) {
+    if (sub2.isNotEmpty) {
       setState(() {
         getSubect.subject2 = sub2[0];
       });
@@ -148,9 +145,6 @@ class _LoginScreenState extends State<Body> {
   SharedPreferences? localStorage;
   final _formKey = GlobalKey<FormState>();
 
-  bool _isLoggedIn = false;
-  late GoogleSignInAccount _userObj;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
   late TextEditingController emailcon;
 
   var body;
@@ -353,92 +347,6 @@ class _LoginScreenState extends State<Body> {
     );
   }
 
-  void _loginwithgoogle() async {
-    setState(() {
-      isLoading = true;
-    });
-    var data = {'email': email, 'password': password};
-    var res = await Network().authData(data, "login-teacher");
-    body = json.decode(res.body);
-    // ignore: avoid_print
-
-    //  print(body.toString());
-    if (res.statusCode == 200) {
-      // commit();
-      SharedPreferences localStorage = await SharedPreferences.getInstance();
-      localStorage.setString("token", body["token"]);
-
-      localStorage.setString('user', json.encode(body['user']));
-
-      // if (bodys["student_id"] == null) {
-      //   Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //       builder: (context) => ProfileScreen(),
-      //     ),
-      //   );
-      // } else {
-      //   Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //       builder: (context) => Main(),
-      //     ),
-      //   );
-      // }
-
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const Main(),
-        ),
-      );
-
-      isLoading = false;
-    } else if (res.statusCode == 401) {
-      _googleSignIn.signOut().then((value) {
-        setState(() {
-          _isLoggedIn = false;
-        });
-      }).catchError((e) {});
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('info'),
-          content: Text(body["message"]),
-          actions: <Widget>[
-            FlatButton(
-              onPressed: () {
-                Navigator.of(context).pop(true);
-                setState(() {
-                  isLoading = false;
-                });
-              },
-              child: const Text('ok'),
-            ),
-          ],
-        ),
-      );
-    } else {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('info'),
-          content: Text(body["message"]),
-          actions: <Widget>[
-            FlatButton(
-              onPressed: () {
-                Navigator.of(context).pop(true);
-                setState(() {
-                  isLoading = false;
-                });
-              },
-              child: const Text('ok'),
-            ),
-          ],
-        ),
-      );
-    }
-  }
 
   void _login() async {
     setState(() {

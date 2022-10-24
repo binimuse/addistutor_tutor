@@ -5,7 +5,6 @@ import 'dart:convert';
 import 'package:addistutor_tutor/Login/login_screen.dart';
 import 'package:addistutor_tutor/Profile/termsodservice.dart';
 import 'package:addistutor_tutor/Signup/components/otp.dart';
-import 'package:addistutor_tutor/Signup/components/social_icon.dart';
 import 'package:addistutor_tutor/components/already_have_an_account_acheck.dart';
 
 import 'package:addistutor_tutor/components/text_field_container.dart';
@@ -15,13 +14,11 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // ignore: import_of_legacy_library_into_null_safe
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../constants.dart';
 import 'background.dart';
-import 'or_divider.dart';
 
 class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);
@@ -39,11 +36,9 @@ class _SplashScreenState extends State<Body> {
   bool isLoading = false;
   var inforesponse;
   bool isChecked = false;
-  bool _isLoggedIn = false;
 
   bool ispassChecked = false;
   var confirmpass;
-  late GoogleSignInAccount _userObj;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   @override
   Widget build(BuildContext context) {
@@ -63,7 +58,7 @@ class _SplashScreenState extends State<Body> {
               ),
               SizedBox(height: size.height * 0.03),
               Image(
-                image: AssetImage(
+                image: const AssetImage(
                   'assets/images/new.png',
                 ),
                 height: size.height * 0.15,
@@ -390,7 +385,6 @@ class _SplashScreenState extends State<Body> {
       setState(() {
         _googleSignIn.signOut().then((value) {
           setState(() {
-            _isLoggedIn = false;
           });
         }).catchError((e) {});
       });
@@ -605,6 +599,7 @@ class _SplashScreenState extends State<Body> {
                     ),
                   );
                 },
+                // ignore: deprecated_member_use
                 child: FlatButton(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),

@@ -2,7 +2,6 @@
 
 import 'dart:io';
 
-import 'package:addistutor_tutor/Wallet/wallet.dart';
 import 'package:addistutor_tutor/controller/getnotificationcontoller.dart';
 import 'package:addistutor_tutor/controller/getreqestedbookingcpntroller.dart';
 import 'package:addistutor_tutor/remote_services/user.dart';
@@ -11,7 +10,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '../constants.dart';
 import 'activity_item_widget.dart';
 
 class Notificationclass extends StatefulWidget {
@@ -118,7 +116,7 @@ class _ActivityPageState extends State<Notificationclass>
                       ),
                     ),
                   ),
-                  body: getNotigicationController.listdate.length != 0
+                  body: getNotigicationController.listdate.isNotEmpty
                       ? ListView.builder(
                           scrollDirection: Axis.vertical,
                           itemBuilder: (context, index) {
@@ -131,7 +129,7 @@ class _ActivityPageState extends State<Notificationclass>
                           },
                           itemCount: getNotigicationController.listdate.length,
                         )
-                      : Center(
+                      : const Center(
                           child: Text(
                             'No Notification',
                             style: TextStyle(
