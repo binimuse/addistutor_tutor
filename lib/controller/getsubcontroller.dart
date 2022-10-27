@@ -31,6 +31,7 @@ class GetSubect extends GetxController with StateMixin {
   }
 
   void setSubectStatus(Subjects zonemodel) {
+  
     listSubjectvalue.value = zonemodel;
   }
 
