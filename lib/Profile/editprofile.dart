@@ -3,12 +3,16 @@
 import 'dart:convert';
 
 import 'package:addistutor_tutor/Home/components/design_course_app_theme.dart';
+
 import 'package:addistutor_tutor/Profile/getmyaccount.dart';
+import 'package:addistutor_tutor/components/dropdown_common_model%20copy.dart';
 import 'package:addistutor_tutor/components/form_drop_down_widget.dart';
 import 'package:addistutor_tutor/components/form_drop_down_widget_cat.dart';
 import 'package:addistutor_tutor/components/form_drop_down_widget_level.dart';
+import 'package:addistutor_tutor/components/form_drop_down_widget_new.dart';
 import 'package:addistutor_tutor/components/form_drop_down_widget_qul.dart';
 import 'package:addistutor_tutor/components/form_drop_down_widget_sub.dart';
+import 'package:addistutor_tutor/components/keyboard.dart';
 import 'package:addistutor_tutor/controller/editprofilecontroller.dart';
 import 'package:addistutor_tutor/controller/getcategorycontroller.dart';
 import 'package:addistutor_tutor/controller/getlevelcontroller.dart';
@@ -56,7 +60,8 @@ class _EditPageState extends State<EditPage> {
   late var elocationname = "";
   late var plocationname = "";
   var showSubject = true.obs;
-
+  RxList<DropDownCommenModel> desablity = List<DropDownCommenModel>.of([]).obs;
+  var desablityValue = Rxn<DropDownCommenModel>();
   var body;
   var ids;
   void _fetchUser() async {
@@ -86,8 +91,6 @@ class _EditPageState extends State<EditPage> {
 
   @override
   void initState() {
-    super.initState();
-
     editprofileController.date = DateFormat.yMd().format(DateTime.now());
 
     _fetchUser();
@@ -97,6 +100,11 @@ class _EditPageState extends State<EditPage> {
 
     _getqulafication();
     _getmyaccount();
+    desablity
+        .add(DropDownCommenModel(id: "2", title: "1st cycle primary(1-4)"));
+    desablity
+        .add(DropDownCommenModel(id: "3", title: "2nd cycle primary(5-8)"));
+    super.initState();
   }
 
   _getEmCategory() async {
@@ -127,6 +135,8 @@ class _EditPageState extends State<EditPage> {
   List<Subjects2> sub2 = [];
 
   _getsub() async {
+    getSubect.listSubject.value.clear();
+    getSubect.listSubjectvalue.value = null;
     getSubect.fetchLocation(editprofileController.lid);
     // getSubect.fetchLocation2();
   }
@@ -300,6 +310,7 @@ class _EditPageState extends State<EditPage> {
                           FocusScope.of(context).requestFocus(FocusNode());
                           editprofileController.macthgender.value = value!;
                         });
+                        KeyboardUtil.hideKeyboard(context);
                       },
                     ),
                     const SizedBox(
@@ -505,6 +516,7 @@ class _EditPageState extends State<EditPage> {
                       value: getLocationController.listlocationvalue.value,
                       onChanged: (GetLocation subcitymodel) {
                         getLocationController.setLocationStatus(subcitymodel);
+                        KeyboardUtil.hideKeyboard(context);
                       },
                     ),
                     // Row(children: [
@@ -712,6 +724,7 @@ class _EditPageState extends State<EditPage> {
                       value: getLocationController.listlocationvalue_gu.value,
                       onChanged: (GetLocation subcitymodel) {
                         getLocationController.setLocationStatusgu(subcitymodel);
+                        KeyboardUtil.hideKeyboard(context);
                       },
                     ),
                     // Row(children: [
@@ -859,6 +872,7 @@ class _EditPageState extends State<EditPage> {
                             showSubject(true);
                           });
                         }
+                        KeyboardUtil.hideKeyboard(context);
                       },
                     ),
                     const SizedBox(
@@ -935,6 +949,7 @@ class _EditPageState extends State<EditPage> {
                             onChanged: (GetLocation subcitymodel) {
                               getLocationController
                                   .setLocationStatuse(subcitymodel);
+                              KeyboardUtil.hideKeyboard(context);
                             },
                           )
                         : SizedBox(),
@@ -1054,6 +1069,7 @@ class _EditPageState extends State<EditPage> {
                                 FocusScope.of(context)
                                     .requestFocus(FocusNode());
                                 editprofileController.since.value = value!;
+                                KeyboardUtil.hideKeyboard(context);
                               });
                             },
                           )
@@ -1077,6 +1093,7 @@ class _EditPageState extends State<EditPage> {
                           getqulificationcontroller.listQulificationvalue.value,
                       onChanged: (GetQulification subcitymodel) {
                         getqulificationcontroller.setLevelStatus(subcitymodel);
+                        KeyboardUtil.hideKeyboard(context);
                       },
                     ),
                     const SizedBox(
@@ -1101,6 +1118,7 @@ class _EditPageState extends State<EditPage> {
                             value: getSubect.listSubjectvalue_e.value,
                             onChanged: (Subjects subcitymodel) {
                               getSubect.setSubectStatus_e(subcitymodel);
+                              KeyboardUtil.hideKeyboard(context);
                             },
                           )
                         : const SizedBox(),
@@ -1145,17 +1163,27 @@ class _EditPageState extends State<EditPage> {
                               getLevelContoller.setLevelStatus(subcitymodel);
 
                               editprofileController.lid = subcitymodel.id;
+                              getSubect.listSubject.value.clear();
+                              getSubect.listSubjectvalue.value = null;
+
+                              print(editprofileController.lid);
                               _getsub();
+                              KeyboardUtil.hideKeyboard(context);
                             },
                           )
-                        : const Text(
-                            'Primary',
-                            style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black,
-                              fontFamily: 'WorkSans',
-                            ),
+                        : FormDropDownNewWidget(
+                            hintText: "Preferred level for tutoring".trArgs(),
+                            options: desablity.value,
+                            value: desablityValue.value,
+                            onChanged: (DropDownCommenModel value) {
+                              getSubect.listSubject.value.clear();
+                              getSubect.listSubjectvalue.value = null;
+
+                              editprofileController.lid = value.id;
+                              _getsub();
+                              KeyboardUtil.hideKeyboard(context);
+                            },
+                            enabled: true,
                           ),
 
                     const SizedBox(

@@ -383,7 +383,7 @@ class EditprofileController extends GetxController with StateMixin {
               ? ""
               : getLocationController.listlocationvalue_location.value!.id,
       "subcity": getLocationController.listlocationvalue_e.value == null
-          ? ""
+          ? "1"
           : getLocationController.listlocationvalue_e.value!.name,
       "woreda": woreda.toString(),
     };
