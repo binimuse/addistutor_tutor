@@ -23,7 +23,8 @@ import 'package:addistutor_tutor/remote_services/user.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart' show SharedPreferences;
+import 'package:shared_preferences/shared_preferences.dart'
+    show SharedPreferences;
 
 import '../../../constants.dart';
 import 'background.dart';
@@ -268,6 +269,10 @@ class _LoginScreenState extends State<Body> {
               //   ),
               // ),
               Container(
+                margin: const EdgeInsets.symmetric(
+                  horizontal: 40,
+                  vertical: 20,
+                ),
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 // ignore: deprecated_member_use
                 child: FlatButton(
@@ -346,7 +351,6 @@ class _LoginScreenState extends State<Body> {
       ),
     );
   }
-
 
   void _login() async {
     setState(() {

@@ -82,7 +82,6 @@ class _HomePageState extends State<TutorDahsbord>
 
       if (body["teacher_id"] != null) {
         setState(() {
-        
           ids = int.parse(body["teacher_id"]);
           getReqBooking.fetchReqBooking(body["teacher_id"]);
           getReqBooking.isfetchedsubject(true);
@@ -303,23 +302,34 @@ class _HomePageState extends State<TutorDahsbord>
                                           width: 40,
                                           height: 80,
                                           decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  width: 4,
-                                                  color: Theme.of(context)
-                                                      .scaffoldBackgroundColor),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    spreadRadius: 2,
-                                                    blurRadius: 10,
-                                                    color: Colors.black
-                                                        .withOpacity(0.1),
-                                                    offset: const Offset(0, 10))
-                                              ],
-                                              shape: BoxShape.circle,
-                                              image: DecorationImage(
-                                                  fit: BoxFit.contain,
-                                                  image: NetworkImage(
-                                                      "https://nextgeneducation.et/student-profile-picture/${chat.student.id}"))),
+                                            border: Border.all(
+                                                width: 4,
+                                                color: Theme.of(context)
+                                                    .scaffoldBackgroundColor),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  spreadRadius: 2,
+                                                  blurRadius: 10,
+                                                  color: Colors.black
+                                                      .withOpacity(0.1),
+                                                  offset: const Offset(0, 10))
+                                            ],
+                                            shape: BoxShape.circle,
+                                            image: DecorationImage(
+                                              fit: BoxFit.contain,
+                                              // image: NetworkImage(
+                                              //   "https://nextgeneducation.et/student-profile-picture/${chat.student.id}",
+                                              // ),
+
+                                              image: NetworkImage(
+                                                  // "https://nextgeneducation.et/api/teacher-profile-picture/${category!.id}",
+                                                  index == 0
+                                                      ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTtKC-ND4_EnNxvuNw-gmmMOzPUO8kabo-SA&usqp=CAU"
+                                                      : index == 1
+                                                          ? "https://media-exp1.licdn.com/dms/image/C5603AQGTnSWEfYq1bg/profile-displayphoto-shrink_400_400/0/1649013749613?e=1672272000&v=beta&t=hC0vxUCpy2IMf_W56-cT3X0sMJDPFX_pzHHQOwIitV8"
+                                                          : "https://userphotos2.teacheron.com/1220313-51919.jpg"),
+                                            ),
+                                          ),
                                         ),
                                       ],
                                     ),
