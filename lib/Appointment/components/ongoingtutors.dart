@@ -210,17 +210,17 @@ class CategoryView extends StatelessWidget {
                                       shape: BoxShape.circle,
                                       image: DecorationImage(
                                         fit: BoxFit.contain,
-                                        // image: NetworkImage(
-                                        //   "https://nextgeneducation.et/api/student-profile-picture/${category!.student.id}",
-                                        // ),
-
                                         image: NetworkImage(
-                                            // "https://nextgeneducation.et/api/teacher-profile-picture/${category!.id}",
-                                            index == 0
-                                                ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTtKC-ND4_EnNxvuNw-gmmMOzPUO8kabo-SA&usqp=CAU"
-                                                : index == 1
-                                                    ? "https://media-exp1.licdn.com/dms/image/C5603AQGTnSWEfYq1bg/profile-displayphoto-shrink_400_400/0/1649013749613?e=1672272000&v=beta&t=hC0vxUCpy2IMf_W56-cT3X0sMJDPFX_pzHHQOwIitV8"
-                                                    : "https://userphotos2.teacheron.com/1220313-51919.jpg"),
+                                          "https://nextgeneducation.et/api/student-profile-picture/${category!.student.id}",
+                                        ),
+
+                                        // image: NetworkImage(
+                                        //     // "https://nextgeneducation.et/api/teacher-profile-picture/${category!.id}",
+                                        //     index == 0
+                                        //         ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTtKC-ND4_EnNxvuNw-gmmMOzPUO8kabo-SA&usqp=CAU"
+                                        //         : index == 1
+                                        //             ? "https://media-exp1.licdn.com/dms/image/C5603AQGTnSWEfYq1bg/profile-displayphoto-shrink_400_400/0/1649013749613?e=1672272000&v=beta&t=hC0vxUCpy2IMf_W56-cT3X0sMJDPFX_pzHHQOwIitV8"
+                                        //             : "https://userphotos2.teacheron.com/1220313-51919.jpg"),
                                       ),
                                     ),
                                   ),
