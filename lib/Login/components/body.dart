@@ -270,7 +270,7 @@ class _LoginScreenState extends State<Body> {
               // ),
               Container(
                 margin: const EdgeInsets.symmetric(
-                  horizontal: 40,
+                  horizontal: 75,
                   vertical: 20,
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 30),
