@@ -79,7 +79,7 @@ class _HomePageState extends State<Appointment>
 
       if (body["teacher_id"] != null) {
         setState(() {
-          ids = int.parse(body["teacher_id"]);
+          ids = body["teacher_id"];
           walletContoller.getbalance(ids);
         });
         // _cheakwallet();

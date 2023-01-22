@@ -112,7 +112,7 @@ class Teacher {
   String email;
   String gender;
   String rating;
-  String teaching_since;
+  int teaching_since;
 
   String birth_date;
 
@@ -169,8 +169,6 @@ class Teacher {
   });
 
   factory Teacher.fromJson(Map<String, dynamic> json) {
-
-
     return Teacher(
       id: json["id"] as int,
       first_name: json["first_name"],
@@ -224,8 +222,8 @@ class GetLocation2 {
 
 class Activedays {
   String day;
-  String is_active;
-  String teacher_id;
+  int is_active;
+  int teacher_id;
 
   Activedays({
     required this.day,
@@ -243,7 +241,7 @@ class Activedays {
 }
 
 class Balance {
-  String wallet_amount;
+  int wallet_amount;
 
   Balance({
     required this.wallet_amount,
@@ -258,8 +256,8 @@ class Balance {
 
 class Transaction {
   String slip_id;
-  String amount;
-  String status;
+  int amount;
+  int status;
   String date;
 
   Transaction({
@@ -700,7 +698,7 @@ class GetLevel {
   String id;
 
   String title;
-  String price;
+  int price;
   String description;
 
   GetLevel({

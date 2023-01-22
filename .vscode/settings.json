@@ -2,8 +2,19 @@
     "cSpell.enableFiletypes": [
         "dart"
     ],
-    "dart.flutterSdkPath": "C:\\src\\flutter\\flutter",
+  //  "dart.flutterSdkPath": "C:\\src\\flutter\\flutter",
     "cSpell.words": [
         "autovalidate"
-    ]
+    ],
+
+    "dart.flutterSdkPath": "C:\\Users\\omen\\fvm\\versions\\2.10.0",
+    "dart.flutterSdkPaths": ["/Users/usr/fvm/versions"],
+    // Remove .fvm files from search
+    "search.exclude": {
+      "**/.fvm": true
+    },
+    // Remove from file watching
+    "files.watcherExclude": {
+      "**/.fvm": true
+    }
 }

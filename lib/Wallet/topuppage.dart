@@ -41,7 +41,7 @@ class _FeedbackScreenState extends State<TopUpPage> {
       body = json.decode(token);
 
       if (body["teacher_id"] != null) {
-        ids = int.parse(body["teacher_id"]);
+        ids = body["teacher_id"];
       } else {
         //  editprofileController.fetchPf(noid);
 

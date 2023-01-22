@@ -82,8 +82,8 @@ class _FeedbackScreenState extends State<AvalablityScreen> {
       var body = json.decode(token);
 
       if (body["teacher_id"] != null) {
-        ids = int.parse(body["teacher_id"]);
-        editprofileController.fetchPf(int.parse(body["teacher_id"]));
+        ids = body["teacher_id"];
+        editprofileController.fetchPf(body["teacher_id"]);
       } else {
         var noid = "noid";
 

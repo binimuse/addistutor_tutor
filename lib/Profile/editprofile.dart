@@ -72,9 +72,9 @@ class _EditPageState extends State<EditPage> {
       body = json.decode(token);
 
       if (body["teacher_id"] != null) {
-        editprofileController.fetchPf(int.parse(body["teacher_id"]));
+        editprofileController.fetchPf(body["teacher_id"]);
         setState(() {
-          ids = int.parse(body["teacher_id"]);
+          ids = body["teacher_id"];
         });
       } else {
         var noid = "noid";
@@ -898,7 +898,7 @@ class _EditPageState extends State<EditPage> {
                                     fontSize: 16,
                                     fontWeight: FontWeight.w300)),
                           )
-                        : SizedBox(),
+                        : const SizedBox(),
                     const SizedBox(
                       height: 20,
                     ),
@@ -922,12 +922,12 @@ class _EditPageState extends State<EditPage> {
                                     fontSize: 16,
                                     fontWeight: FontWeight.w300)),
                           )
-                        : SizedBox(),
+                        : const SizedBox(),
                     showSubject.isTrue
                         ? const SizedBox(
                             height: 20,
                           )
-                        : SizedBox(),
+                        : const SizedBox(),
 
                     showSubject.isTrue
                         ? const Text(
@@ -939,7 +939,7 @@ class _EditPageState extends State<EditPage> {
                               fontFamily: 'WorkSans',
                             ),
                           )
-                        : SizedBox(),
+                        : const SizedBox(),
                     showSubject.isTrue
                         ? FormDropDownWidget(
                             hintText: "Select Subcity".trArgs(),
@@ -952,13 +952,13 @@ class _EditPageState extends State<EditPage> {
                               KeyboardUtil.hideKeyboard(context);
                             },
                           )
-                        : SizedBox(),
+                        : const SizedBox(),
 
                     showSubject.isTrue
                         ? const SizedBox(
                             height: 20,
                           )
-                        : SizedBox(),
+                        : const SizedBox(),
 
                     showSubject.isTrue
                         ? TextFormField(
@@ -981,12 +981,12 @@ class _EditPageState extends State<EditPage> {
                                     fontSize: 16,
                                     fontWeight: FontWeight.w300)),
                           )
-                        : SizedBox(),
+                        : const SizedBox(),
                     showSubject.isTrue
                         ? const SizedBox(
                             height: 20,
                           )
-                        : SizedBox(),
+                        : const SizedBox(),
 
                     showSubject.isTrue
                         ? const Text(
@@ -998,10 +998,10 @@ class _EditPageState extends State<EditPage> {
                               fontFamily: 'WorkSans',
                             ),
                           )
-                        : SizedBox(),
+                        : const SizedBox(),
                     showSubject.isTrue
                         ? DropdownButton<String>(
-                            value: editprofileController.since.value,
+                            value: editprofileController.since.value.toString(),
                             isExpanded: true,
                             style: const TextStyle(
                                 color: Colors.black,
@@ -1073,7 +1073,7 @@ class _EditPageState extends State<EditPage> {
                               });
                             },
                           )
-                        : SizedBox(),
+                        : const SizedBox(),
                     const Text(
                       'Highest qualification',
                       style: TextStyle(

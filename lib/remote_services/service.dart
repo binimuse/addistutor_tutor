@@ -40,7 +40,6 @@ class RemoteServices {
 
   static Future<String> UpdateProfile(var data) async {
     List<String> errors = [];
-  
 
     // create multipart request
     res = await Network().getpassedData(data, "teacher-update");
@@ -112,8 +111,7 @@ class RemoteServices {
   }
 
   static Future<Teacher> fetchpf(var id) async {
-    // print("id.toString()");
-    //print(id.toString());
+  
     res = await Network().getData("teacher/${id.toString()}");
 
     var body = json.decode(res.body);
@@ -429,7 +427,7 @@ class RemoteServices {
     var body = json.decode(res.body);
 
     // print("body");
-  
+
     if (res.statusCode == 200) {
       return body["data"]
           .map((e) => Subjects2.fromJson(e))
@@ -457,11 +455,9 @@ class RemoteServices {
   }
 
   static Future<List<Subjects>> getsubject(var tid) async {
-   
     res = await Network().getData("subjects?tutoring_level_id=${tid}");
 
     var body = json.decode(res.body);
-
 
     if (res.statusCode == 200) {
       return body["data"]
@@ -496,7 +492,7 @@ class RemoteServices {
     res = await Network().getpassedData(data, "booking/${id}/end");
     body = json.decode(res.body);
     // ignore: avoid_print
-   
+
     if (res.statusCode == 200) {
       return body["success"].toString();
     } else {

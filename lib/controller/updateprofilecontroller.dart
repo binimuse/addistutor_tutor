@@ -69,35 +69,28 @@ class Updateprofilecontoller extends GetxController with StateMixin {
       change(fetched, status: RxStatus.success());
       isFetched.value = true;
     } else {
-      try {
-        //  openAndCloseLoadingDialog();
-        fetched = await RemoteServices.fetchpf(id);
+      print("id.toString()");
+      print(id.toString());
+      fetched = await RemoteServices.fetchpf(id.toString());
 
-        if (fetched != "") {
-          isFetched.value = true;
-          id = fetched.id;
+      if (fetched != "") {
+        isFetched.value = true;
+        id = fetched.id;
 
-          phone.text = fetched.phone_no;
+        phone.text = fetched.phone_no;
 
-          email.text = fetched.email;
+        email.text = fetched.email;
 
-          officephone.text = fetched.phone_no_office;
-          rephone.text = fetched.phone_no_residence;
-          subcityid = fetched.subcity;
-          woreda.text = fetched.woreda;
+        officephone.text = fetched.phone_no_office;
+        rephone.text = fetched.phone_no_residence;
+        subcityid = fetched.subcity;
+        woreda.text = fetched.woreda;
 
-          About.text = fetched.about;
+        About.text = fetched.about;
 
-          await Future.delayed(const Duration(seconds: 1));
-          // Dismiss CircularProgressIndicator
-          //   Navigator.of(Get.context!).pop();
-        }
-        change(fetched, status: RxStatus.success());
-      } on Exception {
-        change(null, status: RxStatus.error("Something went wrong"));
-
-        // ignore: todo
-        // TODO
+        await Future.delayed(const Duration(seconds: 1));
+        // Dismiss CircularProgressIndicator
+        //   Navigator.of(Get.context!).pop();
       }
     }
   }
@@ -147,8 +140,6 @@ class Updateprofilecontoller extends GetxController with StateMixin {
         ifupdatd(false);
       }
     } else {
- 
-
       var data = {
         "phone_no": phone.text,
         "phone_no_office": officephone.text,

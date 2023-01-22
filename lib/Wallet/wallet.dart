@@ -41,14 +41,11 @@ class _EditProfilePageState extends State<WalletPage> {
       //   print(fetched);
       if (fetched != "") {
         earned_amount.value = fetched.earned_amount.toString();
-      
 
         await Future.delayed(const Duration(seconds: 1));
         // Dismiss CircularProgressIndicator
         //   Navigator.of(Get.context!).pop();
-      } else {
-       
-      }
+      } else {}
     } on Exception {
       // ignore: todo
       // TODO
@@ -63,10 +60,9 @@ class _EditProfilePageState extends State<WalletPage> {
       var body = json.decode(token);
 
       if (body["teacher_id"] != null) {
-      
-        fetchPf(int.parse(body["teacher_id"]));
+        fetchPf(body["teacher_id"]);
         setState(() {
-          ids = int.parse(body["teacher_id"]);
+          ids = body["teacher_id"];
           walletContoller.getbalance(ids);
           walletContoller.gettransaction(ids);
         });
@@ -338,7 +334,8 @@ class _EditProfilePageState extends State<WalletPage> {
                                                       CrossAxisAlignment.center,
                                                   children: <Widget>[
                                                     Text(
-                                                      transaction.amount +
+                                                      transaction.amount
+                                                              .toString() +
                                                           " Birr",
                                                       style: const TextStyle(
                                                           fontSize: 18,
@@ -446,7 +443,8 @@ class _EditProfilePageState extends State<WalletPage> {
                                                               .center,
                                                       children: <Widget>[
                                                         Text(
-                                                          transaction.amount +
+                                                          transaction.amount
+                                                                  .toString() +
                                                               " Birr",
                                                           style:
                                                               const TextStyle(
@@ -556,7 +554,8 @@ class _EditProfilePageState extends State<WalletPage> {
                                                               .center,
                                                       children: <Widget>[
                                                         Text(
-                                                          transaction.amount +
+                                                          transaction.amount
+                                                                  .toString() +
                                                               " Birr",
                                                           style:
                                                               const TextStyle(

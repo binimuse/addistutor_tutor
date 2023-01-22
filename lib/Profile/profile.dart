@@ -168,9 +168,9 @@ class _ProfilePageState extends State<ProfileS> {
 
       if (body["teacher_id"] != null) {
         setState(() {
-          ids = int.parse(body["teacher_id"]);
+          ids = body["teacher_id"];
         });
-        editprofileController.fetchPf(int.parse(body["teacher_id"]));
+        editprofileController.fetchPf(body["teacher_id"]);
       } else {
         var noid = "noid";
 
@@ -545,8 +545,7 @@ class _ProfilePageState extends State<ProfileS> {
                                         ids = body["id"];
                                         removeaccount.seteditInfo(context, ids);
                                       });
-                                    } else {
-                                    }
+                                    } else {}
                                   } else {}
                                 },
                                 child: const Center(

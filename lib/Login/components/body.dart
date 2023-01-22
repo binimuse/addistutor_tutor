@@ -86,7 +86,7 @@ class _LoginScreenState extends State<Body> {
 
       if (body["teacher_id"] != null) {
         setState(() {
-          ids = int.parse(body["teacher_id"]);
+          ids = body["teacher_id"];
 
           walletContoller.getbalance(ids);
         });

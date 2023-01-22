@@ -275,7 +275,7 @@ class EditprofileController extends GetxController with StateMixin {
           middlename.text = fetched.middle_name;
           phone.text = fetched.phone_no;
           macthgender.value = fetched.gender;
-          since.value = fetched.teaching_since;
+          since.value = fetched.teaching_since.toString();
           email.text = fetched.email;
           date = fetched.birth_date;
           officephone.text = fetched.phone_no_office;
@@ -301,7 +301,8 @@ class EditprofileController extends GetxController with StateMixin {
         }
         change(fetched, status: RxStatus.success());
       } on Exception {
-        //change(null, status: RxStatus.error("Something went wrong"));
+        print(fetched);
+        change(null, status: RxStatus.error("Something went wrong"));
 
         // ignore: todo
         // TODO

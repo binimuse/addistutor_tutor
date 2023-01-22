@@ -54,9 +54,9 @@ class _EditPageState extends State<UpdateProfile> {
       body = json.decode(token);
 
       if (body["teacher_id"] != null) {
-        updateprofilecontoller.fetchPf(int.parse(body["teacher_id"]));
+        updateprofilecontoller.fetchPf(body["teacher_id"]);
         setState(() {
-          id = int.parse(body["teacher_id"]);
+          id = body["teacher_id"];
         });
       } else {
         var noid = "noid";
@@ -92,7 +92,7 @@ class _EditPageState extends State<UpdateProfile> {
 
   _getlocation() async {
     getLocationController.fetchLocation();
-   
+
     // location = getLocationController.listlocation.value;
     // if (location != null && location.isNotEmpty) {
     //   setState(() {
