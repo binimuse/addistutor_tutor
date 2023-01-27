@@ -261,7 +261,8 @@ class CategoryView extends StatelessWidget {
                                           size: 10,
                                         ),
                                         Text(
-                                          category!.session + " session",
+                                          category!.session.toString() +
+                                              " session",
                                           // ignore: prefer_const_constructors
                                           style: TextStyle(
                                             color: kPrimaryColor,

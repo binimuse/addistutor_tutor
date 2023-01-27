@@ -111,7 +111,7 @@ class Teacher {
   String phone_no;
   String email;
   String gender;
-  String rating;
+  int rating;
   int teaching_since;
 
   String birth_date;
@@ -414,10 +414,10 @@ class Locations {
 class RequestedBooking {
   int id;
 
-  String session;
+  int session;
   int sessiontaken;
   String message;
-  String is_active;
+  int is_active;
   String student_id;
   String ended_at;
   List<Bookingschedule> booking_schedule;
@@ -538,7 +538,7 @@ class Bookingschedule {
 
   String day;
   String readable_time;
-  String booking_id;
+  int booking_id;
 
   Bookingschedule({
     required this.id,
@@ -631,10 +631,10 @@ class ReqTech {
   String gender;
   String birth_date;
   String about;
-  String rating;
+  int rating;
   String location_id;
   String profile_img;
-  String teaching_since;
+  int teaching_since;
 
   ReqTech({
     required this.id,
