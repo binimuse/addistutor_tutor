@@ -490,7 +490,7 @@ class GetCategory {
 
   String name;
   String description;
-  String additional_price;
+  int additional_price;
 
   GetCategory({
     required this.id,
@@ -514,7 +514,7 @@ class Subjects {
 
   String code;
   String title;
-  String tutoring_level_id;
+  int tutoring_level_id;
 
   Subjects({
     required this.id,
