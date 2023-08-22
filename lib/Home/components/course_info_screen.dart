@@ -146,7 +146,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                           ),
                           Padding(
                             padding: const EdgeInsets.only(
-                                left: 16, right: 16, bottom: 8, top: 10),
+                                left: 5, right: 5, bottom: 8, top: 10),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.center,

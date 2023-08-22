@@ -299,7 +299,7 @@ class _HomePageState extends State<TutorDahsbord>
                                     Stack(
                                       children: [
                                         Container(
-                                          width: 40,
+                                          width: 30,
                                           height: 80,
                                           decoration: BoxDecoration(
                                             border: Border.all(
