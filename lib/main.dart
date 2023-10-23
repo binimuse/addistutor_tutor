@@ -48,11 +48,11 @@ class _MyHomePageState extends State<MyApp> {
     // or you can fetch the status and display your own dialog, or no dialog.
     const simpleBehavior = true;
 
-    if (simpleBehavior) {
-      basicStatusCheck(newVersion);
-    } else {
-      advancedStatusCheck(newVersion);
-    }
+    // if (simpleBehavior) {
+    //   basicStatusCheck(newVersion);
+    // } else {
+    //   advancedStatusCheck(newVersion);
+    // }
   }
 
   advancedStatusCheck(NewVersion newVersion) async {

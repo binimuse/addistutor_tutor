@@ -350,16 +350,18 @@ class EditprofileController extends GetxController with StateMixin {
       "phone_no_office": officephone.text,
       "phone_no_residence": rephone.text,
       "guarantor_name": g_firstname.text.isEmpty ? "" : g_firstname.text,
-      "guarantor_woreda": g_woreda.text,
+      "guarantor_woreda": g_woreda.text.isEmpty ? "" : g_woreda.text,
       "guarantor_subcity":
           getLocationController.listlocationvalue_gu.value == null
               ? ""
               : getLocationController.listlocationvalue_gu.value!.name,
-      "guarantor_phone": g_phone.text,
-      "guarantor_phone_office": g_office_phone.text,
-      "guarantor_phone_residence": g_office_phone.text,
+      "guarantor_phone": g_phone.text.isEmpty ? "" : g_phone.text,
+      "guarantor_phone_office":
+          g_office_phone.text.isEmpty ? "" : g_office_phone.text,
+      "guarantor_phone_residence":
+          g_office_phone.text.isEmpty ? "" : g_office_phone.text,
       "employer_name": e_firstname.text,
-      "employer_position": e_postion.text,
+      "employer_position": e_postion.text.isEmpty ? "" : e_postion.text,
       "employer_woreda": e_woreda.text,
       "employer_city": getLocationController.listlocationvalue_e.value == null
           ? ""

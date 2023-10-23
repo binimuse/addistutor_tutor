@@ -422,9 +422,9 @@ class _EditPageState extends State<EditPage> {
                               color: DesignCourseAppTheme.nearlyBlack,
                               fontSize: 16,
                               fontWeight: FontWeight.w300)),
-                      validator: (value) {
-                        return editprofileController.validateEmail(value!);
-                      },
+                      // validator: (value) {
+                      //   return editprofileController.validateEmail(value!);
+                      // },
                     ),
                     const SizedBox(
                       height: 20,

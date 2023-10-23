@@ -17,12 +17,13 @@ class GetReqBooking extends GetxController with StateMixin {
   List<Bookingschedule> reqdate = [];
   var isLoading = false.obs;
   void fetchReqBooking(var bId) async {
-   
     listsubject.value = await RemoteServices.getrequestedbooking(bId, "");
-   
+
     if (listsubject.isNotEmpty) {
       //print(list.length.toString());
       isfetchedsubject(true);
+    } else {
+      isfetchedsubject(false);
     }
   }
 
