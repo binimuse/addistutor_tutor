@@ -1,13 +1,17 @@
 {
-    "cSpell.enableFiletypes": [
-        "dart"
-    ],
-  //  "dart.flutterSdkPath": "C:\\src\\flutter\\flutter",
-    "cSpell.words": [
-        "autovalidate"
-    ],
 
-    "dart.flutterSdkPath": "C:\\Users\\omen\\fvm\\versions\\2.10.0",
+  "dart.flutterRunAdditionalArgs": [
+    "--no-sound-null-safety"
+],
+
+    "yaml.schemas": {
+        "https://json.schemastore.org/pubspec.json": "file:///c%3A/Users/omen/addistutor_tutor/pubspec.yaml"
+    },
+    "cSpell.words": [
+        "Bookingschedule"
+    ],
+    
+    "dart.flutterSdkPath": "~/fvm/versions/2.5.0",
     "dart.flutterSdkPaths": ["/Users/usr/fvm/versions"],
     // Remove .fvm files from search
     "search.exclude": {
@@ -18,4 +22,5 @@
       "**/.fvm": true
     },
     "editor.acceptSuggestionOnEnter": "on"
+
 }

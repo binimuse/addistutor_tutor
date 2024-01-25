@@ -69,6 +69,7 @@ class _SplashScreenState extends State<Body> {
                   children: [
                     TextFieldContainer(
                       child: TextFormField(
+                        maxLength: 20,
                         cursorColor: kPrimaryColor,
                         autofocus: false,
                         controller: signupController.fullname,
@@ -87,6 +88,10 @@ class _SplashScreenState extends State<Body> {
                     ),
                     TextFieldContainer(
                       child: TextFormField(
+                        inputFormatters: [
+                          FilteringTextInputFormatter.deny(
+                              RegExp(r'\s')), // Deny spaces
+                        ],
                         cursorColor: kPrimaryColor,
                         autofocus: false,
                         controller: signupController.email,

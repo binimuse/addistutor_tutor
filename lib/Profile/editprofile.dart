@@ -1208,7 +1208,7 @@ class _EditPageState extends State<EditPage> {
                               getSubect.setSubectStatus(subcitymodel);
                             },
                           )
-                        : const Center(child: CircularProgressIndicator()),
+                        : const Center(child: SizedBox()),
 
                     // subjectViewUI(),
                     const SizedBox(

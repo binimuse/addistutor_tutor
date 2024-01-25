@@ -183,7 +183,7 @@ class _LoginScreenState extends State<Body> {
                   controller: emailcon,
                   cursorColor: kPrimaryColor,
                   decoration: const InputDecoration(
-                    hintText: "Email",
+                    hintText: "Email or phone(251***)",
                     icon: Icon(
                       Icons.email,
                       color: kPrimaryColor,
@@ -373,82 +373,26 @@ class _LoginScreenState extends State<Body> {
       var bodys = json.decode(token!);
 
       if (bodys["email_verified_at"] == null) {
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('Please verify your email or otp'),
-            content: const Text("Go to your email or sms to confirm"),
-            actions: <Widget>[
-              FlatButton(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                color: kPrimaryColor,
-                onPressed: () {
-                  Navigator.of(context).pop(true);
-                  setState(() {
-                    isLoading = false;
-                  });
-                  Navigator.push<dynamic>(
-                    context,
-                    MaterialPageRoute<dynamic>(
-                      builder: (BuildContext context) => OTPPage(),
-                    ),
-                  );
-                },
-                child: Container(
-                    width: 20,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    alignment: Alignment.center,
-                    child: const Text(
-                      'Ok',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    )),
-              ),
-            ],
-          ),
-        );
-      } else {
-        if (bodys["teacher_id"] == null) {
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              content: const Text("To continue, please complete your profile."),
-              actions: <Widget>[
-                FlatButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  color: kPrimaryColor,
-                  onPressed: () {
-                    Navigator.of(context).pop(true);
-                    setState(() {
-                      isLoading = false;
-                    });
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const EditPage(),
-                      ),
-                    );
-                  },
-                  child: Container(
-                      width: 20,
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'Ok',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      )),
-                ),
-              ],
+        _showDialog(context, 'Please verify your email or otp',
+            "Go to your email or sms to confirm", () {
+          Navigator.push<dynamic>(
+            context,
+            MaterialPageRoute<dynamic>(
+              builder: (BuildContext context) => OTPPage(),
             ),
           );
+        });
+      } else {
+        if (bodys["teacher_id"] == null) {
+          _showDialog(context, 'To continue, please complete your profile.', "",
+              () {
+            Navigator.push<dynamic>(
+              context,
+              MaterialPageRoute<dynamic>(
+                builder: (BuildContext context) => EditPage(),
+              ),
+            );
+          });
         } else {
           Navigator.pushAndRemoveUntil(
             context,
@@ -502,6 +446,42 @@ class _LoginScreenState extends State<Body> {
         ),
       );
     }
+  }
+
+  void _showDialog(
+      BuildContext context, String title, String message, Function action) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(title),
+        content: Text(message),
+        actions: <Widget>[
+          FlatButton(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            color: kPrimaryColor,
+            onPressed: () {
+              Navigator.of(context).pop(true);
+              setState(() {
+                isLoading = false;
+              });
+              action();
+            },
+            child: Container(
+                width: 20,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                alignment: Alignment.center,
+                child: const Text(
+                  'Ok',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                )),
+          ),
+        ],
+      ),
+    );
   }
 
   Future<void> closeDialog(bool stat, var data) async {
