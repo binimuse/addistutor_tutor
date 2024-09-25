@@ -361,7 +361,7 @@ class _LoginScreenState extends State<Body> {
     body = json.decode(res.body);
     // ignore: avoid_print
 
-    //  print(body.toString());
+    print("jejasda ${body.toString()}");
     if (res.statusCode == 200) {
       // commit();
       SharedPreferences localStorage = await SharedPreferences.getInstance();
@@ -430,7 +430,7 @@ class _LoginScreenState extends State<Body> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text('incorrect Email or password '),
+          title: Text(body.toString()),
           content: Text(body["message"]),
           actions: <Widget>[
             FlatButton(

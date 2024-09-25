@@ -698,7 +698,7 @@ class GetLevel {
   String id;
 
   String title;
-  String price;
+  int price;
   String description;
 
   GetLevel({
