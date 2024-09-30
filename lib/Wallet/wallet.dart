@@ -252,7 +252,7 @@ class _EditProfilePageState extends State<WalletPage> {
                                 const SizedBox(
                                   height: 24,
                                 ),
-                                ListView.builder(
+                                ListView.separated(
                                   physics: const ScrollPhysics(),
                                   scrollDirection: Axis.vertical,
                                   shrinkWrap: true,
@@ -584,7 +584,12 @@ class _EditProfilePageState extends State<WalletPage> {
                                   },
                                   itemCount:
                                       walletContoller.listtransaction.length,
-                                  padding: const EdgeInsets.all(0),
+                                  padding: EdgeInsets.all(0),
+                                  separatorBuilder:
+                                      (BuildContext context, int index) =>
+                                          const SizedBox(
+                                    height: 16,
+                                  ),
                                 ),
                               ],
                             ),

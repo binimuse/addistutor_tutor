@@ -250,7 +250,7 @@ class _FeedbackScreenState extends State<TopUpPage> {
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     buildAccountInfo(
                         "Commercial Bank of Ethiopia", "1000461903766"),
@@ -442,7 +442,7 @@ class _FeedbackScreenState extends State<TopUpPage> {
 
   Widget buildAccountInfo(String bankName, String accountNumber) {
     return Padding(
-      padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
+      padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
       child: Container(
         decoration: BoxDecoration(
           color: AppTheme.white,
@@ -457,53 +457,47 @@ class _FeedbackScreenState extends State<TopUpPage> {
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(25),
-          child: Container(
-            padding: const EdgeInsets.all(4.0),
-            constraints: const BoxConstraints(minHeight: 40, maxHeight: 160),
-            color: AppTheme.white,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Center(
-                    child: SelectableText(
-                      bankName,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14,
-                        color: kPrimaryColor,
-                      ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Center(
+                  child: SelectableText(
+                    bankName,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      color: kPrimaryColor,
                     ),
                   ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Center(
-                          child: SelectableText(
-                            accountNumber,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 14,
-                              color: kPrimaryLightColor,
-                            ),
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Center(
+                        child: SelectableText(
+                          accountNumber,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14,
+                            color: kPrimaryLightColor,
                           ),
                         ),
                       ),
-                      IconButton(
-                        icon: const Icon(Icons.copy),
-                        onPressed: () {
-                          Clipboard.setData(ClipboardData(text: accountNumber));
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content:
-                                  Text("Account number copied to clipboard"),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.copy),
+                      onPressed: () {
+                        Clipboard.setData(ClipboardData(text: accountNumber));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Account number copied to clipboard"),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
