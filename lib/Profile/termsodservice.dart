@@ -411,7 +411,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   Text(
-                    "Terms of service for students",
+                    "Terms of service for tutor",
                     style: TextStyle(
                       fontSize: 14.0,
                       fontFamily: 'Arial',

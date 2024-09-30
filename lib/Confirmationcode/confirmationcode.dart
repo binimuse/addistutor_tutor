@@ -129,7 +129,7 @@ class _FeedbackScreenState extends State<CodeScreen> {
                                       ),
                                     ),
                                   ])
-                                : const Text('Canot find Qr Code'),
+                                : const Text("Can't find QR code"),
                           ))
                       : Container(),
                   Row(

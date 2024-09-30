@@ -173,7 +173,7 @@ class _ActivityPageState extends State<Notificationclass>
               ),
             ),
             content: const Text(
-              'Are You Sure you want to exit This app?',
+              'Are you sure you want to exit this app?',
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w500,
